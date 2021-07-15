@@ -8,6 +8,7 @@
     <Folder Include="Context\" />
     <Folder Include="Entities\Account\" />
     <Folder Include="Entities\Common\" />
+    <Folder Include="DTOs\" />
     <Folder Include="Repository\" />
   </ItemGroup>
 

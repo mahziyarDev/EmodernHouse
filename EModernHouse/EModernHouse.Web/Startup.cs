@@ -8,6 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EModernHouse.Application.Services.Implementations;
+using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.DataLayer.Context;
+using EModernHouse.DataLayer.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace EModernHouse.Web
 {
@@ -24,6 +29,17 @@ namespace EModernHouse.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUserService, UserService>();
+
+            #region Config DataBase
+
+            services.AddDbContext<EModernHouseDbContext>(option =>
+            {
+                option.UseSqlServer(Configuration.GetConnectionString("EModernHouseConnection"));
+            });
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,15 @@
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\bin\Debug\net5.0\EModernHouse.Application.deps.json
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\bin\Debug\net5.0\EModernHouse.Application.dll
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\bin\Debug\net5.0\ref\EModernHouse.Application.dll
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\bin\Debug\net5.0\EModernHouse.Application.pdb
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\bin\Debug\net5.0\EModernHouse.DataLayer.dll
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\bin\Debug\net5.0\EModernHouse.DataLayer.pdb
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.csproj.AssemblyReference.cache
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.AssemblyInfoInputs.cache
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.AssemblyInfo.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.csproj.CoreCompileInputs.cache
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.csproj.CopyComplete
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.dll
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\ref\EModernHouse.Application.dll
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.pdb
