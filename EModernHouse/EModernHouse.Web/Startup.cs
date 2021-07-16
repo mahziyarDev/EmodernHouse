@@ -13,6 +13,7 @@ using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.Context;
 using EModernHouse.DataLayer.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace EModernHouse.Web
 {
@@ -31,6 +32,7 @@ namespace EModernHouse.Web
             services.AddControllersWithViews();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPasswordHelper, PasswordHelper>();
 
             #region Config DataBase
 

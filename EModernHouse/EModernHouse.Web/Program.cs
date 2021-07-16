@@ -22,5 +22,6 @@ namespace EModernHouse.Web
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }
