@@ -8,7 +8,7 @@ using EModernHouse.DataLayer.DTOs.Account;
 
 namespace EModernHouse.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : SiteBaseController
     {
         #region Cotr
 
@@ -34,16 +34,16 @@ namespace EModernHouse.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var res =await _userService.RegisterUSer(register);
+                var res = await _userService.RegisterUSer(register);
                 switch (res)
                 {
                     case RegisterUserResult.MobilExists:
-                        TempData["ErrorMessage"] = "تلفن همراه وارد شده تکراری می باشد";
+                        TempData[ErrorMessage] = "تلفن همراه وارد شده تکراری می باشد";
                         ModelState.AddModelError("Mobile", "تلفن همراه وارد شده تکراری می باشد");
                         break;
                     case RegisterUserResult.Success:
-                        TempData["SuccessMessage"] = "ثبت نام شما با موفقیت انجام شده است";
-                        TempData["InfoMessage"] = "کد تایید تلفن همراه برای شما ارسال شد";
+                        TempData[SuccessMessage] = "ثبت نام شما با موفقیت انجام شده است";
+                        TempData[InfoMessage] = "کد تایید تلفن همراه برای شما ارسال شد";
                         return RedirectToAction("Login");
                 }
             }

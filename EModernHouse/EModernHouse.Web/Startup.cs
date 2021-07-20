@@ -7,11 +7,14 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Implementations;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.Context;
 using EModernHouse.DataLayer.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
@@ -29,10 +32,15 @@ namespace EModernHouse.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region config Services
+
             services.AddControllersWithViews();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPasswordHelper, PasswordHelper>();
+
+            #endregion
+
 
             #region Config DataBase
 
@@ -40,6 +48,30 @@ namespace EModernHouse.Web
             {
                 option.UseSqlServer(Configuration.GetConnectionString("EModernHouseConnection"));
             });
+
+            #endregion
+
+            #region authentication
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options =>
+            {
+                options.LoginPath = "/Login";
+                options.LogoutPath = "/Log-out";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(4320);
+            });
+
+            #endregion
+
+            #region Html Encoder
+
+            services.AddSingleton<HtmlEncoder>(
+                HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Arabic })
+            );
 
             #endregion
         }
