@@ -34,7 +34,9 @@ namespace EModernHouse.Application.Services.Implementations
                     FirstName = Register.FirstName,
                     LastName = Register.LastName,
                     Mobile = Register.Mobile,
-                    Password = _passwordHelper.EncodePasswordMd5(Register.Password)
+                    Password = _passwordHelper.EncodePasswordMd5(Register.Password),
+                    EmailActiveCode = Guid.NewGuid().ToString("N"),
+                    MobileActiveCode = new Random().Next(10000,999999).ToString()
                 };
 
                 await _useRepository.AddEntity(user);

@@ -152,3 +152,4 @@ C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Views\Shared\_FooterReferences.cshtml.g.cs
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Views\Shared\_HeaderReferences.cshtml.g.cs
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Views\Shared\_SiteMessages.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Views\Shared\_JqueryValidator.cshtml.g.cs

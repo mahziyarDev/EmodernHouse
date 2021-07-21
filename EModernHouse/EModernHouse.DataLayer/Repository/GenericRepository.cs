@@ -38,6 +38,7 @@ namespace EModernHouse.DataLayer.Repository
         public async Task AddEntity(TEntity entity)
         {
             entity.CreateDate = DateTime.Now;
+            entity.LastUpdateDate = DateTime.Now;
             await _dbSet.AddAsync(entity);
         }
 
