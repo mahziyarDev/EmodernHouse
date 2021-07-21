@@ -36,7 +36,7 @@ namespace EModernHouse.Application.Services.Implementations
                     Mobile = Register.Mobile,
                     Password = _passwordHelper.EncodePasswordMd5(Register.Password),
                     EmailActiveCode = Guid.NewGuid().ToString("N"),
-                    MobileActiveCode = new Random().Next(10000,999999).ToString()
+                    MobileActiveCode = new Random().Next(10000, 999999).ToString()
                 };
 
                 await _useRepository.AddEntity(user);
@@ -51,6 +51,23 @@ namespace EModernHouse.Application.Services.Implementations
         public async Task<bool> IsUserExistsByMobileNumber(string mobile)
         {
             return await _useRepository.GetQuery().AsQueryable().AnyAsync(s => s.Mobile == mobile);
+        }
+
+        public async Task<LoginUserResult> GetUserForLogin(LoginUserDTO login)
+        {
+            var user = await _useRepository.GetQuery()
+                .AsQueryable().SingleOrDefaultAsync(s => s.Mobile == login.Mobile);
+
+            if (user == null) return LoginUserResult.NotFount;
+            if (user.Password != _passwordHelper.EncodePasswordMd5(login.Password)) return LoginUserResult.NotFount;
+            if (!user.IsMobileActive) return LoginUserResult.NotActivated;
+
+            return LoginUserResult.Success;
+        }
+
+        public async Task<User> GetUserByMobile(string mobil)
+        {
+            return await _useRepository.GetQuery().AsQueryable().SingleOrDefaultAsync(s => s.Mobile == mobil);
         }
 
 
