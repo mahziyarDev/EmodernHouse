@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Account;
+using GoogleReCaptcha.V3.Interface;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -16,10 +17,12 @@ namespace EModernHouse.Web.Controllers
         #region Cotr
 
         private readonly IUserService _userService;
+        private readonly ICaptchaValidator _captchaValidator;
 
-        public AccountController(IUserService userService)
+        public AccountController(IUserService userService, ICaptchaValidator captchaValidator)
         {
             _userService = userService;
+            _captchaValidator = captchaValidator;
         }
 
         #endregion
@@ -35,6 +38,11 @@ namespace EModernHouse.Web.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterUserDTO register)
         {
+            if (!await _captchaValidator.IsCaptchaPassedAsync(register.Captcha))
+            {
+                TempData[ErrorMessage] = "کد کپچا شما تایید نشد";
+                return View(register);
+            } 
             if (ModelState.IsValid)
             {
                 var res = await _userService.RegisterUSer(register);
@@ -65,6 +73,12 @@ namespace EModernHouse.Web.Controllers
         [HttpPost("login"),ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginUserDTO login)  
         {
+            if (!await _captchaValidator.IsCaptchaPassedAsync(login.Captcha))
+            {
+                TempData[ErrorMessage] = "کد کپچا شما تایید نشد";
+                return View(login);
+            }
+
             if (ModelState.IsValid)
             {
                 var res = await _userService.GetUserForLogin(login);
@@ -77,13 +91,15 @@ namespace EModernHouse.Web.Controllers
                         TempData[WarningMessage] = "حساب کاربری شما تایید نشده است";
                         break;
                     case LoginUserResult.Success:
+
                         var user = await _userService.GetUserByMobile(login.Mobile);
+
                         var claims = new List<Claim>
                         {
-                            new Claim(ClaimTypes.Name, user.Mobile),
+                            new Claim(ClaimTypes.Name,user.Mobile),
                             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                            
                         };
-
                         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                         var principal = new ClaimsPrincipal(identity);
                         var properties = new AuthenticationProperties
@@ -94,12 +110,23 @@ namespace EModernHouse.Web.Controllers
                         await HttpContext.SignInAsync(principal, properties);
 
                         TempData[SuccessMessage] = "ورود با موفقیت انجام شد";
-
                         return Redirect("/");
+
                 }
             }
             return View(login);
         }
+        #endregion
+
+        #region LogOut
+
+        [HttpGet("log-out")]
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect("/");
+        }
+
         #endregion
     }
 }

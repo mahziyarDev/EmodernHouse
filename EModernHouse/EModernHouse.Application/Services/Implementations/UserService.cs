@@ -65,7 +65,7 @@ namespace EModernHouse.Application.Services.Implementations
             return LoginUserResult.Success;
         }
 
-        public async Task<User> GetUserByMobile(string mobil)
+        public async Task<EModernHouse.DataLayer.Entities.Account.User> GetUserByMobile(string mobil)
         {
             return await _useRepository.GetQuery().AsQueryable().SingleOrDefaultAsync(s => s.Mobile == mobil);
         }

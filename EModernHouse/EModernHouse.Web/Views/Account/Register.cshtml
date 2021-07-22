@@ -6,6 +6,7 @@
 @section scripts
 {
     <partial name="_JqueryValidator"/>
+    <partial name="_CaptchaScripts"/>
 }
 <main class="page-content">
     <div class="container">
@@ -20,7 +21,7 @@
                    خانه مدرن الکترونیک
                 </div>
                 <form asp-controller="Account" asp-action="Register" method="post">
-
+                    <partial name="_CaptchaInput"/>
                     <div class="form-element-row">
                         <label for="FirstName" class="label-element">نام</label>
                         <div class="form-element-with-icon">

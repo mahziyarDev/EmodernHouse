@@ -14,6 +14,8 @@ using EModernHouse.Application.Services.Implementations;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.Context;
 using EModernHouse.DataLayer.Repository;
+using GoogleReCaptcha.V3;
+using GoogleReCaptcha.V3.Interface;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -38,6 +40,7 @@ namespace EModernHouse.Web
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPasswordHelper, PasswordHelper>();
+            services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
 
             #endregion
 
@@ -60,9 +63,9 @@ namespace EModernHouse.Web
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(options =>
             {
-                options.LoginPath = "/Login";
-                options.LogoutPath = "/Log-out";
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(4320);
+                options.LoginPath = "/login";
+                options.LogoutPath = "/log-out";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(43200);
             });
 
             #endregion
@@ -94,6 +97,7 @@ namespace EModernHouse.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

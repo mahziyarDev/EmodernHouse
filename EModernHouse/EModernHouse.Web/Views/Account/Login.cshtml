@@ -6,6 +6,7 @@
 @section scripts
 {
     <partial name="_JqueryValidator"/>
+    <partial name="_CaptchaScripts"/>
 }
 <main class="page-content">
     <div class="container">
@@ -20,6 +21,7 @@
                     ورود به سایت
                 </div>
                 <form asp-controller="Account" asp-action="Login" method="post">
+                    <partial name="_CaptchaInput"/>
                     <div class="form-element-row">
                         <label for="phone-number" class="label-element">شماره موبایل</label>
                         <div class="form-element-with-icon">
@@ -48,11 +50,11 @@
                             <span class="checkmark"></span>
                         </label>
                     </div>
-                    
+
                     <div class="form-element-row text-left">
                         <button class="btn-element btn-info-element">
                             <i class="fad fa-sign-in-alt"></i>
-                            ورود 
+                            ورود
                         </button>
                     </div>
 

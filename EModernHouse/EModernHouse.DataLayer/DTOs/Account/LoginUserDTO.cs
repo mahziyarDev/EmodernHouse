@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using EModernHouse.DataLayer.DTOs.Site;
 
 namespace EModernHouse.DataLayer.DTOs.Account
 {
-    public class LoginUserDTO
+    public class LoginUserDTO:CaptchaViewModel
     {
         [Display(Name = "تلفن همراه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]

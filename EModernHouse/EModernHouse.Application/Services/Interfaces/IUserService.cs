@@ -10,6 +10,6 @@ namespace EModernHouse.Application.Services.Interfaces
         Task<RegisterUserResult> RegisterUSer(RegisterUserDTO Register);
         Task<bool> IsUserExistsByMobileNumber(string mobile);
         Task<LoginUserResult> GetUserForLogin(LoginUserDTO login);
-        Task<User> GetUserByMobile(string mobil);
+        Task<EModernHouse.DataLayer.Entities.Account.User> GetUserByMobile(string mobil);
     }
 }
