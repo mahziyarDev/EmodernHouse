@@ -156,3 +156,4 @@ C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Views\Shared\_CaptchaInput.cshtml.g.cs
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Views\Shared\_CaptchaScripts.cshtml.g.cs
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\GoogleReCaptcha.V3.dll
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Views\Account\ForgotPassword.cshtml.g.cs

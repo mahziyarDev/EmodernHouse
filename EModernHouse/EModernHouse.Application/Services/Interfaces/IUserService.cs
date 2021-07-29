@@ -11,5 +11,6 @@ namespace EModernHouse.Application.Services.Interfaces
         Task<bool> IsUserExistsByMobileNumber(string mobile);
         Task<LoginUserResult> GetUserForLogin(LoginUserDTO login);
         Task<EModernHouse.DataLayer.Entities.Account.User> GetUserByMobile(string mobil);
+        Task<ForgotPasswordResult> RecoverUserPassword(ForgotPasswordDTO forgotPassword);
     }
 }

@@ -118,6 +118,45 @@ namespace EModernHouse.Web.Controllers
         }
         #endregion
 
+        #region ForgotPassword
+
+        [HttpGet("/forgot-pass")]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost("/forgot-pass")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordDTO forgot)
+        {
+            if (!await _captchaValidator.IsCaptchaPassedAsync(forgot.Captcha))
+            {
+                TempData[ErrorMessage] = "کد کپچا شما تایید نشد";
+                return View(forgot);
+            }
+
+            if (ModelState.IsValid)
+            {
+                var res = await _userService.RecoverUserPassword(forgot);
+                switch (res)
+                {
+                    case ForgotPasswordResult.NotFount:
+                        TempData[ErrorMessage] = "متاسفانه شما با این شماره در این سیستم حسابی ندارید";
+                        break;
+                    case ForgotPasswordResult.NotActivated:
+                        TempData[WarningMessage] = "حساب شما فعال نیست";
+                        break;
+                    case ForgotPasswordResult.Success:
+                        TempData[SuccessMessage] = "پیامی حاوی رمز جدید برای شما ارسال شده در حفظ ان کوشا باشید";
+                        TempData[InfoMessage] = "لطفا بعد از ورود سریعا به حساب کاربری خود مراجعه کنید و رمز خود را تغییر دهید";
+
+                        return RedirectToAction("Login");
+                }
+            }
+            return View(forgot);
+        }
+        #endregion
+
         #region LogOut
 
         [HttpGet("log-out")]

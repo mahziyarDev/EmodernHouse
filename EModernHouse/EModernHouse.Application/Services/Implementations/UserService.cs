@@ -70,6 +70,20 @@ namespace EModernHouse.Application.Services.Implementations
             return await _useRepository.GetQuery().AsQueryable().SingleOrDefaultAsync(s => s.Mobile == mobil);
         }
 
+        public async Task<ForgotPasswordResult> RecoverUserPassword(ForgotPasswordDTO forgotPassword)
+        {
+            var user = await GetUserByMobile(forgotPassword.Mobile);
+            if (user == null) return ForgotPasswordResult.NotFount;
+            if (!user.IsMobileActive) return ForgotPasswordResult.NotActivated;
+            var newPassword = new Random().Next(100000, 9999999).ToString();
+            user.Password = _passwordHelper.EncodePasswordMd5(newPassword);
+            _useRepository.EditEntity(user);
+            //TODO SEND MESSAGE
+            await _useRepository.SaveChanges();
+
+            return ForgotPasswordResult.Success;
+        }
+
 
         #region Dispose
 

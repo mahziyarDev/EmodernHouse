@@ -21,7 +21,7 @@
                     ورود به سایت
                 </div>
                 <form asp-controller="Account" asp-action="Login" method="post">
-                    <partial name="_CaptchaInput"/>
+                    <partial name="_CaptchaInput" />
                     <div class="form-element-row">
                         <label for="phone-number" class="label-element">شماره موبایل</label>
                         <div class="form-element-with-icon">
@@ -60,8 +60,12 @@
 
                 </form>
                 <div class="auth-form-footer">
+                    <span>رمز عبور خود را فراموش کردید؟</span>
+                    <a href="forgot-pass" class="link--with-border-bottom">کلیک کنید</a>
+                </div>
+                <div class="auth-form-footer">
                     <span>کاربر جدید هستید؟</span>
-                    <a href="#" class="link--with-border-bottom">ثبت نام در خانه الکترونیک مدرن</a>
+                    <a href="/register" class="link--with-border-bottom">ثبت نام در خانه الکترونیک مدرن</a>
                 </div>
             </div>
         </div>
