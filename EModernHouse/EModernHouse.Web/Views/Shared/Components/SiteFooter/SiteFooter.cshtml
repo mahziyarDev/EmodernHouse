@@ -1,4 +1,7 @@
-﻿
+﻿@using EModernHouse.DataLayer.Entities.Site
+@{
+    var siteSetting = ViewBag.SiteSetting as SiteSetting;
+}
 <footer class="main-footer">
     <div class="back-to-top">
         <div class="back-btn">
@@ -211,7 +214,7 @@
         <div class="row text-center">
             <div class="col-12">
                 <div class="copy-right" dir="ltr">
-                    <p>© All rights reserved. Designed by BahramiiiRad</p>
+                    <p>@siteSetting.CopyRight</p>
                 </div>
             </div>
         </div>

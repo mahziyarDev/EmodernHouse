@@ -1,4 +1,7 @@
-﻿
+﻿@using EModernHouse.DataLayer.Entities.Site
+@{
+    var siteSetting = ViewBag.SiteSetting as SiteSetting;
+}
 <!-- Page Header -->
 <header class="page-header">
     <div class="top-page-header">
@@ -6,8 +9,8 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div class="contact-list">
                     <ul>
-                        <li><i class="fas fa-phone-rotary"></i><a href="tel: 02100000000">021-00000000</a></li>
-                        <li><i class="fas fa-envelope"></i><a href="mailto: site@example.com">site@example.com</a></li>
+                        <li><i class="fas fa-phone-rotary"></i><a href="tel: @siteSetting.Phone">@siteSetting.Phone</a></li>
+                        <li><i class="fas fa-envelope"></i><a href="mailto: @siteSetting.Email">@siteSetting.Email</a></li>
                     </ul>
                 </div>
                 <div class="top-header-menu">

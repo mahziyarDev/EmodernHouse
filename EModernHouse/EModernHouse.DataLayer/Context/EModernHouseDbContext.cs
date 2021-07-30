@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using EModernHouse.DataLayer.Entities.Account;
+using EModernHouse.DataLayer.Entities.Site;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 
@@ -19,7 +20,7 @@ namespace EModernHouse.DataLayer.Context
         #region DbSet
 
         public DbSet<User> Users { get; set; }
-
+        public DbSet<SiteSetting> SiteSettings { get; set; }
         #endregion
 
         #region on model Creating

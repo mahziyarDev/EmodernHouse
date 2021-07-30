@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using EModernHouse.Application.Services.Implementations;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.Context;
+using EModernHouse.DataLayer.Entities.Site;
 using EModernHouse.DataLayer.Repository;
 using GoogleReCaptcha.V3;
 using GoogleReCaptcha.V3.Interface;
@@ -40,10 +41,10 @@ namespace EModernHouse.Web
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPasswordHelper, PasswordHelper>();
+            services.AddScoped<ISiteService, SiteService>();
             services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
 
             #endregion
-
 
             #region Config DataBase
 
