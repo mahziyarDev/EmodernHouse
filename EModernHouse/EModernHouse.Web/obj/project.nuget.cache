@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ateiCJ+GLVchSBb1FFZXdwOBusNNwY7S/sAQ4yheq2mwktzZaG2RoJWdLqa3hbJJrxQUwLYS8j5wX8TABObdcg==",
+  "dgSpecHash": "x8vvUqMW5xWFXzhI+1q9oVcODv3+HiUrgF5I9xS2OpGW+VnEbswzFUTkLvyocCATMrK6JfvKfnIJbf0UrU1FuQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mahziyar\\Desktop\\jalili\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\EModernHouse.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mahziyar\\.nuget\\packages\\googlerecaptcha.v3\\1.3.1\\googlerecaptcha.v3.1.3.1.nupkg.sha512",
     "C:\\Users\\Mahziyar\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Mahziyar\\.nuget\\packages\\kavenegardotnetcore\\1.0.3\\kavenegardotnetcore.1.0.3.nupkg.sha512",
     "C:\\Users\\Mahziyar\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Mahziyar\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\Mahziyar\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\5.0.0\\microsoft.aspnetcore.razor.language.5.0.0.nupkg.sha512",

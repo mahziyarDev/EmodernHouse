@@ -17,6 +17,7 @@ using EModernHouse.DataLayer.Entities.Site;
 using EModernHouse.DataLayer.Repository;
 using GoogleReCaptcha.V3;
 using GoogleReCaptcha.V3.Interface;
+using EModernHouse.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -42,6 +43,7 @@ namespace EModernHouse.Web
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPasswordHelper, PasswordHelper>();
             services.AddScoped<ISiteService, SiteService>();
+            services.AddScoped<ISmsService, SmsService>();
             services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
 
             #endregion
