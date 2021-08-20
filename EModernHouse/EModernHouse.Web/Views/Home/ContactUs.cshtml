@@ -1,0 +1,82 @@
+﻿@model EModernHouse.DataLayer.DTOs.Contacts.CreateContactUsDTO
+@{
+    ViewData["Title"] = "تماس با ما";
+}
+
+
+@section scripts
+{
+    <partial name="_JqueryValidator" />
+    <partial name="_CaptchaScripts" />
+}
+
+<main class="page-content" style="margin-top: 235.5px;" data-select2-id="select2-data-11-cqoq">
+    <div class="container" data-select2-id="select2-data-10-zg2c">
+        <div class="row" data-select2-id="select2-data-9-7ycw">
+            <div class="col-12">
+                <div class="section-title mb-2">
+                    @ViewData["Title"]
+                </div>
+            </div>
+
+            <div class="col-12" data-select2-id="select2-data-8-qfvq">
+                <div class="shadow-around p-3 mb-5" data-select2-id="select2-data-7-oeht">
+                    <form asp-controller="Home" asp-action="ContactUs" method="post">
+                        <partial name="_CaptchaInput"/>
+                        <div class="row" data-select2-id="select2-data-6-09e5">
+                            <div class="col-12 mb-3">
+                                <p class="text-muted text-sm">
+                                    برای پیگیری یا سوال درباره سفارش و ارسال پیام بهتر است
+                                    از فرم زیر استفاده کنید.
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-element-row" data-select2-id="select2-data-5-zhnl">
+                                    <label class="label-element">موضوع*</label>
+                                    <input type="text" class="input-element" placeholder="" asp-for="Subject">
+                                    <span class="text-danger" asp-validation-for="Subject"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-element-row">
+                                    <label class="label-element">نام و نام خانوادگی*</label>
+                                    <input type="text" class="input-element" asp-for="FullName">
+                                    <span class="text-danger" asp-validation-for="FullName"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-element-row">
+                                    <label class="label-element">ایمیل*</label>
+                                    <input type="email" class="input-element dir-ltr" placeholder="example@example.com" asp-for="Email">
+                                    <span class="text-danger" asp-validation-for="Email"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-element-row">
+                                    <label class="label-element">تلفن تماس*</label>
+                                    <input type="text" class="input-element dir-ltr" placeholder="0912*******" asp-for="Mobile">
+                                    <span class="text-danger" asp-validation-for="Mobile"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-element-row">
+                                    <label class="label-element">پیام*</label>
+                                    <textarea  class="input-element dir-ltr" asp-for="Text"></textarea>
+                                    <span class="text-danger" asp-validation-for="Text"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-element-row text-left">
+                                    <button class="btn-element btn-info-element">
+                                        ثبت و ارسال
+                                        <i class="fad fa-money-check-edit mr-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

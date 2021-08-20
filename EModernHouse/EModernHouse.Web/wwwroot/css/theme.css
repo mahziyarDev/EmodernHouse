@@ -5336,6 +5336,7 @@ header.page-header.fixed {
   top: 34%;
   left: 0;
   z-index: 10;
+    display: none;
 }
 
 #colorswitch-option button {

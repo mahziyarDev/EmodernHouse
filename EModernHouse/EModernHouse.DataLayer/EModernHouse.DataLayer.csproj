@@ -9,7 +9,6 @@
     <Folder Include="DTOs\Site\" />
     <Folder Include="Entities\Account\" />
     <Folder Include="Entities\Common\" />
-    <Folder Include="Entities\Site\" />
     <Folder Include="Repository\" />
   </ItemGroup>
 

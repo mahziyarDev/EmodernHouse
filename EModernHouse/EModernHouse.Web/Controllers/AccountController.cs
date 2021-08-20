@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Account;
 using GoogleReCaptcha.V3.Interface;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -55,7 +56,7 @@ namespace EModernHouse.Web.Controllers
                     case RegisterUserResult.Success:
                         TempData[SuccessMessage] = "ثبت نام شما با موفقیت انجام شده است";
                         TempData[InfoMessage] = "کد تایید تلفن همراه برای شما ارسال شد";
-                        return RedirectToAction("Login");
+                        return RedirectToAction("ActivateMobile");
                 }
             }
             return View(register);
@@ -116,6 +117,46 @@ namespace EModernHouse.Web.Controllers
             }
             return View(login);
         }
+        #endregion
+
+        #region ActivateMobile
+
+        [HttpGet("active-mobile/{mobile}")]
+        public IActionResult ActivateMobile(string mobile)
+        {
+            if (User.Identity.IsAuthenticated) return Redirect("/");
+            var activateMobileDTo = new ActivateMobileDTO
+            {
+                Mobile = mobile,
+            };
+            return View(activateMobileDTo);
+        }
+
+        [HttpPost("active-mobile/{mobile}"), ValidateAntiForgeryToken]
+        public async Task<IActionResult> ActivateMobile(ActivateMobileDTO activate)
+        {
+            if (!await _captchaValidator.IsCaptchaPassedAsync(activate.Captcha))
+            {
+                TempData[ErrorMessage] = "کد کپچا شما تایید نشد";
+                return View(activate);
+            }
+
+            if (ModelState.IsValid)
+            {
+                var res = await _userService.ActivateMobile(activate);
+                if (res)
+                {
+                    TempData[SuccessMessage] = "حساب کاربری شما با موفقیت فعال شد";
+                    return RedirectToAction("Login");
+
+                }
+
+                TempData[ErrorMessage] = "کاربری با مشخصات وارد شده یافت نشد";
+            }
+            return View(activate);
+        }
+
+
         #endregion
 
         #region ForgotPassword

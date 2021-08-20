@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Account;
 using EModernHouse.DataLayer.Entities.Site;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,9 @@ namespace EModernHouse.DataLayer.Context
 
         public DbSet<User> Users { get; set; }
         public DbSet<SiteSetting> SiteSettings { get; set; }
+        public DbSet<ContactUs> ContactUses { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
+        public DbSet<SiteBanner> SiteBanners { get; set; }
         #endregion
 
         #region on model Creating

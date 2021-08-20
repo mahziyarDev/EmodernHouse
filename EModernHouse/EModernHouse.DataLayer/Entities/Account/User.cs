@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
+using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Common;
 
 namespace EModernHouse.DataLayer.Entities.Account
@@ -61,7 +63,7 @@ namespace EModernHouse.DataLayer.Entities.Account
 
         #region relations
 
-        
+        public ICollection<ContactUs> ContactUses { get; set; }
 
         #endregion
 

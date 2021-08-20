@@ -13,4 +13,8 @@
     <ProjectReference Include="..\EModernHouse.DataLayer\EModernHouse.DataLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Utils\" />
+  </ItemGroup>
+
 </Project>

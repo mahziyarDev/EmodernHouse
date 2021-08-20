@@ -1,0 +1,46 @@
+﻿@model EModernHouse.DataLayer.DTOs.Account.ActivateMobileDTO
+@{
+    ViewData["Title"] = "تایید تلفن همراه";
+}
+
+@section scripts
+{
+    <partial name="_JqueryValidator" />
+    <partial name="_CaptchaScripts" />
+}
+<main class="page-content">
+    <div class="container">
+        <div class="auth-wrapper">
+            <div class="auth-form shadow-around">
+                <div class="site-logo">
+                    <a href="#">
+                        <img src="./assets/images/logo.png" alt="logo">
+                    </a>
+                </div>
+                <div class="auth-form-title">
+                   @ViewData["Title"]
+                </div>
+                <form asp-controller="Account" asp-action="ActivateMobile" method="post">
+                    <partial name="_CaptchaInput" />
+                    <input type="hidden" asp-for="Mobile"/>
+                    <div class="form-element-row">
+                        <label for="phone-number" class="label-element">شماره موبایل</label>
+                        <div class="form-element-with-icon">
+                            <input type="text" class="input-element" id="phone-number" asp-for="MobileActiveCode">
+                            <i class="fad fa-mobile-alt"></i>
+                        </div>
+                        <span class="text-danger" asp-validation-for="MobileActiveCode"></span>
+                    </div>
+
+                    <div class="form-element-row text-left">
+                        <button class="btn-element btn-info-element">
+                            تایید
+                        </button>
+                    </div>
+
+                </form>
+               
+            </div>
+        </div>
+    </div>
+</main>

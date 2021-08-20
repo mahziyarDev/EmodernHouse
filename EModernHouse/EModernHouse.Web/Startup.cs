@@ -44,6 +44,7 @@ namespace EModernHouse.Web
             services.AddScoped<IPasswordHelper, PasswordHelper>();
             services.AddScoped<ISiteService, SiteService>();
             services.AddScoped<ISmsService, SmsService>();
+            services.AddScoped<IContactService, ContactService>();
             services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
 
             #endregion

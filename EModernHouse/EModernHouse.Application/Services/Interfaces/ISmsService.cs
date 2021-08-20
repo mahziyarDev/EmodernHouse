@@ -4,6 +4,6 @@ namespace EModernHouse.Application.Services.Interfaces
 {
     public interface ISmsService
     {
-        Task SendSms();
+        Task SendVerificationSms(string mobile, string activationCode);
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using EModernHouse.DataLayer.DTOs.Account;
 using EModernHouse.DataLayer.Entities.Account;
 using EModernHouse.DataLayer.Repository;
+using EModernHouse.DataLayer.DTOs.Account;
 using Microsoft.EntityFrameworkCore;
 
 namespace EModernHouse.Application.Services.Implementations
@@ -16,13 +17,14 @@ namespace EModernHouse.Application.Services.Implementations
 
         private readonly IGenericRepository<User> _useRepository;
         private readonly IPasswordHelper _passwordHelper;
+        private readonly ISmsService _smsService;
 
-        public UserService(IGenericRepository<User> useRepository, IPasswordHelper passwordHelper)
+        public UserService(IGenericRepository<User> useRepository, IPasswordHelper passwordHelper, ISmsService smsService)
         {
             _useRepository = useRepository;
             _passwordHelper = passwordHelper;
+            _smsService = smsService;
         }
-
         #endregion
 
         public async Task<RegisterUserResult> RegisterUSer(RegisterUserDTO Register)
@@ -41,7 +43,7 @@ namespace EModernHouse.Application.Services.Implementations
 
                 await _useRepository.AddEntity(user);
                 await _useRepository.SaveChanges();
-                //TODO : Send Text To Mobile
+               // await _smsService.SendVerificationSms(user.Mobile, user.MobileActiveCode);
                 return RegisterUserResult.Success;
             }
 
@@ -83,6 +85,27 @@ namespace EModernHouse.Application.Services.Implementations
 
             return ForgotPasswordResult.Success;
         }
+
+        public async Task<bool> ActivateMobile(ActivateMobileDTO activate)
+        {
+            var user = await _useRepository.GetQuery().AsQueryable()
+                .SingleOrDefaultAsync(s => s.Mobile == activate.Mobile);
+            if (user != null)
+            {
+                if (user.MobileActiveCode == activate.MobileActiveCode)
+                {
+                    user.IsMobileActive = true;
+                    user.MobileActiveCode = new Random().Next(100000, 9999999).ToString();
+                    await _useRepository.SaveChanges();
+
+                    return true;
+                }
+
+            }
+
+            return false;
+        }
+
 
 
         #region Dispose

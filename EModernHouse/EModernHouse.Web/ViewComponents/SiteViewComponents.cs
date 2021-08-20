@@ -41,4 +41,23 @@ namespace EModernHouse.Web.ViewComponents
     }
 
     #endregion
+
+    #region HomeSlider
+
+    public class HomeSliderViewComponent : ViewComponent
+    {
+        private readonly ISiteService _siteService;
+
+        public HomeSliderViewComponent(ISiteService siteService)
+        {
+            _siteService = siteService;
+        }
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var sliders = await _siteService.GetAllActiveSlider();
+            return View("HomeSlider",sliders);
+        }
+    }
+
+    #endregion
 }
