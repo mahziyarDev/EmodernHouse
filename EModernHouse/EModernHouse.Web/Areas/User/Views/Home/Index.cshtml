@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewData["Title"] = "داشبورد";
+}
+
+
+
+<main class="page-content" style="margin-top: 235.5px; transform: none;">
+    <div class="container" style="transform: none;">
+        <div class="row mb-5" style="transform: none;">
+            <div class="col-lg-3 col-md-4 mb-md-0 mb-3 sticky-sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+                @await Component.InvokeAsync("UserSideBar")
+
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="section-title mb-2">
+                    @ViewData["Title"]
+                </div>
+                <div class="checkout-section shadow-around">
+                    <div class="checkout-section-content">
+                        <div class="row mx-0">
+                            <div class="col-xl-3 col-lg-4 col-sm-6 mb-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label address-select" for="customRadio1">
+                                        <span class="head-address-select">به این آدرس ارسال شود</span>
+                                        <span>تهران، بلوار فرحزادی، نبش سیمای ایران</span>
+                                        <span>
+                                            <i class="fa fa-user"></i>
+                                            جلال بهرامی راد
+                                        </span>
+                                        <a href="#" class="link--with-border-bottom edit-address-btn" data-toggle="modal" data-target="#editAddressModal">
+                                            ویرایش
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4 col-sm-6 mb-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label address-select" for="customRadio2">
+                                        <span class="head-address-select">به این آدرس ارسال شود</span>
+                                        <span>تهران، بلوار فرحزادی، نبش سیمای ایران</span>
+                                        <span>
+                                            <i class="fa fa-user"></i>
+                                            جلال بهرامی راد
+                                        </span>
+                                        <a href="#" class="link--with-border-bottom edit-address-btn" data-toggle="modal" data-target="#editAddressModal">
+                                            ویرایش
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4 col-sm-6 mb-3">
+                                <div class="custom-control custom-radio">
+                                    <button class="add-address" data-toggle="modal" data-target="#addAddressModal">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
+                <div class="banner">
+                    <a href="#">
+                        <img src="./assets/images/banner/banner-sm-01.jpg" alt="banner">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
+                <div class="banner">
+                    <a href="#">
+                        <img src="./assets/images/banner/banner-sm-02.jpg" alt="banner">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
+                <div class="banner">
+                    <a href="#">
+                        <img src="./assets/images/banner/banner-sm-03.jpg" alt="banner">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
+                <div class="banner">
+                    <a href="#">
+                        <img src="./assets/images/banner/banner-sm-04.jpg" alt="banner">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
