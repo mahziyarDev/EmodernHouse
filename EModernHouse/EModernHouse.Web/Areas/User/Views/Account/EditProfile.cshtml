@@ -1,0 +1,81 @@
+﻿@using EModernHouse.Application.Utils
+@model EModernHouse.DataLayer.DTOs.Account.EditUserProfileDTO
+@{
+    ViewData["Title"] = "ویرایش حساب کاربری";
+}
+
+@section scripts
+{
+    <partial name="_JqueryValidator" />
+    <script src="~/js/ChangeImage.js"></script>
+
+}
+
+<main class="page-content" style="margin-top: 235.5px; transform: none;">
+    <div class="container" style="transform: none;">
+        <div class="row mb-5" style="transform: none;">
+            <div class="col-lg-3 col-md-4 mb-md-0 mb-3 sticky-sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+                @await Component.InvokeAsync("UserSideBar")
+
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="section-title mb-2">
+                    @ViewData["Title"]
+                </div>
+                <form method="post" asp-area="User" asp-controller="Account" asp-action="EditProfile">
+                    <div class="row mb-4">
+
+                        <div class="col-lg-8 mb-lg-0 mb-3">
+
+                            <div class="card ">
+                                <div class="card-header text-center">
+                                    ویرایش اطلاعات
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-element-row">
+                                        <label for="phone-number" class="label-element">نام</label>
+                                        <div class="form-element-with-icon">
+                                            <input type="text" class="input-element" asp-for="FirstName">
+                                            <i class="fas fa-user-edit"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-element-row">
+                                        <label for="phone-number" class="label-element">نام خانوادگی</label>
+                                        <div class="form-element-with-icon">
+                                            <input type="text" class="input-element" asp-for="LastName">
+                                        </div>
+
+                                    </div>
+
+                                    
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <input type="submit" class="btn btn-success btn-sm" value="ایجاد تغییرات" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 mb-lg-0 mb-3">
+
+                            <div class="card text-center">
+                                <div class="card-header">
+                                    تغییر آواتار
+                                </div>
+                                <div class="card-body">
+                                    <img style="border-radius:50%; width:150px" id="imgPreviewProduct" class="img-thumbnail" src="@(!string.IsNullOrEmpty(Model.Avatar)?PathExtensions.UserAvatarOrigin + Model.Avatar : PathExtensions.DefaultAvatar)" />
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <input type="file" name="avatarImage" class="btn btn-primary btn-sm" id="imageProduct" value="انتخاب تصویر" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

@@ -14,5 +14,8 @@ namespace EModernHouse.Application.Services.Interfaces
         Task<EModernHouse.DataLayer.Entities.Account.User> GetUserByMobile(string mobil);
         Task<ForgotPasswordResult> RecoverUserPassword(ForgotPasswordDTO forgotPassword);
         Task<bool> ActivateMobile(ActivateMobileDTO activate);
+        Task<ChangePasswordResult> ChangeUserPassword(ChangePasswordDTO changePass, long currentUserId);
+        Task<EditUserProfileDTO> GetProfileForEdit(long userId);
+        Task<EditUserProfileResult> EditUserProfile(EditUserProfileDTO profile,long userI);
     }
 }
