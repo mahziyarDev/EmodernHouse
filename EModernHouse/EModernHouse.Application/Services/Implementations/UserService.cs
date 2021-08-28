@@ -1,13 +1,17 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using EModernHouse.Application.Services.Interfaces;
 using System.Threading.Tasks;
+using EModernHouse.Application.Extensions;
+using EModernHouse.Application.Utils;
 using EModernHouse.DataLayer.DTOs.Account;
 using EModernHouse.DataLayer.Entities.Account;
 using EModernHouse.DataLayer.Repository;
-using EModernHouse.DataLayer.DTOs.Account;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using SixLabors.ImageSharp;
 
 namespace EModernHouse.Application.Services.Implementations
 {
@@ -43,7 +47,7 @@ namespace EModernHouse.Application.Services.Implementations
 
                 await _useRepository.AddEntity(user);
                 await _useRepository.SaveChanges();
-               // await _smsService.SendVerificationSms(user.Mobile, user.MobileActiveCode);
+                // await _smsService.SendVerificationSms(user.Mobile, user.MobileActiveCode);
                 return RegisterUserResult.Success;
             }
 
@@ -145,7 +149,7 @@ namespace EModernHouse.Application.Services.Implementations
             };
         }
 
-        public async Task<EditUserProfileResult> EditUserProfile(EditUserProfileDTO profile, long userId)
+        public async Task<EditUserProfileResult> EditUserProfile(EditUserProfileDTO profile, long userId, IFormFile avatarImage)
         {
             var user = await _useRepository.GetEntityById(userId);
 
@@ -155,7 +159,13 @@ namespace EModernHouse.Application.Services.Implementations
 
             user.FirstName = profile.FirstName;
             user.LastName = profile.LastName;
-            
+            if (avatarImage != null && avatarImage.IsImage())
+            {
+                var imageName = Guid.NewGuid().ToString("N") + Path.GetExtension(avatarImage.FileName);
+                avatarImage.AddImageToServer(imageName, PathExtensions.UserAvatarOriginServer, 100, 100, PathExtensions.UserAvatarThumbServer, user.Avatar);
+                user.Avatar = imageName;
+            }
+
             _useRepository.EditEntity(user);
             await _useRepository.SaveChanges();
             return EditUserProfileResult.Success;

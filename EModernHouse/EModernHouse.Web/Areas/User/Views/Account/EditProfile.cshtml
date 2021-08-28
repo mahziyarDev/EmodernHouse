@@ -23,7 +23,7 @@
                 <div class="section-title mb-2">
                     @ViewData["Title"]
                 </div>
-                <form method="post" asp-area="User" asp-controller="Account" asp-action="EditProfile">
+                <form method="post" asp-area="User" asp-controller="Account" asp-action="EditProfile" enctype="multipart/form-data">
                     <div class="row mb-4">
 
                         <div class="col-lg-8 mb-lg-0 mb-3">
@@ -64,10 +64,11 @@
                                     تغییر آواتار
                                 </div>
                                 <div class="card-body">
-                                    <img style="border-radius:50%; width:150px" id="imgPreviewProduct" class="img-thumbnail" src="@(!string.IsNullOrEmpty(Model.Avatar)?PathExtensions.UserAvatarOrigin + Model.Avatar : PathExtensions.DefaultAvatar)" />
+                                    <img id="imgPreviewProduct" class="img-thumbnail ImagePreviwe_Editprofile" src="@(!string.IsNullOrEmpty(Model.Avatar)?PathExtensions.UserAvatarOrigin + Model.Avatar : PathExtensions.DefaultAvatar)" />
                                 </div>
                                 <div class="card-footer text-muted">
-                                    <input type="file" name="avatarImage" class="btn btn-primary btn-sm" id="imageProduct" value="انتخاب تصویر" />
+                                    <label for="imageProduct" id="lable-Upload-Avatar" class="btn-upload">انتخاب عکس</label>
+                                    <input type="file"  name="avatarImage" id="imageProduct" class="input_Upload_file_Editprofile" />
                                 </div>
                             </div>
 

@@ -85,7 +85,7 @@ namespace EModernHouse.Web.Areas.User.Controllers
         {
             if (ModelState.IsValid)
             {
-                var res = await _userService.EditUserProfile(profile, User.GetUserId());
+                var res = await _userService.EditUserProfile(profile, User.GetUserId(),avatarImage);
                 switch (res)
                 {
                     case EditUserProfileResult.NotFound:
@@ -99,7 +99,7 @@ namespace EModernHouse.Web.Areas.User.Controllers
                         break;
                     case EditUserProfileResult.Success:
                         TempData[SuccessMessage] = $"جناب {profile.FirstName} {profile.LastName} اطلاعات شما با موفقیت ویرایش شد";
-                        break;
+                        return RedirectToAction("EditProfile");
                         
                 }
             }

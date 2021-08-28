@@ -167,3 +167,5 @@ C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\User\Views\Shared\Components\UserSidebar\UserSidebar.cshtml.g.cs
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\User\Views\Account\ChangePassword.cshtml.g.cs
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\User\Views\Account\EditProfile.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\LazZiya.ImageResize.dll
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\SixLabors.ImageSharp.dll
