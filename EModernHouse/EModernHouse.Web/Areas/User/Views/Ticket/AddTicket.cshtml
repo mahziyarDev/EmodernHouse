@@ -1,0 +1,75 @@
+﻿
+@using EModernHouse.DataLayer.Entities.Contacts
+@model EModernHouse.DataLayer.DTOs.Contacts.AddTicketViewModel
+@{
+    ViewData["Title"] = "ثبت تیکت جدید";
+}
+
+
+@section scripts
+{
+    <partial name="_JqueryValidator" />
+
+}
+
+<main class="page-content" style="margin-top: 235.5px; transform: none;">
+    <div class="container" style="transform: none;">
+        <div class="row mb-5" style="transform: none;">
+            <div class="col-lg-3 col-md-4 mb-md-0 mb-3 sticky-sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+                @await Component.InvokeAsync("UserSideBar")
+
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="section-title mb-2">
+                    @ViewData["Title"]
+                </div>
+                <div class="checkout-section shadow-around">
+                    <div class="checkout-section-content">
+                        <div class="row mx-0">
+                            <form asp-area="User" asp-controller="Ticket" asp-action="AddTicket" method="post" class="Form_User">
+
+                                <div class="form-element-row">
+                                    <label class="label-element">عنوان </label>
+                                    <div class="form-element-with-icon">
+                                        <input type="text" class="input-element" asp-for="Title">
+                                        <i class="fad fa-heading"></i>
+                                    </div>
+                                    <span class="text-danger" asp-validation-for="Title"></span>
+                                </div>
+
+                                <div class="form-element-row">
+                                    <label class="label-element">بخش موردنظر</label>
+                                    <div class="form-element-with-icon">
+                                        <select class="form-control" asp-for="TicketSection" asp-items="@(Html.GetEnumSelectList<TicketSection>())"></select>
+                                        <i class="fad fa-user-cog"></i>
+                                    </div>
+                                    <span class="text-danger" asp-validation-for="TicketSection"></span>
+                                </div>
+
+                                <div class="form-element-row">
+                                    <label class="label-element">اولویت</label>
+                                    <div class="form-element-with-icon">
+                                        <select class="form-control" asp-for="TicketPriority" asp-items="@(Html.GetEnumSelectList<TicketPriority>())"></select>
+                                    </div>
+                                    <span class="text-danger" asp-validation-for="TicketPriority"></span>
+                                </div>
+
+                                <div class="form-element-row">
+                                    <label class="label-element">متن پیام</label>
+                                    <div class="form-element-with-icon">
+                                        <textarea class="form-control" rows="10" asp-for="Text"></textarea>
+                                    </div>
+                                    <span class="text-danger" asp-validation-for="Text"></span>
+                                </div>
+                                <div class="form-element-row">
+                                    <input class="btn btn-info" type="submit" value="تغییر رمز عبور" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

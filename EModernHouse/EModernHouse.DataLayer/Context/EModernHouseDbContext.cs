@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Account;
+using EModernHouse.DataLayer.Entities.Contacts;
 using EModernHouse.DataLayer.Entities.Site;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -25,6 +26,8 @@ namespace EModernHouse.DataLayer.Context
         public DbSet<ContactUs> ContactUses { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<SiteBanner> SiteBanners { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<TicketMessage> TicketMessages { get; set; }
         #endregion
 
         #region on model Creating
@@ -33,8 +36,11 @@ namespace EModernHouse.DataLayer.Context
         {
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(s => s.GetForeignKeys()))
             {
-                relationship.DeleteBehavior = DeleteBehavior.Cascade;
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+           
+
 
             base.OnModelCreating(modelBuilder);
         }

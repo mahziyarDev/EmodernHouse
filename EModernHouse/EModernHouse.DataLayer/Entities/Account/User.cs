@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Common;
+using EModernHouse.DataLayer.Entities.Contacts;
 
 namespace EModernHouse.DataLayer.Entities.Account
 {
@@ -64,6 +65,8 @@ namespace EModernHouse.DataLayer.Entities.Account
         #region relations
 
         public ICollection<ContactUs> ContactUses { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
+        public ICollection<TicketMessage> TicketMessages { get; set; }
 
         #endregion
 

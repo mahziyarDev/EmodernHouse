@@ -1,17 +1,12 @@
-﻿using EModernHouse.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Contacts;
 using EModernHouse.DataLayer.Entities.Site;
 using EModernHouse.Web.PresentationExtentions;
 using GoogleReCaptcha.V3.Interface;
-using Microsoft.AspNetCore.Authorization;
+
 
 namespace EModernHouse.Web.Controllers
 {
