@@ -1,0 +1,73 @@
+﻿@using EModernHouse.Application.Extensions
+@model EModernHouse.DataLayer.DTOs.Contacts.FilterTicketDTO
+@{
+    ViewData["Title"] = "لیست تیکت ها";
+}
+
+
+<main class="page-content" style="margin-top: 235.5px; transform: none;">
+    <div class="container" style="transform: none;">
+        <div class="row mb-5" style="transform: none;">
+            <div class="col-lg-3 col-md-4 mb-md-0 mb-3 sticky-sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+                @await Component.InvokeAsync("UserSideBar")
+
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="section-title mb-2">
+                           @ViewData["Title"]
+                        </div>
+                        <section class="shadow-around p-3">
+
+                            <div class="tab-content" id="orders-tab">
+                                <div class="tab-pane fade show active" id="wait-for-payment" role="tabpanel" aria-labelledby="wait-for-payment-tab">
+                                    <section class="table--order shadow-around mt-4">
+                                        <div class="table-responsive">
+                                        @if (Model.Tickets != null && Model.Tickets.Any())
+                                        {
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>کد تیکت</th>
+                                                        <th>عنوان تیکت</th>
+                                                        <th>وضعیت تیکت</th>
+                                                        <th>دستورات</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach (var ticket in Model.Tickets)
+                                                {
+                                                    <tr>
+                                                            <td>@ticket.Id</td>
+                                                            <td>@ticket.Title</td>
+                                                            <td>@ticket.TicketState.GetEnumName()</td>
+                                                            <td><a asp-controller="Ticket" asp-action="TicketDetail" asp-route-ticketId="@ticket.Id">
+                                                                <i class="far fa-chevron-left"></i>
+                                                                نمایش تیکت
+                                                            </a></td>
+                                                    
+                                                        </tr>
+
+                                                }
+                                                
+                                                </tbody>
+                                            </table>
+                                        }
+                                        else
+                                        {
+                                            <partial name="_NoItemFound" />
+                                        }
+                                        </div>
+                                    </section>
+                                </div>
+
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

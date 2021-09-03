@@ -1,6 +1,9 @@
 ﻿@using EModernHouse.DataLayer.Entities.Site
+@using EModernHouse.DataLayer.Entities.Account
+@using EModernHouse.Application.EntitiesExtensions
 @{
     var siteSetting = ViewBag.SiteSetting as SiteSetting;
+    var user = ViewBag.user as User;
 }
 <!-- Page Header -->
 <header class="page-header">
@@ -154,7 +157,7 @@
                 <div class="user-item account">
                     @if (!User.Identity.IsAuthenticated)
                     {
-                        <a href="#" class="btn-auth">
+                        <a  class="btn-auth">
                             <i class="fal fa-user-circle"></i>
                             ورود و عضویت
                         </a>
@@ -170,14 +173,14 @@
                     }
                     else
                     {
-                        <a href="#">
-                           @User.Identity.Name
+                        <a>
+                           @user.GetUserShowName()
                             <i class="fad fa-chevron-down text-sm mr-1"></i>
                         </a>
                         <ul class="dropdown--wrapper">
                            
                             <li>
-                                <a href="#">
+                                <a asp-area="User" asp-controller="Home" asp-action="Index">
                                     ورود به حساب کاربری
                                 </a>
                             </li>

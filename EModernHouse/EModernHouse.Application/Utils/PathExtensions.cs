@@ -19,6 +19,13 @@ namespace EModernHouse.Application.Utils
         public static string UserAvatarThumbServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/Images/UserAvatar/Thumb/");
         #endregion
 
+        #region Uploader
+
+        public static string UploadImage = "/images/Upload/";
+        public static string UploadImageServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/Upload/");
+
+        #endregion
+
         #region Slider
 
         public static string SliderOrigin = "/images/main-slider/";
@@ -31,5 +38,10 @@ namespace EModernHouse.Application.Utils
 
         #endregion
 
+        #region SupportImage
+
+        public static string SupportImage = "/images/avatar/call-center-agent.png";
+
+        #endregion
     }
 }

@@ -10,20 +10,25 @@ namespace EModernHouse.Web.Areas.User.Controllers
     {
         #region Ctor
         private readonly IContactService _contactService;
+        private readonly IUserService _userService;
 
-        public TicketController(IContactService contactService)
+        public TicketController(IContactService contactService, IUserService userService)
         {
             _contactService = contactService;
+            _userService = userService;
         }
-
-
         #endregion
 
         #region List Ticke
 
-        public IActionResult Index()
+        [HttpGet("tickets-list")]
+        public async Task<IActionResult> Index(FilterTicketDTO filter)
         {
-            return View();
+            filter.UserId = User.GetUserId();
+            filter.FilterTicketState = FilterTicketState.NotDeleted;
+            filter.OrderBy = FilterTicketOrder.CreateDate_DES;
+
+            return View(await _contactService.FilterTickets(filter));
         }
 
         #endregion
@@ -57,6 +62,48 @@ namespace EModernHouse.Web.Areas.User.Controllers
         }
 
         #endregion
+        #region Show Ticket detail
+        [HttpGet("tickets/{ticketId}")]
+        public async Task<IActionResult> TicketDetail(long ticketId)
+        {
+            var ticket = await _contactService.GetTicketForShow(ticketId, User.GetUserId());
+            ViewBag.user = await _userService.GetUSerById(ticket.Ticket.OwnerId);
+            if (ticket == null) return NotFound();
 
+            return View(ticket);
+        }
+
+        #endregion
+
+        #region AddNewAnswer
+        [HttpPost("answer-ticket"), ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddNewAnswer(AnswerTicketDTO answer)
+        {
+            if (string.IsNullOrEmpty(answer.Text))
+            {
+                TempData[ErrorMessage] = "لطفا متن پیام خود را وارد نمایید";
+            }
+            if (ModelState.IsValid)
+            {
+                var res = await _contactService.AnswerTicket(answer, User.GetUserId());
+                switch (res)
+                {
+                    case AnswerTicketResult.NotForUser:
+                        TempData[ErrorMessage] = "عدم دسترسی";
+                        TempData[InfoMessage] = "در صورت تکرار این مورد ، دسترسی شما به صورت کلی از سیستم قطع خواهد شد";
+                        return RedirectToAction("Index");
+                    case AnswerTicketResult.NotFound:
+                        TempData[WarningMessage] = "اطلاعات مورد نظر یافت نشد";
+                        return RedirectToAction("Index");
+                    case AnswerTicketResult.Success:
+                        TempData[SuccessMessage] = "اطلاعات مورد نظر با موفقیت ثبت شد";
+                        break;
+                }
+            }
+
+            return RedirectToAction("TicketDetail", "Ticket", new { area = "User", ticketId = answer.Id });
+        }
+
+        #endregion
     }
 }

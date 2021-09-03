@@ -171,7 +171,10 @@ namespace EModernHouse.Application.Services.Implementations
             return EditUserProfileResult.Success;
         }
 
-
+        public async Task<User> GetUSerById(long userID)
+        {
+            return await _useRepository.GetEntityById(userID);
+        }
         #region Dispose
 
         public async ValueTask DisposeAsync()

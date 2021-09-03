@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Contacts;
+using EModernHouse.DataLayer.DTOs.Paging;
 using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Contacts;
 using EModernHouse.DataLayer.Repository;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace EModernHouse.Application.Services.Implementations
@@ -79,7 +82,111 @@ namespace EModernHouse.Application.Services.Implementations
             return AddTicketResult.Success;
         }
 
+        public async Task<FilterTicketDTO> FilterTickets(FilterTicketDTO filter)
+        {
+            var query = _ticketRepository.GetQuery().AsQueryable();
 
+            #region State
+
+            switch (filter.FilterTicketState)
+            {
+                case FilterTicketState.All:
+                    break;
+                case FilterTicketState.Deleted:
+                    query = query.Where(q => q.IsDelete);
+                    break;
+                case FilterTicketState.NotDeleted:
+                    query = query.Where(q => !q.IsDelete);
+                    break;
+
+            }
+            #endregion
+
+            #region OrderBy
+
+            switch (filter.OrderBy)
+            {
+                case FilterTicketOrder.CreateDate_ASC:
+                    query = query.OrderBy(s => s.CreateDate);
+                    break;
+                case FilterTicketOrder.CreateDate_DES:
+                    query = query.OrderByDescending(s => s.CreateDate);
+                    break;
+            }
+
+            #endregion
+
+            #region filter_priorityAndSection
+
+            if (filter.TicketSection != null)
+            {
+                query = query.Where(s => s.TicketSection == filter.TicketSection.Value);
+            }
+
+            if (filter.TicketPriority != null)
+            {
+                query = query.Where(s => s.TicketPriority == filter.TicketPriority.Value);
+            }
+
+            if (filter.UserId != null && filter.UserId != 0)
+            {
+                query = query.Where(q => q.OwnerId == filter.UserId.Value);
+            }
+
+            if (!string.IsNullOrEmpty(filter.Title))
+            {
+                query = query.Where(s => EF.Functions.Like(s.Title, $"%{filter.Title}%"));
+            }
+            #endregion
+
+            #region Paging
+
+            var pager = Pager.Build(filter.PageId, await query.CountAsync(), filter.TakeEntity, filter.HowManyPageAfterAndBefore);
+            var allEntities = await query.Paging(pager).ToListAsync();
+            #endregion
+
+            return filter.setPaging(pager).setTickets(allEntities);
+        }
+
+        public async Task<TicketDetailDTO> GetTicketForShow(long ticketId, long userId)
+        {
+            var ticket = await _ticketRepository.GetQuery().AsQueryable()
+                .Include(s => s.Owner)
+                .SingleOrDefaultAsync(s => s.Id == ticketId);
+
+            if (ticket == null || ticket.OwnerId != userId) return null;
+
+            return new TicketDetailDTO
+            {
+                Ticket = ticket,
+                TicketMessages = await _ticketMessageRepository.GetQuery().AsQueryable()
+                    .OrderByDescending(s => s.CreateDate)
+                    .Where(s => s.TicketId == ticketId && !s.IsDelete).ToListAsync()
+            };
+        }
+
+        public async Task<AnswerTicketResult> AnswerTicket(AnswerTicketDTO answer, long userId)
+        {
+            var ticket = await _ticketRepository.GetEntityById(answer.Id);
+            if (ticket == null) return AnswerTicketResult.NotFound;
+            if (ticket.OwnerId != userId) return AnswerTicketResult.NotForUser;
+
+            var ticketMessage = new TicketMessage
+            {
+                TicketId = ticket.Id,
+                SenderId = userId,
+                Text = answer.Text,
+
+            };
+
+            await _ticketMessageRepository.AddEntity(ticketMessage);
+            await _ticketMessageRepository.SaveChanges();
+            ticket.IsReadByAdmin = false;
+            ticket.IsReadByOwner = true;
+            await _ticketRepository.SaveChanges();
+            return AnswerTicketResult.Success;
+
+        }
 
         #endregion
 

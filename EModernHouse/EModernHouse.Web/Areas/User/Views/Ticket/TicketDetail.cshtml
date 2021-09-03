@@ -1,0 +1,71 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using EModernHouse.Application.Utils
+@using EModernHouse.DataLayer.DTOs.Contacts
+@using EModernHouse.DataLayer.Entities.Account
+@model EModernHouse.DataLayer.DTOs.Contacts.TicketDetailDTO
+@{
+    ViewData["Title"] = Model.Ticket.Title;
+    var user = ViewBag.user as User;
+}
+
+@section styles
+{
+    <link rel="stylesheet" href="/css/ChatRoom.css" />
+}
+<main class="page-content" style="margin-top: 235.5px; transform: none;">
+    <div class="container" style="transform: none;">
+        <div class="row mb-5" style="transform: none;">
+            <div class="col-lg-3 col-md-4 mb-md-0 mb-3 sticky-sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+                @await Component.InvokeAsync("UserSideBar")
+
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="section-title mb-2">
+                            عنوان تیکت : @ViewData["Title"]
+                        </div>
+                        <section class="shadow-around p-3">
+
+                            <div class="tab-content" id="orders-tab">
+                                <div class="tab-pane fade show active" id="wait-for-payment" role="tabpanel" aria-labelledby="wait-for-payment-tab">
+                                    <partial name="_AnswerTicketPartial" model="@(new AnswerTicketDTO{Id = Model.Ticket.Id})" />
+
+                                    <hr />
+                                    <ul class="messages" id="messages">
+                                        @if (Model.TicketMessages != null && Model.TicketMessages.Any())
+                                        {
+                                            foreach (var message in Model.TicketMessages)
+                                            {
+                                                <li class="message @(message.SenderId == Model.Ticket.OwnerId ? "right" : "left") appeared">
+                                                    <div class="avatar">
+                                                        <img src="@(message.SenderId == Model.Ticket.OwnerId ? PathExtensions.UserAvatarThumb + user.Avatar : PathExtensions.SupportImage)" alt="Alternate Text">
+                                                    </div>
+                                                    <div class="text_wrapper">
+                                                        
+                                                        <div class="time">
+                                                            @message.CreateDate.ToStringShamsiDate() ساعت @message.CreateDate.ToString("HH:mm")
+                                                        </div>
+                                                        <div class="text" style="font-size: 16px">
+                                                            / <span>@(message.SenderId == Model.Ticket.OwnerId ? "شما" : "پشتیبانی")</span>
+                                                            @Html.Raw(message.Text)
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

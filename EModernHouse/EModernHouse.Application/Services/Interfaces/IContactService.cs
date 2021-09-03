@@ -17,7 +17,10 @@ namespace EModernHouse.Application.Services.Interfaces
         #region ticket
 
         Task<AddTicketResult> AddUserTicket(AddTicketViewModel ticket, long userId);
-       
+        Task<FilterTicketDTO> FilterTickets(FilterTicketDTO filter);
+        Task<TicketDetailDTO> GetTicketForShow(long ticketId, long userId);
+        Task<AnswerTicketResult> AnswerTicket(AnswerTicketDTO answer, long userId);
+
 
         #endregion
     }
