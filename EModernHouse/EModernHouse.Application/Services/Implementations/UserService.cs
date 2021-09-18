@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
@@ -175,6 +176,63 @@ namespace EModernHouse.Application.Services.Implementations
         {
             return await _useRepository.GetEntityById(userID);
         }
+        #region UserForAdmin
+
+        public async Task<List<User>> GetAllUserForAdmin()
+        {
+            return await _useRepository.GetQuery().AsQueryable().ToListAsync();
+        }
+
+        public async Task<bool> CreateUser(CreateUserDTO createUser)
+        {
+            var user = new User
+            {
+                FirstName = createUser.FirstName,
+                LastName = createUser.LastName,
+                Mobile = createUser.Mobile,
+                Email = createUser.Email,
+                Password = _passwordHelper.EncodePasswordMd5(createUser.Password),
+                EmailActiveCode = Guid.NewGuid().ToString("N"),
+                MobileActiveCode = new Random().Next(10000, 999999).ToString(),
+                IsEmailActive = createUser.IsEmailActive,
+                IsMobileActive = createUser.IsMobileActive,
+            };
+            await _useRepository.AddEntity(user);
+            await _useRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<EditUserDTO> GetUserForEdit(long userId)
+        {
+            var user = await GetUSerById(userId);
+
+            return new EditUserDTO
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                
+            };
+        }
+
+        public async Task<bool> SetUserForEdit(EditUserDTO edit, long userId)
+        {
+            var user = await GetUSerById(userId);
+
+            
+                user.FirstName = edit.FirstName;
+                user.LastName = edit.LastName;
+                user.Email = edit.Email;
+                user.IsEmailActive = false;
+                _useRepository.EditEntity(user);
+                await _useRepository.SaveChanges();
+                return true;
+            
+
+            
+        }
+        #endregion
+
         #region Dispose
 
         public async ValueTask DisposeAsync()

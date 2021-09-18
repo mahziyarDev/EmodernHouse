@@ -1,0 +1,90 @@
+﻿@using EModernHouse.Application.Utils
+@model ICollection<EModernHouse.DataLayer.Entities.Account.User>
+@{
+    ViewData["Title"] = "لیست کاربران";
+}
+
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="well with-header">
+            <div class="header bordered-sky">
+                جست و جو کردن 
+            </div>
+            <div class="row">
+                
+            </div>
+        </div>
+
+        <div class="well with-header with-footer">
+            <div class="header bordered-sky">
+                @ViewData["Title"]
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        شناسه کاربر
+                    </th>
+                    <th>
+                        اواتار
+                    </th>
+                    <th>
+                        نام و نام خانوادگی
+                    </th>
+                    <th>
+                        شماره موبایل
+                    </th>
+                    <th>
+                        ایمیل
+                    </th>
+                    <th>
+                        وضعیت کاربر
+                    </th>
+                    <th>
+                        دستورات
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var user in Model)
+                    {
+                    <tr>
+                        <td>
+                            @user.Id
+                        </td>
+                        <td class="text-center">
+                            <img style="width: 80px;height: 80px" src="@(!string.IsNullOrEmpty(user.Avatar) ? PathExtensions.UserAvatarOrigin + user.Avatar : PathExtensions.DefaultAvatar)" />
+                        </td>
+                        <td>
+                            @user.FirstName @user.LastName
+                        </td>
+                        <td>
+                            @user.Mobile
+                        </td>
+                        <td>
+                            @(user.Email==null ? "ندارد" : $"{user.Email}")
+                        </td>
+                        <td class="@(user.IsMobileActive ? "success" : "danger")">
+                            @(user.IsMobileActive ? "فعال" : "غیر فعال")
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-warning" asp-controller="User" asp-action="EdtiUserForAdmin" asp-route-userId="@user.Id">ویرایش</a>
+                            <a class="btn btn-danger btn-sm">حذف</a>
+                            <a class="btn btn-default btn-sm">بلاک کردن</a>
+                        </td>
+                    </tr>
+
+                    }
+                }
+
+                </tbody>
+            </table>
+            <div class="footer">
+                <code>&lt; td class="active/success/danger/warning" &gt;</code>
+            </div>
+        </div>
+    </div>
+</div>
+

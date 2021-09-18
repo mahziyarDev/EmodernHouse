@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using EModernHouse.DataLayer.DTOs.Account;
 using EModernHouse.DataLayer.Entities.Account;
@@ -19,5 +20,14 @@ namespace EModernHouse.Application.Services.Interfaces
         Task<EditUserProfileDTO> GetProfileForEdit(long userId);
         Task<EditUserProfileResult> EditUserProfile(EditUserProfileDTO profile,long userId, IFormFile avatarImage);
         Task<User> GetUSerById(long userId);
+
+        #region UserForAdmin
+
+        Task<List<User>> GetAllUserForAdmin();
+        Task<bool> CreateUser(CreateUserDTO createUser);
+        Task<EditUserDTO> GetUserForEdit(long userId);
+        Task<bool> SetUserForEdit(EditUserDTO edit,long userId);
+
+        #endregion
     }
 }
