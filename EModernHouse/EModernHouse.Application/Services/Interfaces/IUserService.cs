@@ -23,10 +23,14 @@ namespace EModernHouse.Application.Services.Interfaces
 
         #region UserForAdmin
 
-        Task<List<User>> GetAllUserForAdmin();
+        Task<List<User>> GetAllUser();
         Task<bool> CreateUser(CreateUserDTO createUser);
         Task<EditUserDTO> GetUserForEdit(long userId);
         Task<bool> SetUserForEdit(EditUserDTO edit,long userId);
+        Task<bool> IsDeletedUser(long userId);
+        Task<bool> IsBlocked(long userId);
+
+        Task<Tuple<List<User>, int>> GetUsersForFilter(int pageId, int take, string mobile, string name, string email);
 
         #endregion
     }

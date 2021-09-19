@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Account;
+using EModernHouse.Web.Http;
 using Microsoft.CodeAnalysis.Differencing;
 
 namespace EModernHouse.Web.Areas.Admin.Controllers
@@ -25,10 +26,15 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
         #region List-user
 
         [HttpGet("user-list")]
-        public async Task<IActionResult> ListUsers()
+        public async Task<IActionResult> ListUsers(int pageId=1,int take=5,string mobile="",string name="",string email="")
         {
-            var users = await _userService.GetAllUserForAdmin();
-            return View(users);
+            var usersFilter = await _userService.GetUsersForFilter(pageId, take, mobile, name, email);
+            ViewBag.pageId = pageId;
+            ViewBag.name = name;
+            ViewBag.mobile = mobile;
+            ViewBag.email = email;
+            ViewBag.take = take;
+            return View(usersFilter);
         }
 
         #endregion
@@ -84,6 +90,54 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
 
             return View(edit);
         }
+        #endregion
+
+        #region IsdeletedUser
+
+        [HttpGet("delete-user/{userId}")]
+        public async Task<IActionResult> IsDeletedUser(long userId)
+        {
+
+            var result = await _userService.IsDeletedUser(userId);
+
+            if (result)
+            {
+                return JsonResponseStatus.SendStatus(
+                    JsonResponseStatusType.Success,
+                    "درخواست مورد نظر با موفقیت تایید شد",
+                    null
+                );
+            }
+
+            return JsonResponseStatus.SendStatus(
+                JsonResponseStatusType.Danger,
+                "اطلاعاتی با این مشخصات یافت نشد",
+                null);
+        }
+
+        #endregion
+
+        #region IsBlockedUser
+        [HttpGet("block-user/{userId}")]
+        public async Task<IActionResult> IsBlockedUser(long userId)
+        {
+            var result = await _userService.IsBlocked(userId);
+
+            if (result)
+            {
+                return JsonResponseStatus.SendStatus(
+                    JsonResponseStatusType.Success,
+                    "درخواست مورد نظر با موفقیت تایید شد",
+                    null
+                );
+            }
+
+            return JsonResponseStatus.SendStatus(
+                JsonResponseStatusType.Danger,
+                "اطلاعاتی با این مشخصات یافت نشد",
+                null);
+        }
+
         #endregion
     }
 }

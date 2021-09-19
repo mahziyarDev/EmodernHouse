@@ -11,3 +11,32 @@
         message: decodeURI(text)
     });
 }
+
+$('[ajax-url-button]').on('click', function (e) {
+    e.preventDefault();
+    var url = $(this).attr('href');
+    var itemId = $(this).attr('ajax-url-button');
+    console.log(itemId);
+    swal({
+        title: 'اخطار',
+        text: "آیا از انجام عملیات مورد نظر اطمینان دارید؟",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "بله",
+        cancelButtonText: "خیر",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    }).then((result) => {
+        if (result.value) {
+            $.get(url).then(result => {
+                if (result.status === 'Success') {
+                    ShowMessage("موفقیت", result.message, "success", 3000);
+                    $('#ajax-url-item-' + itemId).hide(1500);
+                }
+            });
+        } else if (result.dismiss === swal.DismissReason.cancel) {
+            swal('توجه', 'عملیات لغو شد', 'error');
+        }
+    });
+});

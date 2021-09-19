@@ -178,9 +178,10 @@ namespace EModernHouse.Application.Services.Implementations
         }
         #region UserForAdmin
 
-        public async Task<List<User>> GetAllUserForAdmin()
+        public async Task<List<User>> GetAllUser()
         {
-            return await _useRepository.GetQuery().AsQueryable().ToListAsync();
+            return await _useRepository.GetQuery().AsQueryable().Where(s => !s.IsDelete && !s.IsBlocked)
+                .ToListAsync();
         }
 
         public async Task<bool> CreateUser(CreateUserDTO createUser)
@@ -230,6 +231,56 @@ namespace EModernHouse.Application.Services.Implementations
             
 
             
+        }
+
+        public async Task<bool> IsDeletedUser(long userId)
+        {
+            var user = await _useRepository.GetEntityById(userId);
+            user.IsDelete = true;
+            _useRepository.EditEntity(user);
+            await _useRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<bool> IsBlocked(long userId)
+        {
+            var user = await _useRepository.GetEntityById(userId);
+            user.IsBlocked = true;
+            _useRepository.EditEntity(user);
+            await _useRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<Tuple<List<User>, int>> GetUsersForFilter(int pageId, int take, string mobile, string name, string email)
+        {
+            IQueryable<User> users = _useRepository.GetQuery().AsQueryable().Where(s=>!s.IsDelete && !s.IsBlocked);
+
+            #region fillterForString
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                users = users.Where(s => s.FirstName.Contains(name) || s.LastName.Contains(name));
+            }
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                users = users.Where(s => s.Email.Contains(email));
+            }
+
+            if (!string.IsNullOrEmpty(mobile))
+            {
+                users = users.Where(s => s.Mobile.Contains(mobile));
+            }
+
+            #endregion
+
+
+
+            int skip = (pageId - 1) * take;
+            int pageCount = (users.Count() % take == 0 ? users.Count() / take : (users.Count() / take) + 1);
+            List<User> result = await users.Skip(skip).Take(take).ToListAsync();
+            return Tuple.Create(result, pageCount);
+
         }
         #endregion
 
