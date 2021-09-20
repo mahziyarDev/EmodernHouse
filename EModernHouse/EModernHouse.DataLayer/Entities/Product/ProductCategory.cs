@@ -16,7 +16,6 @@ namespace EModernHouse.DataLayer.Entities.Product
         public string Title { get; set; }
 
         [Display(Name = "عنوان")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string CategoryImage { get; set; }
 
         [Display(Name = "عنوان در URL")]

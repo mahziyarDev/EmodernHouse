@@ -38,6 +38,7 @@ namespace EModernHouse.Web
             services.AddScoped<ISiteService, SiteService>();
             services.AddScoped<ISmsService, SmsService>();
             services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
 
             #endregion

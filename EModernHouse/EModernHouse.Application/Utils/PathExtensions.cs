@@ -43,5 +43,15 @@ namespace EModernHouse.Application.Utils
         public static string SupportImage = "/images/avatar/call-center-agent.png";
 
         #endregion
+
+        #region Product
+
+        public static string ProductImageOrigin = "/Content/Images/ProductImage/Origin/";
+        public static string ProductImageServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/Images/ProductImage/Origin/");
+
+        public static string ProductImageThumb = "/Content/Images/ProductImage/Thumb/";
+        public static string ProductImageThumbServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/Images/ProductImage/Thumb/");
+
+        #endregion
     }
 }

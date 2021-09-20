@@ -27,6 +27,7 @@
   <ItemGroup>
     <Folder Include="Areas\User\ViewComponents\" />
     <Folder Include="Http\" />
+    <Folder Include="wwwroot\Content\Images\ProductImage\" />
     <Folder Include="wwwroot\Content\Images\UserAvatar\" />
   </ItemGroup>
 
