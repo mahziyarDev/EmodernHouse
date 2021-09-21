@@ -12,8 +12,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace EModernHouse.Web
 {
@@ -40,6 +43,16 @@ namespace EModernHouse.Web
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
+
+            #endregion
+
+
+            #region DataProtection
+
+            services.AddDataProtection()
+                .PersistKeysToFileSystem(new DirectoryInfo(Directory.GetCurrentDirectory() + "\\wwwroot\\Auth\\"))
+                .SetApplicationName("EModernHouseProject")
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(30));
 
             #endregion
 

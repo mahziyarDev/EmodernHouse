@@ -1,4 +1,5 @@
 ﻿@using EModernHouse.DataLayer.Entities.Product
+@using System.Data.Common
 @model EModernHouse.DataLayer.DTOs.Product.CreateProductDTO
 @{
     ViewData["Title"] = "افزودن محصول جدید";
@@ -45,7 +46,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-blue">Submit</button>
+                            <button type="submit" class="btn btn-blue">ثبت محصول</button>
 
                         </div>
                     </div>
@@ -97,7 +98,7 @@
                                         <div class="form-group">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="@nameof(Model.SelectedCategories)" value="@group.Id" />
+                                                    <input main_categories_checkbox="@group.Id" type="checkbox" name="@nameof(Model.SelectedCategories)" value="@group.Id" />
                                                     <span class="text">@group.Title | 1</span>
                                                 </label>
                                             </div>
@@ -106,35 +107,39 @@
                                         if (categories.Any(s => s.ParentId == group.Id))
                                         {
 
-                                            @foreach (var subGroup in categories.Where(s => s.ParentId == group.Id))
-                                            {
-                                                <div class="form-group">
-                                                    <div class="checkbox" style="margin-right: 20px">
-                                                        <label>
-                                                            <input type="checkbox" name="@nameof(Model.SelectedCategories)" value="@subGroup.Id" />
-                                                            <span class="text">@subGroup.Title | 2</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-
-                                                @if (categories.Any(s => s.ParentId == subGroup.Id))
+                                            <div id="firs-parent-categories-@group.Id" style="display: none">
+                                                @foreach (var subGroup in categories.Where(s => s.ParentId == group.Id))
                                                 {
-                                                    @foreach (var lastGroup in categories.Where(s => s.ParentId == subGroup.Id))
-                                                    {
-                                                        <div class="form-group">
-                                                            <div class="checkbox" style="margin-right: 30px!important">
-                                                                <label>
-                                                                    <input type="checkbox" name="@nameof(Model.SelectedCategories)" value="@lastGroup.Id" />
-                                                                    <span class="text">@lastGroup.Title | 3</span>
+                                                    <div class="form-group">
+                                                        <div class="checkbox" style="margin-right: 20px">
+                                                            <label>
+                                                                <input firs-parent-category="@subGroup.Id" firs-parent-category1="@group.Id" type="checkbox" name="@nameof(Model.SelectedCategories)" value="@subGroup.Id" />
+                                                                <span class="text">@subGroup.Title | 2</span>
+                                                            </label>
+                                                        </div>
+                                                    </div> 
 
-                                                                </label>
-                                                            </div>
+                                                    @if (categories.Any(s => s.ParentId == subGroup.Id))
+                                                    {
+                                                        <div id="last-categories-@subGroup.Id" style="display: none">
+                                                            @foreach (var lastGroup in categories.Where(s => s.ParentId == subGroup.Id))
+                                                            {
+                                                                <div class="form-group">
+                                                                    <div class="checkbox" style="margin-right: 30px!important">
+                                                                        <label>
+                                                                            <input two-parent-categories="@subGroup.Id" type="checkbox" name="@nameof(Model.SelectedCategories)" value="@lastGroup.Id" />
+                                                                            <span class="text">@lastGroup.Title | 3</span>
+
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            }
                                                         </div>
                                                     }
+
                                                 }
 
-                                            }
-
+                                            </div>
                                         }
                                         <hr />
                                     }
@@ -142,7 +147,7 @@
                                 }
                                 else
                                 {
-                                    <p class="text-danger">شما هیچ گرونی ثبت نکرده اید</p>
+                                    <p class="text-danger">شما هیچ گروهی ثبت نکرده اید</p>
                                 }
                             </div>
                         </div>
@@ -155,7 +160,9 @@
 </div>
 @section script
 {
-
+    <partial name="_JqueryValidator" />
     <script src="~/js/ChangeImage.js"></script>
+    <script src="~/Admin/js/ForCategoriesInAdmin.js"></script>
+
 }
 

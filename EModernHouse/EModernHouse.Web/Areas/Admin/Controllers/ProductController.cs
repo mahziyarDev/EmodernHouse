@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Product;
+using EModernHouse.Web.Http;
 using Microsoft.AspNetCore.Http;
 
 namespace EModernHouse.Web.Areas.Admin.Controllers
@@ -40,6 +41,21 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
             ViewBag.MainCategories = await _productService.GetAllActiveProductCategories();
             return View();
         }
+        #endregion
+
+        #region productCategories
+        [HttpGet("product-categories/{parentId}")]
+        public async Task<IActionResult> GetProductCategoriesByParentId(long parentId)
+        {
+            var categories = await _productService.GetAllProductCategoriesByParentId(parentId);
+
+            return JsonResponseStatus.SendStatus(
+                JsonResponseStatusType.Success,
+                "اطلاعات دسته بندی ها",
+                categories
+            );
+        }
+
         #endregion
     }
 }

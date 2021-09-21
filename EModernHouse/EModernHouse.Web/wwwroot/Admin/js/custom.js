@@ -96,3 +96,4 @@ $('[ajax-url-button]').on('click', function (e) {
         }
     });
 });
+
