@@ -200,26 +200,39 @@
                 var colorName = $('#product-color-names-input').val();
                 var colorCodes = $('#product-color-code-input').val();
                 var colorPrice = $('#product-color-price-input').val();
-                var indexTable = ($('#list-of-product-colors tr')).length;
-                // create input hidden
-                var input_ColorName = `<input type="hidden" value="${colorName}" name="ProductColor[${indexTable}].ColorName"/>`;
-                var input_ColorCode = `<input type="hidden" value="${colorCodes}" name="ProductColor[${indexTable}].ColorCode"/>`;
-                var input_ColorPrice = `<input type="hidden" value="${colorPrice}" name="ProductColor[${indexTable}].Price"/>`;
-                // send to form
-                var formProduct = $('#form_Product');
-                formProduct.append(input_ColorName);
-                formProduct.append(input_ColorCode);
-                formProduct.append(input_ColorPrice);
+                if (colorName !== "" && colorCodes !== "" && ColorPriceTBL !== "") {
+                    var indexTable = ($('#list-of-product-colors tr')).length;
+                    // create input hidden
+                    var input_ColorName = `<input type="hidden" value="${colorName}" name="ProductColor[${indexTable}].ColorName" color_name_hidden_inputs="${indexTable}"/>`;
+                    var input_ColorCode = `<input type="hidden" value="${colorCodes}" name="ProductColor[${indexTable}].ColorCode" color_Code_hidden_inputs="${indexTable}"/>`;
+                    var input_ColorPrice = `<input type="hidden" value="${colorPrice}" name="ProductColor[${indexTable}].Price" color_Price_hidden_inputs="${indexTable}"/>`;
+                    // send to form
+                    var formProduct = $('#form_Product');
+                    formProduct.append(input_ColorName);
+                    formProduct.append(input_ColorCode);
+                    formProduct.append(input_ColorPrice);
 
-                //create td for table
+                    //create td for table
 
-                var ColorNameTBL = `<td>${colorName}</td>`;
-                var ColorCodeTBL = `<td style="background:${colorCodes};color:#fff">${colorCodes}</td>`;
-                var ColorPriceTBL = `<td>${colorPrice}</td>`;
-                var InsertToTBL = `<tr>${ColorNameTBL} ${ColorCodeTBL} ${ColorPriceTBL}</tr>`;
-                $('#list-of-product-colors').append(InsertToTBL);
+                    var ColorNameTBL = `<td>${colorName}</td>`;
+                    var ColorCodeTBL = `<td style="background:${colorCodes};color:#fff">${colorCodes}</td>`;
+                    var ColorPriceTBL = `<td>${colorPrice}</td>`;
+                    var RemoveTrAndInputs = `<td><a class="text-white btn btn-danger" onclick="remove_ColorItems(${indexTable})">حذف</a></td>`;
+                    var InsertToTBL = `<tr color_table_item="${indexTable}">${ColorNameTBL} ${ColorCodeTBL} ${ColorPriceTBL} ${RemoveTrAndInputs}</tr>`;
+                    $('#list-of-product-colors').append(InsertToTBL);
+                } else {
+                    ShowMessage("تذکر", "فیلد رنگ و کد رنگ و قیمت رنگ باید پر شود", 'warning', 3000);
+                }
 
             });
+
+        function remove_ColorItems(index) {
+            $('[color_name_hidden_inputs="' + index + '"]').remove();
+            $('[color_code_hidden_inputs="' + index + '"]').remove();
+            $('[color_price_hidden_inputs="' + index + '"]').remove();
+            $('[color_table_item="' + index + '"]').remove();
+            
+        }
     </script>
 }
 
