@@ -9,7 +9,7 @@
 
 <div class="col-lg-12 col-sm-12 col-xs-12">
     <div class="row">
-        <form asp-area="Admin" asp-controller="Product" asp-action="CreateProduct" method="post" enctype="multipart/form-data">
+        <form asp-area="Admin" asp-controller="Product" asp-action="CreateProduct" id="form_Product" method="post" enctype="multipart/form-data">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 <div class="widget">
                     <div class="widget-header bordered-bottom bordered-blue">
@@ -37,6 +37,37 @@
                                 <label>قیمت محصول</label>
                                 <input type="text" class="form-control" asp-for="Price">
                             </div>
+
+
+                            <hr />
+                            <div class="form-group">
+                                <h4>رنگ محصول</h4>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="product-color-names-input" placeholder="دور گل ابی" />
+                                    <br />
+                                    <input type="text" class="form-control" id="product-color-code-input" placeholder="کد رنگ مثلا : #45d" />
+                                    <br />
+                                    <input type="number" class="form-control" id="product-color-price-input" placeholder="قیمت  از صفر تا یک عددی" />
+                                </div>
+                                <button class="btn btn-success" id="btn-add-colors">افزودن رنگ</button>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>نام رنگ</th>
+                                            <th>کد رنگ</th>
+                                            <th>قیمت رنگ</th>
+                                            <th>دستورات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="list-of-product-colors">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <hr />
+
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
@@ -45,7 +76,6 @@
                                     </label>
                                 </div>
                             </div>
-
                             <button type="submit" class="btn btn-blue">ثبت محصول</button>
 
                         </div>
@@ -117,7 +147,7 @@
                                                                 <span class="text">@subGroup.Title | 2</span>
                                                             </label>
                                                         </div>
-                                                    </div> 
+                                                    </div>
 
                                                     @if (categories.Any(s => s.ParentId == subGroup.Id))
                                                     {
@@ -160,9 +190,36 @@
 </div>
 @section script
 {
-    <partial name="_JqueryValidator" />
+    <partial name="_JqueryValidator"/>
     <script src="~/js/ChangeImage.js"></script>
     <script src="~/Admin/js/ForCategoriesInAdmin.js"></script>
+    <script>
+        $('#btn-add-colors').on('click',
+            function(e) {
+                e.preventDefault();
+                var colorName = $('#product-color-names-input').val();
+                var colorCodes = $('#product-color-code-input').val();
+                var colorPrice = $('#product-color-price-input').val();
+                var indexTable = ($('#list-of-product-colors tr')).length;
+                // create input hidden
+                var input_ColorName = `<input type="hidden" value="${colorName}" name="ProductColor[${indexTable}].ColorName"/>`;
+                var input_ColorCode = `<input type="hidden" value="${colorCodes}" name="ProductColor[${indexTable}].ColorCode"/>`;
+                var input_ColorPrice = `<input type="hidden" value="${colorPrice}" name="ProductColor[${indexTable}].Price"/>`;
+                // send to form
+                var formProduct = $('#form_Product');
+                formProduct.append(input_ColorName);
+                formProduct.append(input_ColorCode);
+                formProduct.append(input_ColorPrice);
 
+                //create td for table
+
+                var ColorNameTBL = `<td>${colorName}</td>`;
+                var ColorCodeTBL = `<td style="background:${colorCodes};color:#fff">${colorCodes}</td>`;
+                var ColorPriceTBL = `<td>${colorPrice}</td>`;
+                var InsertToTBL = `<tr>${ColorNameTBL} ${ColorCodeTBL} ${ColorPriceTBL}</tr>`;
+                $('#list-of-product-colors').append(InsertToTBL);
+
+            });
+    </script>
 }
 
