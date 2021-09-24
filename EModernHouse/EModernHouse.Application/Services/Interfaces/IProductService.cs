@@ -11,7 +11,8 @@ namespace EModernHouse.Application.Services.Interfaces
         #region Product
 
         Task<bool> CreateProduct(CreateProductDTO create, string imageName);
-
+        Task<EditProductDTO> GetProductForEdit(long productId);
+        Task<bool> EditProduct(EditProductDTO edit);
         #endregion
 
         #region Product-Categories

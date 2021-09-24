@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using EModernHouse.DataLayer.Entities.Common;
@@ -42,6 +43,14 @@ namespace EModernHouse.DataLayer.Repository
             await _dbSet.AddAsync(entity);
         }
 
+        public async Task AddRangeEntity(List<TEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                await AddEntity(entity);
+            }
+        }
+
         public void EditEntity(TEntity entity)
         {
             entity.LastUpdateDate = DateTime.Now;
@@ -68,6 +77,10 @@ namespace EModernHouse.DataLayer.Repository
             _dbSet.Remove(entity);
         }
 
+        public void DeletePermanentRange(List<TEntity> entities)
+        {
+            _context.RemoveRange(entities);
+        }
         public async Task DeletePermanent(long entityId)
         {
             TEntity entity = await GetEntityById(entityId);

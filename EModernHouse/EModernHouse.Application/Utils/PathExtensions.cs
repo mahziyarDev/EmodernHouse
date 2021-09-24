@@ -47,7 +47,7 @@ namespace EModernHouse.Application.Utils
         #region Product
 
         public static string ProductImageOrigin = "/Content/Images/ProductImage/Origin/";
-        public static string ProductImageServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/Images/ProductImage/Origin/");
+        public static string ProductImageOriginServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/Images/ProductImage/Origin/");
 
         public static string ProductImageThumb = "/Content/Images/ProductImage/Thumb/";
         public static string ProductImageThumbServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/Images/ProductImage/Thumb/");
