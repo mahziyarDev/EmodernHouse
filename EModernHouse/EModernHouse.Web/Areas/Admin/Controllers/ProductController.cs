@@ -110,5 +110,44 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
         }
 
         #endregion
+
+        #region CreateproductGalley
+
+        [HttpGet("create-gallery/{productId}")]
+        public async Task<IActionResult> CreateProductGallery(long productId)
+        {
+            ViewBag.productId = productId;
+            ViewBag.productImages = await _productService.GetAllGalleryForProduct(productId);
+            return View();
+        }
+
+        [HttpPost("create-gallery/{productId}")]
+        public async Task<IActionResult> CreateProductGallery(CreateProductGalleryDTO gallery,IFormFile imageGallery, long productId)
+        {
+            if (ModelState.IsValid)
+            {
+                if (imageGallery != null && imageGallery.IsImage())
+                {
+                    var imageName = Guid.NewGuid().ToString("N") + Path.GetExtension(imageGallery.FileName);
+                    imageGallery.AddImageToServer(imageName, PathExtensions.ProductGalleryImageOriginServer, 150, 150,PathExtensions.ProductGalleryImageThumbServer);
+                    gallery.ImageName = imageName;
+
+                    var res = await _productService.AddImageProductForGallery(gallery);
+                    if (res)
+                    {
+                        TempData[SuccessMessage] = "عکس با موفقیت ذخیره شد";
+                        return RedirectToAction("CreateProductGallery");
+                    }
+
+                    TempData[ErrorMessage] = "عملیات ثبت موفق نبود";
+                }
+
+                TempData[ErrorMessage] = "عکس محصول را درست انتخاب کنید";
+            }
+            ViewBag.productId = productId;
+            return View(gallery);
+        }
+
+        #endregion
     }
 }

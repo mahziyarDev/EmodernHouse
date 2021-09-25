@@ -23,15 +23,16 @@ namespace EModernHouse.Application.Services.Implementations
         private readonly IGenericRepository<ProductCategory> _productCategoryRepository;
         private readonly IGenericRepository<ProductSelectedCategory> _productSelectedCategoryRepository;
         private readonly IGenericRepository<ProductColor> _productColorRepository;
+        private readonly IGenericRepository<ProductGallery> _productGalleryRepository;
 
-        public ProductService(IGenericRepository<Product> productRepository, IGenericRepository<ProductCategory> productCategoryRepository, IGenericRepository<ProductSelectedCategory> productSelectedCategoryRepository, IGenericRepository<ProductColor> productColorRepository)
+        public ProductService(IGenericRepository<Product> productRepository, IGenericRepository<ProductCategory> productCategoryRepository, IGenericRepository<ProductSelectedCategory> productSelectedCategoryRepository, IGenericRepository<ProductColor> productColorRepository, IGenericRepository<ProductGallery> productGalleryRepository)
         {
             _productRepository = productRepository;
             _productCategoryRepository = productCategoryRepository;
             _productSelectedCategoryRepository = productSelectedCategoryRepository;
             _productColorRepository = productColorRepository;
+            _productGalleryRepository = productGalleryRepository;
         }
-
         #endregion
 
         #region Product
@@ -200,7 +201,30 @@ namespace EModernHouse.Application.Services.Implementations
         }
         #endregion
 
+        #region ProductGallery
 
+        public async Task<List<ProductGallery>> GetAllGalleryForProduct(long productID)
+        {
+            return await _productGalleryRepository.GetQuery().AsQueryable()
+                .Where(s => !s.IsDelete && s.ProductId == productID).ToListAsync();
+            
+        }
+        public async Task<bool> AddImageProductForGallery(CreateProductGalleryDTO gallery)
+        {
+            var productGallery = new ProductGallery
+            {
+                ProductId = gallery.ProductId,
+                DisplayPriority = gallery.DisplayPriority,
+                ImageName = gallery.ImageName,
+                Alt = gallery.Alt
+                
+            };
+            await _productGalleryRepository.AddEntity(productGallery);
+            await _productGalleryRepository.SaveChanges();
+            return true;
+        }
+
+        #endregion
 
         #region Disposiable
 

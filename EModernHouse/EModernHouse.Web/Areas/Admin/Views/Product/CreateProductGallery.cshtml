@@ -1,0 +1,95 @@
+﻿@using EModernHouse.DataLayer.Entities.Product
+@using EModernHouse.Application.Utils
+@model EModernHouse.DataLayer.DTOs.Product.CreateProductGalleryDTO
+@{
+    ViewData["Title"] = "افزودن گالری";
+    var productGalleries = ViewBag.productImages as List<ProductGallery>;
+}
+
+@section script
+{
+    <script src="~/js/ChangeImage.js"></script>
+    <partial name="_JqueryValidator"/>
+}
+<form asp-area="Admin" asp-controller="Product" asp-action="CreateProductGallery" method="post" enctype="multipart/form-data">
+    <div class="col-lg-8 col-sm-8 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">@ViewData["Title"]</span>
+            </div>
+            <div class="widget-body">
+                <div>
+
+                    <input type="hidden" asp-for="ProductId" value="@ViewBag.productId" />
+                    <div class="form-group">
+                        <label>اولویت عکس</label>
+                        <input class="form-control" asp-for="DisplayPriority">
+                    </div>
+                    <div class="form-group">
+                        <label>مقدار Alt در سئو</label>
+                        <input class="form-control" asp-for="Alt">
+                    </div>
+
+
+                    <button type="submit" class="btn btn-blue">Submit</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-sm-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">انتخاب عکس محصول</span>
+            </div>
+            <div class="widget-body">
+
+                <div class="card text-center">
+                    <div class="card-header">
+                        تغییر آواتار
+                    </div>
+                    <div class="card-body">
+                        <img id="imgPreviewProduct" class="img-thumbnail ImagePreviwe_Editprofile" src="" />
+                    </div>
+                    <div class="card-footer text-muted">
+                        <label for="imageProduct" id="lable-Upload-Avatar" class="btn-upload">انتخاب عکس</label>
+                        <input type="file" name="imageGallery" accept=".png,.jpg,.jpeg" id="imageProduct" class="input_Upload_file_Editprofile" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<br/>
+@if (productGalleries != null && productGalleries.Any())
+{
+    <div class="col-md-9 col-md-offset-2">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>تصویر</th>
+                <th>اولیت</th>
+                <th>مقدار alt</th>
+                <th>دستورات</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var productGallery in productGalleries)
+            {
+                <tr>
+                    <td class="text-center">
+                        <img style="width: 90px;height: 85px" src="@(PathExtensions.ProductGalleryImageThumb+productGallery.ImageName)"/>
+                    </td>
+                    <td class="text-center">@productGallery.DisplayPriority</td>
+                    <td class="text-center">@productGallery.Alt</td>
+                    <td class="text-center">
+                        <a class="btn btn-warning btn-sm" href="#">ویرایش</a>
+                        <a class="btn btn-sm btn-danger" href="#">حذف</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}

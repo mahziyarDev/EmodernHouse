@@ -53,5 +53,14 @@ namespace EModernHouse.Application.Utils
         public static string ProductImageThumbServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/Images/ProductImage/Thumb/");
 
         #endregion
+
+        #region productGallery
+        public static string ProductGalleryImageOrigin = "/Content/Images/ProductGallery/Origin/";
+        public static string ProductGalleryImageOriginServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/Images/ProductGallery/Origin/");
+
+        public static string ProductGalleryImageThumb = "/Content/Images/ProductGallery/Thumb/";
+        public static string ProductGalleryImageThumbServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/Images/ProductGallery/Thumb/");
+
+        #endregion
     }
 }

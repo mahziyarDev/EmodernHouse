@@ -21,5 +21,12 @@ namespace EModernHouse.Application.Services.Interfaces
         Task<List<ProductCategory>> GetAllActiveProductCategories();
 
         #endregion
+
+        #region ProductGallery
+
+        Task<bool> AddImageProductForGallery(CreateProductGalleryDTO gallery);
+        Task<List<ProductGallery>> GetAllGalleryForProduct(long productID);
+
+        #endregion
     }
 }

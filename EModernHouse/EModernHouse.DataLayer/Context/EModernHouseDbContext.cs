@@ -33,6 +33,7 @@ namespace EModernHouse.DataLayer.Context
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductSelectedCategory> ProductSelectedCategories { get; set; }
         public DbSet<ProductColor> ProductColors { get; set; }
+        public DbSet<ProductGallery> ProductGalleries { get; set; }
         #endregion
 
         #region on model Creating
