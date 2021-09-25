@@ -36,3 +36,6 @@
 .image_resized>img {
     max-width: 100%;
 }
+.pointer {
+    cursor: pointer;
+}
