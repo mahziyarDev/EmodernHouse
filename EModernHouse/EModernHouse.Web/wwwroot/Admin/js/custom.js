@@ -132,49 +132,59 @@ $(document).ready(function () {
 //for product colors
 
 
-$('#btn-add-colors').on('click',
-    function (e) {
-        e.preventDefault();
-        var colorName = $('#product-color-names-input').val();
-        var colorCodes = $('#product-color-code-input').val();
-        var colorPrice = $('#product-color-price-input').val();
+//$('#btn-add-colors').on('click',
+//    function (e) {
+//        e.preventDefault();
+//        var colorName = $('#product-color-names-input').val();
+//        var colorCodes = $('#product-color-code-input').val();
+//        var colorPrice = $('#product-color-price-input').val();
         
-        if (colorName !== "" && colorCodes !== "" && colorPrice !== "") {
+//        if (colorName !== "" && colorCodes !== "" && colorPrice !== "") {
             
-            var unic = ($('#list-of-product-colors tr')).length;
-            // create input hidden
-            var input_ColorName = `<input type="hidden" value="${colorName}" name="ProductColor[${unic}].ColorName" color_name_hidden_inputs="${unic}"/>`;
-            var input_ColorCode = `<input type="hidden" value="${colorCodes}" name="ProductColor[${unic}].ColorCode" color_Code_hidden_inputs="${unic}"/>`;
-            var input_ColorPrice = `<input type="hidden" value="${colorPrice}" name="ProductColor[${unic}].Price" color_Price_hidden_inputs="${unic}"/>`;
-            // send to form
-            var formProduct = $('#form_Product');
-            formProduct.append(input_ColorName);
-            formProduct.append(input_ColorCode);
-            formProduct.append(input_ColorPrice);
+//            var unic = ($('#list-of-product-colors tr')).length;
+//            // create input hidden
+//            var input_ColorName = `<input type="hidden" value="${colorName}" name="ProductColor[${unic}].ColorName" color_name_hidden_inputs="${unic}"/>`;
+//            var input_ColorCode = `<input type="hidden" value="${colorCodes}" name="ProductColor[${unic}].ColorCode" color_Code_hidden_inputs="${unic}"/>`;
+//            var input_ColorPrice = `<input type="hidden" value="${colorPrice}" name="ProductColor[${unic}].Price" color_Price_hidden_inputs="${unic}"/>`;
+//            // send to form
+//            var formProduct = $('#form_Product');
+//            formProduct.append(input_ColorName);
+//            formProduct.append(input_ColorCode);
+//            formProduct.append(input_ColorPrice);
 
-            //create td for table
+//            //create td for table
             
-            var ColorNameTBL = `<td>${colorName}</td>`;
-            var ColorCodeTBL = `<td style="background:${colorCodes};color:#000">${colorCodes}</td>`;
-            var ColorPriceTBL = `<td>${colorPrice}</td>`;
-            //var RemoveTrAndInputs = `<td><a class="text-white btn btn-danger" onclick="remove_ColorItems(${unic})">حذف</a></td>`;
-            var InsertToTBL = `<tr color_table_item="${unic}">${ColorNameTBL} ${ColorCodeTBL} ${ColorPriceTBL}</tr>`;
-            $('#list-of-product-colors').append(InsertToTBL);
+//            var ColorNameTBL = `<td>${colorName}</td>`;
+//            var ColorCodeTBL = `<td style="background:${colorCodes};color:#000">${colorCodes}</td>`;
+//            var ColorPriceTBL = `<td>${colorPrice}</td>`;
+//            //var RemoveTrAndInputs = `<td><a class="text-white btn btn-danger" onclick="remove_ColorItems(${unic})">حذف</a></td>`;
+//            var InsertToTBL = `<tr color_table_item="${unic}">${ColorNameTBL} ${ColorCodeTBL} ${ColorPriceTBL}</tr>`;
+//            $('#list-of-product-colors').append(InsertToTBL);
             
-            colorName.val("");
-            colorCodes.val("");
-            colorPrice.val("");
+//            colorName.val("");
+//            colorCodes.val("");
+//            colorPrice.val("");
           
-        } else {
-            ShowMessage("تذکر", "فیلد رنگ و کد رنگ و قیمت رنگ باید پر شود", 'warning', 3000);
-        }
+//        } else {
+//            ShowMessage("تذکر", "فیلد رنگ و کد رنگ و قیمت رنگ باید پر شود", 'warning', 3000);
+//        }
 
-    });
+//    });
 
-function remove_ColorItems() {
+//function remove_ColorItems() {
     
-    $('#list-of-product-colors tr').remove();
-    $('[color_name_hidden_inputs]').remove();
-    $('[color_Code_hidden_inputs]').remove();
-    $('[color_Price_hidden_inputs]').remove();
-}
+//    $('#list-of-product-colors tr').remove();
+//    $('[color_name_hidden_inputs]').remove();
+//    $('[color_Code_hidden_inputs]').remove();
+//    $('[color_Price_hidden_inputs]').remove();
+//}
+
+$(document).ready(function () {
+
+
+    $('#submitFormEdit').on('click',
+        function () {
+            e.preventDefault();
+            $("#EditForm").submit();
+        });
+});

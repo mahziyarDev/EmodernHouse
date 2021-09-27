@@ -11,17 +11,7 @@
     <form asp-area="Admin" asp-controller="Product" asp-action="EditProduct" id="form_Product" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="ImageNameProduct"/>
     <input type="hidden" asp-for="Id"/>
-    @if (Model.ProductColor != null && Model.ProductColor.Any())
-    {
-        var index = 0;
-        @foreach (var color in Model.ProductColor)
-        {
-            <input type="hidden" value="@color.ColorName" name="ProductColor[@index].ColorName" color_name_hidden_inputs="@index"/>
-            <input type="hidden" value="@color.ColorCode" name="ProductColor[@index].ColorName" color_name_hidden_inputs="@index"/>
-            <input type="hidden" value="@color.Price" name="ProductColor[@index].ColorName" color_name_hidden_inputs="@index"/>
-            index += 1;
-        }
-    }
+   
 
     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
         <div class="widget">
@@ -51,48 +41,6 @@
                         <input type="text" class="form-control" asp-for="Price">
                     </div>
 
-
-                    <hr/>
-                    <div class="form-group">
-                        <h4>رنگ محصول</h4>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="product-color-names-input" placeholder="دور گل ابی"/>
-                            <br/>
-                            <input type="text" class="form-control" id="product-color-code-input" placeholder="کد رنگ مثلا : #45d"/>
-                            <br/>
-                            <input type="number" class="form-control" id="product-color-price-input" placeholder="قیمت  از صفر تا یک عددی"/>
-                        </div>
-                        <button class="btn btn-success" id="btn-add-colors">افزودن رنگ</button>
-                    </div>
-                    <br/>
-                    <div class="form-group">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>نام رنگ</th>
-                                <th>کد رنگ</th>
-                                <th>قیمت رنگ</th>
-                            </tr>
-                            </thead>
-                            <tbody id="list-of-product-colors">
-                            @if (Model.ProductColor.Any() && Model.ProductColor != null)
-                            {
-                                @foreach (var color in Model.ProductColor)
-                                {
-                                    <tr color_table_item="">
-                                        <td>@color.ColorName</td>
-                                        <td style="background: @color.ColorCode; color: #000">@color.ColorCode</td>
-                                        <td>@color.Price</td>
-                                    </tr>
-                                }
-                            }
-                            </tbody>
-                        </table>
-                        <div class="alert alert-info">
-                            <p>در صورت وارد کرد کد رنگ ناقص یا اشتباه می توانید از دکمه زیر استفاده کنید و مجددا رنگ ها را وارد نمایید</p>
-                        </div>
-                        <a class="btn btn-danger" onclick="remove_ColorItems()">حذف رنگ ها</a>
-                    </div>
                     <hr/>
 
                     <div class="form-group">

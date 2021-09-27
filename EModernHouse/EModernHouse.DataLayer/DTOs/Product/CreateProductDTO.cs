@@ -25,8 +25,6 @@ namespace EModernHouse.DataLayer.DTOs.Product
         [Display(Name = "فعال / غیرفعال")]
         public bool IsActive { get; set; }
 
-        public List<CreateProductColorDTO> ProductColor { get; set; }
-
         public List<long> SelectedCategories { get; set; }
 
     }

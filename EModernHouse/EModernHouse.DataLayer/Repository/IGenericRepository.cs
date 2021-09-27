@@ -18,6 +18,7 @@ namespace EModernHouse.DataLayer.Repository
         Task DeleteEntity(long entityId);
         void DeletePermanent(TEntity entity);
         void DeletePermanentRange(List<TEntity> entities);
+        void Delete(TEntity entity);
         Task DeletePermanent(long entityId);
         Task SaveChanges();
     }

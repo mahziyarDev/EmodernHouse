@@ -35,12 +35,36 @@ namespace EModernHouse.Application.Services.Implementations
         }
         #endregion
 
+        #region filterProduc
+
+        public async Task<Tuple<List<Product>, int>> GetProductForFilter(int pageId, int take, string productName)
+        {
+            IQueryable<Product> products = _productRepository.GetQuery().AsQueryable()
+                .Where(s => !s.IsDelete);
+
+            #region filter
+
+            if (!string.IsNullOrEmpty(productName))
+            {
+                products = products.Where(s => s.Title.Contains(productName));
+            }
+
+            
+
+            #endregion
+
+            int skip = (pageId - 1) * take;
+            int pageCount = (products.Count() % take == 0 ? products.Count() / take : (products.Count() / take) + 1);
+            List<Product> result = await products.Skip(skip).Take(take).ToListAsync();
+            return Tuple.Create(result, pageCount);
+        }
+        #endregion
+
         #region Product
 
         public async Task<bool> CreateProduct(CreateProductDTO create, string imageName)
         {
             
-
             //create product 
             var newProduct = new Product
             {
@@ -71,23 +95,6 @@ namespace EModernHouse.Application.Services.Implementations
             await _productSelectedCategoryRepository.AddRangeEntity(productSelectedCategories);
             await _productSelectedCategoryRepository.SaveChanges();
 
-            //create product color  
-
-            var productSelectedColor = new List<ProductColor>();
-
-            foreach (var productColor in create.ProductColor)
-            {
-                productSelectedColor.Add( new ProductColor
-                {
-                    ProductId = newProduct.Id,
-                    ColorName = productColor.ColorName,
-                    ColorCode = productColor.ColorCode,
-                    Price = productColor.Price
-                });
-            }
-
-            await _productColorRepository.AddRangeEntity(productSelectedColor);
-            await _productColorRepository.SaveChanges();
             return true;
 
         }
@@ -104,10 +111,6 @@ namespace EModernHouse.Application.Services.Implementations
                 Description = product.Description,
                 Price = product.Price,
                 IsActive = product.IsActive,
-                ProductColor = await _productColorRepository.GetQuery().AsQueryable()
-                    .Where(s=>!s.IsDelete&&s.ProductId==productId)
-                    .Select(s=>new CreateProductColorDTO{ColorName = s.ColorName,ColorCode = s.ColorCode,Price = s.Price})
-                    .ToListAsync(),
                 SelectedCategories = await _productSelectedCategoryRepository
                     .GetQuery().AsQueryable()
                     .Where(s=>!s.IsDelete&&s.ProductId == productId)
@@ -154,26 +157,6 @@ namespace EModernHouse.Application.Services.Implementations
             await _productSelectedCategoryRepository.AddRangeEntity(productSelectedCategories);
             await _productSelectedCategoryRepository.SaveChanges();
 
-            //for remove all productColor
-            _productColorRepository.DeletePermanentRange(await _productColorRepository
-                .GetQuery().AsQueryable()
-                .Where(s=>s.ProductId == product.Id).ToListAsync());
-            //for create all productColor
-            var productSelectedColor = new List<ProductColor>();
-
-            foreach (var productColor in edit.ProductColor)
-            {
-                productSelectedColor.Add(new ProductColor
-                {
-                    ProductId = product.Id,
-                    ColorName = productColor.ColorName,
-                    ColorCode = productColor.ColorCode,
-                    Price = productColor.Price
-                });
-            }
-
-            await _productColorRepository.AddRangeEntity(productSelectedColor);
-            await _productColorRepository.SaveChanges();
             return true;
         }
         #endregion
@@ -224,6 +207,62 @@ namespace EModernHouse.Application.Services.Implementations
             return true;
         }
 
+        public async Task<bool> EditProductGallery(long galleryId, int displayPriority, string alt, string newImage)
+        {
+            var gallery = await _productGalleryRepository.GetEntityById(galleryId);
+            gallery.ImageName = newImage;
+            gallery.Alt = alt;
+            gallery.DisplayPriority = displayPriority;
+
+            _productGalleryRepository.EditEntity(gallery);
+            await _productGalleryRepository.SaveChanges();
+            return true;
+        }
+        #endregion
+
+        #region ProductColor
+
+        public async Task<bool> CreateColorProduct(CreateProductColorDTO create)
+        {
+            var colorProduct = new ProductColor
+            {
+                ProductId = create.ProductId,
+                ColorCode = create.ColorCode,
+                ColorName = create.ColorName,
+                Price = create.Price
+            };
+            await _productColorRepository.AddEntity(colorProduct);
+            await _productColorRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<List<ProductColor>> GetProductColorByproductId(long productId)
+        {
+            var productColor = await _productColorRepository.GetQuery().AsQueryable()
+                .Where(s => s.ProductId == productId).ToListAsync();
+            return productColor;
+
+        }
+
+        public async Task<long> DeleteProductColorById(long colorId)
+        {
+            var color = await _productColorRepository.GetEntityById(colorId);
+            long id = color.ProductId;
+            _productColorRepository.Delete(color);
+            await _productColorRepository.SaveChanges();
+            return id;
+        }
+
+        public async Task<bool> EditProductColor(long colorId, string colorName, string colorCode, int price)
+        {
+            var color =await _productColorRepository.GetEntityById(colorId);
+            color.ColorName = colorName;
+            color.ColorCode = colorCode;
+            color.Price = price;
+            _productColorRepository.EditEntity(color);
+            await _productColorRepository.SaveChanges();
+            return true;
+        }
         #endregion
 
         #region Disposiable

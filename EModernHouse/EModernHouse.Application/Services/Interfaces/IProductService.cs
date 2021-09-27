@@ -8,6 +8,11 @@ namespace EModernHouse.Application.Services.Interfaces
 {
     public interface IProductService : IAsyncDisposable
     {
+        #region filterProduc
+
+        Task<Tuple<List<Product>, int>> GetProductForFilter(int pageId, int take, string productName);
+        #endregion
+
         #region Product
 
         Task<bool> CreateProduct(CreateProductDTO create, string imageName);
@@ -26,6 +31,15 @@ namespace EModernHouse.Application.Services.Interfaces
 
         Task<bool> AddImageProductForGallery(CreateProductGalleryDTO gallery);
         Task<List<ProductGallery>> GetAllGalleryForProduct(long productID);
+        Task<bool> EditProductGallery(long galleryId, int displayPriority, string alt,string newImage);
+        #endregion
+
+        #region ProductColor
+
+        Task<bool> CreateColorProduct(CreateProductColorDTO create);
+        Task<List<ProductColor>> GetProductColorByproductId(long productId);
+        Task<long> DeleteProductColorById(long colorId);
+        Task<bool> EditProductColor(long colorId, string colorName, string colorCode, int price);
 
         #endregion
     }

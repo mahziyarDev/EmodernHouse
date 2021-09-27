@@ -9,7 +9,7 @@
 @section script
 {
     <script src="~/js/ChangeImage.js"></script>
-    <partial name="_JqueryValidator"/>
+    <partial name="_JqueryValidator" />
 }
 <form asp-area="Admin" asp-controller="Product" asp-action="CreateProductGallery" method="post" enctype="multipart/form-data">
     <div class="col-lg-8 col-sm-8 col-xs-12">
@@ -31,7 +31,7 @@
                     </div>
 
 
-                    <button type="submit" class="btn btn-blue">Submit</button>
+                    <button type="submit" class="btn btn-blue">ثبت</button>
 
                 </div>
             </div>
@@ -61,35 +61,85 @@
         </div>
     </div>
 </form>
-<br/>
+<br />
 @if (productGalleries != null && productGalleries.Any())
 {
     <div class="col-md-9 col-md-offset-2">
         <table class="table table-bordered">
             <thead>
-            <tr>
-                <th>تصویر</th>
-                <th>اولیت</th>
-                <th>مقدار alt</th>
-                <th>دستورات</th>
-            </tr>
+                <tr>
+                    <th>تصویر</th>
+                    <th>اولیت</th>
+                    <th>مقدار alt</th>
+                    <th>دستورات</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var productGallery in productGalleries)
-            {
-                <tr>
-                    <td class="text-center">
-                        <img style="width: 90px;height: 85px" src="@(PathExtensions.ProductGalleryImageThumb+productGallery.ImageName)"/>
-                    </td>
-                    <td class="text-center">@productGallery.DisplayPriority</td>
-                    <td class="text-center">@productGallery.Alt</td>
-                    <td class="text-center">
-                        <a class="btn btn-warning btn-sm" href="#">ویرایش</a>
-                        <a class="btn btn-sm btn-danger" href="#">حذف</a>
-                    </td>
-                </tr>
-            }
+                @foreach (var productGallery in productGalleries)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <img style="width: 90px;height: 85px" src="@(PathExtensions.ProductGalleryImageThumb+productGallery.ImageName)" />
+                        </td>
+                        <td class="text-center">@productGallery.DisplayPriority</td>
+                        <td class="text-center">@productGallery.Alt</td>
+                        <td class="text-center">
+                            <a class="btn btn-warning btn-sm" data-toggle="modal" data-target=".@productGallery.Id">ویرایش</a>
+                            <a class="btn btn-sm btn-danger" href="#">حذف</a>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
+}
+else
+{
+    <div class="col-md-12">
+        <div class="alert alert-danger">
+            <p>هیچ عکسی برای گالری محصول ثبت نشده است .</p>
+        </div>
+    </div>
+}
+
+@if (productGalleries != null && productGalleries.Any())
+{
+    @foreach (var productGallery in productGalleries)
+    {
+        <!--LArge Modal Templates-->
+        <div class="modal fade @productGallery.Id" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myLargeModalLabel">ویرایش تصویر</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-12">
+                            <form id="EditForm" asp-area="Admin" asp-controller="Product" asp-action="EditProductGallery" asp-route-galleryId="@productGallery.Id"  enctype="multipart/form-data" method="post">
+                                <input type="hidden" value="@productGallery.ProductId" name="productId" />
+                                <input type="hidden" value="@productGallery.ImageName" name="imageName"/>
+                                <div class="form-group">
+                                    <label>انتخاب تصویر</label>
+                                    <input type="file" name="newGalleryImage"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>انتخاب عنوان</label>
+                                    <input type="text" name="alt" class="form-control" value="@productGallery.Alt"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>انتخاب اولویت نمایش</label>
+                                    <input type="number" name="displayPriority" class="form-control" value="@productGallery.DisplayPriority"/>
+                                </div>
+                                <button class="btn btn-warning btn-sm" id="submitFormEdit">ویرایش</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!--End Large Modal Templates-->
+    }
 }

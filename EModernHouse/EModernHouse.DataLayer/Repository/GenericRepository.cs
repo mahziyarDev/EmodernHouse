@@ -91,6 +91,10 @@ namespace EModernHouse.DataLayer.Repository
 
         }
 
+        public void Delete(TEntity entity)
+        {
+            _context.Remove(entity);
+        }
         public async Task SaveChanges()
         {
             await _context.SaveChangesAsync();

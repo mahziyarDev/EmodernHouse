@@ -1,41 +1,32 @@
-﻿
-@using EModernHouse.Application.Utils
-@using System.Collections.Specialized
-@model Tuple<List<EModernHouse.DataLayer.Entities.Account.User>, int>
+﻿@using EModernHouse.Application.Utils
+@model Tuple<List<EModernHouse.DataLayer.Entities.Product.Product>, int>
 @{
-    ViewData["Title"] = "لیست کاربران";
+    ViewData["Title"] = "لیست محصولات";
 }
 
+
 <div class="row">
-    <div class="col-xs-3 col-md-3">
+    <div class="col-xs-12 col-md-12">
         <div class="well with-header">
             <div class="header bordered-sky">
                 جست و جو کردن
             </div>
             <div class="row">
 
-                <form id="FormFilterUSer" method="get" action="/Admin/Product/product-list">
-                    <input type="hidden" name="pageId" id="PageId" value="@ViewBag.pageId" />
+                <form id="FormFilterUSer">
+                    <input type="hidden" name="pageId" id="PageId" value="@ViewBag.PageId" />
                     <div class="col-md-12 col-sm-12">
-                        <label>نام و نام خانوادگی</label>
-                        <input name="name" class="form-control" value="@ViewBag.name" />
+                        <label>نام محصول</label>
+                        <input type="text" name="productName" class="form-control" value="@ViewBag.ProducrName" />
                     </div>
                     <div class="col-md-12 col-sm-12">
-                        <label>ایمیل</label>
-                        <input name="email" class="form-control" value="@ViewBag.email" />
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label>تلفن تماس</label>
-                        <input name="mobile" class="form-control" value="@ViewBag.mobile" />
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label>تعداد نمایش</label>
-                        <input class="form-control" type="number" min="1" max="20" name="take" value="@ViewBag.take" />
+                        <label>تعداد نمایش در هر صفحه</label>
+                        <input class="form-control" type="number" min="1" max="20" name="take" value="@ViewBag.Take" />
                     </div>
 
                     <div class="col-md-12 col-sm-12">
                         <br />
-                        <button type="submit" class="btn btn-primary btn-block mt-4">جست و جو</button>
+                        <button type="submit" class="btn btn-primary mt-4">جست و جو</button>
                     </div>
 
                 </form>
@@ -44,7 +35,7 @@
 
 
     </div>
-    <div class="col-xs-9 col-md-9">
+    <div class="col-xs-12 col-md-12">
         <div class="well with-header with-footer">
             <div class="header bordered-sky">
                 @ViewData["Title"] ___
@@ -56,19 +47,19 @@
                     <thead>
                         <tr>
                             <th>
-                                شناسه کاربر
+                                شناسه محصول
                             </th>
                             <th>
-                                اواتار
+                                تصویر محصول
                             </th>
                             <th>
-                                نام و نام خانوادگی
+                                نام محصول
                             </th>
                             <th>
-                                شماره موبایل
+                                قیمت محصول
                             </th>
                             <th>
-                                ایمیل
+                                موجودی در انبار
                             </th>
                             <th>
                                 وضعیت کاربر
@@ -80,31 +71,33 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var user in Model.Item1)
+                        @foreach (var product in Model.Item1)
                         {
-                            <tr id="ajax-url-item-@user.Id">
+                            <tr id="ajax-url-item-@product.Id">
                                 <td>
-                                    @user.Id
+                                    @product.Id
                                 </td>
                                 <td class="text-center">
-                                    <img style="width: 80px;height: 80px" src="@(!string.IsNullOrEmpty(user.Avatar) ? PathExtensions.UserAvatarOrigin + user.Avatar : PathExtensions.DefaultAvatar)" />
+                                    <img style="width: 80px;height: 80px" src="@(PathExtensions.ProductImageThumb + product.ImageName )" />
                                 </td>
                                 <td>
-                                    @user.FirstName @user.LastName
+                                    @product.Title
                                 </td>
                                 <td>
-                                    @user.Mobile
+                                    @product.Price
                                 </td>
                                 <td>
-                                    @(user.Email==null ? "ندارد" : $"{user.Email}")
+                                    این قابلیت در دسترس نمی باشد
                                 </td>
-                                <td class="@(user.IsMobileActive ? "success" : "danger")">
-                                    @(user.IsMobileActive ? "فعال" : "غیر فعال")
+                                <td class="@(product.IsActive ? "success" : "danger")">
+                                    @(product.IsActive ? "فعال" : "غیر فعال")
                                 </td>
                                 <td>
-                                    <a class="btn btn-sm btn-warning" asp-controller="User" asp-action="EdtiUserForAdmin" asp-route-userId="@user.Id">ویرایش</a>
-                                    <a class="btn btn-danger btn-sm" ajax-url-button="@user.Id" asp-area="Admin" asp-controller="User" asp-action="IsDeletedUser" asp-route-userId="@user.Id">حذف</a>
-                                    <a class="btn btn-default btn-sm" ajax-url-button="@user.Id" asp-area="Admin" asp-controller="User" asp-action="IsBlockedUser" asp-route-userId="@user.Id">بلاک کردن</a>
+                                    <a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="Product" asp-action="EditProduct" asp-route-productId="@product.Id">ویرایش</a>
+                                    <a class="btn btn-sm btn-info" asp-area="Admin" asp-controller="Product" asp-action="CreateProductGallery" asp-route-productId="@product.Id">افزودن گالری</a>
+                                    <a class="btn btn-sm btn-primary" asp-area="Admin" asp-controller="Product" asp-action="CreateProductColor" asp-route-productId="@product.Id">رنگ محصول</a>
+                                    <a class="btn btn-danger btn-sm">حذف</a>
+                                    <a class="btn btn-default btn-sm">غیر فعال کردن</a>
                                 </td>
                             </tr>
 
