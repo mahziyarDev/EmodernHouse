@@ -85,7 +85,7 @@
                         <td class="text-center">@productGallery.Alt</td>
                         <td class="text-center">
                             <a class="btn btn-warning btn-sm" data-toggle="modal" data-target=".@productGallery.Id">ویرایش</a>
-                            <a class="btn btn-sm btn-danger" href="#">حذف</a>
+                            <a class="btn btn-sm btn-danger" asp-area="Admin" asp-controller="Product" asp-action="DeleteProductGallery" asp-route-galleryId="@productGallery.Id">حذف</a>
                         </td>
                     </tr>
                 }

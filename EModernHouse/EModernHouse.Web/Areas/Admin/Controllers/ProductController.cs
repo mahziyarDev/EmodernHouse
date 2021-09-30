@@ -190,6 +190,15 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
             TempData[ErrorMessage] = "مقادیر خواسته شده را وارد نمایید";
             return Redirect("/Admin/create-gallery/" + productId);
         }
+
+        [HttpGet("delete-product-gallery/{galleryId}")]
+        public async Task<IActionResult> DeleteProductGallery(long productId ,long galleryId)
+        {
+            var res = await _productService.DeleteProductGalleryById(galleryId);
+            
+            TempData[SuccessMessage] = "با موفقیت حذف شد";
+            return Redirect("/Admin/create-gallery/" + res);
+        }
         #endregion
 
         #region ProductColor

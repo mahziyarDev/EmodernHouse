@@ -218,6 +218,20 @@ namespace EModernHouse.Application.Services.Implementations
             await _productGalleryRepository.SaveChanges();
             return true;
         }
+
+        public async Task<long> DeleteProductGalleryById(long galleryId)
+        {
+            var productGallery = await _productGalleryRepository.GetEntityById(galleryId);
+            var productId = productGallery.ProductId;
+            if (File.Exists(PathExtensions.ProductGalleryImageThumbServer+productGallery.ImageName)&&File.Exists(PathExtensions.ProductGalleryImageOriginServer+productGallery.ImageName))
+            {
+               File.Delete(PathExtensions.ProductGalleryImageOriginServer+productGallery.ImageName);
+               File.Delete(PathExtensions.ProductGalleryImageThumbServer+productGallery.ImageName);
+            }
+            _productGalleryRepository.Delete(productGallery);
+            await _productGalleryRepository.SaveChanges();
+            return productId;
+        }
         #endregion
 
         #region ProductColor
@@ -261,6 +275,59 @@ namespace EModernHouse.Application.Services.Implementations
             color.Price = price;
             _productColorRepository.EditEntity(color);
             await _productColorRepository.SaveChanges();
+            return true;
+        }
+        #endregion
+
+        #region categories
+
+        public CategoriesFilterDTO GetCategoriesForList(int pageId, int take, string filter)
+        {
+            IQueryable<ProductCategory> categories =_productCategoryRepository.GetQuery().AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                categories = categories.Where(s => s.Title.Contains(filter));
+            }
+
+            var skip = (pageId - 1) * take;
+            var model = new CategoriesFilterDTO
+            {
+                Filter = filter,
+                ProductCategories = categories.OrderByDescending(s=>s.Id).Skip(skip).Take(take).ToList()
+            };
+
+            model.GeneratePaging(categories,pageId,take);
+            return model;
+        }
+
+        public async Task<List<ProductCategory>> GetAllProductCategoriesForList()
+        {
+           return  await _productCategoryRepository.GetQuery().AsQueryable().Where(s => !s.IsDelete).ToListAsync();
+        }
+
+        public async Task<bool> DeleteCategories(long id)
+        {
+            var category = await _productCategoryRepository.GetEntityById(id);
+            if (category == null)
+            {
+                return false;
+            }
+            _productCategoryRepository.Delete(category);
+            await _productCategoryRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<bool> CreateCategory(string name, string imageName)
+        {
+            var category = new ProductCategory
+            {
+                ParentId = null,
+                Title = name,
+                CategoryImage = imageName,
+            };
+            await _productCategoryRepository.AddEntity(category);
+            await _productCategoryRepository.SaveChanges();
             return true;
         }
         #endregion
