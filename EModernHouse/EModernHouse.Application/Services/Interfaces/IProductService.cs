@@ -40,7 +40,10 @@ namespace EModernHouse.Application.Services.Interfaces
         CategoriesFilterDTO GetCategoriesForList(int pageId, int take, string filter);
         Task<List<ProductCategory>> GetAllProductCategoriesForList();
         Task<bool> DeleteCategories(long id);
-        Task<bool> CreateCategory(string name, string imageName);
+        Task<bool> CreateMainCategory(string name, string imageName);
+        Task<EditProductCategoryDTO> GetMainCategoryForEdit(long categoryId);
+        Task<bool> SetMainCategoryForEdit( EditProductCategoryDTO edit);
+        Task<bool> CreateSubGroups(long groupId, string groupName);
         #endregion
 
         #region ProductColor

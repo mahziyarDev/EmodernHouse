@@ -1,0 +1,40 @@
+﻿@model EModernHouse.DataLayer.DTOs.Product.EditProductCategoryDTO
+@{
+    ViewData["Title"] = "EditMainCategory";
+}
+
+
+
+<div class="col-md-12">
+    <div class="widget">
+        <div class="widget-header bordered-bottom bordered-blue">
+            <span class="widget-caption">@ViewData["Title"]</span>
+        </div>
+        <div class="widget-body">
+            <form asp-area="Admin" asp-controller="Category" asp-action="EditMainCategory" asp-route-categoryId="@Model.CategoryId" method="post" enctype="multipart/form-data">
+               <input type="hidden" asp-for="CategoryId"/>
+                <input type="hidden" asp-for="CategoryImage"/>
+
+                <div class="form-group">
+                    <label>نام سردسته</label>
+                    <input class="form-control" asp-for="Title" >
+                </div>
+                
+                <div class="form-group">
+                    <label>لینک کوتاه</label>
+                    <input class="form-control" asp-for="UrlName" >
+                </div>
+
+                <div class="form-group">
+                    <div class="alert alert-info">
+                        <p>در صورت تغییر تصویر  ،عکس را انتخاب کنید</p>
+                    </div>
+                    <label>عکس سر دسته</label>
+                    <input class="form-control" type="file" name="imageCategory">
+                </div>
+
+                <button class="btn btn-success" type="submit">افزودن</button>
+            </form>
+        </div>
+    </div>
+</div>

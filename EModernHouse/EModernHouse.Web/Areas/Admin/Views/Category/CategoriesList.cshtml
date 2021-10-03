@@ -1,4 +1,5 @@
-﻿@model List<EModernHouse.DataLayer.Entities.Product.ProductCategory>
+﻿@using EModernHouse.Application.Utils
+@model List<EModernHouse.DataLayer.Entities.Product.ProductCategory>
 @{
     ViewData["Title"] = "لیست گروه ها";
 }
@@ -9,7 +10,7 @@
             <span class="widget-caption">@ViewData["Title"]</span>
         </div>
         <div class="widget-body">
-            <form id="form-createCategory">
+            <form asp-area="Admin" asp-controller="Category" asp-action="CreateMainCategory" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>نام سردسته</label>
                     <input class="form-control" type="text" name="nameCategory">
@@ -18,13 +19,75 @@
                     <label>عکس سر دسته</label>
                     <input class="form-control" type="file" name="imageCategory">
                 </div>
-                <button class="btn btn-success" id="btn-addCategory">افزودن</button>
+                <button class="btn btn-success" type="submit">افزودن</button>
             </form>
         </div>
     </div>
 </div>
 
-<hr/>
+
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var mainCategory in Model.Where(s => s.ParentId == null))
+    {
+        <!--Small Modal Templates-->
+        <div class="modal fade @mainCategory.Id" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="mySmallModalLabel">افزودن زیر گروه برای  @mainCategory.Title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get" asp-area="Admin" asp-controller="Category" asp-action="CreateSubGroups">
+                            <input type="hidden" readonly="readonly" name="groupId" value="@mainCategory.Id"/>
+                            <label>
+                                نام گروه رو انتخاب کنید
+                                <input type="text" name="groupName" class="form-control"/>
+                            </label>
+                            <button type="submit" class="btn btn-success">ارسال اطلاعات</button>
+                        </form>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!--End Small Modal Templates-->
+        @if (Model != null && Model.Any(s => s.ParentId == mainCategory.Id))
+        {
+            @foreach(var firstCategory in Model.Where(s=>s.ParentId == mainCategory.Id))
+            {
+                <!--Small Modal Templates-->
+                <div class="modal fade @firstCategory.Id" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title" id="mySmallModalLabel">افزودن زیر گروه برای  @firstCategory.Title</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form method="get" asp-area="Admin" asp-controller="Category" asp-action="CreateSubGroups">
+                                    <input type="hidden" readonly="readonly" name="groupId" value="@firstCategory.Id"/>
+                                    <label>
+                                        نام گروه رو انتخاب کنید
+                                        <input type="text" name="groupName" class="form-control"/>
+                                    </label>
+                                    <button type="submit" class="btn btn-success">ارسال اطلاعات</button>
+                                </form>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+                <!--End Small Modal Templates-->
+            }
+        }
+
+    }
+}
+
+<hr />
 <div class="col-md-10 col-md-offset-1">
     <table class="table table-bordered">
         <thead>
@@ -41,8 +104,9 @@
                     <tr id="@category.Id">
                         <td>
                             @category.Title
-                            <a class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                            <a class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                            <img style="width: 70px;height: 70px" src="@(PathExtensions.CategoryImageImageThumb+category.CategoryImage)" />
+                            <a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="Category" asp-action="EditMainCategory" asp-route-categoryId="@category.Id"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-sm btn-success" data-toggle="modal" data-target=".@category.Id"><i class="fa fa-plus"></i></a>
                             @if (!Model.Any(s => s.ParentId == category.Id))
                             {
                                 <a class="btn btn-sm btn-danger" asp-area="Admin" asp-controller="Category" asp-action="DeleteCategoryById" asp-route-categoryId="@category.Id" DeleteCategory="@category.Id"><i class="fa fa-trash"></i></a>
@@ -57,7 +121,7 @@
                                     <p id="@FirstCategory.Id">
                                         @FirstCategory.Title
                                         <br />
-                                        <a href="#" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                                        <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target=".@FirstCategory.Id"><i class="fa fa-plus"></i></a>
                                         @if (!Model.Any(s => s.ParentId == FirstCategory.Id))
                                         {
                                             <a asp-area="Admin" asp-controller="Category" asp-action="DeleteCategoryById" asp-route-categoryId="@FirstCategory.Id" class="btn btn-sm btn-danger" DeleteCategory="@FirstCategory.Id"><i class="fa fa-trash"></i></a>
@@ -98,6 +162,7 @@
     </table>
 </div>
 
+<br />
 @section script
 {
     <script>
@@ -133,11 +198,7 @@
 
             });
 
-        $('#btn-addCategory').on('click',
-            function(e) {
-                e.preventDefault();
 
-            });
-           
+
     </script>
 }

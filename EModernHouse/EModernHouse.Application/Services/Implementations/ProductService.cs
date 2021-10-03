@@ -309,24 +309,80 @@ namespace EModernHouse.Application.Services.Implementations
         public async Task<bool> DeleteCategories(long id)
         {
             var category = await _productCategoryRepository.GetEntityById(id);
+            
             if (category == null)
             {
                 return false;
+            }
+            if (!string.IsNullOrEmpty(category.CategoryImage))
+            {
+                if (File.Exists(PathExtensions.CategoryImageImageThumbServer + category.CategoryImage) && File.Exists(PathExtensions.CategoryImageImageOriginServer + category.CategoryImage))
+                {
+                    File.Delete(PathExtensions.CategoryImageImageOriginServer + category.CategoryImage);
+                    File.Delete(PathExtensions.CategoryImageImageThumbServer + category.CategoryImage);
+                }
+
             }
             _productCategoryRepository.Delete(category);
             await _productCategoryRepository.SaveChanges();
             return true;
         }
 
-        public async Task<bool> CreateCategory(string name, string imageName)
+        public async Task<bool> CreateMainCategory(string name, string imageName)
         {
             var category = new ProductCategory
             {
                 ParentId = null,
+                UrlName = null,
                 Title = name,
                 CategoryImage = imageName,
+                IsActive = true
+                
             };
             await _productCategoryRepository.AddEntity(category);
+            await _productCategoryRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<EditProductCategoryDTO> GetMainCategoryForEdit(long categoryId)
+        {
+            var category = await _productCategoryRepository.GetEntityById(categoryId);
+            return new EditProductCategoryDTO
+            {
+                CategoryId = category.Id,
+                CategoryImage = category.CategoryImage,
+                Title = category.Title,
+                UrlName = category.UrlName,
+
+            };
+        }
+
+        public async Task<bool> SetMainCategoryForEdit( EditProductCategoryDTO edit)
+        {
+            var category = await _productCategoryRepository.GetEntityById(edit.CategoryId);
+            if (category == null)
+            {
+                return false;
+            }
+
+            category.Title = edit.Title;
+            category.UrlName = edit.UrlName;
+            category.CategoryImage = edit.CategoryImage;
+            _productCategoryRepository.EditEntity(category);
+            await _productCategoryRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<bool> CreateSubGroups(long groupId, string groupName)
+        {
+            var subCategory = new ProductCategory
+            {
+                UrlName = null,
+                Title = groupName,
+                ParentId = groupId,
+                CategoryImage = null
+            };
+            await _productCategoryRepository.AddEntity(subCategory);
             await _productCategoryRepository.SaveChanges();
             return true;
         }
