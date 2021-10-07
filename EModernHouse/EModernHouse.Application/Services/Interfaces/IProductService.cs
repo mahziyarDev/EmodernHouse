@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EModernHouse.DataLayer.DTOs.Filter;
 using EModernHouse.DataLayer.DTOs.Product;
 using EModernHouse.DataLayer.Entities.Product;
 
@@ -52,6 +53,12 @@ namespace EModernHouse.Application.Services.Interfaces
         Task<List<ProductColor>> GetProductColorByproductId(long productId);
         Task<long> DeleteProductColorById(long colorId);
         Task<bool> EditProductColor(long colorId, string colorName, string colorCode, int price);
+
+        #endregion
+
+        #region ProductForClient
+
+        Task<ProductUserFilterDTO> GetProductsForUsers(int pageId,int take,int startPrice,int endPrice,long? category);
 
         #endregion
     }

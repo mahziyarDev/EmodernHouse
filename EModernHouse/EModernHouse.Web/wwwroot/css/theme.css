@@ -2980,57 +2980,16 @@ header.page-header.fixed {
 }
 
 /* Hide the browser's default checkbox */
-.container-checkbox input {
-  position: absolute;
-  right: 0;
-  opacity: 0;
-  cursor: pointer;
+.container-checkbox a {
+cursor: pointer;
+color: #000;
+}
+.container-checkbox a:hover{
+    cursor: pointer;
+    color: #000;
+
 }
 
-/* Create a custom checkbox */
-.container-checkbox .checkmark {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 23px;
-  width: 23px;
-  background-color: #eee;
-  border-radius: 7px;
-}
-
-/* On mouse-over, add a grey background color */
-.container-checkbox:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.container-checkbox input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.container-checkbox .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.container-checkbox input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.container-checkbox .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-}
 
 /* The container */
 .container-radio {
@@ -3788,7 +3747,6 @@ header.page-header.fixed {
 }
 
 .product-carousel.in-box {
-  background-color: #fff;
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 20px;

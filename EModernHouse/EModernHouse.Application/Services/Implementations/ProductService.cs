@@ -11,6 +11,7 @@ using EModernHouse.DataLayer.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using EModernHouse.Application.Extensions;
+using EModernHouse.DataLayer.DTOs.Filter;
 
 
 namespace EModernHouse.Application.Services.Implementations
@@ -386,6 +387,41 @@ namespace EModernHouse.Application.Services.Implementations
             await _productCategoryRepository.SaveChanges();
             return true;
         }
+        #endregion
+
+        #region ProductForClient
+
+        public async Task<ProductUserFilterDTO> GetProductsForUsers(int pageId, int take, int startPrice, int endPrice, long? category)
+        {
+            var result = _productRepository.GetQuery()
+                .Include(s=>s.ProductSelectedCategories)
+                .ThenInclude(s=>s.ProductCategory)
+                .AsQueryable();
+            if (startPrice > 0)
+            {
+                result = result.Where(p => p.Price >= startPrice);
+            }
+            if (endPrice > 0)
+            {
+                result = result.Where(p => p.Price <= endPrice);
+            }
+
+            if ( category != null)
+            {
+                result = result.Where(s => s.ProductSelectedCategories.Any(s => s.ProductCategory.Id == category));
+            }
+            var skip = (pageId - 1) * take;
+            var model = new ProductUserFilterDTO
+            {
+                Products = await result.Skip(skip).Take(take).ToListAsync(),
+                StartPrice = startPrice,
+                EndPage = endPrice,
+               
+            };
+            model.GeneratePaging(result,pageId,take);
+            return model;
+        }
+
         #endregion
 
         #region Disposiable
