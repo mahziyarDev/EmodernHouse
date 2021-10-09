@@ -25,14 +25,16 @@ namespace EModernHouse.Application.Services.Implementations
         private readonly IGenericRepository<ProductSelectedCategory> _productSelectedCategoryRepository;
         private readonly IGenericRepository<ProductColor> _productColorRepository;
         private readonly IGenericRepository<ProductGallery> _productGalleryRepository;
+        private readonly IGenericRepository<ProductFeature> _productFeatureRepository;
 
-        public ProductService(IGenericRepository<Product> productRepository, IGenericRepository<ProductCategory> productCategoryRepository, IGenericRepository<ProductSelectedCategory> productSelectedCategoryRepository, IGenericRepository<ProductColor> productColorRepository, IGenericRepository<ProductGallery> productGalleryRepository)
+        public ProductService(IGenericRepository<Product> productRepository, IGenericRepository<ProductCategory> productCategoryRepository, IGenericRepository<ProductSelectedCategory> productSelectedCategoryRepository, IGenericRepository<ProductColor> productColorRepository, IGenericRepository<ProductGallery> productGalleryRepository, IGenericRepository<ProductFeature> productFeatureRepository)
         {
             _productRepository = productRepository;
             _productCategoryRepository = productCategoryRepository;
             _productSelectedCategoryRepository = productSelectedCategoryRepository;
             _productColorRepository = productColorRepository;
             _productGalleryRepository = productGalleryRepository;
+            _productFeatureRepository = productFeatureRepository;
         }
         #endregion
 
@@ -422,6 +424,63 @@ namespace EModernHouse.Application.Services.Implementations
             return model;
         }
 
+        public async Task<ProductDetailDTO> GetProductDetail(long productId)
+        {
+            var product = await _productRepository
+                .GetQuery().AsQueryable()
+                .Include(s => s.ProductSelectedCategories)
+                .ThenInclude(s => s.ProductCategory)
+                .Include(s => s.ProductGalleries)
+                .Include(s => s.ProductColors)
+                .Include(s=>s.ProductFeatures)
+                .SingleOrDefaultAsync(s => s.Id == productId);
+            if (product == null) return null;
+            return new ProductDetailDTO
+            {
+                Title = product.Title,
+                Price = product.Price,
+                ShortDescription = product.ShortDescription,
+                Description = product.Description,
+                ImageName = product.ImageName,
+                ProductCategories = product.ProductSelectedCategories.Select(s => s.ProductCategory).ToList(),
+                ShortLink = product.ShortLink,
+                ProductColors = product.ProductColors.ToList(),
+                ProductGalleries = product.ProductGalleries.ToList(),
+                ProductFeatures = product.ProductFeatures.ToList()
+            };
+        }
+
+        #endregion
+
+        #region Product Feature
+
+        public async Task CreateProductFeatures(CreateProductFeatureDTO feature)
+        {
+            var newProductFeature = new ProductFeature
+            {
+                ProductId = feature.ProductId,
+                FeatureTitle = feature.FeatureTitle,
+                FeatureValue = feature.FeatureValue
+            };
+
+            await _productFeatureRepository.AddEntity(newProductFeature);
+            await _productFeatureRepository.SaveChanges();
+
+        }
+
+        public async Task RemoveProductFeature(long productFeatureId)
+        {
+            var productFeature = await _productFeatureRepository.GetEntityById(productFeatureId);
+            _productFeatureRepository.Delete(productFeature);
+            await _productFeatureRepository.SaveChanges();
+        }
+
+        public async Task<List<ProductFeature>> GetAllProductFeaturesById(long productId)
+        {
+            return await _productFeatureRepository.GetQuery().AsQueryable()
+                .Where(s => s.ProductId == productId)
+                .ToListAsync();
+        }
         #endregion
 
         #region Disposiable
@@ -432,6 +491,8 @@ namespace EModernHouse.Application.Services.Implementations
             await _productColorRepository.DisposeAsync();
             await _productCategoryRepository.DisposeAsync();
             await _productSelectedCategoryRepository.DisposeAsync();
+            await _productGalleryRepository.DisposeAsync();
+            await _productFeatureRepository.DisposeAsync();
         }
 
         #endregion

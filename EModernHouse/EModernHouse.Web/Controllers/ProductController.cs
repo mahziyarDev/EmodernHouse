@@ -34,5 +34,20 @@ namespace EModernHouse.Web.Controllers
         }
 
         #endregion
+
+        #region DetailProduct
+        [HttpGet("product-Detail/{productId}/{title}")]
+        public async Task<IActionResult> ProductDetail(long productId,string title)
+        {
+            var res = await _productService.GetProductDetail(productId);
+            if (res == null)
+            {
+                return NotFound();
+            }
+
+            return View(res);
+        }
+
+        #endregion
     }
 }

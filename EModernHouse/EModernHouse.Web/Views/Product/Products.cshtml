@@ -41,7 +41,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6 px-0">
                                 <div class="product-card">
                                     <div class="product-card-top">
-                                        <a href="#" class="product-image">
+                                        <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@product.Id" asp-route-title="@product.Title.FixTextForUrl()" class="product-image">
                                             <img src="@(PathExtensions.ProductImageThumb+product.ImageName)" alt="@product.Title">
                                         </a>
                                         <div class="product-card-actions">
@@ -53,7 +53,7 @@
 
                                         </div>
                                         <h6 class="product-name text-center">
-                                            <a href="#">
+                                            <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@product.Id" asp-route-title="@product.Title.FixTextForUrl()">
                                                 @product.Title
                                             </a>
                                         </h6>
@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
-                                            @product.Price.ToString("#,0")
+                                            @product.Price.ToString("#,0 تومان")
                                         </div>
                                         <a href="#" class="btn-add-to-cart col-12">
                                             <i class="fad fa-cart-plus"></i>

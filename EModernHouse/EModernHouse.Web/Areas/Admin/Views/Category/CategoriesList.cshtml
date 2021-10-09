@@ -10,7 +10,7 @@
             <span class="widget-caption">@ViewData["Title"]</span>
         </div>
         <div class="widget-body">
-            <form asp-area="Admin" asp-controller="Category" asp-action="CreateMainCategory" method="post" enctype="multipart/form-data">
+            <form id="FormCreateCategory" asp-area="Admin" asp-controller="Category" asp-action="CreateMainCategory"  enctype="multipart/form-data">
                 <div class="form-group">
                     <label>نام سردسته</label>
                     <input class="form-control" type="text" name="nameCategory">
@@ -19,7 +19,7 @@
                     <label>عکس سر دسته</label>
                     <input class="form-control" type="file" name="imageCategory">
                 </div>
-                <button class="btn btn-success" type="submit">افزودن</button>
+                <button class="btn btn-success" onclick="SendForeCreate" >افزودن</button>
             </form>
         </div>
     </div>
@@ -41,13 +41,13 @@
                         <h4 class="modal-title" id="mySmallModalLabel">افزودن زیر گروه برای  @mainCategory.Title</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="get" asp-area="Admin" asp-controller="Category" asp-action="CreateSubGroups">
+                        <form id="MainCategoryForm" asp-area="Admin" asp-controller="Category" asp-action="CreateSubGroups">
                             <input type="hidden" readonly="readonly" name="groupId" value="@mainCategory.Id"/>
                             <label>
                                 نام گروه رو انتخاب کنید
                                 <input type="text" name="groupName" class="form-control"/>
                             </label>
-                            <button type="submit" class="btn btn-success">ارسال اطلاعات</button>
+                            <button onclick="sendMainCategory" class="btn btn-success">ارسال اطلاعات</button>
                         </form>
                     </div>
                 </div><!-- /.modal-content -->
@@ -68,13 +68,13 @@
                                 <h4 class="modal-title" id="mySmallModalLabel">افزودن زیر گروه برای  @firstCategory.Title</h4>
                             </div>
                             <div class="modal-body">
-                                <form method="get" asp-area="Admin" asp-controller="Category" asp-action="CreateSubGroups">
+                                <form id="FormFirstCategory" asp-area="Admin" asp-controller="Category" asp-action="CreateSubGroups">
                                     <input type="hidden" readonly="readonly" name="groupId" value="@firstCategory.Id"/>
                                     <label>
                                         نام گروه رو انتخاب کنید
                                         <input type="text" name="groupName" class="form-control"/>
                                     </label>
-                                    <button type="submit" class="btn btn-success">ارسال اطلاعات</button>
+                                    <button onclick="sendFirstCategory" class="btn btn-success">ارسال اطلاعات</button>
                                 </form>
                             </div>
                         </div><!-- /.modal-content -->
@@ -198,7 +198,18 @@
 
             });
 
+        function SendForeCreate() {
+            $("#FormCreateCategory").attr("method", "post");
+            $("#FormCreateCategory").submit();
+        }
 
-
+        function sendMainCategory() {
+            $("#MainCategoryForm").attr("method", "get");
+            $("#MainCategoryForm").submit();
+        }
+        function sendFirstCategory() {
+            $("#FormFirstCategory").attr("method", "get");
+            $("#FormFirstCategory").submit();
+        }
     </script>
 }

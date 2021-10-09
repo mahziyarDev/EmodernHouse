@@ -96,8 +96,8 @@
                                     <a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="Product" asp-action="EditProduct" asp-route-productId="@product.Id">ویرایش</a>
                                     <a class="btn btn-sm btn-info" asp-area="Admin" asp-controller="Product" asp-action="CreateProductGallery" asp-route-productId="@product.Id">افزودن گالری</a>
                                     <a class="btn btn-sm btn-primary" asp-area="Admin" asp-controller="Product" asp-action="CreateProductColor" asp-route-productId="@product.Id">رنگ محصول</a>
-                                    <a class="btn btn-danger btn-sm">حذف</a>
-                                    <a class="btn btn-default btn-sm">غیر فعال کردن</a>
+                                    <a class="btn btn-default btn-sm" asp-area="Admin" asp-controller="ProductFeature" asp-action="CreateProductFeature" asp-route-productId="@product.Id">ویژگی</a>
+                                    <a class="btn btn-danger btn-sm">غیر فعال</a>
                                 </td>
                             </tr>
 

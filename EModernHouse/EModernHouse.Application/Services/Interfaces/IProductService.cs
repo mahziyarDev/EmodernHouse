@@ -59,6 +59,15 @@ namespace EModernHouse.Application.Services.Interfaces
         #region ProductForClient
 
         Task<ProductUserFilterDTO> GetProductsForUsers(int pageId,int take,int startPrice,int endPrice,long? category);
+        Task<ProductDetailDTO> GetProductDetail(long productId);
+
+        #endregion
+
+        #region Product Feature
+
+        Task CreateProductFeatures(CreateProductFeatureDTO feature);
+        Task RemoveProductFeature(long productFeatureId);
+        Task<List<ProductFeature>> GetAllProductFeaturesById(long productId);
 
         #endregion
     }

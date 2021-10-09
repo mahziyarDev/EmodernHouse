@@ -1417,7 +1417,7 @@ hr {
 }
 
 .compare-table.product-detail .product-price .product-price-raw {
-  font-size: 20px;
+  font-size: 21px;
 }
 
 .compare-table.product-detail .product-price .product-price-off {
@@ -4061,11 +4061,12 @@ color: #000;
 .product-detail .product-price .product-price-real {
   text-align: left;
   margin: 0;
+    font-size: 16px;
 }
 
 .product-detail .product-price .product-price-raw {
   display: inline;
-  font-size: 31px;
+  font-size: 21px;
   font-weight: bold;
 }
 

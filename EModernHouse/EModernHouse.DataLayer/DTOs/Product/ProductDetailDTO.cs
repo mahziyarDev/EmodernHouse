@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using EModernHouse.DataLayer.Entities.Common;
+using EModernHouse.DataLayer.Entities.Product;
 
-namespace EModernHouse.DataLayer.Entities.Product
+namespace EModernHouse.DataLayer.DTOs.Product
 {
-    public class Product : BaseEntity
+    public class ProductDetailDTO
     {
-        #region Properties
-
         [Display(Name = "نام محصول")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(300, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد")]
@@ -30,20 +28,12 @@ namespace EModernHouse.DataLayer.Entities.Product
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string Description { get; set; }
 
-        [Display(Name = "فعال / غیرفعال")]
-        public bool IsActive { get; set; }
-
         [Display(Name = "لینک کوتاه محصول")]
         public string ShortLink { get; set; }
 
-        #endregion
-
-        #region Relations
-
-        public ICollection<ProductSelectedCategory> ProductSelectedCategories { get; set; }
-        public ICollection<ProductColor> ProductColors { get; set; }
-        public ICollection<ProductGallery> ProductGalleries { get; set; }
-        public ICollection<ProductFeature> ProductFeatures { get; set; }
-        #endregion
+        public List<ProductColor> ProductColors { get; set; }
+        public List<ProductGallery> ProductGalleries { get; set; }
+        public List<ProductCategory> ProductCategories { get; set; }
+        public List<ProductFeature> ProductFeatures { get; set; }
     }
 }

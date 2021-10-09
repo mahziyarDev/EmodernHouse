@@ -249,5 +249,7 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
             return Redirect("/Admin/create-product-color/"+res);
         }
         #endregion
+
+      
     }
 }
