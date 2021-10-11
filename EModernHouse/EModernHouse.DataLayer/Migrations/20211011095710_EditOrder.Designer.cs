@@ -4,14 +4,16 @@ using EModernHouse.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EModernHouse.DataLayer.Migrations
 {
     [DbContext(typeof(EModernHouseDbContext))]
-    partial class EModernHouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211011095710_EditOrder")]
+    partial class EditOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -536,7 +538,8 @@ namespace EModernHouse.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Orders");
                 });
@@ -779,8 +782,8 @@ namespace EModernHouse.DataLayer.Migrations
             modelBuilder.Entity("EModernHouse.DataLayer.Entities.ProductOrder.Order", b =>
                 {
                     b.HasOne("EModernHouse.DataLayer.Entities.Account.User", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
+                        .WithOne("Order")
+                        .HasForeignKey("EModernHouse.DataLayer.Entities.ProductOrder.Order", "UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -817,7 +820,7 @@ namespace EModernHouse.DataLayer.Migrations
                 {
                     b.Navigation("ContactUses");
 
-                    b.Navigation("Orders");
+                    b.Navigation("Order");
 
                     b.Navigation("TicketMessages");
 

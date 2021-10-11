@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using EModernHouse.DataLayer.Entities.Common;
+using EModernHouse.DataLayer.Entities.ProductOrder;
 
 namespace EModernHouse.DataLayer.Entities.Product
 {
@@ -20,7 +22,7 @@ namespace EModernHouse.DataLayer.Entities.Product
         #region Relation
 
         public Product Product { get; set; }
-
+        public ICollection<OrderDetail> OrderDetails { get; set; }
         #endregion
     }
 }

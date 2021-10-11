@@ -35,5 +35,6 @@ namespace EModernHouse.DataLayer.DTOs.Product
         public List<ProductGallery> ProductGalleries { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
         public List<ProductFeature> ProductFeatures { get; set; }
+        public List<Entities.Product.Product> RelatedProducts { get; set; }
     }
 }

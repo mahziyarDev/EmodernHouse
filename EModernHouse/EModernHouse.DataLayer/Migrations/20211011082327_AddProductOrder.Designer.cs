@@ -4,14 +4,16 @@ using EModernHouse.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EModernHouse.DataLayer.Migrations
 {
     [DbContext(typeof(EModernHouseDbContext))]
-    partial class EModernHouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211011082327_AddProductOrder")]
+    partial class AddProductOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -536,8 +538,6 @@ namespace EModernHouse.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Orders");
                 });
 
@@ -776,17 +776,6 @@ namespace EModernHouse.DataLayer.Migrations
                     b.Navigation("ProductCategory");
                 });
 
-            modelBuilder.Entity("EModernHouse.DataLayer.Entities.ProductOrder.Order", b =>
-                {
-                    b.HasOne("EModernHouse.DataLayer.Entities.Account.User", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("EModernHouse.DataLayer.Entities.ProductOrder.OrderDetail", b =>
                 {
                     b.HasOne("EModernHouse.DataLayer.Entities.ProductOrder.Order", "Order")
@@ -816,8 +805,6 @@ namespace EModernHouse.DataLayer.Migrations
             modelBuilder.Entity("EModernHouse.DataLayer.Entities.Account.User", b =>
                 {
                     b.Navigation("ContactUses");
-
-                    b.Navigation("Orders");
 
                     b.Navigation("TicketMessages");
 

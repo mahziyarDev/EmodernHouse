@@ -434,7 +434,11 @@ namespace EModernHouse.Application.Services.Implementations
                 .Include(s => s.ProductColors)
                 .Include(s=>s.ProductFeatures)
                 .SingleOrDefaultAsync(s => s.Id == productId);
+
             if (product == null) return null;
+
+            var selectedCategoriesIds = product.ProductSelectedCategories.Select(p => p.ProductCategoryId).ToList();
+
             return new ProductDetailDTO
             {
                 Title = product.Title,
@@ -446,7 +450,11 @@ namespace EModernHouse.Application.Services.Implementations
                 ShortLink = product.ShortLink,
                 ProductColors = product.ProductColors.ToList(),
                 ProductGalleries = product.ProductGalleries.ToList(),
-                ProductFeatures = product.ProductFeatures.ToList()
+                ProductFeatures = product.ProductFeatures.ToList(),
+                RelatedProducts = await _productRepository.GetQuery()
+                    .Include(s => s.ProductSelectedCategories)
+                    .Where(s => s.ProductSelectedCategories.Any(f => selectedCategoriesIds.Contains(f.ProductCategoryId)) && s.Id != productId)
+                    .ToListAsync()
             };
         }
 

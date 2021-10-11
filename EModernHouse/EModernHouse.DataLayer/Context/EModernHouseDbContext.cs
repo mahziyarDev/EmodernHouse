@@ -3,6 +3,7 @@ using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Account;
 using EModernHouse.DataLayer.Entities.Contacts;
 using EModernHouse.DataLayer.Entities.Product;
+using EModernHouse.DataLayer.Entities.ProductOrder;
 using EModernHouse.DataLayer.Entities.Site;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -35,6 +36,8 @@ namespace EModernHouse.DataLayer.Context
         public DbSet<ProductColor> ProductColors { get; set; }
         public DbSet<ProductGallery> ProductGalleries { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         #endregion
 
         #region on model Creating
