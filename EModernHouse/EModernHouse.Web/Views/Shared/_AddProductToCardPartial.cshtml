@@ -1,0 +1,13 @@
+﻿@model EModernHouse.DataLayer.DTOs.Order.AddProductToOrderDTO
+
+<form method="post" asp-area="User" asp-controller="Order" asp-action="AddProductToOrder"
+      data-ajax="true"
+      data-ajax-success="onSuccessAddProductToOrder"
+      data-ajax-method="post"
+      id="AddProductToCardForm"
+      >
+    <input type="hidden" id="Add-Product_to_Order_ProductId" asp-for="ProductId" />
+    <input type="hidden" id="Add-Product_to_Order_ProductColorId" asp-for="ProductColorId" />
+    <input type="hidden" id="Add-Product_to_Order_Count" asp-for="Count" />
+
+</form>

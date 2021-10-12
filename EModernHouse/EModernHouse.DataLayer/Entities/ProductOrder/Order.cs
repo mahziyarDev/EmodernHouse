@@ -17,12 +17,10 @@ namespace EModernHouse.DataLayer.Entities.ProductOrder
         public bool IsPaid { get; set; }
               
         [Display(Name = "کد پیگیری")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(300)]
         public string TracingCode { get; set; }
 
         [Display(Name = "کد پیگیری")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string Description { get; set; }
         #endregion
 

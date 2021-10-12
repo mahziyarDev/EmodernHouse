@@ -6,6 +6,8 @@ namespace EModernHouse.DataLayer.DTOs.Product
 {
     public class ProductDetailDTO
     {
+        public long ProductId { get; set; }
+
         [Display(Name = "نام محصول")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(300, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد")]

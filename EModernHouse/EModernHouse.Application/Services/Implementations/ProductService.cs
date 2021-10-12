@@ -441,6 +441,7 @@ namespace EModernHouse.Application.Services.Implementations
 
             return new ProductDetailDTO
             {
+                ProductId = product.Id,
                 Title = product.Title,
                 Price = product.Price,
                 ShortDescription = product.ShortDescription,

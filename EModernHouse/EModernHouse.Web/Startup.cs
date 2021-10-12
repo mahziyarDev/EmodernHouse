@@ -42,10 +42,10 @@ namespace EModernHouse.Web
             services.AddScoped<ISmsService, SmsService>();
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
-
+            
             #endregion
-
 
             #region DataProtection
 
