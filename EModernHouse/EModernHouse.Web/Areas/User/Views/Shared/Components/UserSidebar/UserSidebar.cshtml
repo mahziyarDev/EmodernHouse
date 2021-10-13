@@ -1,17 +1,14 @@
-﻿@model EModernHouse.DataLayer.Entities.Account.User
+﻿@using EModernHouse.Application.Utils
+@model EModernHouse.DataLayer.Entities.Account.User
 
 <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none;">
     <div class="sidebar-widget">
-        <div class="banner mb-3">
-            <a href="#">
-                <img src="/images/banner/banner-profile-sidebar.jpg" class="box-shaow-unset has-border" alt="...">
-            </a>
-        </div>
+        
         <div class="profile-sidebar shadow-around">
 
             <div class="d-flex align-items-center">
                 <div class="profile-avatar">
-                    <img src="/images/avatar/avatar.png" alt="avatar">
+                    <img src="@(PathExtensions.UserAvatarThumb+Model.Avatar)" alt="avatar">
                 </div>
                 <div class="profile-info">
                     <div class="d-block">
@@ -28,12 +25,6 @@
                         <a href="#">
                             <span>کیف پول</span>
                             <span>2,500,000 <span class="text-info font-weight-bold">تومان</span></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>همتا کلاب</span>
-                            <span>0 <span class="text-info font-weight-bold">امتیاز</span></span>
                         </a>
                     </li>
                 </ul>
@@ -68,6 +59,12 @@
                         <a asp-controller="Ticket" asp-action="Index" asp-area="User">
                             <i class="far fa-map-marked"></i>
                             لیست تیکت ها
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Order" asp-action="DetailOrder" asp-area="User">
+                            <i class="far fa-map-marked"></i>
+                            لیست فاکتور ها
                         </a>
                     </li>
                     <li>

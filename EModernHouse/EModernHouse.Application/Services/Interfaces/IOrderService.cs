@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using EModernHouse.DataLayer.DTOs.Order;
 using EModernHouse.DataLayer.Entities.ProductOrder;
@@ -9,6 +10,7 @@ namespace EModernHouse.Application.Services.Interfaces
     {
         #region Order
 
+        Task<List<Order>> GetAllOrder(long userId);
         Task<long> AddOrderForUser(long userId);
         Task<Order> GetUserLatestOpenOrder(long userId);
 
@@ -17,6 +19,7 @@ namespace EModernHouse.Application.Services.Interfaces
         #region OrderDetail
 
         Task AddProductToOpenOrder(AddProductToOrderDTO order, long userId);
+        Task<List<OrderDetail>> GetOrderDetailById(long orderId);
 
         #endregion
     }

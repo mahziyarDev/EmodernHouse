@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Order;
@@ -26,6 +27,13 @@ namespace EModernHouse.Application.Services.Implementations
 
         #region Order
 
+        public async Task<List<Order>> GetAllOrder(long userId)
+        {
+            var ordersForUser = await _orderRepository.GetQuery().AsQueryable()
+                .Where(s => s.UserId == userId).ToListAsync();
+            return ordersForUser;
+        }
+
         public async Task<long> AddOrderForUser(long userId)
         {
             var newOrder = new Order
@@ -47,6 +55,8 @@ namespace EModernHouse.Application.Services.Implementations
             var userOrderOpen =await _orderRepository.GetQuery().AsQueryable()
                 .Include(s=>s.OrderDetails)
                 .ThenInclude(s=>s.ProductColor)
+                .Include(s=>s.OrderDetails)
+                .ThenInclude(s=>s.Product)
                 .SingleOrDefaultAsync(s => s.UserId == userId && !s.IsPaid);
             return userOrderOpen;
         }
@@ -80,6 +90,19 @@ namespace EModernHouse.Application.Services.Implementations
             }
           
 
+        }
+
+        public async Task<List<OrderDetail>> GetOrderDetailById(long orderId)
+        {
+            var orderDetail = await _orderDetailRepository.GetQuery().AsQueryable()
+                .Include(s=>s.Product)
+                .Include(s => s.ProductColor)
+             
+                .ThenInclude(s => s.Product)
+                .Include(s=>s.Order)
+                .Where(s => s.OrderId == orderId)
+                .ToListAsync();
+            return orderDetail;
         }
 
         #endregion

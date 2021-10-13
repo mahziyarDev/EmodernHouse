@@ -1,0 +1,77 @@
+﻿@using EModernHouse.Application.Utils
+@model EModernHouse.DataLayer.Entities.ProductOrder.Order
+@{
+    var totalPrice = 0;
+    if (Model.OrderDetails != null && Model.OrderDetails.Any())
+    {
+        foreach (var detail in Model.OrderDetails)
+        {
+            totalPrice = totalPrice + (detail.Count * (detail.Product.Price + detail.ProductColor.Price));
+        }
+    }
+    
+}
+<div class="header-tools">
+    <div class="cart-side">
+        <a href="#" class="btn-toggle-cart-side ml-0">
+            <i class="far fa-shopping-basket"></i>
+            <span class="bag-items-number">@Model.OrderDetails.Count</span>
+        </a>
+        <div class="cart-side-content">
+            <ul>
+                <li class="cart-items">
+                    <ul>
+                    @if (Model.OrderDetails != null && Model.OrderDetails.Any())
+                    {
+                        @foreach (var order in Model.OrderDetails)
+                        {
+                            <li class="cart-item">
+                                <span class="d-flex align-items-center mb-2">
+                                    <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@order.Product.Id" asp-route-title="@order.Product.Title.FixTextForUrl()">
+                                        <img src="@(PathExtensions.ProductImageThumb+order.Product.ImageName)" alt="@order.Product.Title">
+                                    </a>
+                                    <span>
+                                        <a  asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@order.Product.Id" asp-route-title="@order.Product.Title.FixTextForUrl()">
+                                            <span class="title-item">
+                                                @order.Product.Title
+                                            </span>
+                                        </a>
+                                        <span class="color d-flex align-items-center">
+                                            رنگ:
+                                            <span style="background-color: @order.ProductColor.ColorCode;"></span>
+                                        </span>
+                                    </span>
+                                </span>
+                                <span class="">قیمت محصول : @order.Product.Price.ToString("#,0 تومان") </span>
+                                <br />
+                                <span class=""> رنگ : @order.ProductColor.ColorName </span> <span>قیمت مضاف رنگ : @order.ProductColor.Price.ToString("#,0 تومان")</span>
+                                <br />
+                                <span class="">تعداد : @order.Count</span>
+                                <br />
+                                <span>جمع کل این محصول : @(((order.Product.Price + order.ProductColor.Price) * order.Count).ToString("#,0 تومان"))</span>
+                                <br/>
+                                <button class="remove-item">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </li>
+                        }
+                    }
+                        </ul>
+                </li>
+                <li class="cart-footer">
+                    <span class="d-block text-center mb-3">
+                        مبلغ کل:
+                        <span class="total">@totalPrice.ToString("#,0") تومان</span>
+                    </span>
+                    <span class="d-block text-center px-2">
+                        <a asp-area="User" asp-controller="Order" asp-action="UserOpenOrder" class="btn-cart">
+                            مشاهده سبد خرید
+                            <i class="mi mi-ShoppingCart"></i>
+                        </a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="overlay-cart-side"></div>
+    </div>
+</div>

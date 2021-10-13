@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
-using EModernHouse.Application.Services.Interfaces;
+﻿using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.Web.PresentationExtentions;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
 
 namespace EModernHouse.Web.ViewComponents
 {
@@ -66,7 +68,46 @@ namespace EModernHouse.Web.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var sliders = await _siteService.GetAllActiveSlider();
-            return View("HomeSlider",sliders);
+            return View("HomeSlider", sliders);
+        }
+    }
+
+    #endregion
+
+    #region UserOrder
+
+    public class UserOrderViewComponent : ViewComponent
+    {
+        private readonly IOrderService _orderService;
+        private readonly IUserService _userService;
+
+        public UserOrderViewComponent(IOrderService orderService, IUserService userService)
+        {
+            _orderService = orderService;
+            _userService = userService;
+        }
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+
+            var openOrder = await _orderService.GetUserLatestOpenOrder(User.GetUserId());
+            return View("UserOrder", openOrder);
+        }
+    }
+    public class UserOrderResponsiveViewComponent : ViewComponent
+    {
+        private readonly IOrderService _orderService;
+        private readonly IUserService _userService;
+
+        public UserOrderResponsiveViewComponent(IOrderService orderService, IUserService userService)
+        {
+            _orderService = orderService;
+            _userService = userService;
+        }
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+
+            var openOrder = await _orderService.GetUserLatestOpenOrder(User.GetUserId());
+            return View("UserOrderResponsive", openOrder);
         }
     }
 

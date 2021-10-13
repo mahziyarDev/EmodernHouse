@@ -1,0 +1,68 @@
+﻿@using EModernHouse.Application.Utils
+@model List<EModernHouse.DataLayer.Entities.ProductOrder.OrderDetail>
+@{
+    ViewData["Title"] = "جزییات فاکتور";
+}
+
+<main class="page-content" style="margin-top: 235.5px; transform: none;">
+    <div class="container" style="transform: none;">
+        <div class="row mb-5" style="transform: none;">
+            <div class="col-lg-3 col-md-4 mb-md-0 mb-3 sticky-sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+                @await Component.InvokeAsync("UserSideBar")
+
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="section-title mb-2">
+                            @ViewData["Title"]
+                        </div>
+                       
+                        <section class="table--order shadow-around mt-4">
+                            <div class="table-responsive">
+                                @if (Model.Any() && Model != null)
+                                {
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>عکس محصول </th>
+                                                <th>نام محصول</th>
+                                                <th>قیمت محصول</th>
+                                                <th>رنگ محصول</th>
+                                                <th>قیمت مضاف رنگ</th>
+                                                <th>تعداد محصول</th>
+                                                <th>جمع نهایی قیمت</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach (var order in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <img class="img-responsive" style="width: 100px; height: 80px"
+                                                         title="@order.Product.Title" src="@(PathExtensions.ProductImageThumb + order.Product.ImageName)" />
+                                                </td>
+                                                <td>@order.Product.Title</td>
+                                                <td>@order.Product.Price</td>
+                                                <td>@order.ProductColor.ColorName</td>
+                                                <td>@order.ProductColor.Price</td>
+                                                <th>@order.Count</th>
+                                                <td>@((order.Count*(order.Product.Price + order.ProductColor.Price)).ToString("#,0")) تومان</td>
+                                            </tr>
+                                    
+                                        }
+                                        </tbody>
+                                    </table>
+                                }
+
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

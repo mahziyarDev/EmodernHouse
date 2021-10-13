@@ -26,6 +26,8 @@ namespace EModernHouse.Web.Areas.User.Controllers
 
         #endregion
 
+
+        #region addPToduct
         [AllowAnonymous]
         [HttpPost("add-product-to-order")]
         public async Task<IActionResult> AddProductToOrder(AddProductToOrderDTO order)
@@ -34,15 +36,46 @@ namespace EModernHouse.Web.Areas.User.Controllers
             {
                 if (User.Identity.IsAuthenticated)
                 {
-                    await _orderService.AddProductToOpenOrder(order,User.GetUserId());
+                    await _orderService.AddProductToOpenOrder(order, User.GetUserId());
                     return JsonResponseStatus.SendStatus(JsonResponseStatusType.Success, "محصول با موفقیت اضافه شد", null);
                     //TempData[SuccessMessage] = "محصول به سبد خرید شما اضافه شد";
                 }
                 return JsonResponseStatus.SendStatus(JsonResponseStatusType.Warning, "برای ثبت محصول باید در سایت ثبت نام /لاگین کنید", null);
-                    //TempData[WarningMessage] = "برای ثبت محصول باید وارد سایت شوید";
+                //TempData[WarningMessage] = "برای ثبت محصول باید وارد سایت شوید";
             }
             return JsonResponseStatus.SendStatus(JsonResponseStatusType.Danger, "ثبت محصول همراه با خطا مواجه شد", null);
-            
+
         }
+        #endregion
+
+        #region DetailOrder
+        [HttpGet("detail-order-user")]
+        public async Task<IActionResult> DetailOrder()
+        {
+            var order = await _orderService.GetAllOrder(User.GetUserId());
+            return View(order);
+        }
+
+        #endregion
+
+        #region orderDetialById
+        [HttpGet("order-detail-byId")]
+        public async Task<IActionResult> DetailOrderById(long orderId)
+        {
+            var details = await _orderService.GetOrderDetailById(orderId);
+            return View(details);
+        }
+
+        #endregion
+        #region open order
+
+        [HttpGet("open-order")]
+        public async Task<IActionResult> UserOpenOrder()
+        {
+            var openOrder = await _orderService.GetUserLatestOpenOrder(User.GetUserId());
+            return View(openOrder);
+        }
+
+        #endregion
     }
 }
