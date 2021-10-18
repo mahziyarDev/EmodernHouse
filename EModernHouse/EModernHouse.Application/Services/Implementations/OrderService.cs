@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Order;
 using EModernHouse.DataLayer.Entities.ProductOrder;
+using EModernHouse.DataLayer.Entities.Wallet;
 using EModernHouse.DataLayer.Repository;
 using LazZiya.ImageResize.Animated;
 using Microsoft.EntityFrameworkCore;
@@ -16,11 +18,13 @@ namespace EModernHouse.Application.Services.Implementations
 
         private readonly IGenericRepository<Order> _orderRepository;
         private readonly IGenericRepository<OrderDetail> _orderDetailRepository;
+        private readonly IWalletService _walletService;
 
-        public OrderService(IGenericRepository<Order> orderRepository, IGenericRepository<OrderDetail> orderDetailRepository)
+        public OrderService(IGenericRepository<Order> orderRepository, IGenericRepository<OrderDetail> orderDetailRepository, IGenericRepository<SellerWallet> sellerWalletRepository, IWalletService walletService)
         {
             _orderRepository = orderRepository;
             _orderDetailRepository = orderDetailRepository;
+            _walletService = walletService;
         }
 
         #endregion
@@ -61,6 +65,36 @@ namespace EModernHouse.Application.Services.Implementations
             return userOrderOpen;
         }
 
+        public async Task<int> GetTotalOrderPriceForPayment(long userId)
+        {
+            var userOpenOrder = await GetUserLatestOpenOrder(userId);
+            var totalPrice = 0;
+            foreach (var detail in userOpenOrder.OrderDetails)
+            {
+                totalPrice += detail.Count * (detail.Product.Price + detail.ProductColor.Price);
+            }
+
+            return totalPrice;
+        }
+
+        public async Task PayOrderProductPriceToSeller(long userId)
+        {
+            var openOrder = await GetUserLatestOpenOrder(userId);
+            foreach (var order in openOrder.OrderDetails)
+            {
+                var productPrice = order.Product.Price;
+                var productColorPrice = order.ProductColor.Price;
+                var discount = 0;
+                var totalPrice = ((productPrice + productColorPrice) * order.Count) - discount ;
+                await _walletService.AddWallet(new SellerWallet
+                {
+                    Price = (int) Math.Ceiling(totalPrice * 3 / (double)100),
+                    TransactionType = TransactionType.Deposit,
+                    Description = $"سود فروش {order.Product.Title} به مبلغ {(int)Math.Ceiling(totalPrice * 3 / (double)100)} و قیمت اصلی به مبلغ {totalPrice} با سهم 3 درصد واریز شد"
+                });
+            }
+            //todo : send to payment
+        }
         #endregion
 
         #region OrderDetail

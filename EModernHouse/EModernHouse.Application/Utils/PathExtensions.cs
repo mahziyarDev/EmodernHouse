@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace EModernHouse.Application.Utils
 {
@@ -28,8 +29,10 @@ namespace EModernHouse.Application.Utils
 
         #region Slider
 
-        public static string SliderOrigin = "/images/main-slider/";
-
+        public static string SliderOrigin = "/images/main-slider/SliderOrigin/";
+        public static String SliderOriginServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/main-slider/SliderOrigin/");
+        public static string SliderThumb = "/images/main-slider/SliderThumb/";
+        public static String SliderThumbServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/main-slider/SliderThumb/");
         #endregion
 
         #region Banner

@@ -2,10 +2,13 @@
 using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Account;
 using EModernHouse.DataLayer.Entities.Contacts;
+using EModernHouse.DataLayer.Entities.Interest;
 using EModernHouse.DataLayer.Entities.Product;
 using EModernHouse.DataLayer.Entities.ProductOrder;
 using EModernHouse.DataLayer.Entities.Site;
+using EModernHouse.DataLayer.Entities.Wallet;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace EModernHouse.DataLayer.Context
@@ -38,6 +41,8 @@ namespace EModernHouse.DataLayer.Context
         public DbSet<ProductFeature> ProductFeatures { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<ProductInterest> ProductInterests { get; set; }
+        public DbSet<SellerWallet> SellerWallets { get; set; }
         #endregion
 
         #region on model Creating

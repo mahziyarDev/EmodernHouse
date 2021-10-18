@@ -31,6 +31,8 @@
     <Folder Include="wwwroot\Content\Images\CategoryImage\Thumb\" />
     <Folder Include="wwwroot\Content\Images\ProductImage\" />
     <Folder Include="wwwroot\Content\Images\UserAvatar\" />
+    <Folder Include="wwwroot\images\main-slider\SliderThumb\" />
+    <Folder Include="wwwroot\images\main-slider\SliderOrigin\" />
   </ItemGroup>
 
 </Project>

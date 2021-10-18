@@ -267,6 +267,37 @@ namespace EModernHouse.DataLayer.Migrations
                     b.ToTable("TicketMessages");
                 });
 
+            modelBuilder.Entity("EModernHouse.DataLayer.Entities.Interest.ProductInterest", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProductInterests");
+                });
+
             modelBuilder.Entity("EModernHouse.DataLayer.Entities.Product.Product", b =>
                 {
                     b.Property<long>("Id")
@@ -672,6 +703,37 @@ namespace EModernHouse.DataLayer.Migrations
                     b.ToTable("SiteSettings");
                 });
 
+            modelBuilder.Entity("EModernHouse.DataLayer.Entities.Wallet.SellerWallet", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TransactionType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SellerWallets");
+                });
+
             modelBuilder.Entity("EModernHouse.DataLayer.Entites.Contacts.ContactUs", b =>
                 {
                     b.HasOne("EModernHouse.DataLayer.Entities.Account.User", "User")
@@ -710,6 +772,25 @@ namespace EModernHouse.DataLayer.Migrations
                     b.Navigation("Sender");
 
                     b.Navigation("Ticket");
+                });
+
+            modelBuilder.Entity("EModernHouse.DataLayer.Entities.Interest.ProductInterest", b =>
+                {
+                    b.HasOne("EModernHouse.DataLayer.Entities.Product.Product", "Product")
+                        .WithMany("ProductInterests")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EModernHouse.DataLayer.Entities.Account.User", "User")
+                        .WithMany("ProductInterests")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EModernHouse.DataLayer.Entities.Product.ProductCategory", b =>
@@ -817,6 +898,8 @@ namespace EModernHouse.DataLayer.Migrations
 
                     b.Navigation("Orders");
 
+                    b.Navigation("ProductInterests");
+
                     b.Navigation("TicketMessages");
 
                     b.Navigation("Tickets");
@@ -836,6 +919,8 @@ namespace EModernHouse.DataLayer.Migrations
                     b.Navigation("ProductFeatures");
 
                     b.Navigation("ProductGalleries");
+
+                    b.Navigation("ProductInterests");
 
                     b.Navigation("ProductSelectedCategories");
                 });

@@ -6,8 +6,12 @@
             <img src="@(PathExtensions.ProductImageThumb+Model.ImageName)" alt="@Model.Title">
         </a>
         <div class="product-card-actions">
-            <button class="add-to-wishlist"><i class="fas fa-heart"></i></button>
-            
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="add-to-wishlist" asp-area="" asp-controller="Product" asp-action="AddInterest" Addinterest="@Model.Id"><i class="fas fa-heart"></i></a>
+
+            }
+
         </div>
     </div>
     <div class="product-card-middle">

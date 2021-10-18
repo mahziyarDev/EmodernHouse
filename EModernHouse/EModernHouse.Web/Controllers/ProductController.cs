@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.Web.Http;
+using EModernHouse.Web.PresentationExtentions;
 
 namespace EModernHouse.Web.Controllers
 {
@@ -46,6 +48,32 @@ namespace EModernHouse.Web.Controllers
             }
 
             return View(res);
+        }
+
+        #endregion
+
+        #region ProductInterest
+        [HttpGet("add-to-product-Interest/{productId}")]
+        public async Task<JsonResult> AddInterest(long productId)   
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var res =await _productService.AddProductToInterest(User.GetUserId(), productId);
+                if (res)
+                {
+                   return JsonResponseStatus.SendStatus(
+                        JsonResponseStatusType.Success,
+                        "محصول با موفقیت به علاقه مندی های شما اضافه شد",
+                        null
+                        );
+                }
+            }
+
+            return JsonResponseStatus.SendStatus(
+                JsonResponseStatusType.Danger,
+                "شما قبلا این محصول را به علاقه مندی های خود اضافه کرده اید",
+                null
+            );
         }
 
         #endregion

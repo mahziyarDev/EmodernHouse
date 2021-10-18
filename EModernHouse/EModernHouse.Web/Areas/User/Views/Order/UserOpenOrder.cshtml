@@ -58,7 +58,9 @@
                                                 <td>@order.Product.Price</td>
                                                 <td>@order.ProductColor.ColorName</td>
                                                 <td>@order.ProductColor.Price</td>
-                                                <th>@order.Count</th>
+                                                <th class="text-center">
+                                                    <input type="number" min="1" value="@order.Count"/>
+                                                </th>
                                                 <td>@((order.Count*(order.Product.Price + order.ProductColor.Price)).ToString("#,0")) تومان</td>
                                             </tr>
 

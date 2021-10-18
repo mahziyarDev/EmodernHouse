@@ -1,0 +1,84 @@
+﻿@using EModernHouse.Application.Utils
+@model List<EModernHouse.DataLayer.Entites.Contacts.Slider>
+@{
+    ViewData["Title"] = "مدیریت اسلایدر";
+}
+
+
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <a class="btn btn-success">افزودن اسلایدر</a>
+        <div class="well with-header with-footer">
+            <div class="header bordered-sky">
+                @ViewData["Title"]
+
+                @if (Model != null && Model.Any())
+                {
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                تصویری
+                            </th>
+                            <th>
+                                عنوان تصویر
+                            </th>
+                            <th>
+                                مقدار Alt
+                            </th>
+                            <th>
+                                ادرس تصویری
+                            </th>
+                            <th>
+                                وضعیت فعال / غیرفعال
+                            </th>
+                            <th>
+                                دستورات
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach (var slider in Model)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <img style="width: 80px; height: 80px" src="@(PathExtensions.SliderThumb + slider.ImageName)"/>
+                                </td>
+                                <td>
+                                    @slider.MainHeader
+                                </td>
+                                <td>
+                                    @slider.Alt
+                                </td>
+                                <td>
+                                    @slider.Link
+                                </td>
+                                <td class="@(slider.IsActive ? "success" : "danger")">
+                                    @(slider.IsActive ? "فعال" : "غیر فعال")
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-warning">ویرایش</a>
+                                    <a class="btn btn-sm btn-warning">حذف</a>
+                                </td>
+                            </tr>
+
+                        }
+
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-danger">
+                        <p>اطلاعاتی یافت نشد</p>
+                    </div>
+                }
+                <br/>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

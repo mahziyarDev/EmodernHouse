@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using EModernHouse.Application.Extensions;
 using EModernHouse.DataLayer.DTOs.Filter;
+using EModernHouse.DataLayer.Entities.Interest;
 
 
 namespace EModernHouse.Application.Services.Implementations
@@ -26,8 +27,9 @@ namespace EModernHouse.Application.Services.Implementations
         private readonly IGenericRepository<ProductColor> _productColorRepository;
         private readonly IGenericRepository<ProductGallery> _productGalleryRepository;
         private readonly IGenericRepository<ProductFeature> _productFeatureRepository;
+        private readonly IGenericRepository<ProductInterest> _productInterestRepository;
 
-        public ProductService(IGenericRepository<Product> productRepository, IGenericRepository<ProductCategory> productCategoryRepository, IGenericRepository<ProductSelectedCategory> productSelectedCategoryRepository, IGenericRepository<ProductColor> productColorRepository, IGenericRepository<ProductGallery> productGalleryRepository, IGenericRepository<ProductFeature> productFeatureRepository)
+        public ProductService(IGenericRepository<Product> productRepository, IGenericRepository<ProductCategory> productCategoryRepository, IGenericRepository<ProductSelectedCategory> productSelectedCategoryRepository, IGenericRepository<ProductColor> productColorRepository, IGenericRepository<ProductGallery> productGalleryRepository, IGenericRepository<ProductFeature> productFeatureRepository, IGenericRepository<ProductInterest> productInterestRepository)
         {
             _productRepository = productRepository;
             _productCategoryRepository = productCategoryRepository;
@@ -35,6 +37,7 @@ namespace EModernHouse.Application.Services.Implementations
             _productColorRepository = productColorRepository;
             _productGalleryRepository = productGalleryRepository;
             _productFeatureRepository = productFeatureRepository;
+            _productInterestRepository = productInterestRepository;
         }
         #endregion
 
@@ -398,6 +401,7 @@ namespace EModernHouse.Application.Services.Implementations
             var result = _productRepository.GetQuery()
                 .Include(s=>s.ProductSelectedCategories)
                 .ThenInclude(s=>s.ProductCategory)
+                .Include(s=>s.ProductInterests)
                 .AsQueryable();
             if (startPrice > 0)
             {
@@ -492,6 +496,29 @@ namespace EModernHouse.Application.Services.Implementations
         }
         #endregion
 
+        #region ProductInterest
+
+        public async Task<bool> AddProductToInterest(long userId, long productId)
+        {
+            var check = _productInterestRepository.GetQuery().AsQueryable()
+                .Any(s => s.ProductId == productId && s.UserId == userId);
+            if (!check)
+            {
+                var productInterest = new ProductInterest
+                {
+                    ProductId = productId,
+                    UserId = userId
+                };
+                await _productInterestRepository.AddEntity(productInterest);
+                await _productInterestRepository.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+
         #region Disposiable
 
         public async ValueTask DisposeAsync()
@@ -502,6 +529,7 @@ namespace EModernHouse.Application.Services.Implementations
             await _productSelectedCategoryRepository.DisposeAsync();
             await _productGalleryRepository.DisposeAsync();
             await _productFeatureRepository.DisposeAsync();
+            await _productInterestRepository.DisposeAsync();
         }
 
         #endregion

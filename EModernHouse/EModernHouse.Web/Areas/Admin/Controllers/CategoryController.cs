@@ -58,21 +58,18 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
                     return RedirectToAction("CategoriesList");
                 }
 
-
-                
-              
             }
             TempData[ErrorMessage] = "مقادیر خواسته شد را وارد نمایید";
             return RedirectToAction("CategoriesList");
         }
-
-        [HttpGet]
+        
+        [HttpGet("CreateSubGroups")]
         public async Task<IActionResult> CreateSubGroups(long groupId,string groupName)
         {
             if (!string.IsNullOrEmpty(groupName))
             {
-                var newCategory = _productService.CreateSubGroups(groupId, groupName);
-                if (true)
+                var newCategory =await _productService.CreateSubGroups(groupId, groupName);
+                if (newCategory)
                 {
                     TempData[SuccessMessage] = "با موفقیت ثبت شد";
                     return RedirectToAction("CategoriesList");

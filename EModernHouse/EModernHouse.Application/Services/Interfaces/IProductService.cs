@@ -70,5 +70,11 @@ namespace EModernHouse.Application.Services.Interfaces
         Task<List<ProductFeature>> GetAllProductFeaturesById(long productId);
 
         #endregion
+
+        #region ProductInterest
+
+        Task<bool> AddProductToInterest(long userId, long productId);
+
+        #endregion
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using EModernHouse.DataLayer.Entities.Common;
+using EModernHouse.DataLayer.Entities.Interest;
 using EModernHouse.DataLayer.Entities.ProductOrder;
 
 namespace EModernHouse.DataLayer.Entities.Product
@@ -46,6 +47,7 @@ namespace EModernHouse.DataLayer.Entities.Product
         public ICollection<ProductGallery> ProductGalleries { get; set; }
         public ICollection<ProductFeature> ProductFeatures { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<ProductInterest> ProductInterests { get; set; }
         #endregion
     }
 }
