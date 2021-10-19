@@ -9,7 +9,6 @@ C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Applicat
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.AssemblyInfoInputs.cache
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.AssemblyInfo.cs
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.csproj.CoreCompileInputs.cache
-C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.csproj.CopyComplete
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.dll
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\ref\EModernHouse.Application.dll
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.pdb

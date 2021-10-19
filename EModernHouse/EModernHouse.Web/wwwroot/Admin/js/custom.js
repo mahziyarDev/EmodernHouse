@@ -72,7 +72,6 @@ $('[ajax-url-button]').on('click', function (e) {
     e.preventDefault();
     var url = $(this).attr('href');
     var itemId = $(this).attr('ajax-url-button');
-    console.log(itemId);
     swal({
         title: 'اخطار',
         text: "آیا از انجام عملیات مورد نظر اطمینان دارید؟",

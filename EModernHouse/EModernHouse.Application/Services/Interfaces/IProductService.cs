@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using EModernHouse.DataLayer.DTOs.Filter;
 using EModernHouse.DataLayer.DTOs.Product;
+using EModernHouse.DataLayer.Entities.Interest;
 using EModernHouse.DataLayer.Entities.Product;
 
 namespace EModernHouse.Application.Services.Interfaces
@@ -74,6 +75,7 @@ namespace EModernHouse.Application.Services.Interfaces
         #region ProductInterest
 
         Task<bool> AddProductToInterest(long userId, long productId);
+        Task<List<ProductInterest>> GetAllProductInterest(long userId);
 
         #endregion
     }

@@ -517,6 +517,12 @@ namespace EModernHouse.Application.Services.Implementations
             return false;
         }
 
+        public async Task<List<ProductInterest>> GetAllProductInterest(long userId)
+        {
+            var products = _productInterestRepository.GetQuery().AsQueryable().Include(s => s.Product);
+            var productInterest = products.Where(s => s.UserId == userId);
+            return await productInterest.ToListAsync();
+        }
         #endregion
 
         #region Disposiable

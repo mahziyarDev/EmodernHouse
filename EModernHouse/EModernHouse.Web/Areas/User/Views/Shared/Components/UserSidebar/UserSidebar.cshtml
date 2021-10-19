@@ -39,7 +39,7 @@
                     </li>
                     <li>
                         <a asp-area="User" asp-controller="Account" asp-action="EditProfile">
-                            <i class="far fa-heart"></i>
+                            <i class="far fa-user-cog"></i>
                             ویرایش حساب کاربری
                         </a>
                     </li>
@@ -51,20 +51,26 @@
                     </li>
                     <li>
                         <a asp-controller="Ticket" asp-action="AddTicket" asp-area="User">
-                            <i class="far fa-map-marked"></i>
+                            <i class="far fa-comments"></i>
                             ثبت تیکت جدید
                         </a>
                     </li>
                     <li>
                         <a asp-controller="Ticket" asp-action="Index" asp-area="User">
-                            <i class="far fa-map-marked"></i>
+                            <i class="far fa-list-alt"></i>
                             لیست تیکت ها
                         </a>
                     </li>
                     <li>
                         <a asp-controller="Order" asp-action="DetailOrder" asp-area="User">
-                            <i class="far fa-map-marked"></i>
+                            <i class="far fa-tasks"></i>
                             لیست فاکتور ها
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Home" asp-action="FavoriteProduct" asp-area="User">
+                            <i class="far fa-heart"></i>
+                            علاقه مندی ها
                         </a>
                     </li>
                     <li>

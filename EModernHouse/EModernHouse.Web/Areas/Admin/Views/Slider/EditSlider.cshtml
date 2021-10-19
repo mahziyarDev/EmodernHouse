@@ -1,0 +1,85 @@
+﻿@using EModernHouse.Application.Utils
+@model EModernHouse.DataLayer.DTOs.Site.EditSliderDTO
+@{
+    ViewData["Title"] = "ویرایش اسلاید " + Model.MainHeader;
+}
+
+@section script
+{
+    <partial name="_JqueryValidator" />
+    <script src="/js/ChangeImage.js"></script>
+}
+
+<div class="row">
+    <form asp-area="Admin" asp-controller="Slider" asp-action="EditSlider" method="post" enctype="multipart/form-data">
+        <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+            <div class="widget">
+                <div class="widget-header bordered-bottom bordered-blue">
+                    <span class="widget-caption"> تصویر اسلایدر</span>
+                </div>
+                <div class="widget-body">
+
+                    <div class="card text-center">
+                        <div class="card-header">
+                            تصویر اسلایدر
+                        </div>
+                        <div class="card-body">
+                            <img id="imgPreviewProduct" class="img-thumbnail ImagePreviwe_Editprofile" src="@(PathExtensions.SliderThumb+Model.ImageName)" />
+                        </div>
+                        <div class="card-footer text-muted">
+                            <label for="imageProduct" id="lable-Upload-Avatar" class="btn-upload">انتخاب عکس</label>
+                            <input type="file" name="sliderImage" accept=".png,.jpg,.jpeg" id="imageProduct" class="input_Upload_file_Editprofile" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div class="widget">
+                <div class="widget-header bordered-bottom bordered-blue">
+                    <span class="widget-caption">@ViewData["Title"]</span>
+                </div>
+                <div class="widget-body">
+                    <input type="hidden" value="@Model.SliderId" asp-for="SliderId"/>
+                    <input type="hidden" value="@Model.ImageName" asp-for="ImageName"/>
+                    <div>
+                        <div class="form-group">
+                            <label class="btn-block">
+                                عنوان اسلایدر
+                                <input type="text" class="form-control" asp-for="MainHeader"/>
+
+                            </label>
+                            <span class="text-danger" asp-validation-for="MainHeader"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="btn-block">
+                                عنوان alt
+                                <input type="text" class="form-control" asp-for="Alt"/>
+                            </label>
+                            <span class="text-danger" asp-validation-for="Alt"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="btn-block">
+                                ادرس تصویری
+                                <input type="url" class="form-control" asp-for="Link"/>
+                            </label>
+                            <span class="text-danger" asp-validation-for="Link"></span>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" asp-for="IsActive">
+                                <span class="text">وضعیت اسلایدر فعال / غیر فعال</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-blue">ثبت</button>
+                        <button class="btn btn-warning" asp-area="Admin" asp-controller="Slider" asp-action="SliderList">باز گشت به لیست</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+

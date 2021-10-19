@@ -7,64 +7,65 @@
 
 <div class="row">
     <div class="col-xs-12 col-md-12">
-        <a class="btn btn-success">افزودن اسلایدر</a>
+        <a class="btn btn-success" asp-area="Admin" asp-controller="Slider" asp-action="CreateSlider">افزودن اسلایدر</a>
+        <br />
         <div class="well with-header with-footer">
             <div class="header bordered-sky">
                 @ViewData["Title"]
-
+            </div>
+            <div class="well with-header">
                 @if (Model != null && Model.Any())
                 {
                     <table class="table table-bordered table-hover">
                         <thead>
-                        <tr>
-                            <th>
-                                تصویری
-                            </th>
-                            <th>
-                                عنوان تصویر
-                            </th>
-                            <th>
-                                مقدار Alt
-                            </th>
-                            <th>
-                                ادرس تصویری
-                            </th>
-                            <th>
-                                وضعیت فعال / غیرفعال
-                            </th>
-                            <th>
-                                دستورات
-                            </th>
-                        </tr>
+                            <tr>
+                                <th>
+                                    تصویری
+                                </th>
+                                <th>
+                                    عنوان تصویر
+                                </th>
+                                <th>
+                                    مقدار Alt
+                                </th>
+                                <th>
+                                    ادرس تصویری
+                                </th>
+                                <th>
+                                    وضعیت فعال / غیرفعال
+                                </th>
+                                <th>
+                                    دستورات
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
 
-                        @foreach (var slider in Model)
-                        {
-                            <tr>
-                                <td class="text-center">
-                                    <img style="width: 80px; height: 80px" src="@(PathExtensions.SliderThumb + slider.ImageName)"/>
-                                </td>
-                                <td>
-                                    @slider.MainHeader
-                                </td>
-                                <td>
-                                    @slider.Alt
-                                </td>
-                                <td>
-                                    @slider.Link
-                                </td>
-                                <td class="@(slider.IsActive ? "success" : "danger")">
-                                    @(slider.IsActive ? "فعال" : "غیر فعال")
-                                </td>
-                                <td>
-                                    <a class="btn btn-sm btn-warning">ویرایش</a>
-                                    <a class="btn btn-sm btn-warning">حذف</a>
-                                </td>
-                            </tr>
+                            @foreach (var slider in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        <img style="width: 80px; height: 80px" src="@(PathExtensions.SliderThumb + slider.ImageName)" />
+                                    </td>
+                                    <td>
+                                        @slider.MainHeader
+                                    </td>
+                                    <td>
+                                        @slider.Alt
+                                    </td>
+                                    <td>
+                                        @slider.Link
+                                    </td>
+                                    <td class="@(slider.IsActive ? "success" : "danger")">
+                                        @(slider.IsActive ? "فعال" : "غیر فعال")
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="Slider" asp-action="EditSlider" asp-route-sliderId="@slider.Id">ویرایش</a>
+                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-danger@(slider.Id)">حذف</button>
+                                    </td>
+                                </tr>
 
-                        }
-
+                            }
                         </tbody>
                     </table>
                 }
@@ -74,7 +75,7 @@
                         <p>اطلاعاتی یافت نشد</p>
                     </div>
                 }
-                <br/>
+                <br />
 
             </div>
 
@@ -82,3 +83,28 @@
         </div>
     </div>
 </div>
+
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var slider in Model)
+    {
+        <div id="modal-danger@(slider.Id)" class="modal modal-message modal-danger fade" style="display: none; padding-right: 17px;" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class=" glyphicon glyphicon-picture"></i>
+                    </div>
+                    <div class="modal-title">اسلایدر  @slider.MainHeader</div>
+
+                    <div class="modal-body">از حذف اسلایدر اطمینان داردی</div>
+                    <div class="modal-footer">
+                        <a class="btn btn-warning" asp-area="Admin" asp-controller="Slider" asp-action="DeleteSlider" asp-route-sliderId="@slider.Id">حذف شود</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">خیر</button>
+                    </div>
+                </div> <!-- / .modal-content -->
+            </div> <!-- / .modal-dialog -->
+        </div>
+    }
+}
+
