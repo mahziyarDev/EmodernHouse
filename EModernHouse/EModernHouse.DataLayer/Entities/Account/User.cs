@@ -71,6 +71,7 @@ namespace EModernHouse.DataLayer.Entities.Account
         public ICollection<TicketMessage> TicketMessages { get; set; }
         public ICollection<Order> Orders { get; set; }
         public ICollection<ProductInterest> ProductInterests { get; set; }
+        public UserAddress UserAddress { get; set; }
         #endregion
 
     }

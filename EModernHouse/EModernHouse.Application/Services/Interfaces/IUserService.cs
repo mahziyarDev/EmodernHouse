@@ -29,8 +29,16 @@ namespace EModernHouse.Application.Services.Interfaces
         Task<bool> SetUserForEdit(EditUserDTO edit,long userId);
         Task<bool> IsDeletedUser(long userId);
         Task<bool> IsBlocked(long userId);
-
         Task<Tuple<List<User>, int>> GetUsersForFilter(int pageId, int take, string mobile, string name, string email);
+        Task<int> GetUserCount();
+        #endregion
+
+        #region userAddres
+
+        Task<bool> UserAddressIsYesOrNo(long userId);
+        Task<bool> InsertUserAddress(long userId , string address);
+        Task<UserAddress> GetAddress(long userId);
+        Task<bool> EditAddress(long userId,string address);
 
         #endregion
     }

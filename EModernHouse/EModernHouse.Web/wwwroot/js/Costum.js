@@ -137,25 +137,13 @@ function sendPage(page) {
     $("#pageId").val(page);
     $("#formFilter").submit();
 }
-//end product Archive
 
-//function AddToInterestProduct(productId) {
-//    $.get("/add-to-product-Interest/" + productId).then(res => {
-//        if (res.status === 'Success') {
-//            ShowMessage("علاقه مندی", "با موفقیت به علاقه مندی های شما اضافه شد", 'success');
-//        } else {
-//            ShowMessage("اعلان", "نمی توانم این محصول را به علاقه مندی هایتان اضافه نماییم", "error");
-//        }
-//    });
-
-//}
 $('[Addinterest]').on('click',function(e) {
     e.preventDefault();
     var url = $(this).attr("href");
     var id = $(this).attr('Addinterest');
 
     var address = `${"add-to-product-Interest/" + id}`;
-    console.log(address);
     $.get(address).then(res => {
         if (res.status === 'Success') {
             ShowMessage("علاقه مندی", res.message, 'success');
@@ -163,4 +151,29 @@ $('[Addinterest]').on('click',function(e) {
             ShowMessage("اعلان", res.message, "error");
         }
     });
+});
+
+function RemoveProductInterest(productId) {
+    var address = `${"/delete-favorite/" + productId}`;
+    $.get(address).then(res => {
+        if (res.status === 'Success') {
+            ShowMessage("علاقه مندی", res.message, 'success');
+            $("#product-Favorite-" + productId).hide(300);
+        }
+        else {
+            ShowMessage("اعلان", res.message, "error");
+        }
+    });
+}
+
+function closeAddress() {
+    $(".addAddress").val("");
+}
+
+function EditAddress() {
+    
+}
+$('[editText]').on('click',function() {
+    var string = $(this).attr("editText");
+    $("#EditAddressText").val(string);
 });

@@ -23,12 +23,14 @@ namespace EModernHouse.Application.Services.Implementations
         private readonly IGenericRepository<User> _useRepository;
         private readonly IPasswordHelper _passwordHelper;
         private readonly ISmsService _smsService;
+        private readonly IGenericRepository<UserAddress> _userAddressRepository;
 
-        public UserService(IGenericRepository<User> useRepository, IPasswordHelper passwordHelper, ISmsService smsService)
+        public UserService(IGenericRepository<User> useRepository, IPasswordHelper passwordHelper, ISmsService smsService, IGenericRepository<UserAddress> userAddressRepository)
         {
             _useRepository = useRepository;
             _passwordHelper = passwordHelper;
             _smsService = smsService;
+            _userAddressRepository = userAddressRepository;
         }
         #endregion
 
@@ -176,6 +178,7 @@ namespace EModernHouse.Application.Services.Implementations
         {
             return await _useRepository.GetEntityById(userID);
         }
+
         #region UserForAdmin
 
         public async Task<List<User>> GetAllUser()
@@ -280,6 +283,58 @@ namespace EModernHouse.Application.Services.Implementations
             int pageCount = (users.Count() % take == 0 ? users.Count() / take : (users.Count() / take) + 1);
             List<User> result = await users.Skip(skip).Take(take).ToListAsync();
             return Tuple.Create(result, pageCount);
+
+        }
+
+        public async Task<int> GetUserCount()
+        {
+            var userCount = await _useRepository.GetQuery().AsQueryable().ToListAsync();
+            return userCount.Count();
+        }
+        #endregion
+
+        #region userAddres
+
+        public async Task<bool> UserAddressIsYesOrNo(long userId)
+        {
+            var userAddress = _userAddressRepository.GetQuery().AsQueryable().Any(s => s.UserId == userId);
+            if (userAddress)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public async Task<bool> InsertUserAddress(long userId, string address)
+        {
+            var newAddress = new UserAddress
+            {
+                UserId = userId,
+                Address = address,
+                IsDelete = false,
+            };
+            await _userAddressRepository.AddEntity(newAddress);
+            await _userAddressRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<UserAddress> GetAddress(long userId)
+        {
+            var userAddress = await _userAddressRepository.GetQuery().AsQueryable()
+                .Include(s => s.User)
+                .SingleOrDefaultAsync(s => s.UserId == userId);
+            return userAddress;
+        }
+
+        public async Task<bool> EditAddress(long userId, string address)
+        {
+            var userAddress = await _userAddressRepository.GetQuery().AsQueryable()
+                .SingleOrDefaultAsync(s=>s.UserId == userId);
+            if (userAddress == null) return false;
+            userAddress.Address = address;
+            _userAddressRepository.EditEntity(userAddress);
+            await _userAddressRepository.SaveChanges();
+            return true;
 
         }
         #endregion

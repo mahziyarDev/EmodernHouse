@@ -12,10 +12,20 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
     {
         #region Ctor
 
+        private readonly IUserService _userService;
+        private readonly IProductService _productService;
+
+        public HomeController(IUserService userService, IProductService productService)
+        {
+            _userService = userService;
+            _productService = productService;
+        }
         
         #endregion
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewBag.userCount = await _userService.GetUserCount();
+            ViewBag.productCount = await _productService.GetProductCount();
             return View();
         }
     }

@@ -13,6 +13,7 @@ namespace EModernHouse.Application.Services.Interfaces
         #region filterProduc
 
         Task<Tuple<List<Product>, int>> GetProductForFilter(int pageId, int take, string productName);
+        Task<int> GetProductCount();
         #endregion
 
         #region Product
@@ -76,6 +77,7 @@ namespace EModernHouse.Application.Services.Interfaces
 
         Task<bool> AddProductToInterest(long userId, long productId);
         Task<List<ProductInterest>> GetAllProductInterest(long userId);
+        Task<bool> RemoveProductInterest(long productId,long userId);
 
         #endregion
     }

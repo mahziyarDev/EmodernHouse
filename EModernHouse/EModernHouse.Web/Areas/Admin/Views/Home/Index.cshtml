@@ -5,3 +5,41 @@
 
 <p>داشبورد</p>
 
+<div class="row">
+    <div class="col-lg-3 col-sm-3 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-palegreen">
+                <i class="widget-icon fa fa-arrow-down"></i>
+                <span class="widget-caption">تعداد کاربران سایت</span>
+                <div class="widget-buttons">
+                    
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    
+                </div><!--Widget Buttons-->
+            </div><!--Widget Header-->
+            <div class="widget-body text-center">
+                کاربران موجود در سایت : @ViewBag.userCount
+            </div><!--Widget Body-->
+        </div><!--Widget-->
+    </div>
+    <div class="col-lg-3 col-sm-3 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bg-palegreen">
+                <i class="widget-icon fa fa-arrow-down"></i>
+                <span class="widget-caption">تعداد کالاهای سایت</span>
+                <div class="widget-buttons">
+                    
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    
+                </div><!--Widget Buttons-->
+            </div><!--Widget Header-->
+            <div class="widget-body text-center">
+                تعداد کالا های موجود در سایت : @ViewBag.productCount
+            </div><!--Widget Body-->
+        </div><!--Widget-->
+    </div>
+</div>

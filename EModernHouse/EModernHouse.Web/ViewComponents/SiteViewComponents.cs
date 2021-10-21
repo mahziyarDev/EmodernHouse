@@ -14,6 +14,7 @@ namespace EModernHouse.Web.ViewComponents
         private readonly IUserService _userService;
         private readonly IProductService _productService;
 
+
         public SiteHeaderViewComponent(ISiteService siteService, IUserService userService, IProductService productService)
         {
             _siteService = siteService;
@@ -30,6 +31,7 @@ namespace EModernHouse.Web.ViewComponents
                 ViewBag.user = await _userService.GetUserByMobile(User.Identity.Name);
             };
             ViewBag.Categories = await _productService.GetAllActiveProductCategories();
+            ViewBag.interestCount = await _productService.GetAllProductInterest(User.GetUserId());
             return View("SiteHeader");
         }
     }

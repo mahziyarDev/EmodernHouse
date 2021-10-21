@@ -24,43 +24,47 @@
                         {
                             @foreach (var product in Model)
                             {
-                                <div class="col-lg-6 px-0">
+                                <div class="col-lg-6 px-0" id="product-Favorite-@product.Product.Id">
                                     <div class="product-card product-card-horizontal">
                                         <div class="product-card-top">
                                             <a href="" class="product-image">
-                                                <img src="@(PathExtensions.ProductImageThumb + product.Product.ImageName)" alt="product image">
+                                                <img src="@(PathExtensions.ProductImageThumb + product.Product.ImageName)" alt="@product.Product.Title">
                                             </a>
                                             <div class="product-card-actions">
-                                                <button class="add-to-wishlist added"><i class="fas fa-heart"></i></button>
-                                                <button class="add-to-compare"><i class="fas fa-random"></i></button>
+                                                <button class="add-to-wishlist added" onclick="RemoveProductInterest(@product.Product.Id)"><i class="fas fa-heart"></i></button>
                                             </div>
                                         </div>
                                         <div class="product-card-middle">
                                             <div class="ratings-container">
-                                                <div class="ratings">
-                                                    <div class="ratings-val" style="width: 65%;"></div>
-                                                </div>
+                                            
                                             </div>
                                             <h6 class="product-name">
-                                                <a href="#">
-                                                    میز تحریر تاشوو تنظیم شو میلاد سفید
-                                                    70
+                                                <a asp-area="" asp-controller="Product" asp-action="ProductDetail"
+                                                   asp-route-productId="@product.Product.Id" asp-route-title="@product.Product.Title.FixTextForUrl()">
+                                                   @product.Product.Title
                                                 </a>
                                             </h6>
-                                            <div class="product-price product-price-clone">650,000 تومان</div>
+                                            <div class="product-price product-price-clone">@product.Product.Price.ToString("#,0")تومان </div>
                                         </div>
                                         <div class="product-card-bottom">
                                             <div class="product-price">
-                                                650,000 تومان
+                                                @product.Product.Price.ToString("#,0") تومان
                                             </div>
-                                            <a href="#" class="btn-add-to-cart">
+                                            <a asp-area="" asp-controller="Product" asp-action="ProductDetail"
+                                               asp-route-productId="@product.Product.Id" asp-route-title="@product.Product.Title.FixTextForUrl()" class="btn-add-to-cart">
                                                 <i class="fad fa-cart-plus"></i>
-                                                افزودن به سبد خرید
+                                                مشاهده محصول
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             }
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning">
+                                <p>هیچ محصولی به علاقه مندی های شما اضافه نشده است</p>
+                            </div>
                         }
                     </div>
                 </div>

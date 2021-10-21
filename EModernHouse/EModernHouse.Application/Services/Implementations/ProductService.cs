@@ -64,6 +64,12 @@ namespace EModernHouse.Application.Services.Implementations
             List<Product> result = await products.Skip(skip).Take(take).ToListAsync();
             return Tuple.Create(result, pageCount);
         }
+
+        public async Task<int> GetProductCount()
+        {
+            var products = await _productRepository.GetQuery().AsQueryable().ToListAsync();
+            return products.Count();
+        }
         #endregion
 
         #region Product
@@ -399,10 +405,10 @@ namespace EModernHouse.Application.Services.Implementations
         public async Task<ProductUserFilterDTO> GetProductsForUsers(int pageId, int take, int startPrice, int endPrice, long? category)
         {
             var result = _productRepository.GetQuery()
-                .Include(s=>s.ProductSelectedCategories)
-                .ThenInclude(s=>s.ProductCategory)
-                .Include(s=>s.ProductInterests)
-                .AsQueryable();
+                .Include(s => s.ProductSelectedCategories)
+                .ThenInclude(s => s.ProductCategory)
+                .Include(s => s.ProductInterests)
+                .AsQueryable().Where(s => s.IsActive);
             if (startPrice > 0)
             {
                 result = result.Where(p => p.Price >= startPrice);
@@ -522,6 +528,17 @@ namespace EModernHouse.Application.Services.Implementations
             var products = _productInterestRepository.GetQuery().AsQueryable().Include(s => s.Product);
             var productInterest = products.Where(s => s.UserId == userId);
             return await productInterest.ToListAsync();
+        }
+
+        public async Task<bool> RemoveProductInterest(long productId,long userId)
+        {
+            var product = await _productInterestRepository.GetQuery().AsQueryable()
+                .SingleOrDefaultAsync(s=>s.ProductId == productId && s.UserId == userId);
+            if (product == null) return false;
+            _productInterestRepository.Delete(product);
+            await _productInterestRepository.SaveChanges();
+            return true;
+
         }
         #endregion
 

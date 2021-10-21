@@ -43,6 +43,7 @@ namespace EModernHouse.DataLayer.Context
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ProductInterest> ProductInterests { get; set; }
         public DbSet<SellerWallet> SellerWallets { get; set; }
+        public DbSet<UserAddress> UserAddresses { get; set; }
         #endregion
 
         #region on model Creating

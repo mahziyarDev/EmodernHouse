@@ -4963,17 +4963,7 @@ color: #000;
   position: relative;
 }
 
-.profile-sidebar .profile-avatar:after {
-  content: '';
-  position: absolute;
-  right: 28px;
-  top: 50%;
-  width: 2px;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #dedede;
-  z-index: 0;
-}
+
 
 .profile-sidebar .profile-avatar img {
   width: 60px;
@@ -4985,68 +4975,70 @@ color: #000;
 }
 
 .profile-sidebar .user-options {
-  border-bottom: 1px solid #dedede;
-  margin-bottom: 20px;
-  padding-right: 25px;
+    border-bottom: 1px solid #dedede;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding-right: 25px;
 }
 
 .profile-sidebar .user-options ul li {
-  position: relative;
-  padding-right: 20px;
+    position: relative;
+    padding-right: 20px;
 }
 
 .profile-sidebar .user-options ul li:before {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #dedede;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #dedede;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .profile-sidebar .user-options ul li:after {
-  content: '';
-  position: absolute;
-  right: 3px;
-  top: 50%;
-  width: 2px;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #dedede;
+    content: '';
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    width: 2px;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #dedede;
 }
 
-.profile-sidebar .user-options ul li:last-child:after {
+
+.profile-sidebar  ul li:last-child:after {
   display: none;
 }
 
 .profile-sidebar .user-options ul li a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  color: #000;
-  line-height: 38px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    color: #000;
+    line-height: 38px;
 }
 
 .profile-sidebar .user-menu ul li a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  color: #000;
-  line-height: 38px;
-  font-size: 16px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #000;
+    line-height: 38px;
+    font-size: 16px;
 }
 
 .profile-sidebar .user-menu ul li a.active {

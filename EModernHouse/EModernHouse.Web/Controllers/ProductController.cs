@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.Web.Http;
@@ -75,7 +72,27 @@ namespace EModernHouse.Web.Controllers
                 null
             );
         }
-
+        [HttpGet("delete-favorite/{productId}")]
+        public async Task<JsonResult> RemoveProductInterest(long productId)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var res = await _productService.RemoveProductInterest(productId, User.GetUserId());
+                if (res)
+                {
+                    return JsonResponseStatus.SendStatus(
+                        JsonResponseStatusType.Success,
+                        "محصول از علاقه مندی ها حذف شد",
+                        null
+                    );
+                }
+            }
+            return JsonResponseStatus.SendStatus(
+                JsonResponseStatusType.Danger,
+                "برای انجام عملیات نیاز به ثبت نام / لاگین در سایت است",
+                null
+            );
+        }
         #endregion
     }
 }

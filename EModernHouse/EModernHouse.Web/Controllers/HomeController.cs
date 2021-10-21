@@ -24,7 +24,6 @@ namespace EModernHouse.Web.Controllers
             _captchaValidator = captchaValidator;
             _siteService = siteService;
         }
-
         #endregion
 
         #region Index
@@ -73,6 +72,22 @@ namespace EModernHouse.Web.Controllers
 
         #endregion
 
+        #region FollowUpProduct
 
+        public IActionResult FollowUp()
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region seller
+
+        public IActionResult Seller()
+        {
+            return View();
+        }
+
+        #endregion
     }
 }

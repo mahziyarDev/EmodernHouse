@@ -1,11 +1,14 @@
 ﻿@using EModernHouse.DataLayer.Entities.Site
 @using EModernHouse.DataLayer.Entities.Account
 @using EModernHouse.Application.EntitiesExtensions
+@using EModernHouse.Application.Utils
+@using EModernHouse.DataLayer.Entities.Interest
 @using EModernHouse.DataLayer.Entities.Product
 @{
     var siteSetting = ViewBag.SiteSetting as SiteSetting;
     var user = ViewBag.user as User;
     var categories = ViewBag.Categories as List<ProductCategory>;
+    var interestCount = ViewBag.interestCount as List<ProductInterest>;
 }
 <!-- Page Header -->
 <header class="page-header">
@@ -15,14 +18,14 @@
                 <div class="contact-list">
                     <ul>
                         <li><i class="fas fa-phone-rotary"></i><a href="tel: @siteSetting.Phone">@siteSetting.Phone</a></li>
-                        <li><i class="fas fa-envelope"></i><a href="mailto: @siteSetting.Email">@siteSetting.Email</a></li>
+                        <li><i class="fas fa-envelope"></i><a href="#">@siteSetting.Email</a></li>
                     </ul>
                 </div>
                 <div class="top-header-menu">
                     <ul>
-                        <li><a href="#">خانه</a></li>
-                        <li><a href="#">پیگیری سفارش</a></li>
-                        <li><a href="#">فروشگاه</a></li>
+                        <li><a href="/">خانه</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="FollowUp">پیگیری سفارش</a></li>
+                        <li><a href="/product-archive">فروشگاه</a></li>
                     </ul>
                 </div>
             </div>
@@ -61,10 +64,14 @@
             </div>
             <div class="user-items">
                 <div class="user-item">
-                    <a href="#">
-                        <i class="fal fa-heart"></i>
-                        <span class="bag-items-number">3</span>
-                    </a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-area="User" asp-controller="Home" asp-action="FavoriteProduct">
+                            <i class="fal fa-heart"></i>
+                            <span class="bag-items-number">@interestCount.Count</span>
+                        </a>
+                    }
+                    
                 </div>
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -117,6 +124,10 @@
         </div>
         <nav class="nav-wrapper">
             <ul>
+                <li>
+                    <a asp-area="" asp-controller="Product" asp-action="Products"> صفحه اصلی</a>
+                </li>
+
                 @if (categories != null && categories.Any())
                 {
                     @foreach (var mainGroup in categories.Where(s => s.ParentId == null))
@@ -136,13 +147,13 @@
                                                     <ul class="row">
                                                         <li class="col-4">
                                                             <a href="#" class="list-item--image my-3">
-                                                                <img src="/images/mega-menu/01.jpg" class="img-fluid rounded" alt="">
+                                                                <img src="@(PathExtensions.CategoryImageImageThumb + FirstGroup.CategoryImage)" class="img-fluid rounded" alt="@FirstGroup.Title">
                                                             </a>
                                                         </li>
                                                         @foreach (var TwoGroup in categories.Where(s => s.ParentId == FirstGroup.Id))
                                                         {
                                                             <li class="col-2">
-                                                                <a href="#">@TwoGroup.Title</a>
+                                                                <a href="/product-archive/@TwoGroup.Id">@TwoGroup.Title</a>
                                                             </li>
                                                         }
 
@@ -158,6 +169,15 @@
                     }
                 }
 
+                <li>
+                    <a asp-area="" asp-controller="Product" asp-action="Products"> فروشگاه</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="ContactUs"> تماس با ما</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Seller">فروشنده ما باشید</a>
+                </li>
             </ul>
         </nav>
     </div>
@@ -187,7 +207,6 @@
                                     <ul style="display: none;">
                                         @foreach (var FirstCategory in categories.Where(s => s.ParentId == MainCategory.Id))
                                         {
-
                                             <li class="has-children">
                                                 <a href="#" class="">@FirstCategory.Title</a>
                                                 @if (categories.Any(s => s.ParentId == FirstCategory.Id))
@@ -195,14 +214,11 @@
                                                     <ul style="display: none;">
                                                         @foreach (var towCategory in categories.Where(s => s.ParentId == FirstCategory.Id))
                                                         {
-                                                            <li><a href="#">@towCategory.Title</a></li>
-                                                            
+                                                            <li><a href="product-archive/@towCategory.Id">@towCategory.Title</a></li>
                                                         }
                                                     </ul>
                                                 }
                                             </li>
-
-
                                         }
                                     </ul>
                                 }
@@ -249,7 +265,15 @@
             </div>
         </div>
         <div class="header-tools">
-            <a href="#"><i class="far fa-user-circle"></i></a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-area="User" asp-controller="Home" asp-action="Index">حساب کاربری</a>
+            }
+            else
+            {
+                <a asp-area="" asp-controller="Account" asp-action="Login"><i class="far fa-user-circle"></i></a>
+            }
+           
         </div>
     </div>
 </div>
