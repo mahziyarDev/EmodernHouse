@@ -29,7 +29,10 @@
     <Folder Include="Http\" />
     <Folder Include="wwwroot\Content\Images\CategoryImage\Origin\" />
     <Folder Include="wwwroot\Content\Images\CategoryImage\Thumb\" />
+    <Folder Include="wwwroot\Content\Images\SiteLogo\" />
     <Folder Include="wwwroot\Content\Images\ProductImage\" />
+    <Folder Include="wwwroot\Content\Images\SiteBanner\Thumb\" />
+    <Folder Include="wwwroot\Content\Images\SiteBanner\Origin\" />
     <Folder Include="wwwroot\Content\Images\UserAvatar\" />
     <Folder Include="wwwroot\images\main-slider\SliderThumb\" />
     <Folder Include="wwwroot\images\main-slider\SliderOrigin\" />

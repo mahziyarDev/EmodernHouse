@@ -1,0 +1,71 @@
+﻿@using EModernHouse.Application.Utils
+@model EModernHouse.DataLayer.DTOs.Filter.siteSettingFilterDTO
+@{
+    ViewData["Title"] = "تنظیمات سایت";
+}
+
+<div class="row">
+    <a class="btn btn-success">افزودن</a>
+    <div class="widget widget-header">
+        <span class="widget-caption">@ViewData["Title"]</span>
+    </div>
+    <div class="widget-body">
+        
+        @if (Model.SiteSettings.Any() && Model.SiteSettings != null)
+        {
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>عکس لوگو</th>
+                    <th>تلفن ثابت</th>
+                    <th>تلفن همراه</th>
+                    <th>ایمیل</th>
+                    
+                    <th>متن کپی رایت</th>
+                </tr>
+                @foreach (var setting in Model.SiteSettings)
+                {
+                    <tr>
+                        <td>
+                            <img style="width: 100px; height: 80px;" src="
+                                 @(PathExtensions.SiteLogoForShow + setting.Logo)
+                                 "/>
+                        </td>
+                        <td>@setting.Phone</td>
+                        <td>@setting.Mobile</td>
+                        <td>@setting.Email</td>
+                        <td>@setting.CopyRight</td>
+                    
+                    </tr>
+                }
+            </table>
+        }
+
+    </div>
+    <hr/>
+    <form id="FormFilterUSer" method="get" asp-area="User" asp-controller="Home" asp-action="SiteSetting">
+        <input name="pageId" type="hidden" value="@ViewBag.pageId"/>
+    </form>
+    <div class="dataTables_paginate paging_bootstrap text-center" id="simpledatatable_paginate">
+        <ul class="pagination">
+
+            @if (Model.PageId > 1)
+            {
+                <li class="prev"><a onclick="SendPage(@(ViewBag.pageId - 1))">قبل</a></li>
+            }
+
+            @for (int spage = Model.StartPage; spage <= Model.EndPage; spage++)
+            {
+                <li class="active"><a href="#">@ViewBag.pageId</a></li>
+            }
+
+            @if (Model.PageId < Model.PageCount)
+            {
+                <li class="next"><a onclick="SendPage(@(ViewBag.pageId + 1))">بعد</a></li>
+            }
+
+
+        </ul>
+    </div>
+</div>
+
+

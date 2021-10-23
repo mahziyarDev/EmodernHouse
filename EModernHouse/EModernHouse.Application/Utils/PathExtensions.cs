@@ -41,6 +41,13 @@ namespace EModernHouse.Application.Utils
 
         #endregion
 
+        #region SiteLogo
+        
+        public static string SiteLogoForShow = "/Content/SiteLogo/";
+        public static string SiteLogoForSave = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/Content/SiteLogo/");
+        
+        #endregion
+
         #region SupportImage
 
         public static string SupportImage = "/images/avatar/call-center-agent.png";

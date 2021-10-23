@@ -139,3 +139,8 @@ $(document).ready(function () {
             $("#EditForm").submit();
         });
 });
+
+function SendPage(pageId) {
+    $("#PageId").val(pageId);
+    $("#FormFilterUSer").submit();
+}

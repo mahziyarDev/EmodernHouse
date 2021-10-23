@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.DataLayer.DTOs.Filter;
 using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Site;
 using EModernHouse.DataLayer.Repository;
@@ -31,6 +32,20 @@ namespace EModernHouse.Application.Services.Implementations
         {
             return await _siteServiceRepository.GetQuery().AsQueryable()
                 .SingleOrDefaultAsync(s => s.IsDefault && !s.IsDelete);
+        }
+
+        public async Task<siteSettingFilterDTO> GetSiteSetting(int pageId, int take)
+        {
+            var siteSettings = _siteServiceRepository.GetQuery().AsQueryable();
+            //for filter
+            var skip = (pageId - 1) * take;
+
+            var model = new siteSettingFilterDTO
+            {
+                SiteSettings = await siteSettings.Skip(skip).Take(take).ToListAsync(),
+            };
+            model.GeneratePaging(siteSettings,pageId,take);
+            return model;
         }
 
         #endregion

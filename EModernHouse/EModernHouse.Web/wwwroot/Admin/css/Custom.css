@@ -44,3 +44,6 @@
 .ck-content {
     height: 300px;
 }
+.widget {
+    margin: 0 !important;
+}
