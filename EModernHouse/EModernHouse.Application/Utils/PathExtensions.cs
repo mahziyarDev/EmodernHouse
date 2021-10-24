@@ -44,7 +44,7 @@ namespace EModernHouse.Application.Utils
         #region SiteLogo
         
         public static string SiteLogoForShow = "/Content/SiteLogo/";
-        public static string SiteLogoForSave = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/Content/SiteLogo/");
+        public static string SiteLogoForSave = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/SiteLogo/");
         
         #endregion
 

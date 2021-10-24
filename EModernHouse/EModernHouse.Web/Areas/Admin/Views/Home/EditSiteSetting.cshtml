@@ -1,44 +1,45 @@
-﻿@model EModernHouse.DataLayer.DTOs.Site.CreateSiteSettingDTO
+﻿@using EModernHouse.Application.Utils
+@model EModernHouse.DataLayer.DTOs.Site.EditSiteSettingDTO
 @{
-    ViewData["Title"] = "تنظیمات جدید";
+    ViewData["Title"] = "ویرایش تنظیمات سایت";
 }
-
 @section script
 {
-    <partial name="_JqueryValidator"/>
     <script src="/js/ChangeImage.js"></script>
 }
 <div class="row">
     <div class="col-md-12 alert alert-warning">
         <p>اگر از قبل تنظیماتی اعمال کردید که وضعیت ان فعال است لطفا ان را غیر فعال نمایید  و سپس تنظیمات جدید اعمال کنید</p>
     </div>
-    <form asp-area="Admin" asp-controller="Home" asp-action="CreateSiteSetting" method="post" enctype="multipart/form-data">
+    <form asp-area="Admin" asp-controller="Home" asp-action="EditSiteSetting" method="post" enctype="multipart/form-data">
         <div class="col-md-9">
             <div class="widget">
                 <div class="widget-header">
                     <span class="widget-caption">@ViewData["Title"]</span>
                 </div>
                 <div class="widget-body">
+                    <input type="hidden" asp-for="SiteSettingId" value="@Model.SiteSettingId" />
+                    <input type="hidden" asp-for="LogoImage" value="@Model.LogoImage" />
                     <div class="form-group">
                         <label>شماره تلفن</label>
-                        <input type="text" asp-for="Phone" class="form-control"/>
+                        <input type="text" asp-for="Phone" class="form-control" />
                         <span class="text-danger" asp-validation-for="Phone"></span>
                     </div>
                     <div class="form-group">
                         <label>شماره همراه</label>
-                        <input type="text" asp-for="Mobile" class="form-control"/>
+                        <input type="text" asp-for="Mobile" class="form-control" />
                         <span class="text-danger" asp-validation-for="Mobile"></span>
                     </div>
 
                     <div class="form-group">
                         <label>ادرس ایمیل</label>
-                        <input type="text" asp-for="Email" class="form-control"/>
+                        <input type="text" asp-for="Email" class="form-control" />
                         <span class="text-danger" asp-validation-for="Email"></span>
                     </div>
 
                     <div class="form-group">
                         <label>متن کپی رایت</label>
-                        <input type="text" asp-for="CopyRight" class="form-control"/>
+                        <input type="text" asp-for="CopyRight" class="form-control" />
                         <span class="text-danger" asp-validation-for="CopyRight"></span>
                     </div>
                     <div class="form-group">
@@ -64,11 +65,11 @@
                             تصویر لوگو
                         </div>
                         <div class="card-body">
-                            <img id="imgPreviewProduct" class="img-thumbnail ImagePreviwe_Editprofile" src=""/>
+                            <img id="imgPreviewProduct" class="img-thumbnail ImagePreviwe_Editprofile" src="@(PathExtensions.SiteLogoForShow+Model.LogoImage)" />
                         </div>
                         <div class="card-footer text-muted">
                             <label for="imageProduct" id="lable-Upload-Avatar" class="btn-upload">انتخاب عکس</label>
-                            <input type="file" name="logoImage" accept=".png,.jpg,.jpeg" id="imageProduct" class="input_Upload_file_Editprofile"/>
+                            <input type="file" name="editLogoImage" accept=".png,.jpg,.jpeg" id="imageProduct" class="input_Upload_file_Editprofile" />
                         </div>
                     </div>
                 </div>

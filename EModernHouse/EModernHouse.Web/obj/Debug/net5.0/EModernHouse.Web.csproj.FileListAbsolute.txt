@@ -213,3 +213,5 @@ C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Views\Home\FollowUp.cshtml.g.cs
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Views\Home\Seller.cshtml.g.cs
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Home\SiteSetting.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Home\CreateSiteSetting.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Home\EditSiteSetting.cshtml.g.cs

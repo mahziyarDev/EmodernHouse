@@ -1,11 +1,13 @@
 ﻿@using EModernHouse.Application.Utils
+@using Microsoft.IdentityModel.Tokens
 @model EModernHouse.DataLayer.DTOs.Filter.siteSettingFilterDTO
 @{
     ViewData["Title"] = "تنظیمات سایت";
 }
 
 <div class="row">
-    <a class="btn btn-success">افزودن</a>
+    <a class="btn btn-success" asp-area="Admin" asp-controller="Home" asp-action="CreateSiteSetting">افزودن</a>
+    <br/>
     <div class="widget widget-header">
         <span class="widget-caption">@ViewData["Title"]</span>
     </div>
@@ -19,8 +21,9 @@
                     <th>تلفن ثابت</th>
                     <th>تلفن همراه</th>
                     <th>ایمیل</th>
-                    
                     <th>متن کپی رایت</th>
+                    <th>وضعیت</th>
+                    <th>دستورات</th>
                 </tr>
                 @foreach (var setting in Model.SiteSettings)
                 {
@@ -34,7 +37,11 @@
                         <td>@setting.Mobile</td>
                         <td>@setting.Email</td>
                         <td>@setting.CopyRight</td>
-                    
+                        <td>@(setting.IsDefault?"فعال":"غیرفعال")</td>
+                        <td>
+                            <a class="btn btn-danger" asp-area="Admin" asp-controller="Home" asp-action="DeleteSiteSetting" asp-route-settingId="@setting.Id">حذف</a>
+                            <a class="btn btn-warning" asp-area="Admin" asp-controller="Home" asp-action="EditSiteSetting" asp-route-settingId="@setting.Id">ویرایش</a>
+                        </td>
                     </tr>
                 }
             </table>

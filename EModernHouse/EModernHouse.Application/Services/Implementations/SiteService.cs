@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Filter;
+using EModernHouse.DataLayer.DTOs.Site;
 using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Site;
 using EModernHouse.DataLayer.Repository;
@@ -48,6 +49,64 @@ namespace EModernHouse.Application.Services.Implementations
             return model;
         }
 
+        public async Task<bool> CreateSetting(CreateSiteSettingDTO create, string logoImage)
+        {
+            
+            var newSiteSetting = new SiteSetting
+            {
+                CopyRight = create.CopyRight,
+                Logo = logoImage,
+                Mobile = create.Mobile,
+                Phone = create.Phone,
+                Email = create.Email,
+                IsDefault = create.IsActive,
+                IsDelete = false
+            };
+
+            await _siteServiceRepository.AddEntity(newSiteSetting);
+            await _siteServiceRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<EditSiteSettingDTO> GetSiteSettingForEdit(long settingId)
+        {
+            var siteSetting = await _siteServiceRepository.GetEntityById(settingId);
+
+            return new EditSiteSettingDTO
+            {
+                SiteSettingId = siteSetting.Id,
+                LogoImage = siteSetting.Logo,
+                Mobile = siteSetting.Mobile,
+                Email = siteSetting.Email,
+                Phone = siteSetting.Phone,
+                IsActive = siteSetting.IsDefault,
+                CopyRight = siteSetting.CopyRight
+            };
+        }
+        
+        public async Task<bool> SetSiteSettingForEdit(EditSiteSettingDTO edit)
+        {
+            var siteSetting = await _siteServiceRepository.GetEntityById(edit.SiteSettingId);
+            if (siteSetting == null) return false;
+            siteSetting.CopyRight = edit.CopyRight;
+            siteSetting.Mobile = edit.Mobile;
+            siteSetting.Email = edit.Email;
+            siteSetting.Phone = edit.Phone;
+            siteSetting.Logo = edit.LogoImage;
+            siteSetting.IsDefault = edit.IsActive;
+            _siteServiceRepository.EditEntity(siteSetting);
+            await _siteServiceRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<bool> DeleteSiteSetting(long settingId)
+        {
+            var setting = await _siteServiceRepository.GetEntityById(settingId);
+            if (setting == null) return false;
+            _siteServiceRepository.Delete(setting);
+            await _siteServiceRepository.SaveChanges();
+            return true;
+        }
         #endregion
 
         #region Slider
