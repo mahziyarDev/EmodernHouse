@@ -1,0 +1,50 @@
+﻿@using EModernHouse.DataLayer.Entities.Site
+@model EModernHouse.DataLayer.DTOs.Site.SiteBannerDTO
+@{
+    ViewData["Title"] = "Test";
+}
+<main class="page-content">
+    <div class="container">
+        <div class="row d-none d-sm-block">
+            <div class="col-12 mb-3">
+                <div class="banner">
+                    <a href="#">
+                        <img src="/images/banner/banner-lg-01.gif" alt="banner">
+                    </a>
+                </div>
+            </div>
+        </div>
+     
+        <div class="row mb-5">
+            <div class="col-12 mb-4">
+                <div class="section-title">
+                    <i class="fad fa-sort-size-up-alt"></i>
+                    پرفروش ترین ها
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>آدرس اینترنتی</label>
+                    <input type="url" asp-for="Url"/>
+                </div>
+
+                <div class="form-group">
+                    <label>کلاس بوت استرپ</label>
+                    <input type="text" asp-for="ColSize"/>
+                </div>
+
+                <div class="form-group">
+                    <label>ویژگی Alt</label>
+                    <input type="text" asp-for="Alt"/>
+                </div>
+
+                <div class="form-group">
+                    <label>کدام بخش سایت</label>
+                    <select class="form-control" asp-for="BannerPlacement" asp-items="@(Html.GetEnumSelectList<BannerPlacement>())"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

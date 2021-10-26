@@ -37,7 +37,9 @@ namespace EModernHouse.Application.Utils
 
         #region Banner
 
-        public static string BannerOrigin = "/images/banner/";
+        public static string BannerOrigin = "/Content/SiteBannerImage/";
+
+        public static string BannerOriginServer = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Content/SiteBannerImage/");
 
         #endregion
 

@@ -1,0 +1,111 @@
+﻿@using EModernHouse.Application.EntitiesExtensions
+@using EModernHouse.DataLayer.Entities.Site
+@model EModernHouse.DataLayer.DTOs.Site.SiteBannerDTO
+@{
+    ViewData["Title"] = "افزودن بنر جدید";
+}
+@section script
+{
+    <script src="/js/ChangeImage.js"></script>
+}
+<div class="row">
+    <div class="alert alert-warning">
+        <h3>توجه داشته باشید :</h3>
+        <p>قبل از ثبت بنر به نکات زیر توجه کنید</p>
+        <ul>
+            <li>منظور از  کلاس های بوت استرپ سایز و اندازه ای است که قرار است به هر بنر داده شود </li>
+            <li>منظور از کدام بخش سایت بدین معناست که بنر های سایت ما در 5 قسمت سایت جا گرفته است و ما فقط برای جا گذار در ادن بخش این گزینه را قرار داده ایم</li>
+            
+        </ul>
+        <p>
+            اگر نمی دانید به هر بخش از سایت چه کلاس هایی بدهید می توانید از راهنمای زیر استفاده کنید
+        </p>
+        <ol>
+            <li>
+                برای بخش اول یا HOME_1
+                :
+                col-lg-12 col-sm-6 col-12
+            </li>
+            <li>
+                برای بخش بخش دوم یا HOME_2
+                :
+                col-lg-12 col-sm-6 col-12
+            </li>
+            <li>
+                برای بخش بخش سوم یا HOME_3
+                :
+                col-md-3 col-6 mb-lg-0 mb-3
+            </li>
+            <li>
+                برای بخش بخش چهارم یا HOME_4
+                :
+                col-md-6 mb-lg-0 mb-3
+            </li>
+            <li>
+                اولین بنر سایت بخش بالایی یا  HOME_5 :
+                :
+                col-12
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <form method="post" asp-area="Admin" asp-controller="SiteBanner" asp-action="CreateBanner" enctype="multipart/form-data">
+        <div class="col-md-9">
+            <div class="widget">
+                <div class="widget-header">
+                    <span class="widget-caption">افزودن بنر</span>
+                </div>
+                <div class="widget-body">
+                    <div class="form-group">
+                        <label>آدرس اینترنتی</label>
+                        <input type="url" asp-for="Url" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>کلاس بوت استرپ</label>
+                        <input type="text" asp-for="ColSize" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ویژگی Alt</label>
+                        <input type="text" asp-for="Alt" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>کدام بخش سایت</label>
+                        <select class="form-control" id="e1" style="width:100%;" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true" asp-for="BannerPlacement" asp-items="@(Html.GetEnumSelectList<BannerPlacement>())"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            
+            
+            <div class="card text-center">
+                <div class="card-header">
+                    عکس بنر
+                </div>
+                <div class="card-body">
+                    <img id="imgPreviewProduct" class="img-thumbnail ImagePreviwe_Editprofile" />
+                </div>
+                <div class="card-footer text-muted">
+                    <label for="imageProduct" id="lable-Upload-Avatar" class="btn-upload">انتخاب عکس</label>
+                    <input type="file" name="bannerImage" id="imageProduct" class="input_Upload_file_Editprofile" />
+                </div>
+            </div>
+            
+        </div>
+        <div class="clearfix"></div>
+        <br/>
+        <hr class="wide"/>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-success">ثبت اطلاعات</button>
+            <a class="btn btn-warning" asp-area="Admin" asp-controller="SiteBanner" asp-action="Index">بازگشت به لیست بنر ها</a>
+        </div>
+        
+    </form>
+    
+</div>
+
+

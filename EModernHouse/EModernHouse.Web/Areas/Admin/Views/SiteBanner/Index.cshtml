@@ -1,0 +1,82 @@
+﻿@using EModernHouse.DataLayer.Entities.Site
+@using EModernHouse.Application.Utils
+@using EModernHouse.Application.EntitiesExtensions
+@model List<EModernHouse.DataLayer.Entities.Site.SiteBanner>
+
+@{
+    ViewData["Title"] = "تنظیمات بنر سایت";
+}
+
+<div class="row">
+    <a class="btn btn-success" asp-area="Admin" asp-controller="SiteBanner" asp-action="CreateBanner">افزودن بنر جدید</a>
+    <hr class="wide"/>
+    <div class="col-md-12">
+        <div class="widget">
+            <div class="widget-header">
+                <span class="widget-caption">
+                    لیست بنر ها
+                </span>
+            </div>
+            <div class="widget-body">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>
+                            تصویر محصول
+                        </th>
+                        <th>
+                            بخش سایت
+                        </th>
+                        <th>
+                            مقدار alt
+                        </th>
+                        <th>
+                            سایز بوت استرپ
+                        </th>
+                        <th>
+                            لینک بنر
+                        </th>
+                        <th>دستورات</th>
+                    </tr>
+                    @foreach (var banners in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img style="width: 100px; height: 80px" src="@banners.GetBannerMainImageAddress()"/>
+                            </td>
+                            <td>
+                                @switch (banners.BannerPlacement)
+                                {
+                                    case BannerPlacement.Home_1:
+                                        <span>بنر قسمت اول</span>
+                                        break;
+                                    case BannerPlacement.Home_2:
+                                        <span>بنر قسمت دوم</span>
+                                        break;
+                                    case BannerPlacement.Home_3:
+                                        <span>بنر قسمت سوم</span>
+                                        break;
+                                    case BannerPlacement.Home_4:
+                                        <span>بنر قسمت چهارم</span>
+                                        break;
+                                    case BannerPlacement.Home_5:
+                                        <span>بنر قسمت بالایی سایت</span>
+                                        break;
+                                }
+                            </td>
+                            <td>@banners.Alt</td>
+                            <td>@banners.ColSize</td>
+                            <td>@banners.Url</td>
+                            <td>
+                                <a class="btn btn-danger" asp-area="Admin" asp-controller="SiteBanner" asp-action="DeleteBanner" asp-route-bannerId="@banners.Id">حذف</a>
+                                <a class="btn btn-warning" asp-area="Admin" asp-controller="SiteBanner" asp-action="EDitBanner" asp-route-bannerId="@banners.Id">
+                                    ویرایش
+                                </a>
+                                   
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

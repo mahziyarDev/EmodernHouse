@@ -34,6 +34,7 @@
     <Folder Include="wwwroot\Content\Images\SiteBanner\Thumb\" />
     <Folder Include="wwwroot\Content\Images\SiteBanner\Origin\" />
     <Folder Include="wwwroot\Content\Images\UserAvatar\" />
+    <Folder Include="wwwroot\Content\SiteBannerImage\" />
     <Folder Include="wwwroot\images\main-slider\SliderThumb\" />
     <Folder Include="wwwroot\images\main-slider\SliderOrigin\" />
   </ItemGroup>

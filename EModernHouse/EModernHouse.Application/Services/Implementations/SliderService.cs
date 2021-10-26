@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.Application.Utils;
 using EModernHouse.DataLayer.DTOs.Site;
 using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Repository;
@@ -77,6 +79,11 @@ namespace EModernHouse.Application.Services.Implementations
         {
             var slider = await _sliderRepository.GetEntityById(sliderId);
             if (slider == null) return false;
+            if (File.Exists(PathExtensions.SliderOriginServer + slider.ImageName) && File.Exists(PathExtensions.SliderThumbServer + slider.ImageName))
+            {
+                File.Delete(PathExtensions.SliderOriginServer + slider.ImageName);
+                File.Delete(PathExtensions.SliderThumbServer + slider.ImageName);
+            }
             _sliderRepository.Delete(slider);
             await _sliderRepository.SaveChanges();
             return true;

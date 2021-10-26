@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EModernHouse.DataLayer.DTOs.Account;
 using EModernHouse.DataLayer.DTOs.Filter;
 using EModernHouse.DataLayer.DTOs.Site;
 using EModernHouse.DataLayer.Entites.Contacts;
@@ -28,7 +29,12 @@ namespace EModernHouse.Application.Services.Interfaces
 
         #region SiteBanners
 
-        Task<List<SiteBanner>> GetSiteBannersByPlacement(List<BannerPlacement> placements);
+        Task<List<DataLayer.Entities.Site.SiteBanner>> GetSiteBannersByPlacement(List<BannerPlacement> placements);
+        Task<List<SiteBanner>> GetSiteBanner();
+        Task<bool> CreateSiteBanner(SiteBannerDTO banner);
+        Task<bool> DeleteSiteBanner(long bannerId);
+        Task<EditSiteBannerDTO> EditBanner(long bannerId);
+        Task<bool> EditBannerSet(EditSiteBannerDTO edit);
 
         #endregion
     }

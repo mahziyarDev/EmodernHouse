@@ -36,10 +36,16 @@ namespace EModernHouse.Web.Controllers
                 BannerPlacement.Home_2,
                 BannerPlacement.Home_3, 
                 BannerPlacement.Home_4,
+                BannerPlacement.Home_5
             });
             return View();
         }
-
+        [HttpGet("banner-test")]
+        public async Task<IActionResult> Test()
+        {
+           
+            return View();
+        }
         #endregion
 
         #region ContactUS

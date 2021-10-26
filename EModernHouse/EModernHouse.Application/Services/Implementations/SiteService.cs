@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.Application.Utils;
 using EModernHouse.DataLayer.DTOs.Filter;
 using EModernHouse.DataLayer.DTOs.Site;
 using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Site;
 using EModernHouse.DataLayer.Repository;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 
 namespace EModernHouse.Application.Services.Implementations
 {
@@ -17,9 +20,9 @@ namespace EModernHouse.Application.Services.Implementations
 
         private readonly IGenericRepository<SiteSetting> _siteServiceRepository;
         private readonly IGenericRepository<Slider> _slideRepository;
-        private readonly IGenericRepository<SiteBanner> _siteBanneRepository;
+        private readonly IGenericRepository<DataLayer.Entities.Site.SiteBanner> _siteBanneRepository;
 
-        public SiteService(IGenericRepository<SiteSetting> siteServiceRepository, IGenericRepository<Slider> slideRepository, IGenericRepository<SiteBanner> siteBanneRepository)
+        public SiteService(IGenericRepository<SiteSetting> siteServiceRepository, IGenericRepository<Slider> slideRepository, IGenericRepository<DataLayer.Entities.Site.SiteBanner> siteBanneRepository)
         {
             _siteServiceRepository = siteServiceRepository;
             _slideRepository = slideRepository;
@@ -121,10 +124,74 @@ namespace EModernHouse.Application.Services.Implementations
 
         #region SiteBanners
 
-        public async Task<List<SiteBanner>> GetSiteBannersByPlacement(List<BannerPlacement> placements)
+        public async Task<List<DataLayer.Entities.Site.SiteBanner>> GetSiteBannersByPlacement(List<BannerPlacement> placements)
         {
             return await _siteBanneRepository.GetQuery().AsQueryable()
                 .Where(s => placements.Contains(s.BannerPlacement)).ToListAsync();
+        }
+
+        public async Task<List<SiteBanner>> GetSiteBanner()
+        {
+            var siteBanners = await _siteBanneRepository.GetQuery().AsQueryable().ToListAsync();
+            return siteBanners;
+        }
+
+        public async Task<bool> CreateSiteBanner(SiteBannerDTO banner)
+        {
+            var siteBanners = new SiteBanner
+            {
+                 Url = banner.Url,
+                 Alt = banner.Alt,
+                 ColSize = banner.ColSize,
+                 BannerPlacement = banner.BannerPlacement,
+                 ImageName = banner.ImageName
+            };
+            await _siteBanneRepository.AddEntity(siteBanners);
+            await _siteBanneRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<bool> DeleteSiteBanner(long bannerId)
+        {
+            var banner = await _siteBanneRepository.GetEntityById(bannerId);
+            if (banner == null) return false;
+            if (File.Exists(PathExtensions.BannerOriginServer + banner.ImageName))
+            {
+                File.Delete(PathExtensions.BannerOriginServer + banner.ImageName);
+                
+            }
+            _siteBanneRepository.Delete(banner);
+            await _siteBanneRepository.SaveChanges();
+
+            return true;
+        }
+
+        public async Task<EditSiteBannerDTO> EditBanner(long bannerId)
+        {
+            var banner = await _siteBanneRepository.GetEntityById(bannerId);
+            return new EditSiteBannerDTO
+            {
+                ImageName = banner.ImageName,
+                BannerPlacement = banner.BannerPlacement,
+                ColSize = banner.ColSize,
+                Url = banner.Url,
+                Alt = banner.Alt,
+                bannerId = bannerId
+            };
+        }
+
+        public async Task<bool> EditBannerSet(EditSiteBannerDTO edit)
+        {
+            var banner = await _siteBanneRepository.GetEntityById(edit.bannerId);
+
+            banner.Url = edit.Url;
+            banner.Alt = edit.Alt;
+            banner.BannerPlacement = edit.BannerPlacement;
+            banner.ColSize = edit.ColSize;
+            banner.ImageName = edit.ImageName;
+            _siteBanneRepository.EditEntity(banner);
+            await _siteBanneRepository.SaveChanges();
+            return true;
         }
         #endregion
 
