@@ -91,14 +91,14 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
         }
 
         [HttpPost("edit-main-category/{categoryId}")]
-        public async Task<IActionResult> EditMainCategory(long categoryId,EditProductCategoryDTO edit,IFormFile EditImageCategory)
+        public async Task<IActionResult> EditMainCategory(long categoryId,EditProductCategoryDTO edit,IFormFile imageCategory)
         {
             if (ModelState.IsValid)
             {
-                if (EditImageCategory != null)
+                if (imageCategory != null)
                 {
-                    var ImageCategory = Guid.NewGuid().ToString("N") + Path.GetExtension(EditImageCategory.FileName);
-                    EditImageCategory.AddImageToServer(ImageCategory,PathExtensions.CategoryImageImageOriginServer,150,150,PathExtensions.CategoryImageImageThumbServer,edit.CategoryImage);
+                    var ImageCategory = Guid.NewGuid().ToString("N") + Path.GetExtension(imageCategory.FileName);
+                    imageCategory.AddImageToServer(ImageCategory,PathExtensions.CategoryImageImageOriginServer,150,150,PathExtensions.CategoryImageImageThumbServer,edit.CategoryImage);
                     edit.CategoryImage = ImageCategory;
                 }
 

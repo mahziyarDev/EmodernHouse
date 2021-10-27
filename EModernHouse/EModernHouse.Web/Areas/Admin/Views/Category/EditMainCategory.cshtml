@@ -12,8 +12,8 @@
         </div>
         <div class="widget-body">
             <form asp-area="Admin" asp-controller="Category" asp-action="EditMainCategory" asp-route-categoryId="@Model.CategoryId" method="post" enctype="multipart/form-data">
-               <input type="hidden" asp-for="CategoryId"/>
-                <input type="hidden" asp-for="CategoryImage"/>
+               <input type="hidden" asp-for="CategoryId" value="@Model.CategoryId"/>
+                <input type="hidden" asp-for="CategoryImage" value="@Model.CategoryImage"/>
 
                 <div class="form-group">
                     <label>نام سردسته</label>

@@ -392,7 +392,9 @@ namespace EModernHouse.Application.Services.Implementations
                 UrlName = null,
                 Title = groupName,
                 ParentId = groupId,
-                CategoryImage = null
+                CategoryImage = null,
+                IsActive = true,
+                
             };
             await _productCategoryRepository.AddEntity(subCategory);
             await _productCategoryRepository.SaveChanges();
@@ -540,6 +542,27 @@ namespace EModernHouse.Application.Services.Implementations
             return true;
 
         }
+        #endregion
+
+        #region productMainPage
+
+       
+        public async Task<Tuple<List<Product>, List<Product>, List<Product>>> GetProductForIndex(int take)
+        {
+            var productOrderBy = _productRepository.GetQuery().AsQueryable()
+                .OrderBy(s => s.LastUpdateDate).Take(take);
+
+            var maxPrice =await _productRepository.GetQuery().AsQueryable().MaxAsync(s=>s.Price);
+            var productMaxPrice = _productRepository.GetQuery().AsQueryable()
+                .Where(s => s.Price <= maxPrice).Take(take);
+
+            var minPrice = await _productRepository.GetQuery().AsQueryable().MinAsync(s => s.Price);
+            var productMinPrice = _productRepository.GetQuery().AsQueryable()
+                .Where(s => s.Price >= minPrice);
+            return Tuple.Create(await productOrderBy.ToListAsync(),await productMinPrice.ToListAsync()
+                ,await productMaxPrice.ToListAsync());
+        }
+
         #endregion
 
         #region Disposiable

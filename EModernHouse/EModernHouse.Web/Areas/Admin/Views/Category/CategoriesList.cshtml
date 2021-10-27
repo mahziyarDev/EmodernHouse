@@ -41,13 +41,13 @@
                         <h4 class="modal-title" id="mySmallModalLabel">افزودن زیر گروه برای  @mainCategory.Title</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="MainCategoryForm" asp-area="Admin" asp-controller="Category" asp-action="CreateSubGroups">
+                        <form id="MainCategoryForm" asp-area="Admin" asp-controller="Category" asp-action="CreateSubGroups" method="get">
                             <input type="hidden" readonly="readonly" name="groupId" value="@mainCategory.Id"/>
                             <label>
                                 نام گروه رو انتخاب کنید
                                 <input type="text" name="groupName" class="form-control"/>
                             </label>
-                            <button onclick="sendMainCategory" class="btn btn-success">ارسال اطلاعات</button>
+                            <button type="submit" onclick="sendMainCategory" class="btn btn-success">ارسال اطلاعات</button>
                         </form>
                     </div>
                 </div><!-- /.modal-content -->
@@ -68,13 +68,13 @@
                                 <h4 class="modal-title" id="mySmallModalLabel">افزودن زیر گروه برای  @firstCategory.Title</h4>
                             </div>
                             <div class="modal-body">
-                                <form id="FormFirstCategory" asp-area="Admin" asp-controller="Category" asp-action="CreateSubGroups">
+                                <form id="FormFirstCategory" asp-area="Admin" asp-controller="Category" asp-action="CreateSubGroups" method="get">
                                     <input type="hidden" readonly="readonly" name="groupId" value="@firstCategory.Id"/>
                                     <label>
                                         نام گروه رو انتخاب کنید
                                         <input type="text" name="groupName" class="form-control"/>
                                     </label>
-                                    <button onclick="sendFirstCategory" class="btn btn-success">ارسال اطلاعات</button>
+                                    <button type="submit"  class="btn btn-success">ارسال اطلاعات</button>
                                 </form>
                             </div>
                         </div><!-- /.modal-content -->
@@ -198,18 +198,18 @@
 
             });
 
-        function SendForeCreate() {
-            $("#FormCreateCategory").attr("method", "post");
-            $("#FormCreateCategory").submit();
-        }
+        //function SendForeCreate() {
+        //    $("#FormCreateCategory").attr("method", "post");
+        //    $("#FormCreateCategory").submit();
+        //}
 
-        function sendMainCategory() {
-            $("#MainCategoryForm").attr("method", "get");
-            $("#MainCategoryForm").submit();
-        }
-        function sendFirstCategory() {
-            $("#FormFirstCategory").attr("method", "get");
-            $("#FormFirstCategory").submit();
-        }
+        //function sendMainCategory() {
+        //    $("#MainCategoryForm").attr("method", "get");
+        //    $("#MainCategoryForm").submit();
+        //}
+        //function sendFirstCategory() {
+        //    $("#FormFirstCategory").attr("method", "get");
+        //    $("#FormFirstCategory").submit();
+        //}
     </script>
 }

@@ -80,5 +80,11 @@ namespace EModernHouse.Application.Services.Interfaces
         Task<bool> RemoveProductInterest(long productId,long userId);
 
         #endregion
+
+        #region productMainPage
+
+        Task<Tuple<List<Product>, List<Product>, List<Product>>> GetProductForIndex(int take);
+
+        #endregion
     }
 }

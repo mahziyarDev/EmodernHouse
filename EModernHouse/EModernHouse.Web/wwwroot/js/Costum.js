@@ -143,7 +143,7 @@ $('[Addinterest]').on('click',function(e) {
     var url = $(this).attr("href");
     var id = $(this).attr('Addinterest');
 
-    var address = `${"add-to-product-Interest/" + id}`;
+    var address = `${"/add-to-product-Interest/" + id}`;
     $.get(address).then(res => {
         if (res.status === 'Success') {
             ShowMessage("علاقه مندی", res.message, 'success');

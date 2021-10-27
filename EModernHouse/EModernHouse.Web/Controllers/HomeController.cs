@@ -17,12 +17,14 @@ namespace EModernHouse.Web.Controllers
         private readonly IContactService _contactService;
         private readonly ICaptchaValidator _captchaValidator;
         private readonly ISiteService _siteService;
+        private readonly IProductService _productService;
 
-        public HomeController(IContactService contactService, ICaptchaValidator captchaValidator, ISiteService siteService)
+        public HomeController(IContactService contactService, ICaptchaValidator captchaValidator, ISiteService siteService, IProductService productService)
         {
             _contactService = contactService;
             _captchaValidator = captchaValidator;
             _siteService = siteService;
+            _productService = productService;
         }
         #endregion
 
@@ -38,7 +40,8 @@ namespace EModernHouse.Web.Controllers
                 BannerPlacement.Home_4,
                 BannerPlacement.Home_5
             });
-            return View();
+            
+            return View(await _productService.GetProductForIndex(20));
         }
         [HttpGet("banner-test")]
         public async Task<IActionResult> Test()

@@ -42,12 +42,17 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
         [HttpPost("create-banner")]
         public async Task<IActionResult> CreateBanner(SiteBannerDTO banner,IFormFile bannerImage)
         {
-            if (bannerImage != null && bannerImage.IsImage())
+            if (bannerImage != null )
             {
                 if (ModelState.IsValid)
                 {
                     var newImage = Guid.NewGuid().ToString("N") + Path.GetExtension(bannerImage.FileName);
-                    bannerImage.AddImageToServer(newImage, PathExtensions.BannerOriginServer, null, null, null);
+                    var imagePath = PathExtensions.BannerOriginServer + newImage;
+
+                    await using (var stream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        await bannerImage.CopyToAsync(stream);
+                    }
                     banner.ImageName = newImage;
                     var res = await _siteService.CreateSiteBanner(banner);
                     if (res)
@@ -101,8 +106,7 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
                     {
                         await bannerImage.CopyToAsync(stream);
                     }
-                    //bannerImage.AddImageToServer(newImage,PathExtensions.BannerOriginServer,null,null
-                    //,null,edit.ImageName);
+                    
                     edit.ImageName = newImage;
                 }
 

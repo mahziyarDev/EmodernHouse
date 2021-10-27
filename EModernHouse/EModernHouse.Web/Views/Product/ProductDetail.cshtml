@@ -32,13 +32,14 @@
                 <!-- breadcrumb -->
                 <div class="breadcrumb mb-1">
                     <nav>
-                        <a asp-area="" asp-controller="Product" asp-action="ProductList">فروشگاه</a>
+                        <a href="/product-archive">فروشگاه</a>
                         @foreach (var category in Model.ProductCategories)
                         {
                             <a>@category.Title</a>
                         }
 
-                        <a href="#">@Model.Title</a>
+                        <a href="/product-Detail/@Model.ProductId">@Model.Title</a>
+                        @Model.Price.ToString("##,##")
                     </nav>
                 </div>
                 <!-- end breadcrumb -->
@@ -86,16 +87,7 @@
                             <div class="swiper-button-prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
                             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
                         </div>
-                        <ul class="product--actions">
-                            <li>
-                                <!-- در صورت نیاز به استفاده از فرم از کد زیر استفاده کنید -->
-                                <!-- <form action="">
-                                    <button class="add-to-favorite"><i class="fas fa-heart"></i></button>
-                                </form> -->
-                                <a href="#" class="is-action add-to-favorite"><i class="fas fa-heart"></i></a>
-                                <span class="tooltip--action">افزودن به علاقمندی</span>
-                            </li>
-                        </ul>
+                       
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-4 col-md-6">
@@ -190,13 +182,13 @@
                                         @if (Model.ProductColors.Any() && Model.ProductColors != null)
                                         {
                                             var firstColor = Model.ProductColors.FirstOrDefault();
-                                            <span>@((Model.Price + firstColor.Price).ToString("#,0 تومان"))</span>;
+                                        <span>@((Model.Price + firstColor.Price).ToString("##,###")) تومان</span>;
                                             <span>(@firstColor.ColorName)</span>
 
                                         }
                                         else
                                         {
-                                            @Model.Price.ToString("#,0")
+                                            @Model.Price.ToString("##,##")
                                             <span id="clearToman"> تومان</span>
                                         }
                                     </div>
@@ -224,7 +216,7 @@
                     <div class="service-item">
                         <img src="/images/services/delivery-person.png" alt="">
                         <div class="service-item-body">
-                            <h6>تحویل سریع و رایگان</h6>
+                            <h6>تحویل سریع و رایگان </h6>
                             <p>تحویل رایگان کالا برای کلیه سفارشات بیش از یک میلیون تومان</p>
                         </div>
                     </div>
@@ -802,7 +794,39 @@
                         @foreach (var likeProduct in Model.RelatedProducts)
                         {
                             <div class="swiper-slide swiper-slide-active" style="width: 214.333px; margin-left: 10px;">
-                                <partial name="_ProductSmal" model="@likeProduct" />
+                                <div class="product-card">
+                                    <div class="product-card-top">
+                                        <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@likeProduct.Id" asp-route-title="@likeProduct.Title.FixTextForUrl()" class="product-image">
+                                            <img src="@(PathExtensions.ProductImageThumb+likeProduct.ImageName)" alt="@likeProduct.Title">
+                                        </a>
+                                        <div class="product-card-actions">
+                                           
+
+                                        </div>
+                                    </div>
+                                    <div class="product-card-middle">
+                                        <div class="ratings-container">
+                                            <div class="ratings">
+                
+                                            </div>
+                                        </div>
+                                        <h6 class="product-name"> 
+                                            <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@likeProduct.Id" asp-route-title="@likeProduct.Title.FixTextForUrl()" class="product-image">
+                                                @Model.Title
+                                            </a>
+                                        </h6>
+                                        <div class="product-price product-price-clone">@Model.Price.ToString("#,0 تومان")</div>
+                                    </div>
+                                    <div class="product-card-bottom">
+                                        <div class="product-price">
+                                            @Model.Price.ToString("#,0 تومان")
+                                        </div>
+                                        <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@likeProduct.Id" asp-route-title="@likeProduct.Title.FixTextForUrl()" class="btn-add-to-cart">
+                                            <i class="fad fa-cart-plus"></i>
+                                            نمایش جزییات محصول
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         }
 

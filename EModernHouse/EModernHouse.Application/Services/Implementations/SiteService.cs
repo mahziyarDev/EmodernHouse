@@ -155,11 +155,6 @@ namespace EModernHouse.Application.Services.Implementations
         {
             var banner = await _siteBanneRepository.GetEntityById(bannerId);
             if (banner == null) return false;
-            if (File.Exists(PathExtensions.BannerOriginServer + banner.ImageName))
-            {
-                File.Delete(PathExtensions.BannerOriginServer + banner.ImageName);
-                
-            }
             _siteBanneRepository.Delete(banner);
             await _siteBanneRepository.SaveChanges();
 
