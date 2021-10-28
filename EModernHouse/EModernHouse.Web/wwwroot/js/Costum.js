@@ -85,7 +85,7 @@ $(document).ready(function () {
 function changeProductBaseColor(colorId,colorPrice, colorName) {
         $("#clearToman").hide();
         var basePrice = parseInt($("#productBasePrice").val(), 0);
-        $(".product-price-raw").html((basePrice + colorPrice) + "تومان" + '(' + colorName + ')');
+    $("#show-price").html((basePrice + colorPrice) + "تومان" + '(' + colorName + ')');
         $("#Add-Product_to_Order_ProductColorId").val(colorId);
 }
 

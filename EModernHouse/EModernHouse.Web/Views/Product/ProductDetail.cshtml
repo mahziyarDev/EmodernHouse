@@ -39,7 +39,7 @@
                         }
 
                         <a href="/product-Detail/@Model.ProductId">@Model.Title</a>
-                        @Model.Price.ToString("##,##")
+                        
                     </nav>
                 </div>
                 <!-- end breadcrumb -->
@@ -167,7 +167,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex align-items-center justify-content-end mt-3">
+                        <div class="d-flex align-items-center justify-content-center mt-3">
                             <div class="product-price">
                                 @*<div class="product-price-info">
                                         <div class="product-price-off">
@@ -177,8 +177,8 @@
                                             3,216,000
                                         </div>
                                     </div>*@
-                                <div class="product-price-real">
-                                    <div class="product-price-raw">
+                                <div class=" text-center">
+                                    <div id="show-price" class="text-center font-10">
                                         @if (Model.ProductColors.Any() && Model.ProductColors != null)
                                         {
                                             var firstColor = Model.ProductColors.FirstOrDefault();
@@ -188,7 +188,7 @@
                                         }
                                         else
                                         {
-                                            @Model.Price.ToString("##,##")
+                                            @Model.Price.ToString("#,0")
                                             <span id="clearToman"> تومان</span>
                                         }
                                     </div>
@@ -196,7 +196,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center justify-content-center">
                             <a class="add-to-cart pointer" id="AddProductToCardSubmit">
                                 افزودن به سبد خرید
                             </a>

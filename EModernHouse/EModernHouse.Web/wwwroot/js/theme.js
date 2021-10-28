@@ -117,7 +117,7 @@
     HAMTA.SweetAlert = function () {
         $('.user-item.cart-list > ul li.cart-items ul .cart-item .remove-item').on('click', function () {
             Swal.fire({
-                text: "از سبد خریدتان حذف شود؟",
+                text: "دیگه با این قیمت گیر میاری؟",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
