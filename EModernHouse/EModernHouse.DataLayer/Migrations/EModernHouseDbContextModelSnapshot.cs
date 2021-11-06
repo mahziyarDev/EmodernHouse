@@ -16,7 +16,7 @@ namespace EModernHouse.DataLayer.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.8")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("EModernHouse.DataLayer.Entites.Contacts.ContactUs", b =>
@@ -299,6 +299,69 @@ namespace EModernHouse.DataLayer.Migrations
                     b.ToTable("TicketMessages");
                 });
 
+            modelBuilder.Entity("EModernHouse.DataLayer.Entities.Discount.ProductDisCount", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Percentage")
+                        .HasColumnType("int");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductDisCount");
+                });
+
+            modelBuilder.Entity("EModernHouse.DataLayer.Entities.Discount.ProductDiscountUse", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("ProductDisCountId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductDisCountId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProductDiscountUse");
+                });
+
             modelBuilder.Entity("EModernHouse.DataLayer.Entities.Interest.ProductInterest", b =>
                 {
                     b.Property<long>("Id")
@@ -428,12 +491,16 @@ namespace EModernHouse.DataLayer.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ColorCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ColorName")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -817,6 +884,36 @@ namespace EModernHouse.DataLayer.Migrations
                     b.Navigation("Ticket");
                 });
 
+            modelBuilder.Entity("EModernHouse.DataLayer.Entities.Discount.ProductDisCount", b =>
+                {
+                    b.HasOne("EModernHouse.DataLayer.Entities.Product.Product", "Product")
+                        .WithMany("ProductDisCounts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("EModernHouse.DataLayer.Entities.Discount.ProductDiscountUse", b =>
+                {
+                    b.HasOne("EModernHouse.DataLayer.Entities.Discount.ProductDisCount", "ProductDisCount")
+                        .WithMany("ProductDiscountUses")
+                        .HasForeignKey("ProductDisCountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EModernHouse.DataLayer.Entities.Account.User", "User")
+                        .WithMany("ProductDiscountUses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ProductDisCount");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EModernHouse.DataLayer.Entities.Interest.ProductInterest", b =>
                 {
                     b.HasOne("EModernHouse.DataLayer.Entities.Product.Product", "Product")
@@ -941,6 +1038,8 @@ namespace EModernHouse.DataLayer.Migrations
 
                     b.Navigation("Orders");
 
+                    b.Navigation("ProductDiscountUses");
+
                     b.Navigation("ProductInterests");
 
                     b.Navigation("TicketMessages");
@@ -955,11 +1054,18 @@ namespace EModernHouse.DataLayer.Migrations
                     b.Navigation("TicketMessages");
                 });
 
+            modelBuilder.Entity("EModernHouse.DataLayer.Entities.Discount.ProductDisCount", b =>
+                {
+                    b.Navigation("ProductDiscountUses");
+                });
+
             modelBuilder.Entity("EModernHouse.DataLayer.Entities.Product.Product", b =>
                 {
                     b.Navigation("OrderDetails");
 
                     b.Navigation("ProductColors");
+
+                    b.Navigation("ProductDisCounts");
 
                     b.Navigation("ProductFeatures");
 

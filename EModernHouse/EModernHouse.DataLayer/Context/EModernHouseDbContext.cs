@@ -2,6 +2,7 @@
 using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Account;
 using EModernHouse.DataLayer.Entities.Contacts;
+using EModernHouse.DataLayer.Entities.Discount;
 using EModernHouse.DataLayer.Entities.Interest;
 using EModernHouse.DataLayer.Entities.Product;
 using EModernHouse.DataLayer.Entities.ProductOrder;
@@ -44,6 +45,8 @@ namespace EModernHouse.DataLayer.Context
         public DbSet<ProductInterest> ProductInterests { get; set; }
         public DbSet<SellerWallet> SellerWallets { get; set; }
         public DbSet<UserAddress> UserAddresses { get; set; }
+        public ProductDisCount ProductDisCount { get; set; }
+        public ProductDiscountUse ProductDiscountUse { get; set; }
         #endregion
 
         #region on model Creating

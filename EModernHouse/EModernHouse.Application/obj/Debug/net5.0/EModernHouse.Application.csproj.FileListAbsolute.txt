@@ -38,3 +38,4 @@ C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Applicat
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\bin\Debug\net5.0\Microsoft.AspNetCore.Authorization.Policy.xml
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\bin\Debug\net5.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.xml
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\bin\Debug\net5.0\Microsoft.Extensions.Hosting.Abstractions.xml
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Application\obj\Debug\net5.0\EModernHouse.Application.csproj.CopyComplete

@@ -22,13 +22,14 @@ namespace EModernHouse.Web.Controllers
         #region ProductList
         [HttpGet("product-archive")]
         [HttpGet("product-archive/{category}")]
-        public async Task<IActionResult> Products(int pageId=1,int take=20,int startPrice=0,int endPrice=0,long? category=null)
+        public async Task<IActionResult> Products(int pageId=1,int take=20,int startPrice=0,int endPrice=0,long? category=null,string categoryName = "همه دسته بندی ها")
         {
             var model = await _productService.GetProductsForUsers(pageId, take, startPrice, endPrice,category);
             ViewBag.category = await _productService.GetAllActiveProductCategories();
             ViewBag.startPrice = startPrice;
             ViewBag.endPrice = endPrice;
             ViewBag.pageId = pageId;
+            ViewBag.categoryName = categoryName;
             return View(model);
         }
 

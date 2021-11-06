@@ -25,9 +25,9 @@
                         <!-- breadcrumb -->
                         <div class="breadcrumb mb-2 pt-2">
                             <nav>
-                                <a href="#">فروشگاه اینترنتی</a>
-                                <a href="#">کتاب، لوازم تحریر و هنر</a>
-                                <a href="#">لوازم تحریر</a>
+                                <a href="#">فروشگاه</a>
+                                <a href="#">@ViewBag.categoryName</a>
+                                
                             </nav>
                         </div>
                         <!-- end breadcrumb -->
@@ -136,7 +136,7 @@
                                             @foreach (var twoCategory in category.Where(s => s.ParentId == firstCategory.Id))
                                             {
                                                 <label class="container-checkbox">
-                                                    <a asp-area="" asp-controller="Product" asp-action="Products" asp-route-category="@twoCategory.Id">@twoCategory.Title</a>
+                                                    <a asp-area="" asp-controller="Product" asp-action="Products" asp-route-category="@twoCategory.Id" asp-route-categoryName="@twoCategory.Title">@twoCategory.Title</a>
                                                 </label>
                                             }
                                         }

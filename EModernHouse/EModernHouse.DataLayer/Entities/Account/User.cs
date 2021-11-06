@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Common;
 using EModernHouse.DataLayer.Entities.Contacts;
+using EModernHouse.DataLayer.Entities.Discount;
 using EModernHouse.DataLayer.Entities.Interest;
 using EModernHouse.DataLayer.Entities.ProductOrder;
 
@@ -72,6 +73,7 @@ namespace EModernHouse.DataLayer.Entities.Account
         public ICollection<Order> Orders { get; set; }
         public ICollection<ProductInterest> ProductInterests { get; set; }
         public UserAddress UserAddress { get; set; }
+        public ICollection<ProductDiscountUse> ProductDiscountUses { get; set; }
         #endregion
 
     }

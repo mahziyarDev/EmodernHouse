@@ -144,3 +144,27 @@ function SendPage(pageId) {
     $("#PageId").val(pageId);
     $("#FormFilterUSer").submit();
 }
+
+//auto complete
+var options = {
+    url: function (productName) {
+        return "/Admin/Filter-Product-For-Discount?productName=" + productName;
+    },
+
+    getValue: "title",
+
+    list: {
+        match: {
+            enabled: true
+        },
+        onSelectItemEvent: function () {
+            var value = $("#ProductName").getSelectedItemData().id;
+
+            $("#ProductId").val(value).trigger("change");
+        }
+    },
+
+    theme: "square"
+};
+
+$("#ProductName").easyAutocomplete(options);

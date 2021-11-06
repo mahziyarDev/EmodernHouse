@@ -1,0 +1,84 @@
+﻿@using EModernHouse.Application.Utils
+@model EModernHouse.DataLayer.DTOs.Filter.DisCountFilterDTO
+@{
+    ViewData["Title"] = "لیست تخفیفات";
+}
+
+
+<div class="row">
+    <a class="btn btn-success" asp-area="Admin" asp-controller="Home" asp-action="CreateSiteSetting">افزودن</a>
+    <br />
+    <div class="widget widget-header">
+        <span class="widget-caption">@ViewData["Title"]</span>
+    </div>
+    <div class="widget-body">
+
+        @if (Model.ProductDisCounts.Any() && Model.ProductDisCounts != null)
+        {
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>عکس محصول</th>
+                    <th>نام محصول</th>
+                    <th>درصد تخفیف</th>
+                    <th>تاریخ ثبت تخفیف</th>
+                    <th>تاریخ پایان تخفیف</th>
+                    <th>وضعیت</th>
+                    <th>افراد مورد استفاده</th>
+                    <th>دستورات</th>
+                </tr>
+                @foreach (var discount in Model.ProductDisCounts)
+                {
+                    <tr>
+                        <td>
+                            <img style="width: 100px; height: 80px;" src="
+                                 @(PathExtensions.ProductImageThumb + discount.Product.ImageName)
+                                 " />
+                        </td>
+                        <td>@discount.Product.Title</td>
+                        <td>@discount.Percentage</td>
+                        <td>@discount.LastUpdateDate.ToShamsi()</td>
+                        <td>@discount.ExpireDate</td>
+                        <td>@(discount.IsDelete?"فعال":"غیرفعال")</td>
+                        <td><a href="#">نمایش</a></td>
+                        <td>
+                            <a class="btn btn-danger" asp-area="Admin" asp-controller="Home" asp-action="DeleteSiteSetting" asp-route-settingId="">حذف</a>
+                            <a class="btn btn-warning" asp-area="Admin" asp-controller="Home" asp-action="EditSiteSetting" asp-route-settingId="">ویرایش</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-warning">
+                <p>چیزی برای نمایش وجود ندارد</p>
+            </div>
+        }
+
+    </div>
+    <hr />
+    <form id="FormFilterUSer" method="get" asp-area="User" asp-controller="Home" asp-action="SiteSetting">
+        <input name="pageId" type="hidden" value="@ViewBag.pageId" />
+    </form>
+    <div class="dataTables_paginate paging_bootstrap text-center" id="simpledatatable_paginate">
+        <ul class="pagination">
+
+            @if (Model.PageId > 1)
+            {
+                <li class="prev"><a onclick="SendPage(@(ViewBag.pageId - 1))">قبل</a></li>
+            }
+
+            @for (int spage = Model.StartPage; spage <= Model.EndPage; spage++)
+            {
+                <li class="active"><a href="#">@ViewBag.pageId</a></li>
+            }
+
+            @if (Model.PageId < Model.PageCount)
+            {
+                <li class="next"><a onclick="SendPage(@(ViewBag.pageId + 1))">بعد</a></li>
+            }
+
+
+        </ul>
+    </div>
+</div>
