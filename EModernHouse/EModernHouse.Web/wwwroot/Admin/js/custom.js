@@ -168,3 +168,7 @@ var options = {
 };
 
 $("#ProductName").easyAutocomplete(options);
+
+//kama DatePiker
+
+kamaDatepicker('ExpireDate', { buttonsColor: "red", forceFarsiDigits: true });

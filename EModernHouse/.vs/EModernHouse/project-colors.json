@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "26243897-8331-4931-8879-040d2fb7a20c": {
+      "ProjectGuid": "26243897-8331-4931-8879-040d2fb7a20c",
+      "DisplayName": "EModernHouse.Web",
+      "ColorIndex": 0
+    },
+    "f65d7a65-f9dc-46b6-97f4-03d03d643aa0": {
+      "ProjectGuid": "f65d7a65-f9dc-46b6-97f4-03d03d643aa0",
+      "DisplayName": "EModernHouse.Application",
+      "ColorIndex": 1
+    },
+    "a8e88ea1-e987-4181-88e5-8ef9810d7f12": {
+      "ProjectGuid": "a8e88ea1-e987-4181-88e5-8ef9810d7f12",
+      "DisplayName": "EModernHouse.DataLayer",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

@@ -4,56 +4,36 @@
 }
 @section Styles
 {
-    <link rel="stylesheet" href="lib/EasyAutocomplete/easy-autocomplete.css"/>
-    <link rel="stylesheet" href="/lib/EasyAutocomplete/easy-autocomplete.themes.css"/>
+    <link rel="stylesheet" href="lib/EasyAutocomplete/easy-autocomplete.css" />
+    <link rel="stylesheet" href="/lib/EasyAutocomplete/easy-autocomplete.themes.css" />
+    <link rel="stylesheet" href="/lib/date-picker/kamadatepicker.min.css" />
 }
 @section script
 {
     <script src="/lib/EasyAutocomplete/jquery.easy-autocomplete.min.js"></script>
-    <script>
-
-        var options = {
-            url: function(productName) {
-                return "/Admin/Filter-Product-For-Discount?productName=" + productName;
-            },
-
-            getValue: "title",
-
-            list: {
-                match: {
-                    enabled: true
-                },
-                onSelectItemEvent: function() {
-                    var value = $("#ProductName").getSelectedItemData().id;
-
-                    $("#ProductId").val(value).trigger("change");
-                }
-            },
-
-            theme: "square"
-        };
-
-        $("#ProductName").easyAutocomplete(options);
-    </script>
+    <script src="/lib/date-picker/kamadatepicker.min.js"></script>
+    <script src="/lib/date-picker/kamadatepicker.holidays.js"></script>
+    <script src="/Admin/js/custom.js"></script>
+    
 }
 
 
 
-<form asp-area="Admin" asp-controller="ProductFeature" asp-action="CreateProductFeature" asp-route-productId="@ViewBag.productId" method="post">
+<form asp-area="Admin" asp-controller="ProductDiscount" asp-action="CreateProductDiscount" method="post" >
     <div class="col-lg-12 col-sm-12 col-xs-12">
         <div class="widget">
             <div class="widget-header bordered-bottom bordered-blue">
                 <span class="widget-caption">@ViewData["Title"]</span>
             </div>
             <div class="widget-body">
-                <input type="hidden" asp-for="ProductId"/>
+                <input type="hidden" asp-for="ProductId" />
                 <div>
                     <div class="form-group">
                         <label>سرچ نام محصول</label>
                         <input class="form-control" id="ProductName">
                     </div>
                     <div class="form-group">
-                        <label>در صد تخفیف از 0 تا 10</label>
+                        <label> در صد تخفیف از 0 تا100</label>
                         <input class="form-control" asp-for="Percentage">
                     </div>
                     <div class="form-group">

@@ -6,7 +6,7 @@
 
 
 <div class="row">
-    <a class="btn btn-success" asp-area="Admin" asp-controller="Home" asp-action="CreateSiteSetting">افزودن</a>
+    <a class="btn btn-success" asp-area="Admin" asp-controller="ProductDiscount" asp-action="CreateProductDiscount">افزودن</a>
     <br />
     <div class="widget widget-header">
         <span class="widget-caption">@ViewData["Title"]</span>
@@ -37,11 +37,18 @@
                         <td>@discount.Product.Title</td>
                         <td>@discount.Percentage</td>
                         <td>@discount.LastUpdateDate.ToShamsi()</td>
-                        <td>@discount.ExpireDate</td>
-                        <td>@(discount.IsDelete?"فعال":"غیرفعال")</td>
+                        <td>@discount.ExpireDate.ToShamsi()</td>
+                        <td>@(discount.IsDelete? "غیرفعال" : "فعال")</td>
                         <td><a href="#">نمایش</a></td>
                         <td>
-                            <a class="btn btn-danger" asp-area="Admin" asp-controller="Home" asp-action="DeleteSiteSetting" asp-route-settingId="">حذف</a>
+                            @if (!discount.IsDelete && discount.ExpireDate >= DateTime.Now)
+                            {
+                                <a class="btn btn-danger" asp-area="Admin" asp-controller="Home" asp-action="DeleteSiteSetting" asp-route-settingId="">غیر فعال</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-danger" asp-area="Admin" asp-controller="Home" asp-action="DeleteSiteSetting" asp-route-settingId="">فعال</a>
+                            }
                             <a class="btn btn-warning" asp-area="Admin" asp-controller="Home" asp-action="EditSiteSetting" asp-route-settingId="">ویرایش</a>
                         </td>
                     </tr>

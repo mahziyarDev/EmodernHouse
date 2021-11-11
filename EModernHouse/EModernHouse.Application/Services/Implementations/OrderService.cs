@@ -1,4 +1,4 @@
-﻿using System;
+﻿   using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,6 +61,7 @@ namespace EModernHouse.Application.Services.Implementations
                 .ThenInclude(s=>s.ProductColor)
                 .Include(s=>s.OrderDetails)
                 .ThenInclude(s=>s.Product)
+                .ThenInclude(s=>s.ProductDisCounts)
                 .SingleOrDefaultAsync(s => s.UserId == userId && !s.IsPaid);
             return userOrderOpen;
         }

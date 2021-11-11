@@ -35,10 +35,30 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
             return new JsonResult(data);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> CreateProductDiscount(CreateProductDiscountDTO discount)
+        [HttpGet("create-product-discount")]
+        public async Task<IActionResult> CreateProductDiscount()
         {
             return View();
         }
+
+        [HttpPost("create-product-discount"),ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateProductDiscount(CreateProductDiscountDTO discount)
+        {
+            if (ModelState.IsValid)
+            {
+                var res = await _productDiscountService.CreateProductDiscount(discount);
+                if (res)
+                {
+                    TempData[SuccessMessage] = "تخفیف جدید با موفقیت اضافه شد";
+                    return RedirectToAction("GetDiscount");
+                }
+            }
+
+            TempData[ErrorMessage] = "اطلاعات وارد شده کافی یا معتبر نمی باشد";
+            return View(discount);
+        }
+
+        //[HttpGet("delete-discount")]
+        //public async Task<bool> DeleteProductDiscount()}
     }
 }

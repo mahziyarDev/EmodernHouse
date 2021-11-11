@@ -1,7 +1,7 @@
 ﻿@using EModernHouse.Application.Utils
 @model EModernHouse.DataLayer.Entities.ProductOrder.Order
 @{
-    ViewData["Title"] = "UserOpenOrder";
+    ViewData["Title"] = "سبد خرید";
   
         var totalPrice = 0;
         if (Model.OrderDetails != null && Model.OrderDetails.Any())
@@ -43,25 +43,48 @@
                                             <th>رنگ محصول</th>
                                             <th>قیمت مضاف رنگ</th>
                                             <th>تعداد محصول</th>
-                                            <th>جمع نهایی قیمت</th>
+                                            <th> درصد تخفیف</th>
+                                            <th>جمع نهایی قیمت بدون تخفیف</th>
+                                            <th>جمع نهایی قیمت با تخفیف</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach (var order in Model.OrderDetails)
                                         {
+                                            var discount = order.Product.ProductDisCounts?.FirstOrDefault(s => s.ExpireDate >= DateTime.Now);
                                             <tr>
                                                 <td>
-                                                    <img class="img-responsive" style="width: 100px; height: 80px"
+                                                    <img class="img-responsive" style="width: 80px; height: 60px"
                                                          title="@order.Product.Title" src="@(PathExtensions.ProductImageThumb + order.Product.ImageName)" />
                                                 </td>
                                                 <td>@order.Product.Title</td>
                                                 <td>@order.Product.Price</td>
                                                 <td>@order.ProductColor.ColorName</td>
                                                 <td>@order.ProductColor.Price</td>
-                                                <th class="text-center">
-                                                    <input type="number" min="1" value="@order.Count"/>
-                                                </th>
+                                                <td class="text-center">
+                                                    <input class="text-center form-control pr-1 pl-1"  type="number" min="1" value="@order.Count" />
+                                                </td>
+                                                <td>
+                                                    @if (discount != null)
+                                                    {
+                                                        @discount?.Percentage <span>%</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span> ندارد</span>
+                                                    }
+
+                                                </td>
                                                 <td>@((order.Count*(order.Product.Price + order.ProductColor.Price)).ToString("#,0")) تومان</td>
+                                                    @if (discount != null)
+                                                    {
+                                            <td>@((order.Count * (order.Product.Price + order.ProductColor.Price) * discount.Percentage / 100).ToString("#,0")) تومان</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>ندارد</td>
+                                                    }
+
                                             </tr>
 
                                         }

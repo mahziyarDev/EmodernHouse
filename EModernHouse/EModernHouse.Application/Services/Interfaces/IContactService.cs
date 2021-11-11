@@ -23,5 +23,9 @@ namespace EModernHouse.Application.Services.Interfaces
 
 
         #endregion
+
+        #region ticketForAdmin
+        
+        #endregion
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using EModernHouse.DataLayer.DTOs.Filter;
+using EModernHouse.DataLayer.DTOs.Product;
 using EModernHouse.DataLayer.Entities.Product;
 
 namespace EModernHouse.Application.Services.Interfaces
@@ -10,5 +11,6 @@ namespace EModernHouse.Application.Services.Interfaces
     {
         Task<DisCountFilterDTO> GetDiscount(int pageId,int take);
         Task<List<Product>> FilterProductByName(string productName);
+        Task<bool> CreateProductDiscount(CreateProductDiscountDTO discount);
     }
 }

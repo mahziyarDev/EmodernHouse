@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.Application.Utils;
 using EModernHouse.DataLayer.DTOs.Filter;
+using EModernHouse.DataLayer.DTOs.Product;
 using EModernHouse.DataLayer.Entities.Discount;
 using EModernHouse.DataLayer.Entities.Product;
 using EModernHouse.DataLayer.Repository;
@@ -46,6 +49,19 @@ namespace EModernHouse.Application.Services.Implementations
                 .Where(s => EF.Functions.Like(s.Title , $"%{productName}%"))
                 .ToListAsync();
             return products;
+        }
+
+        public async Task<bool> CreateProductDiscount(CreateProductDiscountDTO discount)
+        {
+            var productDiscount = new ProductDisCount
+            {
+                Percentage = discount.Percentage,
+                ProductId = discount.ProductId,
+                ExpireDate = discount.ExpireDate.ToMiladiDateTime()
+            };
+            await _productDisCountRepository.AddEntity(productDiscount);
+            await _productDisCountRepository.SaveChanges();
+            return true;
         }
         #region Dispose
 

@@ -17,6 +17,7 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using WebMarkupMin.AspNetCore5;
 
 namespace EModernHouse.Web
 {
@@ -91,6 +92,16 @@ namespace EModernHouse.Web
             );
 
             #endregion
+
+            #region MinHtml
+
+            services.AddWebMarkupMin(option =>
+            {
+                option.AllowMinificationInDevelopmentEnvironment = true;
+                option.AllowCompressionInDevelopmentEnvironment = true;
+            }).AddHtmlMinification().AddHttpCompression();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -113,7 +124,7 @@ namespace EModernHouse.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseWebMarkupMin();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
