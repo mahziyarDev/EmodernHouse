@@ -5,6 +5,7 @@ using EModernHouse.DataLayer.Entities.Contacts;
 using EModernHouse.DataLayer.Entities.Discount;
 using EModernHouse.DataLayer.Entities.Interest;
 using EModernHouse.DataLayer.Entities.Product;
+using EModernHouse.DataLayer.Entities.ProductComment;
 using EModernHouse.DataLayer.Entities.ProductOrder;
 using EModernHouse.DataLayer.Entities.Site;
 using EModernHouse.DataLayer.Entities.Wallet;
@@ -47,6 +48,7 @@ namespace EModernHouse.DataLayer.Context
         public DbSet<UserAddress> UserAddresses { get; set; }
         public ProductDisCount ProductDisCount { get; set; }
         public ProductDiscountUse ProductDiscountUse { get; set; }
+        public ProductComment ProductComments { get; set; }
         #endregion
 
         #region on model Creating

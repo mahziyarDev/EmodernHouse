@@ -630,6 +630,59 @@ namespace EModernHouse.DataLayer.Migrations
                     b.ToTable("ProductSelectedCategories");
                 });
 
+            modelBuilder.Entity("EModernHouse.DataLayer.Entities.ProductComment.ProductComment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmailUser")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("ParentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("ProductCommentState")
+                        .HasColumnType("int");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("TextComment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleComment")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProductComment");
+                });
+
             modelBuilder.Entity("EModernHouse.DataLayer.Entities.ProductOrder.Order", b =>
                 {
                     b.Property<long>("Id")
@@ -995,6 +1048,32 @@ namespace EModernHouse.DataLayer.Migrations
                     b.Navigation("ProductCategory");
                 });
 
+            modelBuilder.Entity("EModernHouse.DataLayer.Entities.ProductComment.ProductComment", b =>
+                {
+                    b.HasOne("EModernHouse.DataLayer.Entities.ProductComment.ProductComment", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("EModernHouse.DataLayer.Entities.Product.Product", "Product")
+                        .WithMany("ProductComments")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EModernHouse.DataLayer.Entities.Account.User", "User")
+                        .WithMany("ProductComments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Parent");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EModernHouse.DataLayer.Entities.ProductOrder.Order", b =>
                 {
                     b.HasOne("EModernHouse.DataLayer.Entities.Account.User", "User")
@@ -1038,6 +1117,8 @@ namespace EModernHouse.DataLayer.Migrations
 
                     b.Navigation("Orders");
 
+                    b.Navigation("ProductComments");
+
                     b.Navigation("ProductDiscountUses");
 
                     b.Navigation("ProductInterests");
@@ -1064,6 +1145,8 @@ namespace EModernHouse.DataLayer.Migrations
                     b.Navigation("OrderDetails");
 
                     b.Navigation("ProductColors");
+
+                    b.Navigation("ProductComments");
 
                     b.Navigation("ProductDisCounts");
 

@@ -51,6 +51,7 @@ namespace EModernHouse.DataLayer.Entities.Product
         public ICollection<OrderDetail> OrderDetails { get; set; }
         public ICollection<ProductInterest> ProductInterests { get; set; }
         public ICollection<ProductDisCount> ProductDisCounts { get; set; }
+        public ICollection<ProductComment.ProductComment> ProductComments { get; set; }
         #endregion
     }
 }

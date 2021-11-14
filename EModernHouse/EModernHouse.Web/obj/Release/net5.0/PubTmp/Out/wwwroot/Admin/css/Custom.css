@@ -1,0 +1,49 @@
+﻿.CkeckboxInput_createUser {
+    width: 18px;
+    height: 25px;
+    border: 1px solid #000;
+    right: 0px !important;
+    left: 0px !important;
+    bottom: 0px !important;
+    top: 0px !important;
+    margin-right: 90px !important;
+    margin-top: 1px !important;
+    opacity: 1 !important;
+}
+
+.input_Upload_file_Editprofile {
+    width: 50%;
+}
+
+.ImagePreviwe_Editprofile {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 12px;
+}
+
+#lable-Upload-Avatar {
+    cursor: pointer;
+    /* Style as you please, it will become the visible UI component. */
+}
+
+#imageProduct {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.btn-upload {
+    background: #E74C3C;
+    color: #fff;
+    padding: 6px 15px;
+    border: 2px solid #AF0606;
+    border-radius: 5px;
+}
+
+.ck-content {
+    height: 300px;
+}
+.widget {
+    margin: 0 !important;
+}

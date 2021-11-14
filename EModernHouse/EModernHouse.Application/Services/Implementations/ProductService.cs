@@ -445,6 +445,7 @@ namespace EModernHouse.Application.Services.Implementations
                 .Include(s => s.ProductGalleries)
                 .Include(s => s.ProductColors)
                 .Include(s=>s.ProductFeatures)
+                .Include(s=>s.ProductComments )
                 .SingleOrDefaultAsync(s => s.Id == productId);
 
             if (product == null) return null;
@@ -467,7 +468,8 @@ namespace EModernHouse.Application.Services.Implementations
                 RelatedProducts = await _productRepository.GetQuery()
                     .Include(s => s.ProductSelectedCategories)
                     .Where(s => s.ProductSelectedCategories.Any(f => selectedCategoriesIds.Contains(f.ProductCategoryId)) && s.Id != productId)
-                    .ToListAsync()
+                    .ToListAsync(),
+                ProductComments =  product.ProductComments.ToList(),
             };
         }
 

@@ -74,6 +74,7 @@ namespace EModernHouse.DataLayer.Entities.Account
         public ICollection<ProductInterest> ProductInterests { get; set; }
         public UserAddress UserAddress { get; set; }
         public ICollection<ProductDiscountUse> ProductDiscountUses { get; set; }
+        public ICollection<ProductComment.ProductComment> ProductComments { get; set; }
         #endregion
 
     }

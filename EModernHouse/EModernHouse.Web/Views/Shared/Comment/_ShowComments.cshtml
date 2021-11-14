@@ -1,0 +1,51 @@
+﻿@using EModernHouse.Application.EntitiesExtensions
+@using EModernHouse.Application.Utils
+@model List<EModernHouse.DataLayer.Entities.ProductComment.ProductComment>
+
+    
+@if (Model.Any() && Model != null)
+{
+    @foreach (var comment in Model)
+    {
+        <div class="row">
+            <div class="col-md-3 aside">
+                <ul class="comments-user-shopping">
+                    <li>
+                        <div class="cell cell-name">
+                             کاربر : @comment.User.GetUserShowName()
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="cell">
+                            @comment.CreateDate.ToStringShamsiDate() ساعت @comment.CreateDate.ToString("HH:mm")
+                        </div>
+                    </li>
+                </ul>
+
+
+            </div>
+            <div class="col-md-9 article">
+                <div class="header">
+                    <div>@comment.TitleComment</div>
+                </div>
+                <p>
+                    @comment.TextComment
+                </p>
+
+            </div>
+        </div>
+    }
+}
+else
+{
+<div class="alert alert-warning">
+    <p>هیچ کامنتی برای این محصول ثبت نشده است .
+        <br/>
+        شما اولین نفر باشید...
+    </p>
+</div>
+}
+
+
+

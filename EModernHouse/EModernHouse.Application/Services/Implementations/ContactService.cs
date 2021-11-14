@@ -1,10 +1,13 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.DataLayer.DTOs.Comment;
 using EModernHouse.DataLayer.DTOs.Contacts;
 using EModernHouse.DataLayer.DTOs.Paging;
 using EModernHouse.DataLayer.Entites.Contacts;
 using EModernHouse.DataLayer.Entities.Contacts;
+using EModernHouse.DataLayer.Entities.ProductComment;
 using EModernHouse.DataLayer.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,12 +21,14 @@ namespace EModernHouse.Application.Services.Implementations
         private readonly IGenericRepository<ContactUs> _contactUsRepository;
         private readonly IGenericRepository<Ticket> _ticketRepository;
         private readonly IGenericRepository<TicketMessage> _ticketMessageRepository;
+        private readonly IGenericRepository<ProductComment> _productCommentRepository;
 
-        public ContactService(IGenericRepository<ContactUs> contactUsRepository, IGenericRepository<Ticket> ticketRepository, IGenericRepository<TicketMessage> ticketMessageRepository)
+        public ContactService(IGenericRepository<ContactUs> contactUsRepository, IGenericRepository<Ticket> ticketRepository, IGenericRepository<TicketMessage> ticketMessageRepository, IGenericRepository<ProductComment> productCommentRepository)
         {
             _contactUsRepository = contactUsRepository;
             _ticketRepository = ticketRepository;
             _ticketMessageRepository = ticketMessageRepository;
+            _productCommentRepository = productCommentRepository;
         }
 
         #endregion
@@ -188,6 +193,34 @@ namespace EModernHouse.Application.Services.Implementations
 
         }
 
+        #endregion
+
+        #region comment
+
+        public async Task<List<ProductComment>> ShowProductCommentByProductId(long productId)
+        {
+            var comments = await _productCommentRepository.GetQuery().AsQueryable()
+                .Where(s => s.ProductId == productId && s.ProductCommentState == ProductCommentState.Accepted)
+                .Include(s=>s.User)
+                .ToListAsync();
+            return comments;
+        }
+
+        public async Task<bool> CreateComment(CreateCommentDTO create, long userId)
+        {
+            var newComment = new ProductComment
+            {
+                ProductId = create.ProductId,
+                EmailUser = create.EmailUser,
+                TextComment = create.TextComment,
+                TitleComment = create.TitleComment,
+                UserId = userId,
+                ProductCommentState = ProductCommentState.UnderProgress
+            };
+            await _productCommentRepository.AddEntity(newComment);
+            await _productCommentRepository.SaveChanges();
+            return true;
+        }
         #endregion
 
         #region dispose

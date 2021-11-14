@@ -5,6 +5,7 @@ using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.DataLayer.DTOs.Comment;
 using EModernHouse.Web.PresentationExtentions;
 using Microsoft.CodeAnalysis.Differencing;
 
@@ -16,11 +17,12 @@ namespace EModernHouse.Web.Areas.User.Controllers
 
         private readonly IProductService _productService;
         private readonly IUserService _userService;
-
-        public HomeController(IProductService productService, IUserService userService)
+        private readonly IContactService _contactService;
+        public HomeController(IProductService productService, IUserService userService, IContactService contactService)
         {
             _productService = productService;
             _userService = userService;
+            _contactService = contactService;
         }
 
         #endregion
@@ -98,6 +100,32 @@ namespace EModernHouse.Web.Areas.User.Controllers
         {
             var favorite = await _productService.GetAllProductInterest(User.GetUserId());
             return View(favorite);
+        }
+
+        #endregion
+
+        #region Comment
+        [HttpPost("create_comment")]
+        public async Task<IActionResult> CreateCommetn(CreateCommentDTO comment)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (ModelState.IsValid)
+                {
+                    var res =await _contactService.CreateComment(comment, User.GetUserId());
+                    if (res)
+                    {
+                        TempData[InfoMessage] = "کامنت شما درحال برسی است و پس از تایید در سایت منتشر میشود";
+                    }
+
+                    return RedirectToAction("product-Detail/" + comment.ProductId);
+                }
+
+                TempData[WarningMessage] = "اطلاعات به درستی وارد نشده است";
+                return RedirectToAction("product-Detail/" + comment.ProductId);
+            }
+            TempData[ErrorMessage] = "برای ثبت نظر ابتدا باید وارد سایت شوید";
+            return RedirectToAction("product-Detail/" + comment.ProductId);
         }
 
         #endregion

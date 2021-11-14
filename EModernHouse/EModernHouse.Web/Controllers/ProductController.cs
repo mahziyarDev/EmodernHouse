@@ -11,10 +11,11 @@ namespace EModernHouse.Web.Controllers
         #region Ctor
 
         private readonly IProductService _productService;
-
-        public ProductController(IProductService productService)
+        private readonly IContactService _contactService;
+        public ProductController(IProductService productService, IContactService contactService)
         {
             _productService = productService;
+            _contactService = contactService;
         }
 
         #endregion
@@ -45,6 +46,7 @@ namespace EModernHouse.Web.Controllers
                 return NotFound();
             }
 
+            ViewBag.Comment = await _contactService.ShowProductCommentByProductId(productId);
             return View(res);
         }
 

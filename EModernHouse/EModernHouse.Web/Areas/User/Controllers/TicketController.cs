@@ -62,6 +62,7 @@ namespace EModernHouse.Web.Areas.User.Controllers
         }
 
         #endregion
+
         #region Show Ticket detail
         [HttpGet("tickets/{ticketId}")]
         public async Task<IActionResult> TicketDetail(long ticketId)

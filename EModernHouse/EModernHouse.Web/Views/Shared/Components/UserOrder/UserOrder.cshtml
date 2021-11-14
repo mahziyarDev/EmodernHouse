@@ -50,7 +50,7 @@
                     <span>جمع کل این محصول : @(((order.Product.Price + order.ProductColor.Price) * order.Count).ToString("#,0 تومان"))</span>
                     <br/>
                     <button class="remove-item">
-                        <i class="far fa-trash-alt"></i>
+                        <i class="far fa-trash-alt" DeleteItemInBag="@order.Id"></i>
                     </button>
                 </li>
 

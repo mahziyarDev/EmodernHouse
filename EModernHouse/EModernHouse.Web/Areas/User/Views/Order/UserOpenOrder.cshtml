@@ -37,6 +37,7 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
+                                            <th>---</th>
                                             <th>عکس محصول </th>
                                             <th>نام محصول</th>
                                             <th>قیمت محصول</th>
@@ -51,23 +52,27 @@
                                         <tbody>
                                         @foreach (var order in Model.OrderDetails)
                                         {
-                                            var discount = order.Product.ProductDisCounts?.FirstOrDefault(s => s.ExpireDate >= DateTime.Now);
+                                            var discount = order.Product.ProductDisCounts?.OrderByDescending(s=>s.CreateDate).FirstOrDefault(s=>s.ExpireDate>DateTime.Now);
                                             <tr>
                                                 <td>
-                                                    <img class="img-responsive" style="width: 80px; height: 60px"
-                                                         title="@order.Product.Title" src="@(PathExtensions.ProductImageThumb + order.Product.ImageName)" />
+                                                    <a  DeleteItemInBag="@order.Id"><i class="fas fa-trash-alt"></i></a>
+                                                </td>
+                                                <td>
+                                                    <img class="img-responsive" style="width: 60px; height: 40px"
+                                                         title="@order.Product.Title" src="@(PathExtensions.ProductImageThumb + order.Product.ImageName)"/>
                                                 </td>
                                                 <td>@order.Product.Title</td>
                                                 <td>@order.Product.Price</td>
                                                 <td>@order.ProductColor.ColorName</td>
                                                 <td>@order.ProductColor.Price</td>
                                                 <td class="text-center">
-                                                    <input class="text-center form-control pr-1 pl-1"  type="number" min="1" value="@order.Count" />
+                                                    <input class="text-center form-control pr-1 pl-1" type="number" min="1" value="@order.Count"/>
                                                 </td>
                                                 <td>
                                                     @if (discount != null)
                                                     {
-                                                        @discount?.Percentage <span>%</span>
+                                                        @discount?.Percentage
+                                                        <span>%</span>
                                                     }
                                                     else
                                                     {
@@ -75,15 +80,15 @@
                                                     }
 
                                                 </td>
-                                                <td>@((order.Count*(order.Product.Price + order.ProductColor.Price)).ToString("#,0")) تومان</td>
-                                                    @if (discount != null)
-                                                    {
-                                            <td>@((order.Count * (order.Product.Price + order.ProductColor.Price) * discount.Percentage / 100).ToString("#,0")) تومان</td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td>ندارد</td>
-                                                    }
+                                                <td>@((order.Count * (order.Product.Price + order.ProductColor.Price)).ToString("#,0")) تومان</td>
+                                                @if (discount != null)
+                                                {
+                                                    <td>@((order.Count * (order.Product.Price + order.ProductColor.Price) * discount.Percentage / 100).ToString("#,0")) تومان</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>ندارد</td>
+                                                }
 
                                             </tr>
 

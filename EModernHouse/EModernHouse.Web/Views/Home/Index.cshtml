@@ -70,18 +70,18 @@
                         <div class="swiper-slide">
                             <div class="product-card">
                                 <div class="product-card-top">
-                                    <a  asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@newProduct.Id" asp-route-title="@newProduct.Title.FixTextForUrl()" class="product-image">
+                                    <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@newProduct.Id" asp-route-title="@newProduct.Title.FixTextForUrl()" class="product-image">
                                         <img src="@(PathExtensions.ProductImageThumb + newProduct.ImageName)" alt="@newProduct.Title">
                                     </a>
                                     <div class="product-card-actions">
-                                       
+
                                     </div>
                                 </div>
                                 <div class="product-card-middle">
                                     <div class="ratings-container">
                                     </div>
                                     <h6 class="product-name text-center">
-                                        <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@newProduct.Id" asp-route-title="@newProduct.Title.FixTextForUrl()" >
+                                        <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@newProduct.Id" asp-route-title="@newProduct.Title.FixTextForUrl()">
                                             @newProduct.Title
                                         </a>
                                     </h6>
@@ -91,7 +91,7 @@
                                     <div class="product-price">
                                         @newProduct.Price.ToString("#,0") تومان
                                     </div>
-                                    <a href="#" class="btn-add-to-cart">
+                                    <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@newProduct.Id" asp-route-title="@newProduct.Title.FixTextForUrl()" class="btn-add-to-cart">
                                         <i class="fad fa-cart-plus"></i>
                                         نمایش جزئیات
                                     </a>
@@ -100,7 +100,7 @@
                         </div>
                     }
 
-                    
+
                 </div>
                 <!-- Add Arrows -->
                 <div class="swiper-button-next"></div>
@@ -162,7 +162,7 @@
                                     <div class="product-price">
                                         @newProduct.Price.ToString("#,0") تومان
                                     </div>
-                                    <a href="#" class="btn-add-to-cart">
+                                    <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@newProduct.Id" asp-route-title="@newProduct.Title.FixTextForUrl()"  class="btn-add-to-cart">
                                         <i class="fad fa-cart-plus"></i>
                                         نمایش جزئیات
                                     </a>
@@ -225,7 +225,7 @@
                                     <div class="product-price">
                                         @newProduct.Price.ToString("#,0") تومان
                                     </div>
-                                    <a href="#" class="btn-add-to-cart">
+                                    <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@newProduct.Id" asp-route-title="@newProduct.Title.FixTextForUrl()"  class="btn-add-to-cart">
                                         <i class="fad fa-cart-plus"></i>
                                         نمایش جزئیات
                                     </a>
@@ -258,7 +258,7 @@
             </div>
         }
 
-        
+
     </div>
 </main>
 <!-- end Page Content -->
@@ -292,5 +292,3 @@
     </div>
 </div>
 <!-- end Page Loader -->
-
-

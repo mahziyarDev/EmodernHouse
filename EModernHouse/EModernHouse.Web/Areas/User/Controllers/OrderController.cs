@@ -79,5 +79,28 @@ namespace EModernHouse.Web.Areas.User.Controllers
 
         #endregion
 
+        #region RemoveProduct
+
+        [HttpGet("remove-order-item/{detailId}")]
+        public async Task<IActionResult> RemoveProductFromOrder(long detailId)
+        {
+            var res = await _orderService.RemoveOrderDetail(detailId, User.GetUserId());
+            if (res)
+            {
+                return JsonResponseStatus.SendStatus(
+                    JsonResponseStatusType.Success,
+                    "محصول حذف شد",
+                    null
+                );
+            }
+
+            return JsonResponseStatus.SendStatus(
+                JsonResponseStatusType.Danger,
+                "محصول مورد نظر شما یافت نشد",
+                null
+            );
+        }
+
+        #endregion
     }
 }

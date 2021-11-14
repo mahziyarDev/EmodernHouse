@@ -141,6 +141,16 @@ namespace EModernHouse.Application.Services.Implementations
             return orderDetail;
         }
 
+        public async Task<bool> RemoveOrderDetail(long detailId,long userId)
+        {
+            var openOrder = await GetUserLatestOpenOrder(userId);
+            var orderDetail = openOrder.OrderDetails.SingleOrDefault(s => s.Id == detailId);
+            if (orderDetail == null) return false;
+
+            _orderDetailRepository.Delete(orderDetail);
+            await _orderDetailRepository.SaveChanges();
+            return true;
+        }
         #endregion
 
         #region Dispose

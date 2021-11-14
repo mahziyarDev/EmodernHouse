@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using EModernHouse.DataLayer.DTOs.Comment;
 using EModernHouse.DataLayer.DTOs.Contacts;
+using EModernHouse.DataLayer.Entities.ProductComment;
 
 
 namespace EModernHouse.Application.Services.Interfaces
@@ -25,7 +28,14 @@ namespace EModernHouse.Application.Services.Interfaces
         #endregion
 
         #region ticketForAdmin
-        
+
+        #endregion
+
+        #region comment
+
+        Task<List<ProductComment>> ShowProductCommentByProductId(long productId);
+        Task<bool> CreateComment(CreateCommentDTO create, long userId);
+
         #endregion
     }
 }

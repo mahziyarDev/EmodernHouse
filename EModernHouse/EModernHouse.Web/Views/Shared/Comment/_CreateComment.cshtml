@@ -1,0 +1,39 @@
+﻿@model EModernHouse.DataLayer.DTOs.Comment.CreateCommentDTO
+
+<form id="FromSendComment" asp-area="User" asp-controller="Home" asp-action="CreateCommetn" method="post">
+    <input type="hidden"  asp-for="ProductId"/>
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <div class="form-element-row">
+                <label for="phone-number" class="label-element">
+                    عنوان نظر شما
+                    (اجباری)
+                </label>
+                <input type="text" class="input-element" asp-for="TitleComment">
+                <span class="text-danger" asp-validation-for="TitleComment"></span>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-element-row">
+                <label for="phone-number" class="label-element">
+                    ایمیل
+                    شما
+                </label>
+                <input type="email" class="input-element" asp-for="EmailUser">
+                <span class="text-danger" asp-validation-for="EmailUser"></span>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-element-row">
+                <label for="phone-number" class="label-element">نظر شما</label>
+                <textarea id="comment" cols="30" rows="10" class="input-element" asp-for="TextComment"></textarea>
+            </div>
+            <span class="text-danger" asp-validation-for="TextComment"></span>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <button id="btnSendComment" class="btn btn-primary px-3">ارسال نظر <i class="fad fa-comment-alt-edit"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
