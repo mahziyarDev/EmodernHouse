@@ -1,0 +1,70 @@
+﻿@using EModernHouse.Application.Utils
+@using EModernHouse.DataLayer.Entities.Contacts
+@using EModernHouse.Web.PresentationExtentions
+@model EModernHouse.DataLayer.DTOs.Contacts.ShowTicketMessagesDTO
+@{
+    ViewData["Title"] = "تیکت :" + Model.Ticket.Title;
+
+}
+
+<div class="page-body no-padding">
+    <div class="mail-container">
+        <div class="mail-header">
+            <div class="mail-title">
+                <strong>@Model.Ticket.Title</strong>
+                @switch (Model.Ticket.TicketPriority)
+                {
+                    case TicketPriority.High:
+                        <span class="label label-danger">اولویت زیاد</span>
+                        break;
+                    case TicketPriority.Medium:
+                        <span class="label label-palegreen">اولویت متوسط</span>
+                        break;
+                    case TicketPriority.Low:
+                        <span class="label label-palegreen">اولویت کم</span>
+                        break;
+
+                }
+            </div>
+        </div>
+        <div class="mail-body">
+            <div class="mail-info">
+                <div class="mail-sender">
+                    <a href="#">
+                        <img src="@(Model.Avatar!=""? PathExtensions.UserAvatarThumb+Model.Avatar : PathExtensions.DefaultAvatar)" class="img-circle" width="30">
+                        <span> @Model.FirstName @Model.LastName</span>
+                    </a>
+                </div>
+
+            </div>
+            @foreach (var ticketMessage in Model.TicketMessages)
+            {
+                @if (ticketMessage.Id == Model.Ticket.OwnerId)
+                {
+                    <div class="chatTicketsUser">
+                        <div class="mail-text">
+                            @Html.Raw(ticketMessage.Text)
+                        </div>
+                        <div>ارسال شده از طرف : @Model.FirstName @Model.LastName</div>
+                    </div>
+                    
+                }
+                else
+                {
+                    <div class="chatTicketsAdmin">
+                        <div class="mail-text">
+                            @Html.Raw(ticketMessage.Text)
+                        </div>
+                        <div>ارسال شده از طرف : شما</div>
+                    </div>
+                    
+                }
+
+            }
+        </div>
+        <div class="mail-body">
+            <partial name="_SendAnswerTicket" model="@(new TicketMessage{TicketId = Model.Ticket.Id,SenderId = User.GetUserId()})"/>
+        </div>
+        <partial name="_InboxSideBar"/>
+    </div>
+</div>

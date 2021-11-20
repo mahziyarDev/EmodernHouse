@@ -1,0 +1,80 @@
+﻿@model List<EModernHouse.DataLayer.Entities.Contacts.Ticket>
+@{
+    ViewData["Title"] = "تیکت های پشتیبانی فنی";
+}
+
+
+<div class="page-body no-padding ">
+    <div class="mail-container">
+        <div class="mail-body">
+            <ul class="mail-list">
+                @if (Model.Any() && Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <partial name="_ShowRowComment" model="@item" />
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <p class="text-center">
+                            هیچ تیکت جدیدی ثبت نشده است
+                        </p>
+                    </div>
+                }
+
+
+            </ul>
+        </div>
+        <div class="mail-sidebar">
+            <ul class="mail-menu">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-inbox"></i>
+                        <span class="badge badge-default badge-square pull-left">6</span>
+                        کامنت ها
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-star"></i>
+                        <span class="badge badge-default badge-square pull-left">1</span>
+                        ایمیل ها
+                    </a>
+                </li>
+                <li class="divider">
+                </li>
+
+            </ul>
+            <ul class="mail-menu">
+                <li class="menu-title">
+                    <h6>تیکت ها</h6>
+                </li>
+                <li class="active">
+                    <a asp-area="Admin" asp-controller="Inbox" asp-action="ShowTicketsSupport">
+                        <i class="fa fa-inbox"></i>
+                        <span class="badge badge-default badge-square pull-left">6</span>
+                        پشتیبانی
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-inbox"></i>
+                        <span class="badge badge-default badge-square pull-left">6</span>
+                        فنی
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-inbox"></i>
+                        <span class="badge badge-default badge-square pull-left">6</span>
+                        اموزشی
+                    </a>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+</div>

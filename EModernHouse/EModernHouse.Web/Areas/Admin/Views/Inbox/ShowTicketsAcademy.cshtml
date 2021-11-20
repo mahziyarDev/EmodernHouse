@@ -1,0 +1,30 @@
+﻿@model List<EModernHouse.DataLayer.Entities.Contacts.Ticket>
+@{
+    ViewData["Title"] = "تیکت های بخش آموزشی";
+}
+<div class="page-body no-padding ">
+    <div class="mail-container">
+        <div class="mail-body">
+            <ul class="mail-list">
+                @if (Model.Any() && Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <partial name="_ShowRowComment" model="@item"/>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <p class="text-center">
+                            هیچ تیکت جدیدی ثبت نشده است
+                        </p>
+                    </div>
+                }
+                
+
+            </ul>
+        </div>
+        <partial name="_InboxSideBar"/>
+    </div>
+</div>

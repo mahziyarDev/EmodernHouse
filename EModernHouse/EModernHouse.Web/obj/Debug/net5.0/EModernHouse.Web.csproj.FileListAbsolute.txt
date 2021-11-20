@@ -226,3 +226,11 @@ C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\bin\
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\WebMarkupMin.Core.dll
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Views\Shared\Comment\_CreateComment.cshtml.g.cs
 C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Views\Shared\Comment\_ShowComments.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Inbox\Index.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\_ShowRowComment.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Inbox\ShowTicketsSupport.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Inbox\ShowTicketsTechnical.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\_InboxSideBar.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Inbox\ShowTicketsAcademy.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Inbox\ShowTicket.cshtml.g.cs
+C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\_SendAnswerTicket.cshtml.g.cs

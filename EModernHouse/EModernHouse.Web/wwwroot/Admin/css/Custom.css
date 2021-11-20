@@ -47,3 +47,14 @@
 .widget {
     margin: 0 !important;
 }
+.padding-0 {
+    padding: 0px !important;
+}
+.chatTicketsUser {
+    background: #f0f7fd;
+    border-bottom: 1px solid #fb6e52;
+}
+.chatTicketsAdmin {
+    background: #dfdfdf;
+    border-bottom: 1px solid #fb6e52;
+}

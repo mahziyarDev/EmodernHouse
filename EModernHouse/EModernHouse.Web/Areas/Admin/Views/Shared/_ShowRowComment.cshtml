@@ -1,0 +1,38 @@
+﻿@using EModernHouse.Application.EntitiesExtensions
+@using EModernHouse.Application.Utils
+@using EModernHouse.DataLayer.Entities.Contacts
+@model EModernHouse.DataLayer.Entities.Contacts.Ticket
+@{
+    string Seen = "";
+
+    if (!Model.IsReadByAdmin)
+    {
+        Seen = "unread";
+    }
+}
+    <li class="list-item @Seen">
+        <div class="item-sender">
+            <a asp-area="Admin" asp-controller="Inbox" asp-action="ShowTicket" asp-route-ticketId="@Model.Id" class="col-name">@Model.Owner.GetUserShowName()</a>
+        </div>
+        <div class="item-subject">
+            @switch (Model.TicketPriority)
+            {
+                case TicketPriority.High:
+                    <span class="label label-danger">اولویت زیاد</span>
+                    break;
+                case TicketPriority.Medium:
+                    <span class="label label-palegreen">اولویت متوسط</span>
+                    break;
+                case TicketPriority.Low:
+                    <span class="label label-palegreen">اولویت کم</span>
+                    break;
+
+            }
+            <a asp-area="Admin" asp-controller="Inbox" asp-action="ShowTicket" asp-route-ticketId="@Model.Id">
+                عنوان : @Model.Title
+            </a>
+        </div>
+        <div class="item-time">
+            @Model.CreateDate.ToStringShamsiDate() ساعت @Model.CreateDate.ToString("HH:mm")
+        </div>
+    </li>

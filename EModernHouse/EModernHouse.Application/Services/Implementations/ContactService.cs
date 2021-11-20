@@ -23,7 +23,9 @@ namespace EModernHouse.Application.Services.Implementations
         private readonly IGenericRepository<TicketMessage> _ticketMessageRepository;
         private readonly IGenericRepository<ProductComment> _productCommentRepository;
 
-        public ContactService(IGenericRepository<ContactUs> contactUsRepository, IGenericRepository<Ticket> ticketRepository, IGenericRepository<TicketMessage> ticketMessageRepository, IGenericRepository<ProductComment> productCommentRepository)
+        public ContactService(IGenericRepository<ContactUs> contactUsRepository,
+            IGenericRepository<Ticket> ticketRepository, IGenericRepository<TicketMessage> ticketMessageRepository,
+            IGenericRepository<ProductComment> productCommentRepository)
         {
             _contactUsRepository = contactUsRepository;
             _ticketRepository = ticketRepository;
@@ -39,7 +41,7 @@ namespace EModernHouse.Application.Services.Implementations
         {
             var newContact = new ContactUs
             {
-                UserId = userId != null && userId.Value != 0 ? userId.Value : (long?)null,
+                UserId = userId != null && userId.Value != 0 ? userId.Value : (long?) null,
                 Subject = contact.Subject,
                 Email = contact.Email,
                 UserIp = userIp,
@@ -105,6 +107,7 @@ namespace EModernHouse.Application.Services.Implementations
                     break;
 
             }
+
             #endregion
 
             #region OrderBy
@@ -142,12 +145,15 @@ namespace EModernHouse.Application.Services.Implementations
             {
                 query = query.Where(s => EF.Functions.Like(s.Title, $"%{filter.Title}%"));
             }
+
             #endregion
 
             #region Paging
 
-            var pager = Pager.Build(filter.PageId, await query.CountAsync(), filter.TakeEntity, filter.HowManyPageAfterAndBefore);
+            var pager = Pager.Build(filter.PageId, await query.CountAsync(), filter.TakeEntity,
+                filter.HowManyPageAfterAndBefore);
             var allEntities = await query.Paging(pager).ToListAsync();
+
             #endregion
 
             return filter.setPaging(pager).setTickets(allEntities);
@@ -193,6 +199,7 @@ namespace EModernHouse.Application.Services.Implementations
 
         }
 
+
         #endregion
 
         #region comment
@@ -201,7 +208,7 @@ namespace EModernHouse.Application.Services.Implementations
         {
             var comments = await _productCommentRepository.GetQuery().AsQueryable()
                 .Where(s => s.ProductId == productId && s.ProductCommentState == ProductCommentState.Accepted)
-                .Include(s=>s.User)
+                .Include(s => s.User)
                 .ToListAsync();
             return comments;
         }
@@ -219,6 +226,73 @@ namespace EModernHouse.Application.Services.Implementations
             };
             await _productCommentRepository.AddEntity(newComment);
             await _productCommentRepository.SaveChanges();
+            return true;
+        }
+
+        #endregion
+
+        #region ticketForAdmin
+
+        public async Task<List<Ticket>> GetTicketsSupport()
+        {
+            return await _ticketRepository.GetQuery().AsQueryable()
+                .Where(s => s.TicketSection == TicketSection.Support && s.TicketState != TicketState.Closed)
+                .Include(s => s.Owner)
+                .ToListAsync();
+        }
+
+        public async Task<List<Ticket>> GetTicketTechnical()
+        {
+            return await _ticketRepository.GetQuery().AsQueryable()
+                .Where(s => s.TicketSection == TicketSection.Technical && s.TicketState != TicketState.Closed)
+                .Include(s => s.Owner)
+                .ToListAsync();
+        }
+
+        public async Task<List<Ticket>> GetTicketAcademy()
+        {
+            return await _ticketRepository.GetQuery().AsQueryable()
+                .Where(s => s.TicketSection == TicketSection.Academic && s.TicketState != TicketState.Closed)
+                .Include(s => s.Owner)
+                .ToListAsync();
+        }
+
+        public async Task<ShowTicketMessagesDTO> GetMessagesById(long ticketId)
+        {
+            var messages = await _ticketMessageRepository.GetQuery().AsQueryable()
+                .Where(s => s.TicketId == ticketId)
+                .ToListAsync();
+            var ticket = await _ticketRepository.GetQuery().AsQueryable()
+                .Include(s => s.Owner)
+                .SingleOrDefaultAsync(s => s.Id == ticketId);
+
+            ticket.IsReadByAdmin = true;
+            _ticketRepository.EditEntity(ticket);
+            await _ticketRepository.SaveChanges();
+            return new ShowTicketMessagesDTO
+            {
+                Avatar = ticket.Owner.Avatar,
+                FirstName = ticket.Owner.FirstName,
+                LastName = ticket.Owner.LastName,
+                Ticket = ticket,
+                TicketMessages = messages
+            };
+        }
+
+        public async Task<bool> AnswerTicket(TicketMessage message)
+        {
+            var newMessage = new TicketMessage
+            {
+                TicketId = message.TicketId,
+                SenderId = message.SenderId,
+                Text = message.Text,
+            };
+            await _ticketMessageRepository.AddEntity(newMessage);
+            var ticket = await _ticketRepository.GetEntityById(message.TicketId);
+            ticket.TicketState = TicketState.UnderProgress;
+            ticket.IsReadByOwner = false;
+            _ticketRepository.EditEntity(ticket);
+            await _ticketMessageRepository.SaveChanges();
             return true;
         }
         #endregion

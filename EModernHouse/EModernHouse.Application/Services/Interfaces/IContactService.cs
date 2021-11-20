@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using EModernHouse.DataLayer.DTOs.Comment;
 using EModernHouse.DataLayer.DTOs.Contacts;
+using EModernHouse.DataLayer.Entities.Contacts;
 using EModernHouse.DataLayer.Entities.ProductComment;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 
 namespace EModernHouse.Application.Services.Interfaces
@@ -27,14 +29,20 @@ namespace EModernHouse.Application.Services.Interfaces
 
         #endregion
 
-        #region ticketForAdmin
-
-        #endregion
-
         #region comment
 
         Task<List<ProductComment>> ShowProductCommentByProductId(long productId);
         Task<bool> CreateComment(CreateCommentDTO create, long userId);
+
+        #endregion
+
+        #region ticketForAdmin
+
+        Task<List<Ticket>> GetTicketsSupport();
+        Task<List<Ticket>> GetTicketTechnical();
+        Task<List<Ticket>> GetTicketAcademy();
+        Task<ShowTicketMessagesDTO> GetMessagesById(long ticketId);
+        Task<bool> AnswerTicket(TicketMessage message);
 
         #endregion
     }

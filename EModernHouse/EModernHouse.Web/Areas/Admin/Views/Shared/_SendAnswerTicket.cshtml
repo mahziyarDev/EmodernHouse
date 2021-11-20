@@ -1,0 +1,11 @@
+﻿@model EModernHouse.DataLayer.Entities.Contacts.TicketMessage
+
+<form asp-area="Admin" asp-controller="Inbox" asp-action="SendAnswerTicket" method="post">
+    <input type="hidden" asp-for="SenderId"/>
+    <input type="hidden" asp-for="TicketId"/>
+    <div class="">
+        <label>پاسخ خور را وارد کنید</label>
+        <textarea class="form-control" rows="10" ckeditor="1" asp-for="Text"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">ارسال</button>
+</form>
