@@ -14,5 +14,11 @@ namespace EModernHouse.Application.Services.Implementations
             Kavenegar.KavenegarApi api = new Kavenegar.KavenegarApi(ApiKey);
             await api.VerifyLookup(mobile, activationCode, "EmodernHouseVerify");
         }
+
+        public async Task SendSmsInAdmin(string mobile, string shortText)
+        {
+            Kavenegar.KavenegarApi api = new KavenegarApi(ApiKey);
+            await api.VerifyLookup(mobile, shortText, "SendSmsToUser");
+        }
     }
 }

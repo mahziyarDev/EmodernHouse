@@ -1,0 +1,44 @@
+﻿@using EModernHouse.Application.Utils
+@model EModernHouse.DataLayer.Entities.ProductComment.ProductComment
+@{
+    ViewData["Title"] = "نظر :" +Model.TitleComment;
+}
+
+<div class="page-body no-padding">
+    <div class="mail-container">
+        <div class="mail-header">
+            <div class="mail-title">
+                <strong>عنوان : @Model.TitleComment</strong>
+              
+            </div>
+        </div>
+        <div class="mail-body">
+            <div class="mail-info">
+                <div class="mail-sender">
+                    <a href="#">
+                        <img src="@(Model.User.Avatar!=""? PathExtensions.UserAvatarThumb+Model.User.Avatar : PathExtensions.DefaultAvatar)" class="img-circle" width="30">
+                        <span> @Model.User.FirstName @Model.User.LastName</span>
+                    </a>
+                </div>
+
+            </div>
+            
+            <div class="chatTicketsUser">
+                <div class="mail-text">
+                    متن نظر : @Model.TextComment
+                </div>
+                        
+            </div>
+
+            
+        </div>
+        <br/>
+        <div class="mail-body">
+            <div>
+                <a class="btn btn-success" asp-area="Admin" asp-controller="Inbox" asp-action="AcceptComment" asp-route-commentId="@Model.Id">تایید نظر</a>
+                <a class="btn btn-danger" asp-area="Admin" asp-controller="Inbox" asp-action="RejectComment" asp-route-commentId="@Model.Id">رد نظر</a>
+            </div>
+        </div>
+        <partial name="_InboxSideBar" />
+    </div>
+</div>

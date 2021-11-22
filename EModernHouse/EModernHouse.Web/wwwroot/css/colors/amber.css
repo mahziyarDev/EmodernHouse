@@ -110,10 +110,10 @@ header.page-header .nav-wrapper>ul>li.dropdown--list ul li a:hover {
     color: #ffab00;
 }
 
-.product-detail .product-colors .list-radio-color input[type="radio"]:checked+label {
+/*.product-detail .product-colors .list-radio-color input[type="radio"]:checked+label {
     border-color: #ffab00;
 }
-
+*/
 .product-detail .add-to-cart {
     background-color: #ffab00;
 }

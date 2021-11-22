@@ -1,0 +1,46 @@
+﻿@using EModernHouse.Application.Utils
+@using EModernHouse.Application.EntitiesExtensions
+@model List<EModernHouse.DataLayer.Entities.ProductComment.ProductComment>
+@{
+    ViewData["Title"] = "نظرات کاربران";
+}
+
+<div class="page-body no-padding ">
+    <div class="mail-container">
+        <div class="mail-body">
+            <ul class="mail-list">
+                @if (Model.Any() && Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <li class="list-item">
+                            <div class="item-sender">
+                                <a asp-area="Admin" asp-controller="Inbox" asp-action="ShowCommentById" asp-route-commentId="@item.Id" class="col-name">@item.User.GetUserShowName()</a>
+                            </div>
+                            <div class="item-subject">
+                                <a asp-area="Admin" asp-controller="Inbox" asp-action="ShowCommentById" asp-route-commentId="@item.Id">
+                                    عنوان : @item.TitleComment
+                                </a>
+                            </div>
+                            <div class="item-time">
+                                @item.CreateDate.ToStringShamsiDate() ساعت @item.CreateDate.ToString("HH:mm")
+                            </div>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <p class="text-center">
+                            هیچ نظری جدیدی ثبت نشده است
+                        </p>
+                    </div>
+                }
+
+
+            </ul>
+        </div>
+        <partial name="_InboxSideBar" />
+    </div>
+</div>
+

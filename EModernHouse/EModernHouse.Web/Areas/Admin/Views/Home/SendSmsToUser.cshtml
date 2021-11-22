@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "سیستم ارسال sms";
+}
+
+<div class="row">
+    <div class="widget widget-header">
+        <span class="widget-caption">@ViewData["Title"]</span>
+    </div>
+    <div class="widget-body">
+        <form method="post" asp-area="Admin" asp-controller="Home" asp-action="SendSmsToUser">
+            <div class="form-group">
+                <label>
+                    لطفا شماره تلفن مورد نظر را وارد کنید :
+                </label>
+                <input type="number" class="form-control" name="mobile"/>
+                
+            </div>
+            <div class="form-group">
+                <label>
+                متن پیام ارسالی خود را وارد کنید :
+                </label>
+                    <input type="text" class="form-control" name="shortText" />
+               
+            </div>
+            <button type="submit" class="btn btn-success">ارسال پیام</button>
+        </form>
+    </div>
+</div>
+

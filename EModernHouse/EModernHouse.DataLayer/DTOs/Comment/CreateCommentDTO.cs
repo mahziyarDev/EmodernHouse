@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using EModernHouse.DataLayer.DTOs.Site;
 
 namespace EModernHouse.DataLayer.DTOs.Comment
 {
-    public class CreateCommentDTO
+    public class CreateCommentDTO : CaptchaViewModel
     {
         public long? ParentId { get; set; }
         public long ProductId { get; set; }
@@ -19,5 +20,7 @@ namespace EModernHouse.DataLayer.DTOs.Comment
         [Display(Name = "متن کامنت")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string TextComment { get; set; }
+
+        public string ProductName { get; set; }
     }
 }

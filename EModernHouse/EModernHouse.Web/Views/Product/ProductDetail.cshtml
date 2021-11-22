@@ -7,6 +7,7 @@
     ViewData["Title"] = Model.Title;
     var firstProductLike = Model.RelatedProducts.FirstOrDefault();
     var comment = ViewBag.Comment as List<ProductComment>;
+
 }
 
 @section scripts
@@ -22,6 +23,7 @@
 
         </script>
     }
+    <partial name="_CaptchaScripts"/>
 
 }
 
@@ -136,75 +138,102 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="box-info-product">
-                        <input type="hidden" name="productPrice" value="@Model.Price" id="productBasePrice" />
-                        @if (Model.ProductColors.Any() && Model.ProductColors != null)
-                        {
-                            <div class="product-colors mb-3">
-                                <span class="d-block mb-3">رنگ:</span>
-                                <div id="selectoptions-color" class="change-submit list-radio-color">
-                                    @foreach (var color in Model.ProductColors)
-                                    {
-                                        <input type="radio" name="color" id="color-@color.Id" checked="" onclick="changeProductBaseColor(@color.Id,@color.Price, '@color.ColorName')">
-                                        <label for="color-@color.Id">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <span style="background-color: @color.ColorCode !important" class="color-span"></span>
-                                                <span class="mr-2">@color.ColorName</span>
-                                            </div>
-                                        </label>
-                                    }
-
-                                </div>
-                            </div>
-                        }
-
-                        <div class="d-block mb-3">
-                            <span class="d-block">
-                                تعداد:
-                            </span>
-                            <div class="num-block">
-                                <div class="num-in">
-                                    <span class="plus"></span>
-                                    <input type="text" class="in-num" value="1" min="1" max="100" onchange="ChangeCountOfProduct(event)" readonly="">
-                                    <span class="minus dis"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mt-3">
-                            <div class="product-price">
-                                @*<div class="product-price-info">
-                                        <div class="product-price-off">
-                                            %10 <span>تخفیف</span>
-                                        </div>
-                                        <div class="product-price-prev">
-                                            3,216,000
-                                        </div>
-                                    </div>*@
-                                <div class=" text-center">
-                                    <div id="show-price" class="text-center font-10">
-                                        @if (Model.ProductColors.Any() && Model.ProductColors != null)
+                    @if (ViewBag.count > 0)
+                    {
+                        <div class="box-info-product">
+                            <input type="hidden" name="productPrice" value="@Model.Price" id="productBasePrice" />
+                            @if (Model.ProductColors.Any() && Model.ProductColors != null)
+                            {
+                                <div class="product-colors mb-3">
+                                    <span class="d-block mb-3">رنگ:</span>
+                                    <div id="selectoptions-color" class="change-submit list-radio-color">
+                                        @foreach (var color in Model.ProductColors)
                                         {
-                                            var firstColor = Model.ProductColors.FirstOrDefault();
-                                        <span>@((Model.Price + firstColor.Price).ToString("##,###")) تومان</span>;
-                                            <span>(@firstColor.ColorName)</span>
+                                            @if (color.Count > 0)
+                                            {
+                                                <input type="radio" name="color" id="color-@color.Id" checked="" onclick="changeProductBaseColor(@color.Id, @color.Price, '@color.ColorName')">
+                                                <label for="color-@color.Id">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <span style="background-color: @color.ColorCode !important" class="color-span"></span>
+                                                        <span class="mr-2">@color.ColorName</span>
+                                                    </div>
+                                                </label>
+                                            }
 
                                         }
-                                        else
-                                        {
-                                            @Model.Price.ToString("#,0")
-                                            <span id="clearToman"> تومان</span>
-                                        }
+
                                     </div>
+                                </div>
+                            }
 
+                            <div class="d-block mb-3">
+                                <span class="d-block">
+                                    تعداد:
+                                </span>
+                                <div class="num-block">
+                                    <div class="num-in">
+                                        <span class="plus"></span>
+                                        <input type="text" class="in-num" value="1" min="1" max="100" onchange="ChangeCountOfProduct(event)" readonly="">
+                                        <span class="minus dis"></span>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="d-flex align-items-center justify-content-center mt-3">
+                                <div class="product-price">
+                                    <div class="product-price-info">
+                                        @if (Model.ProductDisCount != null)
+                                        {
+                                            <div class="product-price-off">
+                                                @Model.ProductDisCount?.Percentage % <span>تخفیف</span>
+                                            </div>
+                                        }
+
+
+                                    </div>
+                                    <div class=" text-center">
+                                        <div id="show-price" class="text-center font-10 ">
+
+                                            @if (Model.ProductColors.Any() && Model.ProductColors != null)
+                                            {
+                                                var firstColor = Model.ProductColors.FirstOrDefault();
+                                                <span>@((Model.Price + firstColor.Price).ToString("##,###")) تومان</span>;
+                                                <span>(@firstColor.ColorName)</span>
+
+                                            }
+                                            else
+                                            {
+                                                @Model.Price.ToString("#,0")
+                                                <span id="clearToman"> تومان</span>
+                                            }
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center">
+                                @if (ViewBag.count > 0)
+                                {
+                                    <a class="add-to-cart pointer" id="AddProductToCardSubmit">
+                                        افزودن به سبد خرید
+                                    </a>
+                                }
+                                else
+                                {
+                                    <div class="text-danger">اتمام موجودی</div>
+                                }
+
+                            </div>
                         </div>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <a class="add-to-cart pointer" id="AddProductToCardSubmit">
-                                افزودن به سبد خرید
-                            </a>
+                    }
+                    else
+                    {
+                        <div class="box-info-product">
+                            <div class="text-center text-danger">
+                                اتمام موجودی
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
             <div class="py-3">
@@ -318,9 +347,9 @@
                         <div class="tab-pane fade" id="productComments" role="tabpanel" aria-labelledby="productComments-tab">
                             <!-- product-review -->
                             <div class="product-review-form mb-3">
-                                <partial name="Comment/_CreateComment" model="@(new CreateCommentDTO{ProductId = Model.ProductId})" />
+                                <partial name="Comment/_CreateComment" model="@(new CreateCommentDTO { ProductId = Model.ProductId,ProductName = Model.Title})" />
                                 <div class="section-title mb-1 mt-4">
-                                    نظرات کاربران (۵)
+                                  نظرات کاربران
                                 </div>
                                 <hr>
                             </div>

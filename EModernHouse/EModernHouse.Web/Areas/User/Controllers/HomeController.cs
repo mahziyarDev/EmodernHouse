@@ -118,14 +118,33 @@ namespace EModernHouse.Web.Areas.User.Controllers
                         TempData[InfoMessage] = "کامنت شما درحال برسی است و پس از تایید در سایت منتشر میشود";
                     }
 
-                    return RedirectToAction("product-Detail/" + comment.ProductId);
+                    return Redirect("/product-Detail/" + comment.ProductId + "/" + comment.ProductName);
                 }
 
                 TempData[WarningMessage] = "اطلاعات به درستی وارد نشده است";
-                return RedirectToAction("product-Detail/" + comment.ProductId);
+                return Redirect("/product-Detail/" + comment.ProductId + "/" + comment.ProductName);
             }
             TempData[ErrorMessage] = "برای ثبت نظر ابتدا باید وارد سایت شوید";
-            return RedirectToAction("product-Detail/" + comment.ProductId);
+            return Redirect("/product-Detail/" + comment.ProductId + "/" + comment.ProductName);
+        }
+
+        [HttpGet("show-comments")]
+        public async Task<IActionResult> ShowComments()
+        {
+            return View(await _contactService.ShowCommentsForUser(User.GetUserId()));
+        }
+
+        [HttpGet("delete-comment/{commentId}")]
+        public async Task<IActionResult> DeleteComment(long commentId)
+        {
+            var res = await _contactService.DeleteComment(User.GetUserId(), commentId);
+            if (res)
+            {
+                TempData[SuccessMessage] = "نظر شما با موفقیت حذف شد";
+                return RedirectToAction("ShowComments");
+            }
+            TempData[WarningMessage] = "چنین نظری برای شما ثبت نشده است ";
+            return RedirectToAction("ShowComments");
         }
 
         #endregion

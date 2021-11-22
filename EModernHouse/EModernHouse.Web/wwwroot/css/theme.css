@@ -3983,9 +3983,7 @@ color: #000;
   display: none;
 }
 
-.product-detail .product-colors .list-radio-color input[type="radio"]:checked + label {
-  border-color: #007bff;
-}
+
 
 .product-detail .product-colors .list-radio-color label {
   position: relative;
@@ -4033,6 +4031,7 @@ color: #000;
 .product-detail .product-price .product-price-info .product-price-off {
   padding: 0 10px;
   margin-left: 15px;
+  margin-bottom: 35px;
   font-weight: 700;
   background: #f44336;
   color: #fff;

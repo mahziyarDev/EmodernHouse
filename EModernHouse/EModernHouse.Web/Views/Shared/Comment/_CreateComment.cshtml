@@ -2,6 +2,8 @@
 
 <form id="FromSendComment" asp-area="User" asp-controller="Home" asp-action="CreateCommetn" method="post">
     <input type="hidden"  asp-for="ProductId"/>
+    <input type="hidden" asp-for="ProductName"/>
+    <partial name="_CaptchaInput"/>
     <div class="row align-items-center">
         <div class="col-lg-6">
             <div class="form-element-row">

@@ -46,6 +46,13 @@ namespace EModernHouse.Web.Controllers
                 return NotFound();
             }
 
+            int countColor = 0;
+            foreach (var count in res.ProductColors)
+            {
+                countColor += count.Count;
+            }
+
+            ViewBag.coutn = countColor;
             ViewBag.Comment = await _contactService.ShowProductCommentByProductId(productId);
             return View(res);
         }

@@ -1,0 +1,65 @@
+﻿@using EModernHouse.Application.Extensions
+@using EModernHouse.Application.Utils
+@using EModernHouse.Web.PresentationExtentions
+@model List<EModernHouse.DataLayer.Entities.ProductComment.ProductComment>
+@{
+    ViewData["Title"] = "لیست نظرات شما";
+}
+
+<main class="page-content" style="margin-top: 235.5px; transform: none;">
+    <div class="container" style="transform: none;">
+        <div class="row mb-5" style="transform: none;">
+            <div class="col-lg-3 col-md-4 mb-md-0 mb-3 sticky-sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+                @await Component.InvokeAsync("UserSideBar")
+
+            </div>
+
+            <div class="col-lg-9 col-md-8">
+                <div class="section-title mb-2">
+                    @ViewData["Title"]
+                </div>
+                <div class="checkout-section shadow-around">
+                    <div class="checkout-section-content">
+                        <div class="row mx-0">
+                            @if (Model.Any() && Model != null)
+                            {
+                                @foreach (var comment in Model)
+                                {
+                                    <div class="col-xl-4 col-lg-4 col-sm-6 mb-3">
+                                        <div class="card">
+                                            <img class="card-img-top img-responsive" src="@(PathExtensions.ProductImageOrigin + comment.Product.ImageName)" alt="@comment.Product.Title">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@comment.TitleComment</h5>
+                                                <p class="card-text">@comment.TextComment</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <p class="text-center">
+                                                    وضعیت : @comment.ProductCommentState.GetEnumName()
+                                                    <br />
+                                                    <a asp-area="User" asp-controller="Home" asp-action="DeleteComment" asp-route-commentId="@comment.Id">حذف نظر</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="alert alert-warning text-center">
+                                    <p>تا کنون نظری ثبت نکرده اید</p>
+                                </div>
+
+                            }
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+

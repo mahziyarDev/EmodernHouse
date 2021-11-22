@@ -410,6 +410,7 @@ namespace EModernHouse.Application.Services.Implementations
                 .Include(s => s.ProductSelectedCategories)
                 .ThenInclude(s => s.ProductCategory)
                 .Include(s => s.ProductInterests)
+                .Include(s=>s.ProductColors)
                 .AsQueryable().Where(s => s.IsActive);
             if (startPrice > 0)
             {
@@ -446,6 +447,7 @@ namespace EModernHouse.Application.Services.Implementations
                 .Include(s => s.ProductColors)
                 .Include(s=>s.ProductFeatures)
                 .Include(s=>s.ProductComments )
+                .Include(s=>s.ProductDisCounts)
                 .SingleOrDefaultAsync(s => s.Id == productId);
 
             if (product == null) return null;
@@ -462,6 +464,7 @@ namespace EModernHouse.Application.Services.Implementations
                 ImageName = product.ImageName,
                 ProductCategories = product.ProductSelectedCategories.Select(s => s.ProductCategory).ToList(),
                 ShortLink = product.ShortLink,
+                ProductDisCount = product.ProductDisCounts?.OrderByDescending(s => s.CreateDate).FirstOrDefault(s => s.ExpireDate > DateTime.Now),
                 ProductColors = product.ProductColors.ToList(),
                 ProductGalleries = product.ProductGalleries.ToList(),
                 ProductFeatures = product.ProductFeatures.ToList(),

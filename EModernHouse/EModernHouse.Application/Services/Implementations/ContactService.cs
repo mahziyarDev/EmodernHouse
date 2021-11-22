@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
@@ -22,7 +23,7 @@ namespace EModernHouse.Application.Services.Implementations
         private readonly IGenericRepository<Ticket> _ticketRepository;
         private readonly IGenericRepository<TicketMessage> _ticketMessageRepository;
         private readonly IGenericRepository<ProductComment> _productCommentRepository;
-
+        
         public ContactService(IGenericRepository<ContactUs> contactUsRepository,
             IGenericRepository<Ticket> ticketRepository, IGenericRepository<TicketMessage> ticketMessageRepository,
             IGenericRepository<ProductComment> productCommentRepository)
@@ -229,6 +230,64 @@ namespace EModernHouse.Application.Services.Implementations
             return true;
         }
 
+        public async Task<List<ProductComment>> ShowCommentsForUser(long userId)
+        {
+            return await _productCommentRepository.GetQuery().AsQueryable()
+                .Include(s=>s.Product)
+                .Where(s => s.UserId == userId && !s.IsDelete)
+                .ToListAsync();
+        }
+
+        public async Task<bool> DeleteComment(long userId, long commentId)
+        {
+            var comment = await _productCommentRepository.GetEntityById(commentId);
+            if (comment == null) return false;
+            if (comment.UserId == userId)
+            {
+                comment.IsDelete = true;
+                _productCommentRepository.EditEntity(comment);
+                await _productCommentRepository.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<List<ProductComment>> ShowNewCommentForAdmin()
+        {
+            return await _productCommentRepository.GetQuery().AsQueryable()
+                .Where(s => !s.IsDelete && s.ProductCommentState == ProductCommentState.UnderProgress)
+                .Include(s=>s.User)
+                .ToListAsync();
+        }
+
+        public async Task<ProductComment> ShowCommentByIdForAdmin(long commentId)
+        {
+            return await _productCommentRepository.GetQuery().AsQueryable()
+                .Include(s => s.User)
+                .SingleOrDefaultAsync(s => s.Id == commentId);
+
+        }
+
+        public async Task<bool> AcceptStateComment(long commentId)
+        {
+            var comment = await _productCommentRepository.GetEntityById(commentId);
+            if (comment == null) return false;
+            comment.ProductCommentState = ProductCommentState.Accepted;
+            _productCommentRepository.EditEntity(comment);
+            await _productCommentRepository.SaveChanges();
+            return true;
+        }
+
+        public async Task<bool> RejectStateComment(long commentId)
+        {
+            var comment = await _productCommentRepository.GetEntityById(commentId);
+            if (comment == null) return false;
+            comment.ProductCommentState = ProductCommentState.Rejected;
+            _productCommentRepository.EditEntity(comment);
+            await _productCommentRepository.SaveChanges();
+            return true;
+        }
         #endregion
 
         #region ticketForAdmin

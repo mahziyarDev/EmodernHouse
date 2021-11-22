@@ -70,6 +70,47 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
         }
         #endregion
 
+        #region Comments
+
+        [HttpGet("show-new-comments")]
+        public async Task<IActionResult> ShowComments()
+        {
+            return View(await _contactService.ShowNewCommentForAdmin());
+        }
+
+        [HttpGet("show-comment/{commentId}")]
+        public async Task<IActionResult> ShowCommentById(long commentId)
+        {
+            return View(await _contactService.ShowCommentByIdForAdmin(commentId));
+        }
+
+        [HttpGet("accept-comment/{commentId}")]
+        public async Task<IActionResult> AcceptComment(long commentId)
+        {
+            var res = await _contactService.AcceptStateComment(commentId);
+            if (res)
+            {
+                TempData[SuccessMessage] = "با موفقیت تایید شد";
+                return RedirectToAction("ShowComments");
+            }
+            TempData[WarningMessage] = "عملیات ناموفق بود";
+            return RedirectToAction("ShowComments");
+        }
+
+        [HttpGet("reject-comment/{commentId}")]
+        public async Task<IActionResult> RejectComment(long commentId)
+        {
+            var res = await _contactService.RejectStateComment(commentId);
+            if (res)
+            {
+                TempData[SuccessMessage] = "با موفقیت رد شد";
+                return RedirectToAction("ShowComments");
+            }
+            TempData[WarningMessage] = "عملیات ناموفق بود";
+            return RedirectToAction("ShowComments");
+        }
+        #endregion
+
         #region Email
 
 

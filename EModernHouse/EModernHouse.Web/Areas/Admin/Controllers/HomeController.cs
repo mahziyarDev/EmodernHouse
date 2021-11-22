@@ -22,12 +22,14 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
         private readonly IUserService _userService;
         private readonly IProductService _productService;
         private readonly ISiteService _siteService;
+        private readonly ISmsService _smsService;
 
-        public HomeController(IUserService userService, IProductService productService, ISiteService siteService)
+        public HomeController(IUserService userService, IProductService productService, ISiteService siteService, ISmsService smsService)
         {
             _userService = userService;
             _productService = productService;
             _siteService = siteService;
+            _smsService = smsService;
         }
         
         #endregion
@@ -125,11 +127,25 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
         #endregion
 
         #region
-        //[HttpGet("ticket-list")]
-        //public async Task<IActionResult> FilterTickets()
-        //{
-        //    return View();
-        //}
+
+        [HttpGet("send-sms")]
+        public async Task<IActionResult> SendSmsToUser()
+        {
+            return View();
+        }
+        [HttpPost("send-sms")]
+        public async Task<IActionResult> SendSmsToUser(string mobile,string shortText)
+        {
+            if (!string.IsNullOrEmpty(mobile) && !string.IsNullOrEmpty(shortText))
+            {
+                await _smsService.SendSmsInAdmin(mobile, shortText);
+                TempData[SuccessMessage] = "پیام با موفقیت ارسال شد";
+                return RedirectToAction("SendSmsToUser");
+            }
+
+            TempData[ErrorMessage] = "مقادیر وارد شده را پر کنید";
+            return RedirectToAction("SendSmsToUser");
+        }
         #endregion
     }
 }

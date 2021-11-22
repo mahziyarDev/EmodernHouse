@@ -206,3 +206,7 @@ $('#colorswitch').attr('href', '/css/colors/amber.css');
 $("#btnSendComment").on('click',function() {
     $("#FromSendComment").submit();
 });
+
+$("").on('click',function() {
+
+});

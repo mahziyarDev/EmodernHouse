@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EModernHouse.Application.Extensions;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Contacts;
 using EModernHouse.DataLayer.Entities.Site;
@@ -46,7 +47,8 @@ namespace EModernHouse.Web.Controllers
         [HttpGet("banner-test")]
         public async Task<IActionResult> Test()
         {
-           
+             EmailSender.SendEmail("mahziyar138006@gmail.com", "تست", "تست");
+            
             return View();
         }
         #endregion
@@ -98,5 +100,11 @@ namespace EModernHouse.Web.Controllers
         }
 
         #endregion
+
+
+        public async Task<IActionResult> Error404()
+        {
+            return View();
+        }
     }
 }

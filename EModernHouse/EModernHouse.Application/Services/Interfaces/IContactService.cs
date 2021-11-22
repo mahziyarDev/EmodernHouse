@@ -33,7 +33,12 @@ namespace EModernHouse.Application.Services.Interfaces
 
         Task<List<ProductComment>> ShowProductCommentByProductId(long productId);
         Task<bool> CreateComment(CreateCommentDTO create, long userId);
-
+        Task<List<ProductComment>> ShowCommentsForUser(long userId);
+        Task<bool> DeleteComment(long userId, long commentId);
+        Task<List<ProductComment>> ShowNewCommentForAdmin();
+        Task<ProductComment> ShowCommentByIdForAdmin(long commentId);
+        Task<bool> AcceptStateComment(long commentId);
+        Task<bool> RejectStateComment(long commentId);
         #endregion
 
         #region ticketForAdmin

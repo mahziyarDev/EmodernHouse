@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using EModernHouse.DataLayer.Entities.Discount;
 using EModernHouse.DataLayer.Entities.Product;
 using EModernHouse.DataLayer.Entities.ProductComment;
 
@@ -34,11 +35,13 @@ namespace EModernHouse.DataLayer.DTOs.Product
         [Display(Name = "لینک کوتاه محصول")]
         public string ShortLink { get; set; }
 
+        public ProductDisCount ProductDisCount { get; set; }
         public List<ProductColor> ProductColors { get; set; }
         public List<ProductGallery> ProductGalleries { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
         public List<ProductFeature> ProductFeatures { get; set; }
         public List<Entities.Product.Product> RelatedProducts { get; set; }
         public List<ProductComment> ProductComments { get; set; }
+
     }
 }
