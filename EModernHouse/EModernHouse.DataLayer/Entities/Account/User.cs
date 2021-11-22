@@ -8,6 +8,7 @@ using EModernHouse.DataLayer.Entities.Contacts;
 using EModernHouse.DataLayer.Entities.Discount;
 using EModernHouse.DataLayer.Entities.Interest;
 using EModernHouse.DataLayer.Entities.ProductOrder;
+using EModernHouse.DataLayer.Entities.Roles;
 
 namespace EModernHouse.DataLayer.Entities.Account
 {
@@ -75,6 +76,7 @@ namespace EModernHouse.DataLayer.Entities.Account
         public UserAddress UserAddress { get; set; }
         public ICollection<ProductDiscountUse> ProductDiscountUses { get; set; }
         public ICollection<ProductComment.ProductComment> ProductComments { get; set; }
+        public ICollection<UserSelectedRole> UserSelectedRoles { get; set; }
         #endregion
 
     }

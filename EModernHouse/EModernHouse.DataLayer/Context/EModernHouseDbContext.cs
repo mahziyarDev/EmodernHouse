@@ -7,6 +7,7 @@ using EModernHouse.DataLayer.Entities.Interest;
 using EModernHouse.DataLayer.Entities.Product;
 using EModernHouse.DataLayer.Entities.ProductComment;
 using EModernHouse.DataLayer.Entities.ProductOrder;
+using EModernHouse.DataLayer.Entities.Roles;
 using EModernHouse.DataLayer.Entities.Site;
 using EModernHouse.DataLayer.Entities.Wallet;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +50,9 @@ namespace EModernHouse.DataLayer.Context
         public ProductDisCount ProductDisCount { get; set; }
         public ProductDiscountUse ProductDiscountUse { get; set; }
         public ProductComment ProductComments { get; set; }
+        public Roles Roles { get; set; }
+        public UserSelectedRole UserSelectedRolesRoles { get; set; }
+        public ProductForShowIndex ProductForShowIndexes { get; set; }
         #endregion
 
         #region on model Creating
