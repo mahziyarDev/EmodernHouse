@@ -1,6 +1,8 @@
-﻿@model EModernHouse.DataLayer.DTOs.Account.CreateUserDTO
+﻿@using EModernHouse.DataLayer.Entities.Roles
+@model EModernHouse.DataLayer.DTOs.Account.CreateUserDTO
 @{
     ViewData["Title"] = "افزودن کاربر جدید";
+    var Role = ViewBag.role as List<Roles>;
 }
 
 @section script
@@ -68,6 +70,26 @@
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header">
+                <span class="widget-caption">سطح دسترسی کاربر</span>
+            </div>
+            <div class="widget-body">
+                @foreach (var role in Role)
+                {
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                @role.Title
+                                <input type="checkbox" class="CkeckboxInput_createUser" name="@nameof(Model.Roles)" value="@role.Id">
+                            </label>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>

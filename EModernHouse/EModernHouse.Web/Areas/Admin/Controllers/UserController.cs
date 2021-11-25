@@ -15,10 +15,11 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
         #region Ctor
 
         private readonly IUserService _userService;
-
-        public UserController(IUserService userService)
+        private readonly IRoleService _roleService;
+        public UserController(IUserService userService, IRoleService roleService)
         {
             _userService = userService;
+            _roleService = roleService;
         }
 
         #endregion
@@ -41,8 +42,9 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
 
         #region Create User
         [HttpGet("create-user")]
-        public IActionResult CreateUser()
+        public async Task<IActionResult> CreateUser()
         {
+            ViewBag.role = await _roleService.GetRoles();
             return View();
         }
 

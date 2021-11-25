@@ -5649,11 +5649,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mahziyar\\Desktop\\jalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj",
+      "projectUniqueName": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj",
       "projectName": "EModernHouse.Application",
-      "projectPath": "C:\\Users\\Mahziyar\\Desktop\\jalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj",
+      "projectPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj",
       "packagesPath": "C:\\Users\\Mahziyar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mahziyar\\Desktop\\jalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\obj\\",
+      "outputPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Mahziyar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5670,8 +5670,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Mahziyar\\Desktop\\jalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj": {
-              "projectPath": "C:\\Users\\Mahziyar\\Desktop\\jalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj"
+            "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj": {
+              "projectPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj"
             }
           }
         }

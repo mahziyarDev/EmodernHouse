@@ -9,6 +9,7 @@ using EModernHouse.Application.Extensions;
 using EModernHouse.Application.Utils;
 using EModernHouse.DataLayer.DTOs.Account;
 using EModernHouse.DataLayer.Entities.Account;
+using EModernHouse.DataLayer.Entities.Roles;
 using EModernHouse.DataLayer.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -24,13 +25,15 @@ namespace EModernHouse.Application.Services.Implementations
         private readonly IPasswordHelper _passwordHelper;
         private readonly ISmsService _smsService;
         private readonly IGenericRepository<UserAddress> _userAddressRepository;
+        private readonly IGenericRepository<UserSelectedRole> _userSelectedRoleRepository;
 
-        public UserService(IGenericRepository<User> useRepository, IPasswordHelper passwordHelper, ISmsService smsService, IGenericRepository<UserAddress> userAddressRepository)
+        public UserService(IGenericRepository<User> useRepository, IPasswordHelper passwordHelper, ISmsService smsService, IGenericRepository<UserAddress> userAddressRepository, IGenericRepository<UserSelectedRole> userSelectedRoleRepository)
         {
             _useRepository = useRepository;
             _passwordHelper = passwordHelper;
             _smsService = smsService;
             _userAddressRepository = userAddressRepository;
+            _userSelectedRoleRepository = userSelectedRoleRepository;
         }
         #endregion
 
@@ -49,6 +52,12 @@ namespace EModernHouse.Application.Services.Implementations
                 };
 
                 await _useRepository.AddEntity(user);
+                var selectedRole = new UserSelectedRole
+                {
+                    RolesId = 1,
+                    UserId = user.Id
+                };
+                await _userSelectedRoleRepository.AddEntity(selectedRole);
                 await _useRepository.SaveChanges();
                 // await _smsService.SendVerificationSms(user.Mobile, user.MobileActiveCode);
                 return RegisterUserResult.Success;
@@ -202,6 +211,10 @@ namespace EModernHouse.Application.Services.Implementations
                 IsMobileActive = createUser.IsMobileActive,
             };
             await _useRepository.AddEntity(user);
+            foreach (long userRole in createUser.Roles)
+            {
+                
+            }
             await _useRepository.SaveChanges();
             return true;
         }

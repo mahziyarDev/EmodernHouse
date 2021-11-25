@@ -1,0 +1,380 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = EModernHouse.Web
+build_property.RootNamespace = EModernHouse.Web
+build_property.ProjectDir = C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Mahziyar\Desktop\jalili\EmodernHouse\EModernHouse\EModernHouse.Web
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Category/CategoriesList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcnlcQ2F0ZWdvcmllc0xpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Category/EditMainCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcnlcRWRpdE1haW5DYXRlZ29yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Home/CreateSiteSetting.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxDcmVhdGVTaXRlU2V0dGluZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Home/EditSiteSetting.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxFZGl0U2l0ZVNldHRpbmcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Home/SendSmsToUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxTZW5kU21zVG9Vc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Home/SiteSetting.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxTaXRlU2V0dGluZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Inbox/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5ib3hcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Inbox/ShowCommentById.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5ib3hcU2hvd0NvbW1lbnRCeUlkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Inbox/ShowComments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5ib3hcU2hvd0NvbW1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Inbox/ShowTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5ib3hcU2hvd1RpY2tldC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Inbox/ShowTicketsAcademy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5ib3hcU2hvd1RpY2tldHNBY2FkZW15LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Inbox/ShowTicketsSupport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5ib3hcU2hvd1RpY2tldHNTdXBwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Inbox/ShowTicketsTechnical.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSW5ib3hcU2hvd1RpY2tldHNUZWNobmljYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/ProductDiscount/CreateProductDiscount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdERpc2NvdW50XENyZWF0ZVByb2R1Y3REaXNjb3VudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/ProductDiscount/GetDiscount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdERpc2NvdW50XEdldERpc2NvdW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/ProductFeature/CreateProductFeature.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdEZlYXR1cmVcQ3JlYXRlUHJvZHVjdEZlYXR1cmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Product/CreateProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdFxDcmVhdGVQcm9kdWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Product/CreateProductColor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdFxDcmVhdGVQcm9kdWN0Q29sb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Product/CreateProductGallery.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdFxDcmVhdGVQcm9kdWN0R2FsbGVyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Product/EditProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdFxFZGl0UHJvZHVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Product/ProductList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdFxQcm9kdWN0TGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Shared/_AdminChatBarSection.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pbkNoYXRCYXJTZWN0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Shared/_AdminFooterReferences.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pbkZvb3RlclJlZmVyZW5jZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Shared/_AdminHeaderReferences.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pbkhlYWRlclJlZmVyZW5jZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Shared/_AdminNavbarSection.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pbk5hdmJhclNlY3Rpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Shared/_AdminSideBarSection.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pblNpZGVCYXJTZWN0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Shared/_InboxSideBar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9JbmJveFNpZGVCYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Shared/_SendAnswerTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9TZW5kQW5zd2VyVGlja2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Shared/_ShowRowComment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9TaG93Um93Q29tbWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Shared/_SiteMessages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9TaXRlTWVzc2FnZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/SiteBanner/CreateBanner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2l0ZUJhbm5lclxDcmVhdGVCYW5uZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/SiteBanner/EDitBanner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2l0ZUJhbm5lclxFRGl0QmFubmVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/SiteBanner/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2l0ZUJhbm5lclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Slider/CreateSlider.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2xpZGVyXENyZWF0ZVNsaWRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Slider/EditSlider.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2xpZGVyXEVkaXRTbGlkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/Slider/SliderList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2xpZGVyXFNsaWRlckxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/User/CreateUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlclxDcmVhdGVVc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/User/EdtiUserForAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlclxFZHRpVXNlckZvckFkbWluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/User/ListUsers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlclxMaXN0VXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/Admin/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Account/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xBY2NvdW50XENoYW5nZVBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Account/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xBY2NvdW50XEVkaXRQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Home/ActiveEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xIb21lXEFjdGl2ZUVtYWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Home/FavoriteProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xIb21lXEZhdm9yaXRlUHJvZHVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xIb21lXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Home/ShowComments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xIb21lXFNob3dDb21tZW50cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Order/DetailOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xPcmRlclxEZXRhaWxPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Order/DetailOrderById.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xPcmRlclxEZXRhaWxPcmRlckJ5SWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Order/UserOpenOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xPcmRlclxVc2VyT3Blbk9yZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Shared/Components/UserSidebar/UserSidebar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xTaGFyZWRcQ29tcG9uZW50c1xVc2VyU2lkZWJhclxVc2VyU2lkZWJhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Shared/_AnswerTicketPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xTaGFyZWRcX0Fuc3dlclRpY2tldFBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Ticket/AddTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xUaWNrZXRcQWRkVGlja2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Ticket/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xUaWNrZXRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/Ticket/TicketDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xUaWNrZXRcVGlja2V0RGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Areas/User/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Account/ActivateMobile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY3RpdmF0ZU1vYmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Account/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Home/ContactUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0VXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Home/Error404.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFcnJvcjQwNC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Home/FollowUp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGb2xsb3dVcC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Home/Seller.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWxsZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Home/Test.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Product/ProductDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0RGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Product/Products.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/Comment/_CreateComment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbW1lbnRcX0NyZWF0ZUNvbW1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/Comment/_ShowComments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbW1lbnRcX1Nob3dDb21tZW50cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/Components/HomeSlider/HomeSlider.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcSG9tZVNsaWRlclxIb21lU2xpZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/Components/SiteFooter/SiteFooter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcU2l0ZUZvb3RlclxTaXRlRm9vdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/Components/SiteHeader/SiteHeader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcU2l0ZUhlYWRlclxTaXRlSGVhZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/Components/UserOrderResponsive/UserOrderResponsive.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcVXNlck9yZGVyUmVzcG9uc2l2ZVxVc2VyT3JkZXJSZXNwb25zaXZlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/Components/UserOrder/UserOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcVXNlck9yZGVyXFVzZXJPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/_AddProductToCardPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZGRQcm9kdWN0VG9DYXJkUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/_CaptchaInput.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DYXB0Y2hhSW5wdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/_CaptchaScripts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DYXB0Y2hhU2NyaXB0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/_FooterReferences.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXJSZWZlcmVuY2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/_HeaderReferences.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9IZWFkZXJSZWZlcmVuY2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/_JqueryValidator.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9KcXVlcnlWYWxpZGF0b3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/_MainLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NYWluTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/_NoItemFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob0l0ZW1Gb3VuZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/_ProductBig.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Qcm9kdWN0QmlnLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/_ProductSmal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Qcm9kdWN0U21hbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/Shared/_SiteMessages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TaXRlTWVzc2FnZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahziyar/Desktop/jalili/EmodernHouse/EModernHouse/EModernHouse.Web/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

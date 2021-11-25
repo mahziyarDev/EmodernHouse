@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Un2Rrv1NjG+pCMtHcxRvDWpBy6veo2iPvvxrBz800LnnAQJatoqq+Ma3UzfhqD4FWDjvbsa4RHJZpLt3oLU6wA==",
+  "dgSpecHash": "aYjmIHhI7QpMBA2JYJQ/0Wqur/ZpvrxFYsCPzVaeL8RmJEU99Q/8/YGJ1+qx2T3PkOGU6i9L9fzy2hQyl8T6/Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mahziyar\\Desktop\\jalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj",
+  "projectFilePath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mahziyar\\.nuget\\packages\\kavenegardotnetcore\\1.0.3\\kavenegardotnetcore.1.0.3.nupkg.sha512",
     "C:\\Users\\Mahziyar\\.nuget\\packages\\lazziya.imageresize\\4.1.0\\lazziya.imageresize.4.1.0.nupkg.sha512",
