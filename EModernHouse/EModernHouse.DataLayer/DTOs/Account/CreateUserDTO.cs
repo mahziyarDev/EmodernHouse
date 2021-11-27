@@ -38,9 +38,7 @@ namespace EModernHouse.DataLayer.DTOs.Account
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1}کاراکتر باشد .")]
         public string LastName { get; set; }
 
-        [Display(Name = "سطح دسترسی های کاربر")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        public List<long> Roles { get; set; }
+        
     }
 
 

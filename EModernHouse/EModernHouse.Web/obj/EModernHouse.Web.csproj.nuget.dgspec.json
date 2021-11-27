@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\EModernHouse.Web.csproj": {}
+    "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\EModernHouse.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj": {
+    "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj",
+        "projectUniqueName": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj",
         "projectName": "EModernHouse.Application",
-        "projectPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj",
+        "projectPath": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj",
         "packagesPath": "C:\\Users\\Mahziyar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\obj\\",
+        "outputPath": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mahziyar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj": {
-                "projectPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj"
+              "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj": {
+                "projectPath": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj"
               }
             }
           }
@@ -52,9 +52,21 @@
               "target": "Package",
               "version": "[4.1.0, )"
             },
+            "Microsoft.AspNetCore.Authorization": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.AspNetCore.Http": {
               "target": "Package",
               "version": "[2.2.2, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -80,18 +92,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj": {
+    "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj",
+        "projectUniqueName": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj",
         "projectName": "EModernHouse.DataLayer",
-        "projectPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj",
+        "projectPath": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj",
         "packagesPath": "C:\\Users\\Mahziyar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\obj\\",
+        "outputPath": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mahziyar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -156,18 +168,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\EModernHouse.Web.csproj": {
+    "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\EModernHouse.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\EModernHouse.Web.csproj",
+        "projectUniqueName": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\EModernHouse.Web.csproj",
         "projectName": "EModernHouse.Web",
-        "projectPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\EModernHouse.Web.csproj",
+        "projectPath": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\EModernHouse.Web.csproj",
         "packagesPath": "C:\\Users\\Mahziyar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\obj\\",
+        "outputPath": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mahziyar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -184,11 +196,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj": {
-                "projectPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj"
+              "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj": {
+                "projectPath": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj"
               },
-              "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj": {
-                "projectPath": "C:\\Users\\Mahziyar\\Desktop\\ProjectJalili\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj"
+              "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj": {
+                "projectPath": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.DataLayer\\EModernHouse.DataLayer.csproj"
               }
             }
           }
@@ -254,7 +266,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Content\Images\SiteBanner\**" />
+    <Compile Remove="wwwroot\Content\Images\SiteLogo\**" />
+    <Content Remove="wwwroot\Content\Images\SiteBanner\**" />
+    <Content Remove="wwwroot\Content\Images\SiteLogo\**" />
+    <EmbeddedResource Remove="wwwroot\Content\Images\SiteBanner\**" />
+    <EmbeddedResource Remove="wwwroot\Content\Images\SiteLogo\**" />
+    <None Remove="wwwroot\Content\Images\SiteBanner\**" />
+    <None Remove="wwwroot\Content\Images\SiteLogo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="GoogleReCaptcha.V3" Version="1.3.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.11">
@@ -30,14 +41,19 @@
     <Folder Include="Http\" />
     <Folder Include="wwwroot\Content\Images\CategoryImage\Origin\" />
     <Folder Include="wwwroot\Content\Images\CategoryImage\Thumb\" />
-    <Folder Include="wwwroot\Content\Images\SiteLogo\" />
+    <Folder Include="wwwroot\Content\Images\ProductGallery\Origin\" />
+    <Folder Include="wwwroot\Content\Images\ProductGallery\Thumb\" />
     <Folder Include="wwwroot\Content\Images\ProductImage\" />
-    <Folder Include="wwwroot\Content\Images\SiteBanner\Thumb\" />
-    <Folder Include="wwwroot\Content\Images\SiteBanner\Origin\" />
+    <Folder Include="wwwroot\Content\Images\ProductImage\Origin\" />
+    <Folder Include="wwwroot\Content\Images\ProductImage\Thumb\" />
     <Folder Include="wwwroot\Content\Images\UserAvatar\" />
+    <Folder Include="wwwroot\Content\Images\UserAvatar\Origin\" />
+    <Folder Include="wwwroot\Content\Images\UserAvatar\Thumb\" />
     <Folder Include="wwwroot\Content\SiteBannerImage\" />
+    <Folder Include="wwwroot\Content\SiteLogo\" />
     <Folder Include="wwwroot\images\main-slider\SliderThumb\" />
     <Folder Include="wwwroot\images\main-slider\SliderOrigin\" />
+    <Folder Include="wwwroot\images\Upload\" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.DataLayer.Entities.Account;
 using EModernHouse.DataLayer.Entities.Roles;
 using EModernHouse.DataLayer.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -12,18 +13,32 @@ namespace EModernHouse.Application.Services.Implementations
     {
         #region Ctor
 
-        private readonly IGenericRepository<Roles> _roleRepository;
+        private readonly IGenericRepository<DataLayer.Entities.Roles.Roles> _roleRepository;
         private readonly IGenericRepository<UserSelectedRole> _userSelectedRoleRepository;
-        public RoleServices(IGenericRepository<Roles> roleRepository, IGenericRepository<UserSelectedRole> userSelectedRoleRepository)
+        private readonly IGenericRepository<User> _useRepository;
+        public RoleServices(IGenericRepository<DataLayer.Entities.Roles.Roles> roleRepository, IGenericRepository<UserSelectedRole> userSelectedRoleRepository, IGenericRepository<User> useRepository)
         {
             _roleRepository = roleRepository;
             _userSelectedRoleRepository = userSelectedRoleRepository;
+            _useRepository = useRepository;
         }
         #endregion
 
-        public async Task<List<Roles>> GetRoles()
+        public long GetUserIdByMobile(string mobile)
         {
-            return await _roleRepository.GetQuery().AsQueryable().ToListAsync();
+            var user = _useRepository.GetQuery().SingleOrDefault(s => s.Mobile == mobile);
+            return user.Id;
+        }
+        public bool CheckRoles(long id, long userId)
+        {
+            var userRoles = _userSelectedRoleRepository.GetQuery()
+                .Any(s => s.UserId == userId && s.RolesId == id);
+            if (userRoles)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         #region Dispose

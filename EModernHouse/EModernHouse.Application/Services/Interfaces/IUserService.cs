@@ -20,6 +20,7 @@ namespace EModernHouse.Application.Services.Interfaces
         Task<EditUserProfileDTO> GetProfileForEdit(long userId);
         Task<EditUserProfileResult> EditUserProfile(EditUserProfileDTO profile,long userId, IFormFile avatarImage);
         Task<User> GetUSerById(long userId);
+        Task<bool> UserChangeAdmin(long userId);
 
         #region UserForAdmin
 

@@ -26,14 +26,16 @@ namespace EModernHouse.Application.Services.Implementations
         private readonly ISmsService _smsService;
         private readonly IGenericRepository<UserAddress> _userAddressRepository;
         private readonly IGenericRepository<UserSelectedRole> _userSelectedRoleRepository;
+        private readonly IGenericRepository<DataLayer.Entities.Roles.Roles> _rolesRepository;
 
-        public UserService(IGenericRepository<User> useRepository, IPasswordHelper passwordHelper, ISmsService smsService, IGenericRepository<UserAddress> userAddressRepository, IGenericRepository<UserSelectedRole> userSelectedRoleRepository)
+        public UserService(IGenericRepository<User> useRepository, IPasswordHelper passwordHelper, ISmsService smsService, IGenericRepository<UserAddress> userAddressRepository, IGenericRepository<UserSelectedRole> userSelectedRoleRepository, IGenericRepository<DataLayer.Entities.Roles.Roles> rolesRepository)
         {
             _useRepository = useRepository;
             _passwordHelper = passwordHelper;
             _smsService = smsService;
             _userAddressRepository = userAddressRepository;
             _userSelectedRoleRepository = userSelectedRoleRepository;
+            _rolesRepository = rolesRepository;
         }
         #endregion
 
@@ -52,13 +54,14 @@ namespace EModernHouse.Application.Services.Implementations
                 };
 
                 await _useRepository.AddEntity(user);
+                await _useRepository.SaveChanges();
                 var selectedRole = new UserSelectedRole
                 {
-                    RolesId = 1,
+                    RolesId = 3,
                     UserId = user.Id
                 };
                 await _userSelectedRoleRepository.AddEntity(selectedRole);
-                await _useRepository.SaveChanges();
+                await _userSelectedRoleRepository.SaveChanges();
                 // await _smsService.SendVerificationSms(user.Mobile, user.MobileActiveCode);
                 return RegisterUserResult.Success;
             }
@@ -211,11 +214,14 @@ namespace EModernHouse.Application.Services.Implementations
                 IsMobileActive = createUser.IsMobileActive,
             };
             await _useRepository.AddEntity(user);
-            foreach (long userRole in createUser.Roles)
-            {
-                
-            }
             await _useRepository.SaveChanges();
+            var userRole = new UserSelectedRole
+            {
+                UserId = user.Id,
+                RolesId = 3,
+            };
+            await _userSelectedRoleRepository.AddEntity(userRole);
+            await _userSelectedRoleRepository.SaveChanges();
             return true;
         }
 
@@ -267,6 +273,23 @@ namespace EModernHouse.Application.Services.Implementations
             return true;
         }
 
+        public async Task<bool> UserChangeAdmin(long userId)
+        {
+            var user = await _useRepository.GetEntityById(userId);
+            if (user==null)
+            {
+                return false;
+            }
+
+            var userRole = new UserSelectedRole
+            {
+                UserId = user.Id,
+                RolesId = 2,
+            };
+            await _userSelectedRoleRepository.AddEntity(userRole);
+            await _userSelectedRoleRepository.SaveChanges();
+            return true;
+        }
         public async Task<Tuple<List<User>, int>> GetUsersForFilter(int pageId, int take, string mobile, string name, string email)
         {
             IQueryable<User> users = _useRepository.GetQuery().AsQueryable().Where(s=>!s.IsDelete && !s.IsBlocked);

@@ -1,5 +1,90 @@
 ﻿@using EModernHouse.DataLayer.Entities.Site
-@model EModernHouse.DataLayer.DTOs.Site.SiteBannerDTO
+@model EModernHouse.DataLayer.DTOs.Account.RegisterUserDTO
 @{
     ViewData["Title"] = "Test";
+    Layout = null;
 }
+<main class="page-content">
+    <div class="container">
+        <div class="auth-wrapper">
+            <div class="auth-form shadow-around">
+                <div class="site-logo">
+                    <a href="#">
+                        <img src="/images/logo.png" alt="logo">
+                    </a>
+                </div>
+                <div class="auth-form-title">
+                    خانه مدرن الکترونیک
+                </div>
+                <form asp-controller="Home" asp-action="Test" method="post">
+                    <partial name="_CaptchaInput" />
+                    <div class="form-element-row">
+                        <label for="FirstName" class="label-element">نام</label>
+                        <div class="form-element-with-icon">
+                            <input type="text" class="input-element" id="FirstName" asp-for="FirstName">
+
+                        </div>
+                        <span class="text-danger" asp-validation-for="FirstName"></span>
+                    </div>
+
+                    <div class="form-element-row">
+                        <label for="LastName" class="label-element">نام خانوادگی</label>
+                        <div class="form-element-with-icon">
+                            <input type="text" class="input-element" id="LastName" asp-for="LastName">
+
+                        </div>
+                        <span class="text-danger" asp-validation-for="LastName"></span>
+                    </div>
+
+                    <div class="form-element-row">
+                        <label for="phone-number" class="label-element">شماره موبایل</label>
+                        <div class="form-element-with-icon">
+                            <input type="text" class="input-element" id="phone-number" asp-for="Mobile">
+
+                        </div>
+                        <span class="text-danger" asp-validation-for="Mobile"></span>
+                    </div>
+
+                    <div class="form-element-row">
+                        <label for="Password" class="label-element">رمز عبور</label>
+                        <div class="form-element-with-icon">
+                            <input type="password" class="input-element" id="Password" asp-for="Password">
+
+                        </div>
+                        <span class="text-danger" asp-validation-for="Password"></span>
+                    </div>
+
+                    <div class="form-element-row">
+                        <label for="ConfirmPassword" class="label-element">تکرار رمز عبور</label>
+                        <div class="form-element-with-icon">
+                            <input type="password" class="input-element" id="ConfirmPassword" asp-for="ConfirmPassword">
+
+                        </div>
+                        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                    </div>
+
+                    <div class="form-element-row">
+                        <label class="container-checkbox">
+                            <a href="#" class="link--with-border-bottom">حریم خصوصی</a> و <a href="#" class="link--with-border-bottom">شرایط و قوانین</a> استفاده از سرویس های سایت
+                            خانه مدرن الکترونیک  را مطالعه نموده
+                            و با کلیه موارد آن موافقم.
+
+                        </label>
+                    </div>
+
+                    <div class="form-element-row text-left">
+                        <button class="btn-element btn-success-element">
+                            <i class="fad fa-user-edit"></i>
+                            ثبت نام در همتا
+                        </button>
+                    </div>
+
+                </form>
+                <div class="auth-form-footer">
+                    <span>قبلا در همتا ثبت‌نام کرده‌اید؟</span>
+                    <a href="#" class="link--with-border-bottom">وارد شوید</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

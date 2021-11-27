@@ -3,13 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EModernHouse.Application.Roles;
 using Microsoft.AspNetCore.Authorization;
 
 namespace EModernHouse.Web.Areas.Admin.Controllers
 {
     [Authorize]
+    [RolesCheker(2)]
     [Area("Admin")]
-    [Route("admin")]
+    [Route("star-site-admin")]
     public class AdminBaseController : Controller
     {
         protected string ErrorMessage = "ErrorMessage";

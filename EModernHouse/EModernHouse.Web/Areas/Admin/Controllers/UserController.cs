@@ -44,7 +44,6 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
         [HttpGet("create-user")]
         public async Task<IActionResult> CreateUser()
         {
-            ViewBag.role = await _roleService.GetRoles();
             return View();
         }
 
@@ -138,6 +137,23 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
                 JsonResponseStatusType.Danger,
                 "اطلاعاتی با این مشخصات یافت نشد",
                 null);
+        }
+
+        #endregion
+
+        #region ToAdmin
+        [HttpGet("toAdmin")]
+        public async Task<IActionResult> ToAdmin(long userId)
+        {
+            var res = await _userService.UserChangeAdmin(userId);
+            if (res)
+            {
+                TempData[SuccessMessage] = "کاربر به ادمین تغیییر سمت یافت";
+                return RedirectToAction("ListUsers");
+            }
+
+            TempData[WarningMessage] = "عملیات ناموفق بود";
+            return RedirectToAction("ListUsers");
         }
 
         #endregion

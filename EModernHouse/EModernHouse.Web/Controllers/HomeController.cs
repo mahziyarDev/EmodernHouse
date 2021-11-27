@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using EModernHouse.Application.Extensions;
 using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.DataLayer.DTOs.Account;
 using EModernHouse.DataLayer.DTOs.Contacts;
 using EModernHouse.DataLayer.Entities.Site;
 using EModernHouse.Web.PresentationExtentions;
@@ -19,13 +20,15 @@ namespace EModernHouse.Web.Controllers
         private readonly ICaptchaValidator _captchaValidator;
         private readonly ISiteService _siteService;
         private readonly IProductService _productService;
+        private readonly IUserService _userService;
 
-        public HomeController(IContactService contactService, ICaptchaValidator captchaValidator, ISiteService siteService, IProductService productService)
+        public HomeController(IContactService contactService, ICaptchaValidator captchaValidator, ISiteService siteService, IProductService productService, IUserService userService)
         {
             _contactService = contactService;
             _captchaValidator = captchaValidator;
             _siteService = siteService;
             _productService = productService;
+            _userService = userService;
         }
         #endregion
 
@@ -44,11 +47,10 @@ namespace EModernHouse.Web.Controllers
             
             return View(await _productService.GetProductForIndex(20));
         }
+
         [HttpGet("banner-test")]
         public async Task<IActionResult> Test()
         {
-             EmailSender.SendEmail("mahziyar138006@gmail.com", "تست", "تست");
-            
             return View();
         }
         #endregion

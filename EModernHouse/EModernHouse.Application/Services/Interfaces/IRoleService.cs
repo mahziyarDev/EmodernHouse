@@ -7,6 +7,7 @@ namespace EModernHouse.Application.Services.Interfaces
 {
     public interface IRoleService:IAsyncDisposable
     {
-        Task<List<Roles>> GetRoles();
+        long GetUserIdByMobile(string mobile);
+        bool CheckRoles(long id,long userId);
     }
 }
