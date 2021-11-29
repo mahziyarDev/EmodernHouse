@@ -47,6 +47,7 @@ namespace EModernHouse.Web
             services.AddScoped<IWalletService,WalletService>();
             services.AddScoped<ISliderService,SliderService>();
             services.AddScoped<IRoleService,RoleServices>();
+            services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<IProductDiscountService,ProductDiscountService>();
             services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
             

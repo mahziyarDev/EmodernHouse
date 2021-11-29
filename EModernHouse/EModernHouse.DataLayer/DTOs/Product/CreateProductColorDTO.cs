@@ -14,6 +14,10 @@ namespace EModernHouse.DataLayer.DTOs.Product
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string ColorCode { get; set; }
 
+        [Display(Name = "تعداد موجودی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public int Count { get; set; }
+
         [Display(Name = "قیمت")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public int Price { get; set; }

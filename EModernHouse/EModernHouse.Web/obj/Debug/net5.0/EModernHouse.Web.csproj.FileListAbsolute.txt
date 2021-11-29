@@ -731,3 +731,9 @@ D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\Microsoft
 D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
 D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\EModernHouse.Web.MvcApplicationPartsAssemblyInfo.cs
+D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Inventory\FilterForInventory.cshtml.g.cs
+D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Inventory\ShowProductById.cshtml.g.cs
+D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\AngleSharp.dll
+D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\AngleSharp.Css.dll
+D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\HtmlSanitizer.dll

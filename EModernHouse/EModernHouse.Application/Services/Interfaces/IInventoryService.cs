@@ -8,6 +8,8 @@ namespace EModernHouse.Application.Services.Interfaces
 {
     public interface IInventoryService : IAsyncDisposable
     {
-        //Task<List<Product>> ProductFilter(InventoryFilterDTO inventory);
+        Task<InventoryFilterDTO> GetProducyForInventory(int pageId, int take, string productName);
+        Task<List<ProductColor>> ProductColors(long productId);
+        Task<bool> InsertNumberCount(long colorId,int count);
     }
 }

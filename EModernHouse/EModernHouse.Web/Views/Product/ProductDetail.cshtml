@@ -138,7 +138,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6">
-                    @if (ViewBag.count > 0)
+                    @if (ViewBag.coutn > 0)
                     {
                         <div class="box-info-product">
                             <input type="hidden" name="productPrice" value="@Model.Price" id="productBasePrice" />
@@ -156,6 +156,7 @@
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span style="background-color: @color.ColorCode !important" class="color-span"></span>
                                                         <span class="mr-2">@color.ColorName</span>
+                                                        <span class="mr-2"> تعداد : @color.Count</span>
                                                     </div>
                                                 </label>
                                             }
@@ -198,7 +199,6 @@
                                                 var firstColor = Model.ProductColors.FirstOrDefault();
                                                 <span>@((Model.Price + firstColor.Price).ToString("##,###")) تومان</span>;
                                                 <span>(@firstColor.ColorName)</span>
-
                                             }
                                             else
                                             {
@@ -212,7 +212,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center justify-content-center">
-                                @if (ViewBag.count > 0)
+                                @if (ViewBag.coutn > 0)
                                 {
                                     <a class="add-to-cart pointer" id="AddProductToCardSubmit">
                                         افزودن به سبد خرید

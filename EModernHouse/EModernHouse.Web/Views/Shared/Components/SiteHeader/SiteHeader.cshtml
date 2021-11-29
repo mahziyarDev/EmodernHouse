@@ -145,18 +145,18 @@
                                                 <li class="col-12">
                                                     <a href="#">همه دسته بندی های @FirstGroup.Title</a>
                                                     <ul class="row">
-                                                        <li class="col-4">
-                                                            <a href="#" class="list-item--image my-3">
-                                                                <img src="@(PathExtensions.CategoryImageImageOrigin + mainGroup.CategoryImage)" class="img-fluid rounded" alt="@FirstGroup.Title">
-                                                            </a>
-                                                        </li>
+
                                                         @foreach (var TwoGroup in categories.Where(s => s.ParentId == FirstGroup.Id))
                                                         {
-                                                            <li class="col-2">
-                                                                <a href="/product-archive/@TwoGroup.Id">@TwoGroup.Title</a>
+                                                            <li class="col-4">
+                                                                <a href="/product-archive/@TwoGroup.Id?categoryName=@TwoGroup.Title">@TwoGroup.Title</a>
                                                             </li>
                                                         }
-
+                                                        <li class="col-12">
+                                                            <a href="#" class="list-item--image my-3">
+                                                                <img src="@(PathExtensions.CategoryImageImageOrigin + mainGroup.CategoryImage)" class="img-fluid rounded imageCategory" alt="@FirstGroup.Title">
+                                                            </a>
+                                                        </li>
                                                     </ul>
                                                 </li>
                                             </ul>

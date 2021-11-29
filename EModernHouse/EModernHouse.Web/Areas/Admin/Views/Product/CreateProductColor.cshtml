@@ -21,6 +21,7 @@
                 <tr>
                     <th>نام رنگ</th>
                     <th>کد رنگ</th>
+                    <th>قیمت رنگ</th>
                     <th>قیمت</th>
                     <th>دستورات</th>
                 </tr>
@@ -32,6 +33,7 @@
                         <td>@productColor.ColorName</td>
                         <td class="text-center" style="background-color: @productColor.ColorCode">@productColor.ColorCode</td>
                         <td class="text-center">@productColor.Price</td>
+                        <td class="text-center">@productColor.Count</td>
                         <td class="text-center">
                             <a class="btn btn-warning btn-sm" data-toggle="modal" data-target=".@productColor.Id">ویرایش</a>
                             <a class="btn btn-sm btn-danger" asp-area="Admin" asp-controller="Product" asp-action="DeleteProductColor" asp-route-colorId="@productColor.Id">حذف</a>
@@ -69,13 +71,19 @@ else
                     <div class="form-group">
                         <label>کد رنگ</label>
                         <input class="form-control" asp-for="ColorCode">
-                        <span asp-validation-for="ColorName" class="text-danger"></span>
+                        <span asp-validation-for="ColorCode" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>تعداد</label>
+                        <input class="form-control" asp-for="Count">
+                        <span asp-validation-for="Count" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label>قیمت</label>
                         <input class="form-control" asp-for="Price">
-                        <span asp-validation-for="ColorCode" class="text-danger"></span>
+                        <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
 
                     <button type="submit" class="btn btn-blue">ثبت رنگ</button>

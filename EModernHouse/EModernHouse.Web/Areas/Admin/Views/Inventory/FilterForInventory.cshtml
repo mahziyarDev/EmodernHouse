@@ -1,0 +1,118 @@
+﻿@using EModernHouse.Application.Utils
+@model EModernHouse.DataLayer.DTOs.Filter.InventoryFilterDTO
+@{
+    ViewData["Title"] = "FilterForInventory";
+}
+@section script
+{
+    <script src="/Admin/js/custom.js"></script>
+}
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="well with-header">
+            <div class="header bordered-sky">
+                جست و جو کردن
+            </div>
+            <div class="row">
+
+                <form id="FormFilterUSer">
+                    <input type="hidden" name="pageId" id="PageId" value="@ViewBag.PageId" />
+                    <div class="col-md-12 col-sm-12">
+                        <label>نام محصول</label>
+                        <input type="text" name="productName" class="form-control" value="@ViewBag.ProducrName" />
+                    </div>
+
+                    <div class="col-md-12 col-sm-12">
+                        <br />
+                        <button onclick="SendPage(ViewBag.pageId)" class="btn btn-primary mt-4">جست و جو</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-12 col-sm-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-sky">
+                @ViewData["Title"]
+            </div>
+            @if (Model.Products != null && Model.Products.Any())
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            تصویر محصول
+                        </th>
+                        <th>
+                            نام محصول
+                        </th>
+                        <th>
+                            قیمت محصول
+                        </th>
+                        <th>
+                            موجودی در انبار
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach (var product in Model.Products)
+                    {
+
+                        <tr>
+                               
+                            <td class="text-center">
+                                <img style="width: 80px;height: 80px" src="@(PathExtensions.ProductImageThumb + product.ImageName )" />
+                            </td>
+                            <td>
+                                @product.Title
+                            </td>
+                            <td>
+                                @product.Price
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-sm"
+                                asp-area="Admin" asp-controller="Inventory" asp-action="ShowProductById" asp-route-productId="@product.Id"
+                                   >نمایش</a>
+                            </td>
+
+                        </tr>
+
+                    }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    <p>اطلاعاتی یافت نشد</p>
+                </div>
+            }
+            <br />
+            <div class="dataTables_paginate paging_bootstrap text-center" id="simpledatatable_paginate">
+                <ul class="pagination">
+                    @if (Model.PageId > 1)
+                    {
+                        <li class="prev"><a onclick="sendPage(@(Model.PageId - 1))">قبل</a></li>
+                    }
+                    @for (int spage = Model.StartPage; spage <= Model.EndPage; spage++)
+                    {
+                        <li class="@((spage == Model.PageId)?"active":"")"><a href="#" onclick="sendPage(@spage)">@ViewBag.pageId</a></li>
+                    }
+
+
+                    @if (Model.PageId < Model.PageCount)
+                    {
+                        <li class="next"><a onclick="sendPage(@(Model.PageId + 1))">بعد</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

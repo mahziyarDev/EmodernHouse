@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Comment;
 using EModernHouse.Web.PresentationExtentions;
+using Ganss.XSS;
 using Microsoft.CodeAnalysis.Differencing;
+using WebMarkupMin.Core;
 
 namespace EModernHouse.Web.Areas.User.Controllers
 {
@@ -112,6 +114,9 @@ namespace EModernHouse.Web.Areas.User.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var sanitizer = new HtmlSanitizer();
+                    comment.TextComment = sanitizer.Sanitize(comment.TextComment);
+                    comment.TitleComment = sanitizer.Sanitize(comment.TitleComment);
                     var res =await _contactService.CreateComment(comment, User.GetUserId());
                     if (res)
                     {

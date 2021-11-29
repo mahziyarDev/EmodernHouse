@@ -1,0 +1,101 @@
+﻿@using EModernHouse.Application.Utils
+@model List<EModernHouse.DataLayer.Entities.Product.ProductColor>
+@{
+    ViewData["Title"] = "نمایش تعداد موجودی رنگ های محصول";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-sky">
+                @ViewData["Title"]
+            </div>
+            <div class="alert alert-info">
+                تعداد موجودی هر رنگ را با استفاده از فلش بالا و پایین 
+            </div>
+            @if (Model != null && Model.Any())
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            
+                            <th>
+                                نام رنگ
+                            </th>
+                            <th>
+                                کد رنگ  
+                            </th>
+                            <th>
+                                قیمت رنگ
+                            </th>
+                            <th>
+                                موجودی 
+                            </th>
+                            <th>
+                                دستورات
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var color in Model)
+                        {
+
+                            <tr>
+
+                                <td>
+                                    @color.ColorName
+                                </td>
+                                <td class="text-center" style="background: @color.ColorCode">
+                                    @color.ColorCode
+                                </td>
+                                <td>
+                                    @color.Price
+                                </td>
+                                <td>
+                                    <input id="inputCount-@color.Id" type="number" class="form-control"  value="@color.Count"/>
+                                </td>
+                                <td>
+                                    <button class="btn btn-success" onclick="count(@color.Id)">ثبت موجودی</button>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    <p>اطلاعاتی یافت نشد</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section script
+{
+    <partial name="_JqueryValidator"/>
+    <script>
+        function count(id) {
+            var inputId = "#inputCount-" + id;
+            var countValue = $(inputId).val();
+            $.ajax({
+                url: "/admin/insert-number-count",
+                type: "post",
+                data: {
+                    colorId: id,
+                    count:countValue
+                },
+                success: function (response) {
+                   alert("انجام شد");
+                },
+                error: function () {
+                   alert("انجام نشد");
+                }
+
+            });
+        }
+    </script>
+}

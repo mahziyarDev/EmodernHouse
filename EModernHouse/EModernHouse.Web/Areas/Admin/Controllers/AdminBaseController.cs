@@ -11,7 +11,7 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
     [Authorize]
     [RolesCheker(2)]
     [Area("Admin")]
-    [Route("star-site-admin")]
+    [Route("Admin")]
     public class AdminBaseController : Controller
     {
         protected string ErrorMessage = "ErrorMessage";

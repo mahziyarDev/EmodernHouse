@@ -6,6 +6,6 @@ namespace EModernHouse.DataLayer.DTOs.Filter
     {
         public List<Entities.Product.Product> Products { get; set; }
         public string ProductName { get; set; }
-        public int Price { get; set; }
+        
     }
 }

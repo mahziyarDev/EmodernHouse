@@ -7,6 +7,7 @@ using EModernHouse.DataLayer.DTOs.Account;
 using EModernHouse.DataLayer.DTOs.Contacts;
 using EModernHouse.DataLayer.Entities.Site;
 using EModernHouse.Web.PresentationExtentions;
+using Ganss.XSS;
 using GoogleReCaptcha.V3.Interface;
 
 
@@ -73,6 +74,12 @@ namespace EModernHouse.Web.Controllers
 
             if (ModelState.IsValid)
             {
+                var sanitizer = new HtmlSanitizer();
+                contact.Mobile = sanitizer.Sanitize(contact.Mobile);
+                contact.Email = sanitizer.Sanitize(contact.Email);
+                contact.FullName = sanitizer.Sanitize(contact.FullName);
+                contact.Subject = sanitizer.Sanitize(contact.Subject);
+                contact.Text = sanitizer.Sanitize(contact.Text);
                 var ip = HttpContext.GetUserIp();
                 await _contactService.CreateContactUs(contact, HttpContext.GetUserIp(), User.GetUserId());
                 TempData[SuccessMessage] = "پیام شما با موفقیت ارسال شد";

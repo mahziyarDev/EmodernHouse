@@ -255,7 +255,8 @@ namespace EModernHouse.Application.Services.Implementations
                 ProductId = create.ProductId,
                 ColorCode = create.ColorCode,
                 ColorName = create.ColorName,
-                Price = create.Price
+                Price = create.Price,
+                Count = create.Count
             };
             await _productColorRepository.AddEntity(colorProduct);
             await _productColorRepository.SaveChanges();
