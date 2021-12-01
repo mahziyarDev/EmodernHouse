@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
@@ -8,6 +9,7 @@ using EModernHouse.DataLayer.DTOs.Order;
 using EModernHouse.Web.Http;
 using EModernHouse.Web.PresentationExtentions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace EModernHouse.Web.Areas.User.Controllers
 {
@@ -77,6 +79,40 @@ namespace EModernHouse.Web.Areas.User.Controllers
             return View(openOrder);
         }
 
+        #endregion
+
+        #region IncreaseDetail
+        [HttpGet("confirmation/{detailId}/{count}")]
+        public async Task<IActionResult> Confirmation(long detailId,int count)
+        {
+            int changeCount = count + 1;
+            var res = await _orderService.ExistProductColor(detailId, changeCount, User.GetUserId());
+            if (res)
+            {
+                return RedirectToAction("ChangeCount", new {detailId = detailId, count = changeCount });
+            }
+
+            TempData[WarningMessage] = "موجودی انبار کافی نمی باشد";
+            return RedirectToAction("UserOpenOrder");
+        }
+        [HttpGet("ChangeCount/{detailId}/{count}")]
+        public async Task<IActionResult> ChangeCount(long detailId, int count)
+        {
+            await _orderService.ChangeOpenOrder(detailId, User.GetUserId(), count);
+            TempData[SuccessMessage] = "تعداد افزایش یافت";
+            return RedirectToAction("UserOpenOrder");
+        }
+
+        [HttpGet("decraese/{detailId}/{count}")]
+        public async Task<IActionResult> Decrease(long detailId, int count)
+        {
+            int changeCount = count - 1;
+            await _orderService.ChangeOpenOrder(detailId, User.GetUserId(), changeCount);
+            TempData[SuccessMessage] = "تعداد کم شد";
+            return RedirectToAction("UserOpenOrder");
+        }
+
+        
         #endregion
 
         #region RemoveProduct

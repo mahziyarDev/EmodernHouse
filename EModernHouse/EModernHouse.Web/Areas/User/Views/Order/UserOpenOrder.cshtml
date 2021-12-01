@@ -23,7 +23,7 @@
                 @await Component.InvokeAsync("UserSideBar")
 
             </div>
-            <div class="col-lg-9 col-md-8">
+            <div class="col-lg-9 col-md-8" id="Open-Order-Wrapper">           
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="section-title mb-2">
@@ -62,11 +62,18 @@
                                                          title="@order.Product.Title" src="@(PathExtensions.ProductImageThumb + order.Product.ImageName)"/>
                                                 </td>
                                                 <td>@order.Product.Title</td>
-                                                <td>@order.Product.Price</td>
+                                                <td>@order.Product.Price.ToString("#,0")</td>
                                                 <td>@order.ProductColor.ColorName</td>
-                                                <td>@order.ProductColor.Price</td>
+                                                <td>@order.ProductColor.Price.ToString("#,0")</td>
                                                 <td class="text-center">
-                                                    <input class="text-center form-control pr-1 pl-1" type="number" min="1" value="@order.Count"/>
+                                                    <span>@order.Count</span>
+                                                    <br />
+                                                    <a class="btn btn-primary btn-sm" asp-area="User"asp-controller="Order" asp-action="Confirmation" asp-route-detailId="@order.Id" asp-route-count="@order.Count">
+                                                        <i class="fas fa-chevron-up"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm" asp-area="User"asp-controller="Order" asp-action="Decrease" asp-route-detailId="@order.Id" asp-route-count="@order.Count">
+                                                        <i class="fas fa-chevron-down"></i>
+                                                    </a>
                                                 </td>
                                                 <td>
                                                     @if (discount != null)

@@ -23,6 +23,8 @@ namespace EModernHouse.Application.Services.Interfaces
         Task AddProductToOpenOrder(AddProductToOrderDTO order, long userId);
         Task<List<OrderDetail>> GetOrderDetailById(long orderId);
         Task<bool> RemoveOrderDetail(long detailId,long userId);
+        Task ChangeOpenOrder(long detailId, long userId, int count);
+        Task<bool> ExistProductColor(long detailId, int count,long userId);
 
         #endregion
     }

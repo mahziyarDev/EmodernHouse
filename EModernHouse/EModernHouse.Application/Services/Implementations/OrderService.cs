@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Order;
-using EModernHouse.DataLayer.Entities.ProductOrder;
+   using EModernHouse.DataLayer.Entities.Product;
+   using EModernHouse.DataLayer.Entities.ProductOrder;
 using EModernHouse.DataLayer.Entities.Wallet;
 using EModernHouse.DataLayer.Repository;
 using LazZiya.ImageResize.Animated;
@@ -19,12 +20,14 @@ namespace EModernHouse.Application.Services.Implementations
         private readonly IGenericRepository<Order> _orderRepository;
         private readonly IGenericRepository<OrderDetail> _orderDetailRepository;
         private readonly IWalletService _walletService;
+        private readonly IGenericRepository<ProductColor> _productColorRepository;
 
-        public OrderService(IGenericRepository<Order> orderRepository, IGenericRepository<OrderDetail> orderDetailRepository, IGenericRepository<SellerWallet> sellerWalletRepository, IWalletService walletService)
+        public OrderService(IGenericRepository<Order> orderRepository, IGenericRepository<OrderDetail> orderDetailRepository, IGenericRepository<SellerWallet> sellerWalletRepository, IWalletService walletService, IGenericRepository<ProductColor> productColorRepository)
         {
             _orderRepository = orderRepository;
             _orderDetailRepository = orderDetailRepository;
             _walletService = walletService;
+            _productColorRepository = productColorRepository;
         }
 
         #endregion
@@ -150,6 +153,41 @@ namespace EModernHouse.Application.Services.Implementations
             _orderDetailRepository.Delete(orderDetail);
             await _orderDetailRepository.SaveChanges();
             return true;
+        }
+
+        public async Task ChangeOpenOrder(long detailId, long userId, int count)
+        {
+            var openOrder =await GetUserLatestOpenOrder(userId);
+            var detail = openOrder.OrderDetails.SingleOrDefault(s => s.Id == detailId);
+
+            if (detail != null)
+            {
+                if (count > 0)
+                {
+                    detail.Count = count;
+                    _orderDetailRepository.EditEntity(detail);
+                    await _orderDetailRepository.SaveChanges();
+                }
+                else
+                {
+                    _orderDetailRepository.Delete(detail);
+                    await _orderDetailRepository.SaveChanges();
+                }
+            }
+        }
+
+        public async Task<bool> ExistProductColor(long detailId, int count,long userId)
+        {
+            var openOrder = await GetUserLatestOpenOrder(userId);
+            var detail =openOrder.OrderDetails.SingleOrDefault(s => s.Id == detailId);
+            var color = await _productColorRepository.GetEntityById(detail.ProductColor.Id);
+
+            if (color.Count >= count)
+            {
+                return true;
+            }
+
+            return false;
         }
         #endregion
 

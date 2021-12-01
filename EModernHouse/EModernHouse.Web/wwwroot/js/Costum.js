@@ -207,6 +207,55 @@ $("#btnSendComment").on('click',function() {
     $("#FromSendComment").submit();
 });
 
-$("").on('click',function() {
+//function changeCountOpenOrder(event, detailId) {
+//    open_waiting();
+//    $.ajax({
+//        url: "/user/open-order-detail",
+//        type:"get",
+//        data: {
+//            detailId : detailId,
+//            count: event.target.value
+//        }
+//    }).done(function (res) {
+//        $("#Open-Order-Wrapper").html(res);
+//        var jsCustom = "<script src='/js/Costum.js'></script>";
+//        document.getElementsByTagName("head")[0].appendChild(script);
+//        $('#Open-Order-Wrapper').append(jsCustom);
+//        //$('#Open-Order-Wrapper').data('validator', null);
+//        //$.validator.unobtrusive.parse('#Open-Order-Wrapper');
 
-});
+//        close_waiting();
+//    });
+//}
+
+//$("[order-detail-count]").on('change', function (event) {
+//    var detailId = $(this).attr("order-detail-count");
+//    var count = event.target.value;
+//    $.ajax({
+//        url: "/user/confirmation",
+//        type: "get",
+//        data: {
+//            detailId: detailId,
+//            count: count
+//        },
+//        beforeSend: function () {
+//            open_waiting();
+//        },
+//        success: function (response) {
+//            close_waiting();
+//            addCount(detailId, count);
+//        },
+//        error: function () {
+//            close_waiting();
+//            ShowMessage('اعلان', 'تعداد موجودی انبار کافی نیست', 'Danger');
+//        }
+        
+//    });
+
+//    function addCount(detailId, count) {
+//        $.get('/user/ChangeCount/'+detailId+"/"+count).then(res => {
+//            $("#Open-Order-Wrapper").html(res);
+//        });
+//    }
+//});
+
