@@ -38,9 +38,12 @@ namespace EModernHouse.Web.Areas.User.Controllers
             {
                 if (User.Identity.IsAuthenticated)
                 {
-                    await _orderService.AddProductToOpenOrder(order, User.GetUserId());
-                    return JsonResponseStatus.SendStatus(JsonResponseStatusType.Success, "محصول با موفقیت اضافه شد", null);
-                    //TempData[SuccessMessage] = "محصول به سبد خرید شما اضافه شد";
+                    if (await _orderService.ExistProductColorByColorId(order.ProductColorId,order.Count))
+                    {
+                        await _orderService.AddProductToOpenOrder(order, User.GetUserId());
+                        return JsonResponseStatus.SendStatus(JsonResponseStatusType.Success, "محصول با موفقیت اضافه شد", null);
+                    }
+                    return JsonResponseStatus.SendStatus(JsonResponseStatusType.Warning, "تعداد در خواستی از موجودی انبار بیشتر می باشد", null);
                 }
                 return JsonResponseStatus.SendStatus(JsonResponseStatusType.Warning, "برای ثبت محصول باید در سایت ثبت نام /لاگین کنید", null);
                 //TempData[WarningMessage] = "برای ثبت محصول باید وارد سایت شوید";

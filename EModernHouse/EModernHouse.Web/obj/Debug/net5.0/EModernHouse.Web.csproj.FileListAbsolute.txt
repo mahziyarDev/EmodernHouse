@@ -737,3 +737,4 @@ D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Are
 D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\AngleSharp.dll
 D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\AngleSharp.Css.dll
 D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\bin\Debug\net5.0\HtmlSanitizer.dll
+D:\Project\EmodernHouse\EModernHouse\EModernHouse.Web\obj\Debug\net5.0\Razor\Areas\Admin\Views\Inventory\GetProductForIndexFilter.cshtml.g.cs

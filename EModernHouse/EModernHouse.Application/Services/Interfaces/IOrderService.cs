@@ -25,6 +25,7 @@ namespace EModernHouse.Application.Services.Interfaces
         Task<bool> RemoveOrderDetail(long detailId,long userId);
         Task ChangeOpenOrder(long detailId, long userId, int count);
         Task<bool> ExistProductColor(long detailId, int count,long userId);
+        Task<bool> ExistProductColorByColorId(long colorId, int count);
 
         #endregion
     }

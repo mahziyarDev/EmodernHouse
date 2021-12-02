@@ -189,6 +189,17 @@ namespace EModernHouse.Application.Services.Implementations
 
             return false;
         }
+
+        public async Task<bool> ExistProductColorByColorId(long colorId, int count)
+        {
+            var color = await _productColorRepository.GetEntityById(colorId);
+            if (color.Count < count)
+            {
+                return false;
+            }
+
+            return true;
+        }
         #endregion
 
         #region Dispose

@@ -1,0 +1,109 @@
+﻿@using EModernHouse.Application.Utils
+@using EModernHouse.Application.Extensions
+@model EModernHouse.DataLayer.DTOs.Product.PopularProductsFilterDTO
+@{
+    ViewData["Title"] = "GetProductForIndexFilter";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="well with-header">
+            <div class="header bordered-sky">
+                جست و جو کردن
+            </div>
+            <div class="row">
+
+                <form id="FormFilterUSer">
+                    <input type="hidden" name="pageId" id="PageId" value="@ViewBag.PageId" />
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-12 col-sm-12">
+        <div class="well with-header with-footer">
+            <div class="header bordered-sky">
+                @ViewData["Title"]
+            </div>
+            @if (Model.ProductForShowIndices != null && Model.ProductForShowIndices.Any())
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                تصویر محصول
+                            </th>
+                            <th>
+                                نام محصول
+                            </th>
+                            <th>
+                                قیمت محصول
+                            </th>
+                            <th>
+                                قسمت نمایشی
+                            </th>
+                            <th>
+                                دستورات
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var popularProducts in Model.ProductForShowIndices)
+                        {
+
+                            <tr>
+
+                                <td class="text-center">
+                                    <img style="width: 80px;height: 80px" src="@(PathExtensions.ProductImageThumb + popularProducts.Product.ImageName )" />
+                                </td>
+                                <td>
+                                    @popularProducts.Product.Title
+                                </td>
+                                <td>
+                                    @popularProducts.Product.Price
+                                </td>
+                                <td>
+                                    @popularProducts.Priority.GetEnumName()
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm"
+                                       asp-area="Admin" asp-controller="Inventory" asp-action="DeletePopularProduct" asp-route-productId="@popularProducts.Id">حذف</a>
+                                </td>
+
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    <p>اطلاعاتی یافت نشد</p>
+                </div>
+            }
+            <br />
+            <div class="dataTables_paginate paging_bootstrap text-center" id="simpledatatable_paginate">
+                <ul class="pagination">
+                    @if (Model.PageId > 1)
+                    {
+                        <li class="prev"><a onclick="sendPage(@(Model.PageId - 1))">قبل</a></li>
+                    }
+                    @for (int spage = Model.StartPage; spage <= Model.EndPage; spage++)
+                    {
+                        <li class="@((spage == Model.PageId)?"active":"")"><a href="#" onclick="sendPage(@spage)">@ViewBag.pageId</a></li>
+                    }
+
+
+                    @if (Model.PageId < Model.PageCount)
+                    {
+                        <li class="next"><a onclick="sendPage(@(Model.PageId + 1))">بعد</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

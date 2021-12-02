@@ -6,6 +6,6 @@
 
         public int Count { get; set; }
 
-        public long? ProductColorId { get; set; }
+        public long ProductColorId { get; set; }
     }
 }
