@@ -20,7 +20,8 @@ namespace EModernHouse.Application.Services.Interfaces
         #region ForProductShowIndex
 
         Task<PopularProductsFilterDTO> GetPopularProducts(int pageId, int take);
-        Task<bool> DeletePopularProduct(long popularId);
+        Task<bool> DeletePopular(long popularId);
+        Task<bool> AddPopularProduct(ProductForShowIndex popular);
 
         #endregion
     }

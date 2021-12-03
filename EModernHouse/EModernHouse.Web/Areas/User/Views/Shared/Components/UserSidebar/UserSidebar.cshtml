@@ -8,7 +8,7 @@
 
             <div class="d-flex align-items-center">
                 <div class="profile-avatar">
-                    <img src="@(PathExtensions.UserAvatarThumb+Model.Avatar)" alt="avatar">
+                    <img src="@(Model.Avatar != null ? PathExtensions.UserAvatarThumb+Model.Avatar : PathExtensions.DefaultAvatar)" alt="avatar">
                 </div>
                 <div class="profile-info">
                     <div class="d-block">

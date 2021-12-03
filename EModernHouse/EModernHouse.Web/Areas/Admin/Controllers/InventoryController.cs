@@ -52,27 +52,45 @@ namespace EModernHouse.Web.Areas.Admin.Controllers
 
         #region For-Popular-products
         [HttpGet("get-popular-product")]
-        public async Task<IActionResult> GetProductForIndexFilter(int pageId=1,int take=30)
+        public async Task<IActionResult> GetProductForIndexFilter(int pageId=1,int take=20)
         {
             var res = await _inventoryService.GetPopularProducts(pageId, take);
             ViewBag.PageId = pageId;
-            ViewBag.TakeId = take;
 
             return View(res);
         }
-        [HttpGet("delete-Popular-product/{popularId}")]
-        public async Task<IActionResult> DeletePopularProduct(long popularId)
+
+        [HttpGet("DeletePopular/{id}")]
+        public async Task<IActionResult> DeletePopular(long id)
         {
-            var res = await _inventoryService.DeletePopularProduct(popularId);
+            var res = await _inventoryService.DeletePopular(id);
             if (res)
             {
-                TempData[SuccessMessage] = "عملیات موفقیت آمیز بود";
+                TempData[SuccessMessage] = "موفقیت امیز بود";
                 return RedirectToAction("GetProductForIndexFilter");
             }
-            TempData[SuccessMessage] = "عملیات شکست خورد";
+
+            TempData[WarningMessage] = "عملیات ناموفق بود";
             return RedirectToAction("GetProductForIndexFilter");
         }
 
+        [HttpGet("add-popular-product")]
+        public async Task<IActionResult> AddProductPopular()
+        {
+            return View();
+        }
+        [HttpPost("add-popular-product")]
+        public async Task<IActionResult> AddProductPopular(ProductForShowIndex popular)
+        {
+            var res = await _inventoryService.AddPopularProduct(popular);
+            if(res)
+            {
+                TempData[SuccessMessage] = "موفقیت آمیز بود";
+                return RedirectToAction("GetProductForIndexFilter");
+            }
+            return RedirectToAction("GetProductForIndexFilter");
+        }
         #endregion
+        
     }
 }

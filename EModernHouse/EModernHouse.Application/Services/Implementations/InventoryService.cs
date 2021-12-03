@@ -91,17 +91,30 @@ namespace EModernHouse.Application.Services.Implementations
             return model;
         }
 
-        public async Task<bool> DeletePopularProduct(long popularId)
+        public async Task<bool> DeletePopular(long popularId)
         {
             var popular = await _productForShowIndexRepository.GetEntityById(popularId);
-            if (popular != null) 
+            if (popular != null)
             {
                 _productForShowIndexRepository.Delete(popular);
                 await _productForShowIndexRepository.SaveChanges();
                 return true;
             }
-
+            
             return false;
+        }
+
+        public async Task<bool> AddPopularProduct(ProductForShowIndex popular)
+        {
+            var newPopularProduct = new ProductForShowIndex
+            {
+                ProductId = popular.ProductId,
+                Priority = popular.Priority,
+                IsDelete = false
+            };
+            await _productForShowIndexRepository.AddEntity(popular);
+            await _productForShowIndexRepository.SaveChanges();
+            return true;
         }
         #endregion
 
