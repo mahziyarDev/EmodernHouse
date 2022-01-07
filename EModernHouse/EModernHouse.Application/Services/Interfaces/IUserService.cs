@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using EModernHouse.DataLayer.DTOs.Account;
+using EModernHouse.DataLayer.DTOs.UserPanel;
 using EModernHouse.DataLayer.Entities.Account;
 using Microsoft.AspNetCore.Http;
 
@@ -36,10 +37,20 @@ namespace EModernHouse.Application.Services.Interfaces
 
         #region userAddres
 
-        Task<bool> UserAddressIsYesOrNo(long userId);
-        Task<bool> InsertUserAddress(long userId , string address);
-        Task<UserAddress> GetAddress(long userId);
-        Task<bool> EditAddress(long userId,string address);
+        /// <summary>
+        /// پر کردن ویو مدل صفحه اصلی پنل کاربر
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>viewModel</returns>
+        Task<UserPanelIndexDTO> IndexUserPanel(long userId);
+
+        /// <summary>
+        /// برای ثبت نام ادرس کاربر یا ویرایش ان
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="viewModel"></param>
+        /// <returns>bool</returns>
+        Task<bool> Manage(long userId,UserPanelIndexDTO viewModel);
 
         #endregion
     }

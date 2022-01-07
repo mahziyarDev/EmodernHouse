@@ -19,11 +19,13 @@ namespace EModernHouse.Web.Areas.User.Controllers
 
         private readonly IOrderService _orderService;
         private readonly IUserService _userService;
+        private readonly IPaymentService _paymentService;
 
-        public OrderController(IOrderService orderService, IUserService userService)
+        public OrderController(IOrderService orderService, IUserService userService, IPaymentService paymentService)
         {
             _orderService = orderService;
             _userService = userService;
+            _paymentService = paymentService;
         }
 
         #endregion
@@ -138,6 +140,17 @@ namespace EModernHouse.Web.Areas.User.Controllers
                 "محصول مورد نظر شما یافت نشد",
                 null
             );
+        }
+
+        #endregion
+
+        #region PaymentOrder
+
+        [HttpGet("pay-order ")]
+        public IActionResult PaymentOrder()
+        {
+            var openOrder = _orderService.GetTotalOrderPriceForPayment(User.GetUserId());
+            return RedirectToAction("UserOpenOrder");
         }
 
         #endregion

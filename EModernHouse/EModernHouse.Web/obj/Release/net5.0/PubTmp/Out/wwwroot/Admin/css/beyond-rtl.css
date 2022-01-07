@@ -15338,7 +15338,7 @@ width:calc(100% - 90px);
 }
 .mail-container .mail-body .mail-list .list-item > div.item-time {
   left: 0;
-  width: 120px;
+  width: 240px;
   line-height: 38px;
   text-align: left;
   padding-left: 20px;

@@ -5,6 +5,7 @@ using EModernHouse.Application.Extensions;
 using EModernHouse.Application.Services.Interfaces;
 using EModernHouse.DataLayer.DTOs.Account;
 using EModernHouse.DataLayer.DTOs.Contacts;
+using EModernHouse.DataLayer.DTOs.Product;
 using EModernHouse.DataLayer.Entities.Site;
 using EModernHouse.Web.PresentationExtentions;
 using Ganss.XSS;
@@ -23,6 +24,7 @@ namespace EModernHouse.Web.Controllers
         private readonly IProductService _productService;
         private readonly IUserService _userService;
 
+
         public HomeController(IContactService contactService, ICaptchaValidator captchaValidator, ISiteService siteService, IProductService productService, IUserService userService)
         {
             _contactService = contactService;
@@ -31,6 +33,7 @@ namespace EModernHouse.Web.Controllers
             _productService = productService;
             _userService = userService;
         }
+
         #endregion
 
         #region Index
@@ -45,8 +48,9 @@ namespace EModernHouse.Web.Controllers
                 BannerPlacement.Home_4,
                 BannerPlacement.Home_5
             });
-            
-            return View(await _productService.GetProductForIndex(20));
+
+            var tupleProducts = await _productService.GetProductForIndex(20);
+            return View(tupleProducts);
         }
 
         [HttpGet("banner-test")]

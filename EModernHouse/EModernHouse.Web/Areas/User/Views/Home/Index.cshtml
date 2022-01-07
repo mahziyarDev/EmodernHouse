@@ -1,10 +1,9 @@
 ﻿@using EModernHouse.DataLayer.Entities.Account
 @using EModernHouse.Web.PresentationExtentions
-
+@using EModernHouse.Application.Extensions
+@model EModernHouse.DataLayer.DTOs.UserPanel.UserPanelIndexDTO
 @{
     ViewData["Title"] = "داشبورد";
-    var userAddresses = ViewData["userAddress"];
-    var userInf = ViewBag.UserInformation as UserAddress;
 }
 
 
@@ -24,7 +23,7 @@
                 <div class="checkout-section shadow-around">
                     <div class="checkout-section-content">
                         <div class="row mx-0 pl-3 pr-3">
-                            @if ((bool)userAddresses)
+                            @if (Model.IsUserAddress)
                             {
                                 <div class="col-md-12">
                                     <div class="card text-center">
@@ -32,10 +31,11 @@
                                             آدرس
                                         </div>
                                         <div class="card-body">
-                                            <h5 class="card-title">@userInf.Address</h5>
+                                            <p>استان : @Model.Manage.City.GetEnumName()</p>
+                                            <h4 class="card-title">@Model.Manage.UserAddress</h4>
                                             <p class="card-text">مرسولات شما به این آدرس ارسال می شود (لطفا در ثبت ادرس دقت فرمایید مرسولات شما به این ادس ارسال می شود)</p>
-                                            <br />
-                                            <a data-toggle="modal" data-target="#editmodal" class="btn btn-primary" editText="@userInf.Address">ویرایش آدرس</a>
+                                            <br/>
+                                            <a data-toggle="modal" data-target="#editmodal" class="btn btn-primary" editText="@Model.Manage.UserAddress">ویرایش آدرس</a>
                                         </div>
 
                                     </div>
@@ -65,10 +65,10 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">اطلاعات تماس</h5>
-                                        <p class="card-text">@userInf.User.Mobile</p>
-                                        @if (userInf.User.Email != null)
+                                        <p class="card-text">@Model.Mobile</p>
+                                        @if (Model.Email != null)
                                         {
-                                            <p class="card-text">@userInf.User.Email</p>
+                                            <p class="card-text">@Model.Email</p>
                                         }
                                     </div>
                                 </div>
@@ -102,14 +102,19 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" asp-area="User" asp-controller="Home" asp-action="CreateUserAddress">
+                <form method="post" asp-area="User" asp-controller="Home" asp-action="Manage">
+                    <div class="alert">درحال حاضر امکان ارسال مرسولات به شهر یزد می باشد</div>
+                    <div class="form-group">
+                        <label>استان :</label>
+                        <select class="form-control" asp-for="Manage.City" asp-items="@(Html.GetEnumSelectList<Cities>())"></select>
+                    </div>
 
                     <div class="form-group">
                         <label>آدرس را وارد کنید</label>
-                        <textarea  name="address" class="form-control addAddress" placeholder="آدرس به صورت کامل نوشته شود هرگونه نقص در ادرس بر عهده کابر می باشد .."></textarea>
+                        <textarea  asp-for="Manage.UserAddress" class="form-control addAddress" placeholder="آدرس به صورت کامل نوشته شود هرگونه نقص در ادرس بر عهده کابر می باشد .."></textarea>
                     </div>
 
-                    <br />
+                    <br/>
                     <button onclick="closeAddress()" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
                     <button type="submit" class="btn btn-primary">ثبت ادرس</button>
                 </form>
@@ -131,13 +136,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" asp-area="User" asp-controller="Home" asp-action="EditAddress">
-
+                <form method="post" asp-area="User" asp-controller="Home" asp-action="Manage">
+                    <input type="hidden" asp-for="IsUserAddress"/>
                     <div class="form-group">
                         <label>آدرس را وارد کنید</label>
-                        <textarea id="EditAddressText" name="address" class="form-control addAddress"></textarea>
+                        <textarea id="EditAddressText" asp-for="Manage.UserAddress" class="form-control addAddress"></textarea>
                     </div>
-
+                    <div class="form-group">
+                        <label>استان خود را وارد کنید : </label>
+                        <select class="form-control" asp-for="Manage.City" asp-items="@(Html.GetEnumSelectList<Cities>())"></select>
+                    </div>
                     <br />
                     <button onclick="closeAddress()" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
                     <button type="submit" class="btn btn-primary">ثبت ادرس</button>

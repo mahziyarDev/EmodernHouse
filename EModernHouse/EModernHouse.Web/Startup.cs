@@ -49,6 +49,7 @@ namespace EModernHouse.Web
             services.AddScoped<IRoleService,RoleServices>();
             services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<IProductDiscountService,ProductDiscountService>();
+            services.AddScoped<IPaymentService,PaymentService>();
             services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
             
             #endregion

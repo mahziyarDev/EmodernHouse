@@ -28,8 +28,8 @@ namespace EModernHouse.Application.Services.Implementations
         private readonly IGenericRepository<ProductGallery> _productGalleryRepository;
         private readonly IGenericRepository<ProductFeature> _productFeatureRepository;
         private readonly IGenericRepository<ProductInterest> _productInterestRepository;
-
-        public ProductService(IGenericRepository<Product> productRepository, IGenericRepository<ProductCategory> productCategoryRepository, IGenericRepository<ProductSelectedCategory> productSelectedCategoryRepository, IGenericRepository<ProductColor> productColorRepository, IGenericRepository<ProductGallery> productGalleryRepository, IGenericRepository<ProductFeature> productFeatureRepository, IGenericRepository<ProductInterest> productInterestRepository)
+        private readonly IGenericRepository<ProductForShowIndex> _productForShowIndexRepository;
+        public ProductService(IGenericRepository<Product> productRepository, IGenericRepository<ProductCategory> productCategoryRepository, IGenericRepository<ProductSelectedCategory> productSelectedCategoryRepository, IGenericRepository<ProductColor> productColorRepository, IGenericRepository<ProductGallery> productGalleryRepository, IGenericRepository<ProductFeature> productFeatureRepository, IGenericRepository<ProductInterest> productInterestRepository, IGenericRepository<ProductForShowIndex> productForShowIndexRepository)
         {
             _productRepository = productRepository;
             _productCategoryRepository = productCategoryRepository;
@@ -38,6 +38,7 @@ namespace EModernHouse.Application.Services.Implementations
             _productGalleryRepository = productGalleryRepository;
             _productFeatureRepository = productFeatureRepository;
             _productInterestRepository = productInterestRepository;
+            _productForShowIndexRepository = productForShowIndexRepository;
         }
         #endregion
 
@@ -553,20 +554,27 @@ namespace EModernHouse.Application.Services.Implementations
         #region productMainPage
 
        
-        public async Task<Tuple<List<Product>, List<Product>, List<Product>>> GetProductForIndex(int take)
+        public async Task<Tuple<List<ProductForShowIndex>, List<ProductForShowIndex>, List<ProductForShowIndex>>> GetProductForIndex(int take)
         {
-            var productOrderBy = _productRepository.GetQuery().AsQueryable()
-                .OrderBy(s => s.LastUpdateDate).Take(take);
+            var productForBoxOne = _productForShowIndexRepository.GetQuery().AsQueryable()
+                .Where(m => m.Priority == Priority.Favorites)
+                .Include(m=>m.Product)
+                .OrderBy(m => m.LastUpdateDate).Take(take);
 
-            var maxPrice =await _productRepository.GetQuery().AsQueryable().MaxAsync(s=>s.Price);
-            var productMaxPrice = _productRepository.GetQuery().AsQueryable()
-                .Where(s => s.Price <= maxPrice).Take(take);
+            var productForBoxTwo = _productForShowIndexRepository.GetQuery().AsQueryable()
+                .Where(m => m.Priority == Priority.Bestsellers)
+                .Include(m => m.Product)
+                .OrderBy(m => m.LastUpdateDate).Take(take);
 
-            var minPrice = await _productRepository.GetQuery().AsQueryable().MinAsync(s => s.Price);
-            var productMinPrice = _productRepository.GetQuery().AsQueryable()
-                .Where(s => s.Price >= minPrice);
-            return Tuple.Create(await productOrderBy.ToListAsync(),await productMinPrice.ToListAsync()
-                ,await productMaxPrice.ToListAsync());
+            var productForBoxThree = _productForShowIndexRepository.GetQuery().AsQueryable()
+                .Where(m => m.Priority == Priority.Cheapest)
+                .Include(m => m.Product)
+                .OrderBy(m => m.LastUpdateDate).Take(take);
+
+
+            return Tuple.Create(await productForBoxOne.ToListAsync()
+                ,await productForBoxTwo.ToListAsync()
+                ,await productForBoxThree.ToListAsync());
         }
 
         #endregion

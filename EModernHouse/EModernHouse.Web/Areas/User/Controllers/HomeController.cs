@@ -5,7 +5,9 @@ using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.DataLayer.DTOs.Account;
 using EModernHouse.DataLayer.DTOs.Comment;
+using EModernHouse.DataLayer.DTOs.UserPanel;
 using EModernHouse.Web.PresentationExtentions;
 using Ganss.XSS;
 using Microsoft.CodeAnalysis.Differencing;
@@ -29,64 +31,35 @@ namespace EModernHouse.Web.Areas.User.Controllers
 
         #endregion
 
-        #region Address
 
+        /// <summary>
+        /// صفحه اصلی پنل کاربر برای نمایش اطلاعات ادرس و شماره تلفن
+        /// </summary>
+        /// <returns>return view and view model</returns>
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ViewData["userAddress"] = await _userService.UserAddressIsYesOrNo(User.GetUserId());
-            if (await _userService.UserAddressIsYesOrNo(User.GetUserId()))
-            {
-                ViewBag.UserInformation = await _userService.GetAddress(User.GetUserId());
-            }
-            return View();
+            var viewModel = await _userService.IndexUserPanel(User.GetUserId());
+            return View(viewModel);
         }
 
-        [HttpPost("create-address")]
-        public async Task<IActionResult> CreateUserAddress(string address)
+        /// <summary>
+        /// برای ثبت و ویرایش ادرس کابر
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns>redirect to action index with tempdata</returns>
+        [HttpPost]
+        public async Task<IActionResult> Manage(UserPanelIndexDTO viewModel)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (string.IsNullOrEmpty(address))
-                {
-                    TempData[WarningMessage] = "لطفا آدرس خود را وارد نمایید";
-                    return RedirectToAction("Index");
-                }
+            var userId = User.GetUserId();
+            var result = await _userService.Manage(userId,viewModel);
+            if (result)
+                TempData[SuccessMessage] = "با موفقیت ثبت شد";
+            else
+                TempData[ErrorMessage] = "خطا در ثبت ادرس";
 
-                var res = await _userService.InsertUserAddress(User.GetUserId() ,address);
-                if (res)
-                {
-                    TempData[SuccessMessage] = "آدرس شما با موفقیت ثبت شد";
-                    return RedirectToAction("Index");
-                }
-
-                
-            }
-            TempData[ErrorMessage] = "عملیات با شکست مواجه شد";
             return RedirectToAction("Index");
         }
-
-        [HttpPost("edit-address")]
-        public async Task<IActionResult> EditAddress(string address)
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (!string.IsNullOrEmpty(address))
-                {
-                    var res = await _userService.EditAddress(User.GetUserId(), address);
-                    if (res)
-                    {
-                        TempData[SuccessMessage] = "ویرایش با موفقیت انجام شد";
-                        return RedirectToAction("Index");
-                    }
-                }
-            }
-
-            TempData[WarningMessage] = "عملیات انجام نشد";
-            return RedirectToAction("Index");
-        }
-
-        #endregion
-
 
 
         [HttpGet("active-email")]

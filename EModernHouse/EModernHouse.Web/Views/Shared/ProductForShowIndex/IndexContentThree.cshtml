@@ -1,0 +1,56 @@
+﻿@using EModernHouse.Application.Utils
+@model List<EModernHouse.DataLayer.Entities.Product.ProductForShowIndex>
+
+@if (Model.Any() && Model != null)
+{
+    <section class="product-carousel in-box">
+            <div class="section-title">
+                <i class="fas fa-tags"></i>
+                ارزان ترین محصولات
+            </div>
+            <div class="swiper-container slider-lg">
+                <div class="swiper-wrapper">
+                   
+                    @foreach (var item in Model)
+                    {
+                        <div class="swiper-slide">
+                            <div class="product-card">
+                                <div class="product-card-top">
+                                    <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@item.Product.Id" asp-route-title="@item.Product.Title.FixTextForUrl()" class="product-image">
+                                        <img src="@(PathExtensions.ProductImageThumb + item.Product.ImageName)" alt="@item.Product.Title">
+                                    </a>
+                                    <div class="product-card-actions">
+
+                                    </div>
+                                </div>
+                                <div class="product-card-middle">
+                                    <div class="ratings-container">
+                                    </div>
+                                    <h6 class="product-name text-center">
+                                        <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@item.Product.Id" asp-route-title="@item.Product.Title.FixTextForUrl()">
+                                            @item.Product.Title
+                                        </a>
+                                    </h6>
+                                    <div class="product-price product-price-clone">@item.Product.Price.ToString("#,0") تومان</div>
+                                </div>
+                                <div class="product-card-bottom">
+                                    <div class="product-price">
+                                        @item.Product.Price.ToString("#,0") تومان
+                                    </div>
+                                    <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@item.Product.Id" asp-route-title="@item.Product.Title.FixTextForUrl()" class="btn-add-to-cart">
+                                        <i class="fad fa-cart-plus"></i>
+                                        نمایش جزئیات
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    
+                </div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+}

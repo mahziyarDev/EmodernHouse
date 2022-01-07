@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using EModernHouse.Application.Extensions;
 using EModernHouse.Application.Utils;
 using EModernHouse.DataLayer.DTOs.Account;
+using EModernHouse.DataLayer.DTOs.UserPanel;
 using EModernHouse.DataLayer.Entities.Account;
 using EModernHouse.DataLayer.Entities.Roles;
 using EModernHouse.DataLayer.Repository;
@@ -331,47 +332,63 @@ namespace EModernHouse.Application.Services.Implementations
 
         #region userAddres
 
-        public async Task<bool> UserAddressIsYesOrNo(long userId)
+        public async Task<UserPanelIndexDTO> IndexUserPanel(long userId)
         {
-            var userAddress = _userAddressRepository.GetQuery().AsQueryable().Any(s => s.UserId == userId);
-            if (userAddress)
+            var user =await _useRepository.GetQuery().AsQueryable().FirstOrDefaultAsync(s => s.Id == userId);
+            var address =await _userAddressRepository.GetQuery().AsQueryable().FirstOrDefaultAsync(s => s.UserId == userId);
+            var viewModel = new UserPanelIndexDTO();
+            var manageUserPanel = new UserPanelManageDTO();
+            viewModel.Email = user.Email ?? "تا کنون برای شما ادرس ایمیلی ثبت نشده است";
+            viewModel.Mobile = user.Mobile;
+            
+            if (address != null)
             {
-                return true;
+                viewModel.IsUserAddress = true;
+                manageUserPanel.City = address.Cities;
+                manageUserPanel.UserAddress = address.Address;
             }
 
-            return false;
+            viewModel.Manage = manageUserPanel;
+
+            return viewModel;
+
         }
-        public async Task<bool> InsertUserAddress(long userId, string address)
+
+        /// <summary>
+        /// برای ثبت نام ادرس کاربر یا ویرایش ان
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="viewModel"></param>
+        /// <returns>bool</returns>
+        public async Task<bool> Manage(long userId,UserPanelIndexDTO viewModel)
         {
-            var newAddress = new UserAddress
+            var user = await _useRepository.GetQuery().AsQueryable()
+                .FirstOrDefaultAsync(m => m.Id == userId);
+            if (user == null) return false;
+
+            if (!viewModel.IsUserAddress)
             {
-                UserId = userId,
-                Address = address,
-                IsDelete = false,
-            };
-            await _userAddressRepository.AddEntity(newAddress);
+                var userAddress = new UserAddress()
+                {
+                    UserId = user.Id,
+                    Address = viewModel.Manage.UserAddress,
+                    Cities = viewModel.Manage.City,
+                };
+                await _userAddressRepository.AddEntity(userAddress);
+            }
+            else
+            {
+                var address = await _userAddressRepository.GetQuery().AsQueryable()
+                    .FirstOrDefaultAsync(m => m.UserId == user.Id);
+                if (address == null) return false;
+
+                address.Address = viewModel.Manage.UserAddress;
+                address.Cities = viewModel.Manage.City;
+                _userAddressRepository.EditEntity(address);
+            }
+
             await _userAddressRepository.SaveChanges();
             return true;
-        }
-
-        public async Task<UserAddress> GetAddress(long userId)
-        {
-            var userAddress = await _userAddressRepository.GetQuery().AsQueryable()
-                .Include(s => s.User)
-                .SingleOrDefaultAsync(s => s.UserId == userId);
-            return userAddress;
-        }
-
-        public async Task<bool> EditAddress(long userId, string address)
-        {
-            var userAddress = await _userAddressRepository.GetQuery().AsQueryable()
-                .SingleOrDefaultAsync(s=>s.UserId == userId);
-            if (userAddress == null) return false;
-            userAddress.Address = address;
-            _userAddressRepository.EditEntity(userAddress);
-            await _userAddressRepository.SaveChanges();
-            return true;
-
         }
         #endregion
 

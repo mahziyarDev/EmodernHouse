@@ -83,7 +83,7 @@ namespace EModernHouse.Application.Services.Interfaces
 
         #region productMainPage
 
-        Task<Tuple<List<Product>, List<Product>, List<Product>>> GetProductForIndex(int take);
+        Task<Tuple<List<ProductForShowIndex>, List<ProductForShowIndex>, List<ProductForShowIndex>>> GetProductForIndex(int take);
 
         #endregion
     }
