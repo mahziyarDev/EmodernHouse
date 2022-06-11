@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
-    <PackageReference Include="Zarinpal" Version="2.0.4" />
+    <PackageReference Include="Zarinpal" Version="3.0.1" />
     <PackageReference Include="ZarinpalSandbox" Version="2.0.4" />
   </ItemGroup>
 

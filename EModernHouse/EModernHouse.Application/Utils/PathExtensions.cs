@@ -5,6 +5,12 @@ namespace EModernHouse.Application.Utils
 {
     public static class PathExtensions
     {
+        #region DomainAddress
+
+        public static string DomainAddress = "http://localhost:44393/";
+
+        #endregion
+
         #region default Images
 
         public static string DefaultAvatar = "/images/defaults/avatar.jpg";

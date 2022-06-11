@@ -19,7 +19,11 @@ namespace EModernHouse.Application.Services.Implementations
 
             return (PaymentStatus)res.Status;
         }
-        public PaymentStatus PaymentVerification(string merchantId, string authority, int amount, ref long refId)
+
+
+
+        public PaymentStatus PaymentVerification
+            (string merchantId, string authority, int amount, ref long refId)
         {
             var payment = new ZarinpalSandbox.Payment(amount);
             var res = payment.Verification(authority).Result;

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yeMz4LFtMab5EYgTuypn1DXmXWvjomNfjuM7nOMfM+uC1fy9P8J4VIR6w3maQBNrzkSRZCMPQC9RKji0iqr3Ng==",
+  "dgSpecHash": "1wsKUUzUUhY5aGplNr1lOfQzm1c7XVXF5jl279+UsP9f8ZeEZXiwk47t8e2+ukJbwqUKyxPnn6Qe9y9Q6iJMRQ==",
   "success": true,
   "projectFilePath": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Application\\EModernHouse.Application.csproj",
   "expectedPackageFiles": [
@@ -186,7 +186,7 @@
     "C:\\Users\\Mahziyar\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "C:\\Users\\Mahziyar\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
     "C:\\Users\\Mahziyar\\.nuget\\packages\\system.xml.xpath.xdocument\\4.0.1\\system.xml.xpath.xdocument.4.0.1.nupkg.sha512",
-    "C:\\Users\\Mahziyar\\.nuget\\packages\\zarinpal\\2.0.4\\zarinpal.2.0.4.nupkg.sha512",
+    "C:\\Users\\Mahziyar\\.nuget\\packages\\zarinpal\\3.0.1\\zarinpal.3.0.1.nupkg.sha512",
     "C:\\Users\\Mahziyar\\.nuget\\packages\\zarinpalsandbox\\2.0.4\\zarinpalsandbox.2.0.4.nupkg.sha512"
   ],
   "logs": []

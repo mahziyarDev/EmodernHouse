@@ -5,7 +5,9 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using EModernHouse.Application.Services.Interfaces;
+using EModernHouse.Application.Utils;
 using EModernHouse.DataLayer.DTOs.Order;
+using EModernHouse.DataLayer.DTOs.Product;
 using EModernHouse.Web.Http;
 using EModernHouse.Web.PresentationExtentions;
 using Microsoft.AspNetCore.Authorization;
@@ -147,10 +149,33 @@ namespace EModernHouse.Web.Areas.User.Controllers
         #region PaymentOrder
 
         [HttpGet("pay-order ")]
-        public IActionResult PaymentOrder()
+        public async Task<IActionResult >PaymentOrder()  
         {
-            var openOrder = _orderService.GetTotalOrderPriceForPayment(User.GetUserId());
+            var openOrderAmount = await _orderService.GetTotalOrderPriceForPayment(User.GetUserId());
+            string callbackUrl = PathExtensions.DomainAddress + Url.RouteUrl("zarinPalPaymentResult");
+            string redirectUrl = "";
+
+            var status = _paymentService.CreatePaymentRequest(
+                null,
+                openOrderAmount,
+                "تکمیل فرایند خرید از سایت",
+                callbackUrl,
+                ref redirectUrl);
+            if (status == PaymentStatus.St100)
+            {
+                return Redirect(redirectUrl); 
+            }
             return RedirectToAction("UserOpenOrder");
+        }
+
+        #endregion
+
+        #region CallBackUrl
+        [AllowAnonymous]
+        [HttpGet("payment-result",Name = "zarinPalPaymentResult")]
+        public async Task<IActionResult> CallBackZarinpal()
+        {
+            return View();
         }
 
         #endregion

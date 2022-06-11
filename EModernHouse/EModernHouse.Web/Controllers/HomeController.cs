@@ -23,15 +23,16 @@ namespace EModernHouse.Web.Controllers
         private readonly ISiteService _siteService;
         private readonly IProductService _productService;
         private readonly IUserService _userService;
+        private readonly IPaymentService _paymentService;
 
-
-        public HomeController(IContactService contactService, ICaptchaValidator captchaValidator, ISiteService siteService, IProductService productService, IUserService userService)
+        public HomeController(IContactService contactService, ICaptchaValidator captchaValidator, ISiteService siteService, IProductService productService, IUserService userService, IPaymentService paymentService)
         {
             _contactService = contactService;
             _captchaValidator = captchaValidator;
             _siteService = siteService;
             _productService = productService;
             _userService = userService;
+            _paymentService = paymentService;
         }
 
         #endregion
@@ -48,6 +49,23 @@ namespace EModernHouse.Web.Controllers
                 BannerPlacement.Home_4,
                 BannerPlacement.Home_5
             });
+
+
+            //string redirectUrl = "";
+            //var result = _paymentService.CreatePaymentRequest(
+            //    null,
+            //    100000,
+            //    "توضیحات",
+            //    "http://localhost:54500/contact-us",
+            //    ref redirectUrl,
+            //    "test@test.com",
+            //    "09913439792"
+            //);
+
+            //if (result == PaymentStatus.St100)
+            //{
+            //    return Redirect(redirectUrl);
+            //}
 
             var tupleProducts = await _productService.GetProductForIndex(20);
             return View(tupleProducts);

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "iCXkM8PglUIwVTEFEYXLIqWeQa+NnfmcQnGKFsN8RsD6cDMtG2kNRKgGpBAR69jRRG1wGdSl7n4fba80JA6EAQ==",
+  "dgSpecHash": "OziRPoJin9VDHoZODhC9c68lfg2901PZn5xi/yN2+M0nfWyzWNhJqbHX98j8Pizi+yUjcy9P/xZk2M6L++u2Jw==",
   "success": true,
   "projectFilePath": "D:\\Project\\EmodernHouse\\EModernHouse\\EModernHouse.Web\\EModernHouse.Web.csproj",
   "expectedPackageFiles": [
@@ -217,9 +217,9 @@
     "C:\\Users\\Mahziyar\\.nuget\\packages\\webmarkupmin.aspnet.common\\2.10.0\\webmarkupmin.aspnet.common.2.10.0.nupkg.sha512",
     "C:\\Users\\Mahziyar\\.nuget\\packages\\webmarkupmin.aspnetcore5\\2.11.0\\webmarkupmin.aspnetcore5.2.11.0.nupkg.sha512",
     "C:\\Users\\Mahziyar\\.nuget\\packages\\webmarkupmin.core\\2.9.0\\webmarkupmin.core.2.9.0.nupkg.sha512",
-    "C:\\Users\\Mahziyar\\.nuget\\packages\\zarinpal\\2.0.4\\zarinpal.2.0.4.nupkg.sha512",
+    "C:\\Users\\Mahziyar\\.nuget\\packages\\zarinpal\\3.0.1\\zarinpal.3.0.1.nupkg.sha512",
     "C:\\Users\\Mahziyar\\.nuget\\packages\\zarinpalsandbox\\2.0.4\\zarinpalsandbox.2.0.4.nupkg.sha512",
-    "C:\\Users\\Mahziyar\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
+    "C:\\Users\\Mahziyar\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.14\\microsoft.netcore.app.host.win-x64.5.0.14.nupkg.sha512"
   ],
   "logs": []
 }
